@@ -1,0 +1,76 @@
+<main>
+  <div class="right w-50">
+    <div class="right-container">
+
+      <div class="d-flex justify-content-center align-items-center">
+        <i inlineSVG="assets/icons/persons.svg"></i>
+      </div>
+
+      <div class="text-center text">
+        <h3>تسریع فرآیند مدیریت</h3>
+        <span>مدیریت منابع انسانی مستقر، ثبت رویداد ها، درخواست مرخصی و یا ماموریت، تشویق و یا تذکر به نیرو و ...</span>
+      </div>
+
+      <div class="step">
+        <div *ngFor="let item of step" class="circle" [class.is-active]="item.isActive"></div>
+      </div>
+
+      <div class="square small-square"></div>
+      <div class="square big-square"></div>
+
+    </div>
+  </div>
+
+  <div class="left w-50">
+
+    <div class="left-container" [class.wrong-password]="wrongPassword">
+      <div class="d-flex justify-content-center logo">
+        <img src="assets/icons/Logo.svg" alt=""/>
+      </div>
+
+      <div class="form">
+        <label for="user">نام کاربری</label>
+        <input id="user" class="form-group" nz-input placeholder="ایمیل یا نام کاربری" nzSize="large"/>
+      </div>
+
+      <div class="form sight-icon">
+        <label for="password">رمز عبور</label>
+        <input id="password" type="password" class="form-group" nz-input placeholder="رمز ورود به سامانه" nzSize="large"
+               #inputPass/>
+        <i inlineSVG="assets/icons/Sight.svg" *ngIf="!show" (click)="showPassword()"></i>
+        <i inlineSVG="assets/icons/Sight-off.svg" *ngIf="show" (click)="showPassword()"></i>
+      </div>
+
+      <div class="check-box" *ngIf="notRobot">
+        <label nz-checkbox [(ngModel)]="checked">من ربات نیستم</label>
+      </div>
+
+      <div class="form">
+        <button class="btn">ورود</button>
+      </div>
+
+      <div class="d-flex justify-content-evenly align-items-center login-with">
+        <div class="d-flex align-items-center">
+          <i class="ps-1" inlineSVG="assets/icons/voice-scan.svg"></i>
+          <span>ورود با تشخیص صدا</span>
+        </div>
+        <span class="divider"></span>
+        <div class="d-flex align-items-center">
+          <i class="ps-1" inlineSVG="assets/icons/face-scan.svg"></i>
+          <span>ورود با تشخیص چهره</span>
+        </div>
+      </div>
+
+      <div class="reset-pass">
+        <div class="ps-1">فراموشی رمز عبور؟</div>
+        <span>ثبت تیکت</span>
+      </div>
+
+      <div class="form-group error-message" *ngIf="wrongPassword">
+        <i inlineSVG="assets/icons/Error.svg"></i>
+        <span class="pe-3">نام کاربری یا رمز عبور اشتباه است.</span>
+      </div>
+
+    </div>
+  </div>
+</main>

@@ -1,0 +1,165 @@
+main {
+  height: 100vh;
+  display: flex;
+  overflow: hidden;
+
+  .left {
+    height: 100%;
+    overflow: auto;
+    background-color: var(--background);
+    padding-top: 40px;
+    display: flex;
+    justify-content: center;
+
+    .logo {
+      margin-bottom: 30px;
+    }
+
+    .left-container {
+      width: 450px;
+
+      .sight-icon {
+        position: relative;
+
+        i {
+          position: absolute;
+          left: 20px;
+          top: 55%;
+          cursor: pointer;
+        }
+      }
+
+      .form {
+        margin-top: 30px;
+
+        label {
+          color: var(--gray-mid);
+          letter-spacing: 0.1px;
+          margin-bottom: 8px;
+        }
+      }
+
+      button {
+        width: 100%;
+        background-color: var(--primary);
+        color: #fff;
+        height: 50px;
+      }
+
+      .login-with {
+        > div {
+          cursor: pointer;
+        }
+
+        margin: 30px 0;
+
+        .divider {
+          height: 16px;
+          width: 1px;
+          background-color: var(--gray-mid);
+        }
+
+        span {
+          color: var(--secondary);
+        }
+      }
+
+      .reset-pass {
+        display: flex;
+        justify-content: center;
+        color: var(--gray-mid);
+
+        span {
+          color: var(--secondary);
+          cursor: pointer;
+        }
+      }
+
+      .check-box {
+        margin: 30px 0;
+      }
+
+      .error-message {
+        margin-top: 30px;
+        background: #FFF1F1;
+        border: 1px solid #DA1E28;
+        height: 48px;
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    .wrong-password {
+      input {
+        outline: 2px solid #DA1E28 !important;
+      }
+    }
+  }
+
+  .right {
+    height: 100%;
+    background-color: var(--primary);
+    padding-top: 140px;
+    display: flex;
+    justify-content: center;
+
+    .right-container {
+      width: 400px;
+      position: relative;
+
+      .text {
+        h3 {
+          color: #fff;
+          margin: 40px 0 25px;
+        }
+
+        span {
+          color: #fff;
+          font-size: 18px;
+        }
+      }
+
+      .step {
+        margin-top: 120px;
+        display: flex;
+        justify-content: center;
+
+        .circle {
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          margin: 0 5px;
+          background-color: #fff;
+        }
+
+        .is-active {
+          width: 24px;
+          border-radius: 8px;
+        }
+      }
+
+      .square {
+        position: absolute;
+        background: rgba(17, 146, 232, 0.05);
+        border-radius: 24px;
+        transform: rotate(-60deg);
+      }
+
+      .small-square {
+        left: 430px;
+        top: 10px;
+        width: 115px;
+        height: 115px;
+      }
+
+      .big-square {
+        width: 280px;
+        height: 280px;
+        left: 430px;
+        top: 200px;
+      }
+    }
+
+
+  }
+}
