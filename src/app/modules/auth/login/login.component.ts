@@ -1,4 +1,5 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-login',
@@ -17,11 +18,18 @@ export class LoginComponent implements OnInit {
     {id: 3}
   ];
 
-  constructor() {
+  myForm!: FormGroup;
+
+  constructor(private fb: FormBuilder) {
   }
 
   ngOnInit(): void {
     this.step[0].isActive = true;
+
+    this.myForm = this.fb.group({
+      username: ['', Validators.required],
+      password: ['', [Validators.required, Validators.min(8)]],
+    });
   }
 
   showPassword() {

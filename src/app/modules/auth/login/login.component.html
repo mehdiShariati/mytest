@@ -3,7 +3,7 @@
     <div class="right-container">
 
       <div class="d-flex justify-content-center align-items-center">
-        <i inlineSVG="assets/icons/persons.svg"></i>
+        <i inlineSVG="assets/icons/persons.svg" [cacheSVG]="false"></i>
       </div>
 
       <div class="text-center text">
@@ -23,20 +23,21 @@
 
   <div class="left w-50">
 
-    <div class="left-container" [class.wrong-password]="wrongPassword">
+    <form [formGroup]="myForm" class="left-container" [class.wrong-password]="wrongPassword">
       <div class="d-flex justify-content-center logo">
         <img src="assets/icons/Logo.svg" alt=""/>
       </div>
 
       <div class="form">
         <label for="user">نام کاربری</label>
-        <input id="user" class="form-group" nz-input placeholder="ایمیل یا نام کاربری" nzSize="large"/>
+        <input id="user" class="form-group" nz-input placeholder="ایمیل یا نام کاربری" nzSize="large"
+               formControlName="username"/>
       </div>
 
       <div class="form sight-icon">
         <label for="password">رمز عبور</label>
         <input id="password" type="password" class="form-group" nz-input placeholder="رمز ورود به سامانه" nzSize="large"
-               #inputPass/>
+               #inputPass formControlName="password"/>
         <i inlineSVG="assets/icons/Sight.svg" *ngIf="!show" (click)="showPassword()"></i>
         <i inlineSVG="assets/icons/Sight-off.svg" *ngIf="show" (click)="showPassword()"></i>
       </div>
@@ -71,6 +72,6 @@
         <span class="pe-3">نام کاربری یا رمز عبور اشتباه است.</span>
       </div>
 
-    </div>
+    </form>
   </div>
 </main>

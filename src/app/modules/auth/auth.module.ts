@@ -4,7 +4,7 @@ import {LoginComponent} from './login/login.component';
 import {InlineSVGModule} from "ng-inline-svg-2";
 import {NzInputModule} from "ng-zorro-antd/input";
 import {NzCheckboxModule} from "ng-zorro-antd/checkbox";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -19,7 +19,8 @@ import {FormsModule} from "@angular/forms";
     InlineSVGModule,
     NzInputModule,
     NzCheckboxModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class AuthModule {
