@@ -28,7 +28,7 @@ main {
       }
 
       button {
-        @apply w-full h-[50px] bg-primary text-[#fff];
+        @apply w-full h-[50px] bg-primary text-[#fff] rounded-md;
       }
 
       .login-with {
@@ -72,7 +72,7 @@ main {
   }
 
   .right {
-
+    @apply bg-primary justify-center w-1/2 hidden md:flex min-h-full text-center min-h-[720px];
 
     .right-container {
       @apply mt-20 w-[400px] relative;
@@ -101,23 +101,15 @@ main {
       }
 
       .square {
-        @apply absolute rounded-[24px];
-        background: rgba(17, 146, 232, 0.05);
-        transform: rotate(-60deg);
+        @apply absolute rounded-[24px] bg-[#1192E80C] rotate-[-60deg];
       }
 
       .small-square {
-        left: 430px;
-        top: 10px;
-        width: 115px;
-        height: 115px;
+        @apply w-[115px] h-[115px] top-[10px] left-[430px];
       }
 
       .big-square {
-        width: 280px;
-        height: 280px;
-        left: 430px;
-        top: 200px;
+        @apply w-[280px] h-[280px] top-[200px] left-[430px];
       }
     }
 
