@@ -3,12 +3,15 @@ import {CommonModule} from '@angular/common';
 import {LoginComponent} from './login/login.component';
 import {InlineSVGModule} from "ng-inline-svg-2";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import { HttpClientModule } from '@angular/common/http';
+import {HttpClientModule} from '@angular/common/http';
+import {ChangePasswordComponent} from './change-password/change-password.component';
+import {CoreModule} from "../../core/core.module";
 
 
 @NgModule({
   declarations: [
-    LoginComponent
+    LoginComponent,
+    ChangePasswordComponent
   ],
   exports: [
     LoginComponent
@@ -18,7 +21,8 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     InlineSVGModule.forRoot(),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CoreModule,
   ]
 })
 export class AuthModule {

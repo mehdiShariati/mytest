@@ -17,7 +17,7 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,12 +27,10 @@ const routes: Routes = [
     AuthModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [
-    // {provide: NZ_I18N, useValue: en_US}
-  ],
+  providers: [],
   bootstrap: [AppComponent],
   exports: [
-    RouterModule
+    RouterModule,
   ]
 })
 export class AppModule {
