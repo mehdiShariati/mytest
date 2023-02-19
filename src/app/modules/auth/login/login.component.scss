@@ -15,7 +15,9 @@ main {
     }
 
     .left-container {
-      width: 450px;
+      width: 100%;
+      padding: 10px;
+      max-width: 450px;
 
       .sight-icon {
         position: relative;
@@ -96,15 +98,15 @@ main {
   }
 
   .right {
-    min-height: 720px;
-    background-color: var(--primary);
-    padding-top: 140px;
-    display: flex;
-    justify-content: center;
+    // min-height: 720px;
+    // background-color: var(--primary);
+    // padding-top: 140px;
+    // display: flex;
+    // justify-content: center;
 
     .right-container {
-      width: 400px;
-      position: relative;
+      // width: 400px;
+      // position: relative;
 
       .text {
         h3 {
@@ -162,3 +164,11 @@ main {
 
   }
 }
+// @media(max-width: 800px) {
+//   .right {
+//     display: none!important;
+//   }
+//   .left{
+//     width: 100%!important;
+//   }
+// }

@@ -1,15 +1,15 @@
 <main>
-  <div class="right w-50">
-    <div class="right-container">
+  <div class=" right bg-primary justify-center w-1/2	 hidden md:flex min-h-full text-align:center text-center  ">
+    <div class="right-container mt-20"> 
 
-      <div class="d-flex justify-content-center align-items-center">
-        <i inlineSVG="assets/icons/persons.svg" [cacheSVG]="false"></i>
+      <div class="flex justify-center items-center m-auto">
+        <div class="m-auto"><i class="" [inlineSVG]="'assets/icons/persons.svg'" [cacheSVG]="false"></i></div>
       </div>
 
       <div class="text-center text">
-        <h3>تسریع فرآیند مدیریت</h3>
-        <span>مدیریت منابع انسانی مستقر، ثبت رویداد ها، درخواست مرخصی و یا ماموریت، تشویق و یا تذکر به نیرو و ...</span>
-      </div>
+        <h3 class="text-white text-xl			">تسریع فرآیند مدیریت</h3>
+        <span class="text-white text-lg		">مدیریت منابع انسانی مستقر، ثبت رویداد ها، درخواست مرخصی و یا ماموریت، تشویق و یا تذکر به نیرو و ...</span>
+      </div> 
 
       <div class="step">
         <div *ngFor="let item of step" class="circle" [class.is-active]="item.isActive"></div>
@@ -21,22 +21,22 @@
     </div>
   </div>
 
-  <div class="left w-50">
+  <div class="left md:w-1/2 w-full	">
 
-    <form [formGroup]="myForm" class="left-container" [class.wrong-password]="wrongPassword">
-      <div class="d-flex justify-content-center logo">
-        <img src="assets/icons/Logo.svg" alt=""/>
+    <form [formGroup]="myForm" class="left-container z-10" [class.wrong-password]="wrongPassword">
+      <div class="flex justify-center logo">
+        <i inlineSVG="http://localhost:4200/assets/icons/Logo.svg"  [resolveSVGUrl]="false"></i>
       </div>
 
       <div class="form">
         <label for="user">نام کاربری</label>
-        <input id="user" class="form-group" nz-input placeholder="ایمیل یا نام کاربری" nzSize="large"
+        <input id="user" class="mt-1 h-16 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-primary focus:ring-primary block w-full rounded-md sm:text-sm focus:ring-1"  placeholder="ایمیل یا نام کاربری" 
                formControlName="username"/>
       </div>
 
       <div class="form sight-icon">
         <label for="password">رمز عبور</label>
-        <input id="password" type="password" class="form-group" nz-input placeholder="رمز ورود به سامانه" nzSize="large"
+        <input id="password" type="password" class="mt-1 h-16 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-primary focus:ring-primary block w-full rounded-md sm:text-sm focus:ring-1"  placeholder="رمز ورود به سامانه" 
                #inputPass formControlName="password"/>
         <i inlineSVG="assets/icons/Sight.svg" *ngIf="!show" (click)="showPassword()"></i>
         <i inlineSVG="assets/icons/Sight-off.svg" *ngIf="show" (click)="showPassword()"></i>
@@ -50,26 +50,26 @@
         <button class="btn">ورود</button>
       </div>
 
-      <div class="d-flex justify-content-evenly align-items-center login-with">
-        <div class="d-flex align-items-center">
-          <i class="ps-1" inlineSVG="assets/icons/voice-scan.svg"></i>
+      <div class="flex justify-evenly items-center login-with">
+        <div class="flex items-center">
+          <i class="px-1" inlineSVG="assets/icons/voice-scan.svg"></i>
           <span>ورود با تشخیص صدا</span>
         </div>
         <span class="divider"></span>
-        <div class="d-flex align-items-center">
-          <i class="ps-1" inlineSVG="assets/icons/face-scan.svg"></i>
+        <div class="flex items-center">
+          <i class="px-1" inlineSVG="assets/icons/face-scan.svg"></i>
           <span>ورود با تشخیص چهره</span>
         </div>
       </div>
 
       <div class="reset-pass">
-        <div class="ps-1">فراموشی رمز عبور؟</div>
+        <div class="px-1">فراموشی رمز عبور؟</div>
         <span>ثبت تیکت</span>
       </div>
 
-      <div class="form-group error-message" *ngIf="wrongPassword">
+      <div class="form-group error-message" *ngIf="true">
         <i inlineSVG="assets/icons/Error.svg"></i>
-        <span class="pe-3">نام کاربری یا رمز عبور اشتباه است.</span>
+        <span class="px-3">نام کاربری یا رمز عبور اشتباه است.</span>
       </div>
 
     </form>
