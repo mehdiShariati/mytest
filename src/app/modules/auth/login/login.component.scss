@@ -1,5 +1,5 @@
 main {
-  height: 100vh;
+  @apply h-[100vh] flex overflow-auto ;
   display: flex;
   overflow: auto;
 
@@ -98,15 +98,12 @@ main {
   }
 
   .right {
-    // min-height: 720px;
-    // background-color: var(--primary);
-    // padding-top: 140px;
-    // display: flex;
-    // justify-content: center;
+
 
     .right-container {
-      // width: 400px;
-      // position: relative;
+      @apply mt-20;
+      width: 400px;
+      position: relative;
 
       .text {
         h3 {
@@ -164,6 +161,7 @@ main {
 
   }
 }
+
 // @media(max-width: 800px) {
 //   .right {
 //     display: none!important;

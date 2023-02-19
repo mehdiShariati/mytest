@@ -1,15 +1,16 @@
 <main>
-  <div class=" right bg-primary justify-center w-1/2	 hidden md:flex min-h-full text-align:center text-center  ">
-    <div class="right-container mt-20"> 
+  <div
+    class="right bg-primary justify-center w-1/2	 hidden md:flex min-h-full text-align:center text-center min-h-[720px]">
+    <div class="right-container">
 
       <div class="flex justify-center items-center m-auto">
         <div class="m-auto"><i class="" [inlineSVG]="'assets/icons/persons.svg'" [cacheSVG]="false"></i></div>
       </div>
 
       <div class="text-center text">
-        <h3 class="text-white text-xl			">تسریع فرآیند مدیریت</h3>
-        <span class="text-white text-lg		">مدیریت منابع انسانی مستقر، ثبت رویداد ها، درخواست مرخصی و یا ماموریت، تشویق و یا تذکر به نیرو و ...</span>
-      </div> 
+        <h3 class="text-white text-xl">تسریع فرآیند مدیریت</h3>
+        <span class="text-white text-lg">مدیریت منابع انسانی مستقر، ثبت رویداد ها، درخواست مرخصی و یا ماموریت، تشویق و یا تذکر به نیرو و ...</span>
+      </div>
 
       <div class="step">
         <div *ngFor="let item of step" class="circle" [class.is-active]="item.isActive"></div>
@@ -21,22 +22,26 @@
     </div>
   </div>
 
-  <div class="left md:w-1/2 w-full	">
+  <div class="left md:w-1/2 w-full">
 
     <form [formGroup]="myForm" class="left-container z-10" [class.wrong-password]="wrongPassword">
       <div class="flex justify-center logo">
-        <i inlineSVG="http://localhost:4200/assets/icons/Logo.svg"  [resolveSVGUrl]="false"></i>
+        <i [inlineSVG]="'assets/icons/Logo.svg'" [resolveSVGUrl]="false"></i>
       </div>
 
       <div class="form">
         <label for="user">نام کاربری</label>
-        <input id="user" class="mt-1 h-16 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-primary focus:ring-primary block w-full rounded-md sm:text-sm focus:ring-1"  placeholder="ایمیل یا نام کاربری" 
+        <input id="user"
+               class="mt-1 h-16 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-primary focus:ring-primary block w-full rounded-md sm:text-sm focus:ring-1"
+               placeholder="ایمیل یا نام کاربری"
                formControlName="username"/>
       </div>
 
       <div class="form sight-icon">
         <label for="password">رمز عبور</label>
-        <input id="password" type="password" class="mt-1 h-16 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-primary focus:ring-primary block w-full rounded-md sm:text-sm focus:ring-1"  placeholder="رمز ورود به سامانه" 
+        <input id="password" type="password"
+               class="mt-1 h-16 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-primary focus:ring-primary block w-full rounded-md sm:text-sm focus:ring-1"
+               placeholder="رمز ورود به سامانه"
                #inputPass formControlName="password"/>
         <i inlineSVG="assets/icons/Sight.svg" *ngIf="!show" (click)="showPassword()"></i>
         <i inlineSVG="assets/icons/Sight-off.svg" *ngIf="show" (click)="showPassword()"></i>
@@ -67,7 +72,7 @@
         <span>ثبت تیکت</span>
       </div>
 
-      <div class="form-group error-message" *ngIf="true">
+      <div class="form-group error-message" *ngIf="wrongPassword">
         <i inlineSVG="assets/icons/Error.svg"></i>
         <span class="px-3">نام کاربری یا رمز عبور اشتباه است.</span>
       </div>
