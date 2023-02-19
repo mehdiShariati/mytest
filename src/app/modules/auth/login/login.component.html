@@ -22,11 +22,11 @@
     </div>
   </div>
 
-  <div class="left md:w-1/2 w-full">
+  <div class="left">
 
-    <form [formGroup]="myForm" class="left-container z-10" [class.wrong-password]="wrongPassword">
+    <form [formGroup]="myForm" class="left-container" [class.wrong-password]="wrongPassword">
       <div class="flex justify-center logo">
-        <i [inlineSVG]="'assets/icons/Logo.svg'" [resolveSVGUrl]="false"></i>
+        <img [src]="'assets/icons/Logo.svg'" alt=""/>
       </div>
 
       <div class="form">
