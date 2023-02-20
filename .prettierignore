@@ -1,0 +1,13 @@
+package.json
+package-lock.json
+yarn.lock
+dist
+node_modules
+src/api
+.gitlab-ci.yml
+src/assets/fonts
+src/assets/images
+src/assets/map
+src/assets/point
+src/assets/polygons
+src/favicon.ico

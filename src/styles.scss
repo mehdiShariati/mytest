@@ -1,17 +1,17 @@
 @font-face {
-  font-family: "dana-fanum";
+  font-family: 'dana-fanum';
   font-weight: 300;
-  src: url("/assets/fonts/dana-fanum-regular.woff") format("woff");
-  src: url("/assets/fonts/dana-fanum-regular.woff2") format("woff2");
-  src: url("/assets/fonts/dana-fanum-regular.eot") format("eot");
+  src: url('/assets/fonts/dana-fanum-regular.woff') format('woff');
+  src: url('/assets/fonts/dana-fanum-regular.woff2') format('woff2');
+  src: url('/assets/fonts/dana-fanum-regular.eot') format('eot');
 }
 
 @font-face {
-  font-family: "dana-fanum";
+  font-family: 'dana-fanum';
   font-weight: 500;
-  src: url("/assets/fonts/dana-fanum-medium.woff") format("woff");
-  src: url("/assets/fonts/dana-fanum-medium.woff2") format("woff2");
-  src: url("/assets/fonts/dana-fanum-medium.eot") format("eot");
+  src: url('/assets/fonts/dana-fanum-medium.woff') format('woff');
+  src: url('/assets/fonts/dana-fanum-medium.woff2') format('woff2');
+  src: url('/assets/fonts/dana-fanum-medium.eot') format('eot');
 }
 
 * {
@@ -19,31 +19,30 @@
   font-family: 'dana-fanum', sans-serif !important;
 }
 
-
 :root {
-  --primary: #00539A;
-  --secondary: #0072C3;
-  --background: #F4F4F4;
-  --gray-mid: #8D8D8D;
+  --primary: #00539a;
+  --secondary: #0072c3;
+  --background: #f4f4f4;
+  --gray-mid: #8d8d8d;
   --gray-dark: #262626;
-  --danger: #DA1E28;
+  --danger: #da1e28;
 }
 
 .form-group {
   border: none;
   padding: 15px;
   border-radius: 8px;
-  box-shadow: inset 0px -1px 0px #E0E0E0;
+  box-shadow: inset 0px -1px 0px #e0e0e0;
 }
 
 input:focus-visible {
   outline: none;
 }
 
-
 /*------------------------- overRide ant style -----------------------------*/
 
-.ant-input-focused, .ant-input:focus {
+.ant-input-focused,
+.ant-input:focus {
   transition: 0s;
   border: none;
   box-shadow: none;
@@ -55,7 +54,9 @@ input:focus-visible {
   font-size: 15px;
 }
 
-.ant-checkbox-input:focus + .ant-checkbox-inner, .ant-checkbox-wrapper:hover .ant-checkbox-inner, .ant-checkbox:hover .ant-checkbox-inner {
+.ant-checkbox-input:focus + .ant-checkbox-inner,
+.ant-checkbox-wrapper:hover .ant-checkbox-inner,
+.ant-checkbox:hover .ant-checkbox-inner {
   border-color: var(--gray-dark);
 }
 
@@ -64,7 +65,8 @@ input:focus-visible {
   background-color: var(--gray-dark);
 }
 
-.ant-checkbox-wrapper:hover .ant-checkbox::after, .ant-checkbox:hover::after {
+.ant-checkbox-wrapper:hover .ant-checkbox::after,
+.ant-checkbox:hover::after {
   visibility: hidden;
 }
 
