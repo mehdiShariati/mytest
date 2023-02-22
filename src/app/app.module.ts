@@ -4,10 +4,12 @@ import {AppComponent} from './app.component';
 import {registerLocaleData} from '@angular/common';
 import en from '@angular/common/locales/en';
 import {FormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AuthModule} from "./modules/auth/auth.module";
 import {RouterModule, Routes} from "@angular/router";
+import {BasicAuthInterceptor} from "./core/interceptors/basic-auth.interceptor";
+import {HttpErrorInterceptor} from "./core/interceptors/http-error.interceptor";
 
 registerLocaleData(en);
 
@@ -27,7 +29,10 @@ const routes: Routes = [
     AuthModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true},
+  ],
   bootstrap: [AppComponent],
   exports: [
     RouterModule,

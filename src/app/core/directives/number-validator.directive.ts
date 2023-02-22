@@ -7,32 +7,12 @@ import {FormControl} from "@angular/forms";
 })
 export class NumberValidatorDirective {
 
-  static forbiddenNameValidator(formcontrol: FormControl): { hasLower: boolean; hasNumber: boolean; hasUpper: boolean } | null {
+  static forbiddenNameValidator(formcontrol: FormControl): { hasLower: boolean; hasNumber: boolean; hasUpper: boolean; static: boolean } {
     const hasNumber = /\d/.test(formcontrol.value);
     const hasUpper = /[A-Z]/.test(formcontrol.value);
     const hasLower = /[a-z]/.test(formcontrol.value);
 
-    let errors = {
-      hasUpper: true,
-      hasNumber: true,
-      hasLower: true
-    }
-
-    if (hasNumber) {
-      errors.hasNumber = false;
-    }
-
-    if (hasUpper) {
-      errors.hasUpper = false;
-    }
-
-    if (hasLower) {
-      errors.hasLower = false;
-    }
-
-    let forbidden = !hasUpper || !hasLower || !hasNumber;
-    return forbidden ? errors : null;
-
+    return {hasUpper: !hasUpper, hasNumber: !hasNumber, hasLower: !hasLower, static: true};
   }
 }
 

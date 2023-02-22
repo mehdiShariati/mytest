@@ -2,7 +2,7 @@ main {
   @apply h-[100vh] flex overflow-auto ;
 
   .left {
-    @apply md:w-1/2 w-full min-h-[720px] bg-background pt-[40px] flex justify-center;
+    @apply md:w-1/2 w-full min-h-[720px] bg-background pt-[40px] flex items-center justify-center;
 
     .logo {
       @apply mb-[30px];
@@ -72,7 +72,7 @@ main {
   }
 
   .right {
-    @apply bg-primary justify-center w-1/2 hidden md:flex min-h-full text-center min-h-[720px];
+    @apply bg-primary justify-center w-1/2 hidden md:flex min-h-full text-center items-center min-h-[720px];
 
     .right-container {
       @apply mt-20 w-[400px] relative;

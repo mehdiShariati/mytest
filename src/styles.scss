@@ -34,16 +34,15 @@
 }
 
 .form-group {
-  border: none;
-  padding: 15px;
-  border-radius: 8px;
+  @apply border-none p-[15px] rounded-lg;
   box-shadow: inset 0px -1px 0px #E0E0E0;
 }
 
 input:focus-visible {
   outline: none;
 }
-svg{
+
+svg {
   display: inline-block;
 }
 
