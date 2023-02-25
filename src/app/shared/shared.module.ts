@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginatorModule } from 'primeng/paginator';
 import { MultiSelectModule } from 'primeng/multiselect';
@@ -21,37 +20,61 @@ import { TooltipModule } from 'primeng/tooltip';
 import { TriStateCheckboxModule } from 'primeng/tristatecheckbox';
 import { DialogModule } from 'primeng/dialog';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-
-const PIPES = [];
-const MODULES = [
-  FormsModule,
-  ReactiveFormsModule,
-  PaginatorModule,
-  MultiSelectModule,
-  OverlayPanelModule,
-  TableModule,
-  ConfirmDialogModule,
-  FocusTrapModule,
-  ToastModule,
-  SplitButtonModule,
-  DropdownModule,
-  CheckboxModule,
-  InputSwitchModule,
-  RadioButtonModule,
-  CalendarModule,
-  AccordionModule,
-  TabViewModule,
-  TooltipModule,
-  TriStateCheckboxModule,
-  DialogModule,
-  ProgressSpinnerModule,
-];
-const COMPONENTS = [];
-const DIRECTIVES = [];
+import { MessagesModule } from 'primeng/messages';
+import { MessageModule } from 'primeng/message';
 
 @NgModule({
-  declarations: [], //[...PIPES, ...DIRECTIVES, ...COMPONENTS]
-  imports: [...MODULES],
-  exports: [...MODULES], //[...PIPES, ...DIRECTIVES, ...COMPONENTS, ...MODULES],
+  declarations: [],
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    PaginatorModule,
+    MultiSelectModule,
+    OverlayPanelModule,
+    TableModule,
+    ConfirmDialogModule,
+    FocusTrapModule,
+    ToastModule,
+    SplitButtonModule,
+    DropdownModule,
+    CheckboxModule,
+    InputSwitchModule,
+    RadioButtonModule,
+    CalendarModule,
+    AccordionModule,
+    TabViewModule,
+    TooltipModule,
+    TriStateCheckboxModule,
+    DialogModule,
+    ProgressSpinnerModule,
+    MessageModule,
+    MessagesModule,
+  ],
+  exports: [
+    FormsModule,
+    ReactiveFormsModule,
+    PaginatorModule,
+    MultiSelectModule,
+    OverlayPanelModule,
+    TableModule,
+    ConfirmDialogModule,
+    FocusTrapModule,
+    ToastModule,
+    SplitButtonModule,
+    DropdownModule,
+    CheckboxModule,
+    InputSwitchModule,
+    RadioButtonModule,
+    CalendarModule,
+    AccordionModule,
+    TabViewModule,
+    TooltipModule,
+    TriStateCheckboxModule,
+    DialogModule,
+    ProgressSpinnerModule,
+    MessageModule,
+    MessagesModule,
+  ],
+  providers: [ConfirmationService],
 })
 export class SharedModule {}

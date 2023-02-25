@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterEvent, RoutesRecognized } from '@angular/router';
+import { Router, RoutesRecognized } from '@angular/router';
 import { Layouts } from './core/enums/layouts.enum';
 
 @Component({
@@ -12,6 +12,7 @@ export class AppComponent implements OnInit {
 
   LayoutsEnum = Layouts;
   layout!: Layouts;
+
   constructor(private router: Router) {}
 
   // We can't use `ActivatedRoute` here since we are not within a `router-outlet` context yet.

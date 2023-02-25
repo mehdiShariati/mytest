@@ -1,0 +1,9 @@
+aside {
+  @apply w-[200px] bg-white;
+
+  ul {
+    li {
+      @apply px-[20px] py-[8px] text-gray-mid block;
+    }
+  }
+}
