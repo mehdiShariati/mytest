@@ -63,9 +63,7 @@ export class LoginComponent implements OnInit {
           return;
         }
 
-        if (res.status == 428 && res.error.fingerPrint == 'captcha') {
-          this.getCaptcha();
-        }
+        this.getCaptcha();
       },
     );
   }
