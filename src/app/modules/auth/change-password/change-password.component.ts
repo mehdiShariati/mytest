@@ -15,7 +15,6 @@ export class ChangePasswordComponent implements OnInit {
   show2: boolean = false;
   @ViewChild('inputPass1') passwordInput1!: ElementRef;
   @ViewChild('inputPass2') passwordInput2!: ElementRef;
-  notRobot: boolean = false;
   wrongPassword: boolean = false;
   checked!: boolean;
   loading: boolean = true;
@@ -38,19 +37,15 @@ export class ChangePasswordComponent implements OnInit {
 
   ngOnInit(): void {
     this.myForm = new FormGroup<any>({
-      username: new FormControl(this.data.username),
-      oldPassword: new FormControl(this.data.password),
+      username: new FormControl(this.data?.username),
+      oldPassword: new FormControl(this.data?.password),
       newPassword: this.password,
       confirmPassword: this.confirmPassword,
       captchaId: new FormControl('', Validators.required),
       captchaValue: new FormControl('', Validators.required)
     });
 
-    this.authService.getCaptcha('').subscribe((res: any) => {
-      this.loading = false;
-      this.captchaImage = res.captchaBase64;
-      this.myForm.get('captchaId')?.setValue(res.id);
-    })
+    this.getCaptcha();
   }
 
   showPassword(isShow1: boolean = false) {
@@ -81,6 +76,14 @@ export class ChangePasswordComponent implements OnInit {
 
     this.authService.changeTemporaryPassword(model).subscribe(() => {
       this.router.navigate(['auth/login']);
+    });
+  }
+
+  getCaptcha() {
+    this.authService.getCaptcha('').subscribe((res: any) => {
+      this.loading = false;
+      this.captchaImage = res.captchaBase64;
+      this.myForm.get('captchaId')?.setValue(res.id);
     });
   }
 }

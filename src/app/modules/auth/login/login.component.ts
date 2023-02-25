@@ -19,13 +19,17 @@ export class LoginComponent implements OnInit {
     {id: 2},
     {id: 3}
   ];
-
+  captchaImage!: string;
   myForm!: FormGroup;
 
   constructor(private fb: FormBuilder,
               private authService: AuthServiceService,
               private router: Router
   ) {
+    if (localStorage.getItem('token')) {
+      this.router.navigate(['']);
+      return;
+    }
   }
 
   ngOnInit(): void {
@@ -34,6 +38,8 @@ export class LoginComponent implements OnInit {
     this.myForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
+      captchaId: '',
+      captchaValue: '',
     });
   }
 
@@ -54,13 +60,26 @@ export class LoginComponent implements OnInit {
     }
 
     this.authService.login(this.myForm.value).subscribe(res => {
-      console.log(res)
+      this.notRobot = false;
+      localStorage.setItem('token', res.access_token);
+      localStorage.setItem('refresh-token', res.refresh_token);
     }, res => {
       if (res.status == 428 && res.error.fingerPrint == 'temporary.password') {
         this.router.navigate(['/auth/new-password'], {state: this.myForm.value});
+        return;
       }
+
       if (res.status == 428 && res.error.fingerPrint == 'captcha') {
+        this.getCaptcha();
       }
+    });
+  }
+
+  getCaptcha() {
+    this.authService.getCaptcha('').subscribe((res: any) => {
+      this.notRobot = true;
+      this.captchaImage = res.captchaBase64;
+      this.myForm.get('captchaId')?.setValue(res.id);
     });
   }
 }

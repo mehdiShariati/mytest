@@ -1,8 +1,8 @@
 main {
-  @apply h-[100vh] flex overflow-auto ;
+  @apply min-h-[100vh] flex overflow-auto ;
 
   .left {
-    @apply md:w-1/2 w-full min-h-[720px] bg-background pt-[40px] flex items-center justify-center;
+    @apply md:w-1/2 w-full min-h-[720px] bg-background flex items-center justify-center;
 
     .logo {
       @apply mb-[30px];
@@ -56,7 +56,27 @@ main {
       }
 
       .check-box {
-        @apply my-[30px] mx-0;
+        @apply my-[30px] mx-0 flex items-center flex-wrap;
+
+        > div {
+          @apply w-full flex items-center justify-between;
+
+          > div {
+            @apply flex items-center;
+
+            i {
+              @apply ml-2 cursor-pointer;
+            }
+
+            > .image-container {
+              @apply w-[170px] h-[48px] rounded-[8px] bg-white overflow-hidden;
+
+              img {
+                @apply w-full h-full object-contain;
+              }
+            }
+          }
+        }
       }
 
       .error-message {

@@ -24,8 +24,10 @@ export class AuthServiceService {
   login(value: any) {
     let formData = new URLSearchParams();
 
-    formData.append('username', value.username);
-    formData.append('password', value.password);
+    for (const key in value) {
+      if (value[key])
+        formData.append(key, value[key]);
+    }
 
     return this.http.post<any>(`${environment.apiUrlPublic}/usermanagement/tokens/generate/password`, formData).pipe(map(user => {
       user.authBasic = btoa(value.username + ':' + value.password);
@@ -37,6 +39,8 @@ export class AuthServiceService {
 
   logout() {
     localStorage.removeItem('currentUser');
+    localStorage.removeItem('token');
+    localStorage.removeItem('refresh-token');
     this.currentUserSubject.next(null);
   }
 
@@ -47,13 +51,20 @@ export class AuthServiceService {
   changeTemporaryPassword(value: any) {
     let formData = new URLSearchParams();
 
-    formData.append('username', value.username);
-    formData.append('oldPassword', value.oldPassword);
-    formData.append('newPassword', value.newPassword);
-    formData.append('captchaId', value.captchaId);
-    formData.append('captchaValue', value.captchaValue);
-
+    for (const key in value) {
+      if (value[key])
+        formData.append(key, value[key]);
+    }
 
     return this.http.post(`${environment.apiUrlPublic}/usermanagement/tokens/change-temporary-password`, formData);
+  }
+
+  getToken() {
+    let value = {
+      grant_type: 'refresh_token',
+      refresh_token: localStorage.getItem('refresh-token')
+    }
+
+    return this.http.post(`${environment.apiToken}/oauth2/token`, value);
   }
 }
