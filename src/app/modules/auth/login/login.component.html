@@ -52,7 +52,21 @@
       </div>
 
       <div class="check-box" *ngIf="notRobot">
-        <label nz-checkbox [(ngModel)]="checked">من ربات نیستم</label>
+        <div>
+          <label>جواب سوال رو به رو</label>
+          <div>
+            <i inlineSVG="assets/icons/refresh-captcha.svg" (click)="getCaptcha()"></i>
+            <div class="image-container">
+              <img [src]="'data:image/jpeg;base64,' + captchaImage" alt="captcha" />
+            </div>
+          </div>
+        </div>
+        <input
+          class="form-group mt-6 h-12 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-primary focus:ring-primary block w-full rounded-md sm:text-sm focus:ring-1"
+          type="text"
+          placeholder="پاسخ شما"
+          formControlName="captchaValue"
+        />
       </div>
 
       <div class="form">
