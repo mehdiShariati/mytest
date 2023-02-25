@@ -41,7 +41,7 @@ export class AuthServiceService {
     localStorage.removeItem('currentUser');
     localStorage.removeItem('token');
     localStorage.removeItem('refresh-token');
-    this.currentUserSubject.next(null);
+    this.currentUserSubject.complete();
   }
 
   getCaptcha(value: any) {
