@@ -30,7 +30,6 @@ const MODULES = [
   MultiSelectModule,
   OverlayPanelModule,
   TableModule,
-  ConfirmationService,
   ConfirmDialogModule,
   FocusTrapModule,
   ToastModule,

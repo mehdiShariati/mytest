@@ -45,6 +45,8 @@ svg {
   display: inline-block;
 }
 
+//import custom components styles
+@import './assets/components/p-carousel';
 /*------------------------- overRide ant style -----------------------------*/
 
 // .ant-input-focused, .ant-input:focus {

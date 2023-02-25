@@ -8,18 +8,17 @@ import { LoginComponent } from './modules/auth/login/login.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 
 const routes: Routes = [
-  {
-    path: 'dashboard',
-    children: [{ path: '', component: DashboardComponent }],
-    data: { layout: Layouts.Main },
-  },
+  // {
+  //   path: 'dashboard',
+  //   children: [{ path: '', component: DashboardComponent }],
+  //   data: { layout: Layouts.Main },
+  // },
   {
     path: 'auth',
     children: [
       {
         path: 'login',
         component: LoginComponent,
-        data: { layout: Layouts.Auth },
       },
       {
         path: 'new-password',
@@ -28,15 +27,15 @@ const routes: Routes = [
     ],
     data: { layout: Layouts.Auth },
   },
-  // {
-  //   path: 'dashboard',
-  //   loadChildren: () =>
-  //     import('./modules/dashboard/dashboard.module').then((m) => m.DashboardModule)
-  // },
   {
-    path: 'auth',
-    loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule),
+    path: 'dashboard',
+    loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule),
+    data: { layout: Layouts.Main },
   },
+  // {
+  //   path: 'auth',
+  //   loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule),
+  // },
 ];
 
 @NgModule({
