@@ -3,17 +3,9 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { Layouts } from 'src/app/core/enums/layouts.enum';
 
-const routes: Routes = [
-  {
-    path: 'login',
-    component: LoginComponent,
-  },
-  {
-    path: 'new-password',
-    component: ChangePasswordComponent,
-  },
-];
+const routes: Routes = [];
 
 @NgModule({
   declarations: [],

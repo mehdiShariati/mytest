@@ -10,23 +10,13 @@ import { AuthModule } from './modules/auth/auth.module';
 import { RouterModule, Routes } from '@angular/router';
 import { BasicAuthInterceptor } from './core/interceptors/basic-auth.interceptor';
 import { HttpErrorInterceptor } from './core/interceptors/http-error.interceptor';
-
+import { LayoutsModule } from './layouts/layouts.module';
+import { AppRoutingModule } from './app-routing.module';
 registerLocaleData(en);
-
-const routes: Routes = [
-  { path: 'auth', loadChildren: () => import('./modules/auth/auth-routing.module').then(m => m.AuthRoutingModule) },
-];
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    AuthModule,
-    RouterModule.forRoot(routes),
-  ],
+  imports: [BrowserModule, FormsModule, HttpClientModule, BrowserAnimationsModule, AppRoutingModule, LayoutsModule],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },

@@ -13,6 +13,10 @@ module.exports = {
         white: '#fff',
         black: '#000',
       },
+
+      fontFamily: {
+        dana: ['dana-fanum', 'Arial', 'sans-serif'],
+      },
     },
   },
   plugins: [],
