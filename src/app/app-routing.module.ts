@@ -4,11 +4,17 @@ import { Layouts } from './core/enums/layouts.enum';
 import { ChangePasswordComponent } from './modules/auth/change-password/change-password.component';
 import { LoginComponent } from './modules/auth/login/login.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
+import { DashboardAdminComponent } from './modules/admin/dashboard/dashboard.component';
 
 const routes: Routes = [
   {
     path: 'dashboard',
     children: [{ path: '', component: DashboardComponent }],
+    data: { layout: Layouts.Main },
+  },
+  {
+    path: 'admin',
+    children: [{ path: '', component: DashboardAdminComponent }],
     data: { layout: Layouts.Main },
   },
   {
