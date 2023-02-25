@@ -1,14 +1,15 @@
 <main>
-  <div class="right w-50">
+  <div class="right">
     <div class="right-container">
-
-      <div class="d-flex justify-content-center align-items-center">
-        <i inlineSVG="assets/icons/persons.svg" [cacheSVG]="false"></i>
+      <div class="flex justify-center items-center m-auto">
+        <div class="m-auto"><i class="" [inlineSVG]="'assets/icons/persons.svg'" [cacheSVG]="false"></i></div>
       </div>
 
       <div class="text-center text">
-        <h3>تسریع فرآیند مدیریت</h3>
-        <span>مدیریت منابع انسانی مستقر، ثبت رویداد ها، درخواست مرخصی و یا ماموریت، تشویق و یا تذکر به نیرو و ...</span>
+        <h3 class="text-white text-xl">تسریع فرآیند مدیریت</h3>
+        <span class="text-white text-lg"
+          >مدیریت منابع انسانی مستقر، ثبت رویداد ها، درخواست مرخصی و یا ماموریت، تشویق و یا تذکر به نیرو و ...</span
+        >
       </div>
 
       <div class="step">
@@ -17,27 +18,35 @@
 
       <div class="square small-square"></div>
       <div class="square big-square"></div>
-
     </div>
   </div>
 
-  <div class="left w-50">
-
-    <form [formGroup]="myForm" class="left-container" [class.wrong-password]="wrongPassword">
-      <div class="d-flex justify-content-center logo">
-        <img src="assets/icons/Logo.svg" alt=""/>
+  <div class="left">
+    <form [formGroup]="myForm" class="left-container" [class.wrong-password]="wrongPassword" (ngSubmit)="submit()">
+      <div class="flex justify-center logo">
+        <img [src]="'assets/icons/Logo.svg'" alt="" />
       </div>
 
       <div class="form">
         <label for="user">نام کاربری</label>
-        <input id="user" class="form-group" nz-input placeholder="ایمیل یا نام کاربری" nzSize="large"
-               formControlName="username"/>
+        <input
+          id="user"
+          class="form-group mt-1 h-12 px-3 py-2 bg-white placeholder-slate-400 focus:outline-none focus:border-primary focus:ring-primary block w-full rounded-md sm:text-sm focus:ring-1"
+          placeholder="ایمیل یا نام کاربری"
+          formControlName="username"
+        />
       </div>
 
       <div class="form sight-icon">
         <label for="password">رمز عبور</label>
-        <input id="password" type="password" class="form-group" nz-input placeholder="رمز ورود به سامانه" nzSize="large"
-               #inputPass formControlName="password"/>
+        <input
+          id="password"
+          type="password"
+          class="form-group mt-1 h-12 px-3 py-2 bg-white placeholder-slate-400 focus:outline-none focus:border-primary focus:ring-primary block w-full rounded-md sm:text-sm focus:ring-1"
+          placeholder="رمز ورود به سامانه"
+          #inputPass
+          formControlName="password"
+        />
         <i inlineSVG="assets/icons/Sight.svg" *ngIf="!show" (click)="showPassword()"></i>
         <i inlineSVG="assets/icons/Sight-off.svg" *ngIf="show" (click)="showPassword()"></i>
       </div>
@@ -50,28 +59,27 @@
         <button class="btn">ورود</button>
       </div>
 
-      <div class="d-flex justify-content-evenly align-items-center login-with">
-        <div class="d-flex align-items-center">
-          <i class="ps-1" inlineSVG="assets/icons/voice-scan.svg"></i>
+      <div class="flex justify-evenly items-center login-with">
+        <div class="flex items-center">
+          <i class="px-1" inlineSVG="assets/icons/voice-scan.svg"></i>
           <span>ورود با تشخیص صدا</span>
         </div>
         <span class="divider"></span>
-        <div class="d-flex align-items-center">
-          <i class="ps-1" inlineSVG="assets/icons/face-scan.svg"></i>
+        <div class="flex items-center">
+          <i class="px-1" inlineSVG="assets/icons/face-scan.svg"></i>
           <span>ورود با تشخیص چهره</span>
         </div>
       </div>
 
       <div class="reset-pass">
-        <div class="ps-1">فراموشی رمز عبور؟</div>
+        <div class="px-1">فراموشی رمز عبور؟</div>
         <span>ثبت تیکت</span>
       </div>
 
       <div class="form-group error-message" *ngIf="wrongPassword">
         <i inlineSVG="assets/icons/Error.svg"></i>
-        <span class="pe-3">نام کاربری یا رمز عبور اشتباه است.</span>
+        <span class="px-3">نام کاربری یا رمز عبور اشتباه است.</span>
       </div>
-
     </form>
   </div>
 </main>

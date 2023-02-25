@@ -1,164 +1,125 @@
 main {
-  height: 100vh;
-  display: flex;
-  overflow: auto;
+  @apply h-[100vh] flex overflow-auto;
 
   .left {
-    min-height: 720px;
-    background-color: var(--background);
-    padding-top: 40px;
-    display: flex;
-    justify-content: center;
+    @apply md:w-1/2 w-full min-h-[720px] bg-background pt-[40px] flex items-center justify-center;
 
     .logo {
-      margin-bottom: 30px;
+      @apply mb-[30px];
     }
 
     .left-container {
-      width: 450px;
+      @apply w-full p-[10px] max-w-[450px] z-10;
 
       .sight-icon {
-        position: relative;
+        @apply relative;
 
         i {
-          position: absolute;
-          left: 20px;
-          top: 55%;
-          cursor: pointer;
+          @apply absolute left-[20px] top-[55%] cursor-pointer;
         }
       }
 
       .form {
-        margin-top: 30px;
+        @apply mt-[30px];
 
         label {
-          color: var(--gray-mid);
-          letter-spacing: 0.1px;
-          margin-bottom: 8px;
+          @apply text-gray-mid mb-[8px];
         }
       }
 
       button {
-        width: 100%;
-        background-color: var(--primary);
-        color: #fff;
-        height: 50px;
+        @apply w-full h-[50px] bg-secondary text-[#fff] rounded-md;
       }
 
       .login-with {
+        @apply my-[30px] mx-[0];
+
         > div {
-          cursor: pointer;
+          @apply cursor-pointer;
         }
 
-        margin: 30px 0;
-
         .divider {
-          height: 16px;
-          width: 1px;
-          background-color: var(--gray-mid);
+          @apply h-[16px] w-[1px] bg-gray-mid;
         }
 
         span {
-          color: var(--secondary);
+          @apply text-secondary;
         }
       }
 
       .reset-pass {
-        display: flex;
-        justify-content: center;
-        color: var(--gray-mid);
+        @apply flex justify-center text-gray-mid;
 
         span {
-          color: var(--secondary);
-          cursor: pointer;
+          @apply text-secondary cursor-pointer;
         }
       }
 
       .check-box {
-        margin: 30px 0;
+        @apply my-[30px] mx-0;
       }
 
       .error-message {
-        margin-top: 30px;
-        background: #FFF1F1;
-        border: 1px solid var(--danger);
-        height: 48px;
-        display: flex;
-        align-items: center;
+        @apply mt-[30px] flex items-center bg-[#FFF1F1] border-solid border-danger border-[1px] h-[48px];
       }
     }
 
     .wrong-password {
       input {
-        outline: 2px solid var(--danger) !important;
+        @apply border-solid border-danger border-[2px] #{!important};
       }
     }
   }
 
   .right {
-    min-height: 720px;
-    background-color: var(--primary);
-    padding-top: 140px;
-    display: flex;
-    justify-content: center;
+    @apply bg-primary justify-center w-1/2 hidden md:flex min-h-full text-center items-center min-h-[720px];
 
     .right-container {
-      width: 400px;
-      position: relative;
+      @apply mt-20 w-[400px] relative;
 
       .text {
         h3 {
-          color: #fff;
+          @apply text-[#fff];
           margin: 40px 0 25px;
         }
 
         span {
-          color: #fff;
-          font-size: 18px;
+          @apply text-[#fff] text-[18px];
         }
       }
 
       .step {
-        margin-top: 120px;
-        display: flex;
-        justify-content: center;
+        @apply mt-[120px] flex justify-center;
 
         .circle {
-          width: 12px;
-          height: 12px;
-          border-radius: 50%;
-          margin: 0 5px;
-          background-color: #fff;
+          @apply w-[12px] h-[12px] rounded-[50%] my-0 mx-[5px] bg-[#fff];
         }
 
         .is-active {
-          width: 24px;
-          border-radius: 8px;
+          @apply w-[24px] rounded-[8px];
         }
       }
 
       .square {
-        position: absolute;
-        background: rgba(17, 146, 232, 0.05);
-        border-radius: 24px;
-        transform: rotate(-60deg);
+        @apply absolute rounded-[24px] bg-[#1192E80C] rotate-[-60deg];
       }
 
       .small-square {
-        left: 430px;
-        top: 10px;
-        width: 115px;
-        height: 115px;
+        @apply w-[115px] h-[115px] top-[10px] left-[430px];
       }
 
       .big-square {
-        width: 280px;
-        height: 280px;
-        left: 430px;
-        top: 200px;
+        @apply w-[280px] h-[280px] top-[200px] left-[430px];
       }
     }
-
-
   }
 }
+
+// @media(max-width: 800px) {
+//   .right {
+//     display: none!important;
+//   }
+//   .left{
+//     width: 100%!important;
+//   }
+// }
