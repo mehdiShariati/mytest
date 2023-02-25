@@ -20,33 +20,40 @@
 
 * {
   direction: rtl;
-  font-family: 'dana-fanum', sans-serif !important;
+  font-family: "dana-fanum", sans-serif;
 }
 
-
 :root {
-  --primary: #00539A;
-  --secondary: #0072C3;
-  --background: #F4F4F4;
-  --gray-mid: #8D8D8D;
+  --primary: #00539a;
+  --secondary: #0072c3;
+  --background: #f4f4f4;
+  --gray-mid: #8d8d8d;
   --gray-dark: #262626;
-  --danger: #DA1E28;
+  --danger: #da1e28;
 }
 
 .form-group {
   border: none;
   padding: 15px;
   border-radius: 8px;
-  box-shadow: inset 0px -1px 0px #E0E0E0;
+  box-shadow: inset 0px -1px 0px #e0e0e0;
 }
 
 input:focus-visible {
   outline: none;
 }
-svg{
+svg {
   display: inline-block;
 }
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
 
+/* For IE, Edge and Firefox */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
 
 /*------------------------- overRide ant style -----------------------------*/
 
