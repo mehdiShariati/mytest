@@ -1,1 +1,6 @@
-<router-outlet></router-outlet>
+<ng-container [ngSwitch]="layout">
+  <!-- Alternativerly use the main layout as the default switch case -->
+  <app-main-layout *ngSwitchCase="LayoutsEnum.Main"></app-main-layout>
+  <app-auth-layout *ngSwitchCase="LayoutsEnum.Auth"></app-auth-layout>
+</ng-container>
+<p-toast></p-toast>

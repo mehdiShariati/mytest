@@ -3,24 +3,24 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "dana-fanum";
+  font-family: 'dana-fanum';
   font-weight: 300;
-  src: url("/assets/fonts/dana-fanum-regular.woff") format("woff");
-  src: url("/assets/fonts/dana-fanum-regular.woff2") format("woff2");
-  src: url("/assets/fonts/dana-fanum-regular.eot") format("eot");
+  src: url('/assets/fonts/dana-fanum-regular.woff') format('woff');
+  src: url('/assets/fonts/dana-fanum-regular.woff2') format('woff2');
+  src: url('/assets/fonts/dana-fanum-regular.eot') format('eot');
 }
 
 @font-face {
-  font-family: "dana-fanum";
+  font-family: 'dana-fanum';
   font-weight: 500;
-  src: url("/assets/fonts/dana-fanum-medium.woff") format("woff");
-  src: url("/assets/fonts/dana-fanum-medium.woff2") format("woff2");
-  src: url("/assets/fonts/dana-fanum-medium.eot") format("eot");
+  src: url('/assets/fonts/dana-fanum-medium.woff') format('woff');
+  src: url('/assets/fonts/dana-fanum-medium.woff2') format('woff2');
+  src: url('/assets/fonts/dana-fanum-medium.eot') format('eot');
 }
 
 * {
   direction: rtl;
-  font-family: "dana-fanum", sans-serif;
+  font-family: 'dana-fanum', sans-serif;
 }
 
 :root {
@@ -33,9 +33,7 @@
 }
 
 .form-group {
-  border: none;
-  padding: 15px;
-  border-radius: 8px;
+  @apply border-none p-[15px] rounded-lg;
   box-shadow: inset 0px -1px 0px #e0e0e0;
 }
 
@@ -49,11 +47,13 @@ svg {
   display: none;
 }
 
+//import custom components styles
 /* For IE, Edge and Firefox */
 .scrollbar-hide {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+@import './assets/components/p-carousel';
 
 /*------------------------- overRide ant style -----------------------------*/
 
