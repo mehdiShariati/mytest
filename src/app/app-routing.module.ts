@@ -36,6 +36,10 @@ const routes: Routes = [
     loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule),
     data: { layout: Layouts.Main },
   },
+  {
+    path: 'app',
+    loadChildren: () => import('./modules/chat/chat-routing.module').then(m => m.ChatRoutingModule),
+  },
   // {
   //   path: 'auth',
   //   loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule),

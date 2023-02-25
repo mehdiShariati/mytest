@@ -12,6 +12,9 @@ module.exports = {
         danger: '#DA1E28',
         white: '#fff',
         black: '#000',
+        'chat-bg-hover': '#EDF5FF',
+        'chat-self-msg': '#3DDBD9',
+        'chat-others-msg': '#A6C8FF',
       },
 
       fontFamily: {

@@ -40,13 +40,21 @@
 input:focus-visible {
   outline: none;
 }
-
 svg {
   display: inline-block;
 }
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
 
 //import custom components styles
+/* For IE, Edge and Firefox */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
 @import './assets/components/p-carousel';
+
 /*------------------------- overRide ant style -----------------------------*/
 
 // .ant-input-focused, .ant-input:focus {
