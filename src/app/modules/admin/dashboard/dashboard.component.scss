@@ -1,0 +1,7 @@
+.element-container {
+  @apply flex;
+
+  section {
+    @apply px-[30px] py-[24px];
+  }
+}

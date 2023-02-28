@@ -1,9 +1,33 @@
 aside {
-  @apply w-[200px] bg-white;
+  @apply w-[230px] bg-white h-[calc(100vh_-_40px)] px-[30px] py-[24px];
+
+  .exit-container {
+    @apply h-[calc(100vh_-_365px)] flex items-end justify-center;
+
+    .exit {
+      @apply flex items-center cursor-pointer;
+
+      i {
+        @apply flex items-center justify-center w-[32px] h-[32px] bg-[#FFF1F1] rounded-[8px] ml-[12px];
+      }
+    }
+  }
 
   ul {
     li {
-      @apply px-[20px] py-[8px] text-gray-mid block;
+      @apply px-[20px] py-[8px] mb-[20px] rounded-[8px] text-gray-mid block cursor-pointer duration-[150ms];
+
+      i {
+        @apply fill-gray-mid;
+      }
+    }
+
+    .active {
+      @apply bg-secondary text-white;
+
+      i {
+        @apply fill-white;
+      }
     }
   }
 }
