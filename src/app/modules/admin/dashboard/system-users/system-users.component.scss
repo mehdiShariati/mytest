@@ -1,4 +1,6 @@
 .component-container {
+  @apply h-[calc(100vh_-_90px)] overflow-auto;
+
   .header {
     @apply w-full flex justify-between items-center;
 
@@ -40,6 +42,95 @@
       i {
         @apply cursor-pointer;
       }
+    }
+  }
+}
+
+.modal-content {
+  @apply bg-white rounded-[8px] p-[16px] pb-0;
+
+  .information {
+    @apply flex items-center;
+
+    img {
+      @apply ml-[16px];
+    }
+
+    p {
+      @apply text-gray-dark text-[18px];
+    }
+
+    span {
+      @apply text-gray-mid text-[14px];
+    }
+  }
+
+  .data {
+    @apply px-0 h-[230px] overflow-auto;
+
+    > div {
+      @apply py-[18px] flex justify-between items-center;
+
+      p {
+        @apply text-[16px] text-gray-dark;
+      }
+
+      i {
+        @apply cursor-pointer ml-4;
+      }
+    }
+
+    /* width */
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    /* Track */
+    &::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+      background: #b8b7b7;
+      border-radius: 10px;
+    }
+
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+      background: #989797;
+    }
+  }
+
+  .add-new-btn {
+    @apply rounded-[8px] border-solid border-[1px] text-cyan-60 border-cyan-60 p-[14px] w-full flex items-center justify-center mt-4 cursor-pointer;
+
+    i {
+      @apply ml-[8px];
+    }
+  }
+
+  .data > div:not(:last-child) {
+    @apply border-b-[1px] border-solid border-gray-light;
+  }
+}
+
+.btns {
+  @apply flex justify-end items-center mt-4;
+
+  div {
+    @apply w-[140px] h-[48px] flex items-center justify-center cursor-pointer;
+  }
+
+  .add {
+    @apply text-white bg-secondary rounded-[8px];
+  }
+
+  input {
+    @apply h-[48px] p-[12px] rounded-[8px] border-solid border-[1px] border-[#CBD5E1] w-full ml-3;
+
+    &:focus {
+      @apply border-[2px] border-[#3B82F6];
     }
   }
 }

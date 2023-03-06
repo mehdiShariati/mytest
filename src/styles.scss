@@ -81,4 +81,58 @@ svg {
   }
 }
 
+.paginator-custom {
+  .p-paginator.p-component {
+    @apply w-max p-0 mt-[24px] mx-auto;
+    direction: ltr;
+  }
+
+  button {
+    @apply border-solid border-r-[1px] border-body font-body rounded-none m-0 #{!important};
+  }
+
+  .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+    @apply bg-secondary text-white;
+  }
+
+  .p-paginator-pages {
+    @apply flex flex-row-reverse;
+  }
+
+  .p-paginator .p-paginator-last {
+    @apply border-none #{!important};
+  }
+}
+
+.modal-custom {
+  .p-dialog {
+    .p-dialog-content,
+    .p-dialog-header {
+      @apply bg-body #{!important};
+    }
+
+    .p-dialog-header .p-dialog-title {
+      @apply font-[400] #{!important};
+    }
+  }
+}
+
+.tab-custom {
+  .p-tabview .p-tabview-nav {
+    @apply mt-[24px];
+  }
+
+  .p-tabview .p-tabview-nav li {
+    @apply w-[33%];
+  }
+
+  .p-tabview .p-tabview-nav li .p-tabview-nav-link {
+    @apply justify-center font-[300];
+  }
+
+  .p-tabview .p-tabview-nav li .p-tabview-nav-link:not(.p-disabled):focus {
+    @apply shadow-none;
+  }
+}
+
 /*------------------------- overRide primeng -----------------------------*/

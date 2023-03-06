@@ -8,10 +8,23 @@ import { AdminDashboardComponent } from './dashboard/dashboard.component';
 import { TableModule } from 'primeng/table';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { InputTextModule } from 'primeng/inputtext';
+import { PaginatorModule } from 'primeng/paginator';
+import { DialogModule } from 'primeng/dialog';
+import { TabViewModule } from 'primeng/tabview';
 
 @NgModule({
   declarations: [AsideComponent, SystemUsersComponent, AdminDashboardComponent],
-  imports: [CommonModule, InlineSVGModule, RouterModule, TableModule, ProgressBarModule, InputTextModule],
+  imports: [
+    CommonModule,
+    InlineSVGModule,
+    RouterModule,
+    TableModule,
+    ProgressBarModule,
+    InputTextModule,
+    PaginatorModule,
+    DialogModule,
+    TabViewModule,
+  ],
   exports: [AsideComponent],
 })
 export class AdminModule {}
