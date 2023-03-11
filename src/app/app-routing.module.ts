@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { Layouts } from './core/enums/layouts.enum';
-import { DashboardAdminComponent } from './modules/admin/dashboard/dashboard.component';
+// import { DashboardAdminComponent } from './modules/admin/dashboard/dashboard.component';
 import { ChangePasswordComponent } from './modules/auth/change-password/change-password.component';
 import { LoginComponent } from './modules/auth/login/login.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
+import { AdminDashboardComponent } from './modules/admin/dashboard/dashboard.component';
+import { SystemUsersComponent } from './modules/admin/dashboard/system-users/system-users.component';
 
 const routes: Routes = [
   // {
@@ -14,8 +16,9 @@ const routes: Routes = [
   // },
   {
     path: 'admin',
-    children: [{ path: '', component: DashboardAdminComponent }],
-    data: { layout: Layouts.Main },
+    component: AdminDashboardComponent,
+    children: [{ path: 'system-users', component: SystemUsersComponent }],
+    data: { layout: Layouts.Admin },
   },
   {
     path: 'auth',
@@ -23,6 +26,7 @@ const routes: Routes = [
       {
         path: 'login',
         component: LoginComponent,
+        data: { layout: Layouts.Auth },
       },
       {
         path: 'new-password',

@@ -1,0 +1,174 @@
+<div class="component-container">
+  <div class="header">
+    <span>داشبورد ادمین</span>
+    <div class="return">
+      بازگشت
+      <i inlineSVG="assets/icons/return-arrow.svg"></i>
+    </div>
+  </div>
+
+  <div class="table">
+    <p-table
+      #dt
+      dataKey="id"
+      [rowHover]="true"
+      class="users-table"
+      [value]="users"
+      [rows]="10"
+      [showCurrentPageReport]="true"
+      [rowsPerPageOptions]="[10, 25, 50]"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [filterDelay]="0"
+      [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
+    >
+      <ng-template pTemplate="caption">
+        <div class="table-header">
+          <div class="text-[18px] font-bold">لیست کاربران</div>
+          <div class="flex items-center">
+            <span class="p-input-icon-left w-[500px]">
+              <i class="pi pi-search"></i>
+              <input class="search-input" pInputText type="text" placeholder="جستجو" />
+            </span>
+            <div class="add-new">
+              <i class="ml-2" inlineSVG="assets/icons/Add.svg"></i>
+              افزودن کاربر
+            </div>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="name" style="min-width: 10rem">
+            <div class="flex justify-content-between align-items-center">
+              کد پرسنلی
+              <p-sortIcon class="mr-4" field="name"></p-sortIcon>
+            </div>
+          </th>
+          <th pSortableColumn="country.name" style="min-width: 10rem">
+            <div class="flex justify-content-between align-items-center">
+              نام
+              <p-sortIcon class="mr-4" field="country.name"></p-sortIcon>
+            </div>
+          </th>
+          <th pSortableColumn="representative.name" style="min-width: 10rem">
+            <div class="flex justify-content-between align-items-center">
+              نام خانوادگی
+              <p-sortIcon class="mr-4" field="representative.name"></p-sortIcon>
+            </div>
+          </th>
+          <th style="min-width: 8rem">
+            <div class="flex justify-content-between align-items-center">استان و شهر</div>
+          </th>
+          <th style="min-width: 8rem">
+            <div class="flex justify-content-between align-items-center">حوزه فعالیت</div>
+          </th>
+          <th style="min-width: 8rem">
+            <div class="flex justify-content-between align-items-center">نقش</div>
+          </th>
+          <th style="min-width: 6rem"></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-user>
+        <tr class="p-selectable-row">
+          <td style="color: #0f62fe !important">
+            {{ user.code }}
+          </td>
+          <td>
+            <span class="image-text">{{ user.firstName }}</span>
+          </td>
+          <td>
+            <span class="image-text">{{ user.lastName }}</span>
+          </td>
+          <td>{{ user.state }} - {{ user.city }}</td>
+          <td>
+            {{ user.activity }}
+          </td>
+          <td>
+            <span>{{ user.role }}</span>
+          </td>
+          <td>
+            <div class="edit">
+              <i inlineSVG="assets/icons/edit-pen.svg" (click)="showUserInfo(user.id)"></i>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="8">کاربری یافت نشد.</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  <div>
+    <p-paginator class="paginator-custom" [rows]="10" [totalRecords]="120"></p-paginator>
+  </div>
+</div>
+
+<p-dialog
+  header="مشخصات کاربر"
+  [(visible)]="displayModal"
+  [closable]="true"
+  [modal]="true"
+  [style]="{ width: '700px' }"
+  [draggable]="false"
+  [resizable]="false"
+  class="modal-custom"
+>
+  <div class="modal-content">
+    <div class="information">
+      <img alt="" [src]="userInfo?.profileImageUrl ? userInfo?.profileImageUrl : 'assets/icons/profile-image.svg'" />
+      <div>
+        <p>{{ userInfo?.firstName }} {{ userInfo?.lastName }}</p>
+        <span>{{ userInfo?.state }} - {{ userInfo?.city }}</span>
+      </div>
+    </div>
+    <p-tabView class="tab-custom">
+      <p-tabPanel header="نقش ها">
+        <div class="btns mb-5" *ngIf="newRole">
+          <input />
+          <div class="add">ذخیره</div>
+        </div>
+        <div class="data" *ngIf="!newRole">
+          <div *ngFor="let item of [{}, {}, {}, {}, {}, {}]">
+            <p>راننده کامیونت بنز</p>
+            <i inlineSVG="assets/icons/recycle.svg"></i>
+          </div>
+        </div>
+        <div *ngIf="!newRole" class="add-new-btn" (click)="newRole = true">
+          <i inlineSVG="assets/icons/Add-blue.svg"></i>
+          افزودن نقش جدید
+        </div>
+        <div *ngIf="newRole" class="add-new-btn" (click)="newRole = false">انصراف</div>
+      </p-tabPanel>
+      <p-tabPanel header="حوزه های فعالیت">
+        <div class="data">
+          <div *ngFor="let item of [{}, {}, {}, {}, {}, {}]">
+            <p>راننده کامیونت بنز</p>
+          </div>
+        </div>
+      </p-tabPanel>
+      <p-tabPanel header="گروه های کاربری">
+        <div class="btns mb-5" *ngIf="newGroup">
+          <input />
+          <div class="add">ذخیره</div>
+        </div>
+        <div class="data" *ngIf="!newGroup">
+          <div *ngFor="let item of [{}, {}, {}, {}, {}, {}]">
+            <p>راننده کامیونت بنز</p>
+            <i inlineSVG="assets/icons/recycle.svg"></i>
+          </div>
+        </div>
+        <div *ngIf="!newGroup" class="add-new-btn" (click)="newGroup = true">
+          <i inlineSVG="assets/icons/Add-blue.svg"></i>
+          گروه کاربری جدید
+        </div>
+        <div *ngIf="newGroup" class="add-new-btn" (click)="newGroup = false">انصراف</div>
+      </p-tabPanel>
+    </p-tabView>
+  </div>
+  <!--  <div *ngIf="newGroup || newRole" class="btns">-->
+  <!--    <div (click)="cancel()">انصراف</div>-->
+  <!--    <div class="add">افزودن کاربر</div>-->
+  <!--  </div>-->
+</p-dialog>

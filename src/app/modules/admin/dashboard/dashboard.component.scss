@@ -1,0 +1,7 @@
+.element-container {
+  @apply flex;
+
+  section {
+    @apply w-full px-[30px] py-[24px];
+  }
+}

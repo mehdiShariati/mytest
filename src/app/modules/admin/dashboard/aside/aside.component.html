@@ -1,8 +1,15 @@
 <aside>
   <ul>
-    <li *ngFor="let item of items">
+    <li *ngFor="let item of items" (click)="change(item.id)" [class.active]="item.isSelected">
       <i [inlineSVG]="item.icon"></i>
       {{ item.title }}
     </li>
   </ul>
+  <div class="exit-container">
+    <div class="exit">
+      <span>یک مدیر نسخه ۰.۰.۱</span>
+      <i inlineSVG="assets/icons/exit-red.svg"></i>
+      خروج از داشبورد
+    </div>
+  </div>
 </aside>
