@@ -17,7 +17,6 @@ export class HttpErrorInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
       catchError(err => {
-        debugger;
         this.messageService.add({ severity: 'error', detail: err.error.message });
         if (err.status === 401) {
           if (localStorage.getItem('refresh-token')) {

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../../../../core/services/user.service';
 
 @Component({
   selector: 'app-system-users',
@@ -13,6 +14,8 @@ export class SystemUsersComponent implements OnInit {
   userInfo!: any;
   newGroup: boolean = false;
   newRole: boolean = false;
+
+  constructor(private userService: UserService) {}
 
   ngOnInit(): void {
     this.users = [
@@ -37,6 +40,10 @@ export class SystemUsersComponent implements OnInit {
         role: 'راننده لیفتراک',
       },
     ];
+
+    this.userService.getUser().subscribe(res => {
+      console.log(res);
+    });
   }
 
   showUserInfo(userId: number) {

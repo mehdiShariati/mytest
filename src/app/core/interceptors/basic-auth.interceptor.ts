@@ -6,10 +6,11 @@ import { environment } from '../../../environments/environment';
 @Injectable()
 export class BasicAuthInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    let token = btoa(environment.clientUser + ':' + environment.clientPassword);
+    let basicToken = btoa(environment.clientUser + ':' + environment.clientPassword);
+    let token = localStorage.getItem('token');
     request = request.clone({
       setHeaders: {
-        Authorization: `Basic ${token}`,
+        Authorization: token ? `Bearer ${token}` : `Basic ${basicToken}`,
         'Content-Type': 'application/x-www-form-urlencoded',
         'Accept-Language': 'fa',
       },
