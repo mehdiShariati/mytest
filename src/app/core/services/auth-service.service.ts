@@ -59,10 +59,9 @@ export class AuthServiceService {
   }
 
   getToken() {
-    let value = {
-      grant_type: 'refresh_token',
-      refresh_token: localStorage.getItem('refresh-token'),
-    };
+    let value = new URLSearchParams();
+    value.append('grant_type', 'refresh_token');
+    value.append('refresh_token', <string>localStorage.getItem('refresh-token'));
 
     return this.http.post(`${environment.apiToken}/oauth2/token`, value);
   }

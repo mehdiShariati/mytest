@@ -71,13 +71,13 @@
       <ng-template pTemplate="body" let-user>
         <tr class="p-selectable-row">
           <td style="color: #0f62fe !important">
-            {{ user.code }}
+            {{ user?.personnel?.personnelCode }}
           </td>
           <td>
-            <span class="image-text">{{ user.firstName }}</span>
+            <span class="image-text">{{ user?.personnel?.firstName }}</span>
           </td>
           <td>
-            <span class="image-text">{{ user.lastName }}</span>
+            <span class="image-text">{{ user?.personnel?.lastName }}</span>
           </td>
           <td>{{ user.state }} - {{ user.city }}</td>
           <td>

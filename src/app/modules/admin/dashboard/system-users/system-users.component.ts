@@ -14,36 +14,20 @@ export class SystemUsersComponent implements OnInit {
   userInfo!: any;
   newGroup: boolean = false;
   newRole: boolean = false;
+  totalCount!: boolean;
 
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
-    this.users = [
-      {
-        id: 1,
-        code: '12345678',
-        firstName: 'محمد جواد',
-        lastName: 'ابوترابی',
-        city: 'تهران',
-        state: 'تهران',
-        activity: 'شهید مطهری',
-        role: 'راننده لیفتراک',
-      },
-      {
-        id: 2,
-        code: '12345678',
-        firstName: 'محمد جواد',
-        lastName: 'ابوترابی',
-        city: 'تهران',
-        state: 'تهران',
-        activity: 'شهید مطهری',
-        role: 'راننده لیفتراک',
-      },
-    ];
-
-    this.userService.getUser().subscribe(res => {
-      console.log(res);
-    });
+    this.userService
+      .getUser({
+        pageNumber: 0,
+        pageSize: 10,
+      })
+      .subscribe((res: any) => {
+        this.users = res.content;
+        debugger;
+      });
   }
 
   showUserInfo(userId: number) {
