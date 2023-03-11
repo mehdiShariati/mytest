@@ -1,24 +1,28 @@
 aside {
-  @apply w-[230px] bg-white h-[calc(100vh_-_40px)] px-[30px] py-[24px];
+  @apply w-[230px] bg-white h-[100vh] px-[30px] py-[24px];
 
   .exit-container {
-    @apply h-[calc(100vh_-_365px)] flex items-end justify-center;
+    @apply h-[calc(100vh_-_365px)] flex items-end justify-center flex-wrap;
 
     .exit {
-      @apply flex items-center cursor-pointer;
+      @apply flex items-center cursor-pointer justify-center flex-wrap;
 
       i {
         @apply flex items-center justify-center w-[32px] h-[32px] bg-[#FFF1F1] rounded-[8px] ml-[12px];
+      }
+
+      span {
+        @apply text-[12px] text-gray-dark text-center w-full mb-5;
       }
     }
   }
 
   ul {
     li {
-      @apply px-[20px] py-[8px] mb-[20px] rounded-[8px] text-gray-mid block cursor-pointer duration-[150ms];
+      @apply px-[20px] py-[8px] mb-[20px] rounded-[8px] text-gray-mid flex items-center cursor-pointer duration-[150ms];
 
       i {
-        @apply fill-gray-mid;
+        @apply fill-gray-mid bg-body rounded-[8px] ml-2;
       }
     }
 
@@ -26,7 +30,7 @@ aside {
       @apply bg-secondary text-white;
 
       i {
-        @apply fill-white;
+        @apply fill-white bg-primary;
       }
     }
   }

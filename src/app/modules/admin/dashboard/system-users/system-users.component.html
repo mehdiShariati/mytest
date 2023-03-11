@@ -135,10 +135,11 @@
             <i inlineSVG="assets/icons/recycle.svg"></i>
           </div>
         </div>
-        <div class="add-new-btn" (click)="newRole = true">
+        <div *ngIf="!newRole" class="add-new-btn" (click)="newRole = true">
           <i inlineSVG="assets/icons/Add-blue.svg"></i>
           افزودن نقش جدید
         </div>
+        <div *ngIf="newRole" class="add-new-btn" (click)="newRole = false">انصراف</div>
       </p-tabPanel>
       <p-tabPanel header="حوزه های فعالیت">
         <div class="data">
@@ -158,15 +159,16 @@
             <i inlineSVG="assets/icons/recycle.svg"></i>
           </div>
         </div>
-        <div class="add-new-btn" (click)="newGroup = true">
+        <div *ngIf="!newGroup" class="add-new-btn" (click)="newGroup = true">
           <i inlineSVG="assets/icons/Add-blue.svg"></i>
           گروه کاربری جدید
         </div>
+        <div *ngIf="newGroup" class="add-new-btn" (click)="newGroup = false">انصراف</div>
       </p-tabPanel>
     </p-tabView>
   </div>
-  <div *ngIf="newGroup || newRole" class="btns">
-    <div (click)="cancel()">انصراف</div>
-    <div class="add">افزودن کاربر</div>
-  </div>
+  <!--  <div *ngIf="newGroup || newRole" class="btns">-->
+  <!--    <div (click)="cancel()">انصراف</div>-->
+  <!--    <div class="add">افزودن کاربر</div>-->
+  <!--  </div>-->
 </p-dialog>

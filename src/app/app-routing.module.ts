@@ -17,7 +17,7 @@ const routes: Routes = [
     path: 'admin',
     component: AdminDashboardComponent,
     children: [{ path: 'system-users', component: SystemUsersComponent }],
-    data: { layout: Layouts.Main },
+    data: { layout: Layouts.Admin },
   },
   {
     path: 'auth',
