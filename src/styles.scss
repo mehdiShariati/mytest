@@ -40,9 +40,11 @@
 input:focus-visible {
   outline: none;
 }
+
 svg {
   display: inline-block;
 }
+
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
@@ -53,6 +55,7 @@ svg {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
 @import './assets/components/p-carousel';
 
 /*------------------------- overRide primeng -----------------------------*/
@@ -142,6 +145,24 @@ svg {
 
   .p-tabview .p-tabview-nav li .p-tabview-nav-link:not(.p-disabled):focus {
     @apply shadow-none;
+  }
+}
+
+.custom-auto-complete {
+  @apply w-full pl-[16px];
+
+  .p-autocomplete,
+  .p-inputtext {
+    @apply w-full;
+    font-family: 'dana-fanum', sans-serif;
+  }
+
+  .p-inputtext {
+    @apply pr-[2.5rem];
+  }
+
+  .p-autocomplete-loader {
+    @apply hidden;
   }
 }
 

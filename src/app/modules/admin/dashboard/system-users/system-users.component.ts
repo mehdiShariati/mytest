@@ -8,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class SystemUsersComponent implements OnInit {
   users!: any[];
   displayModal: boolean = false;
+  newUserModal: boolean = false;
+  searchId!: number | null;
   userInfo!: any;
   newGroup: boolean = false;
   newRole: boolean = false;
@@ -47,5 +49,9 @@ export class SystemUsersComponent implements OnInit {
   cancel() {
     this.newGroup = false;
     this.newRole = false;
+  }
+
+  removeId() {
+    this.searchId = null;
   }
 }

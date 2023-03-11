@@ -29,7 +29,7 @@
               <i class="pi pi-search"></i>
               <input class="search-input" pInputText type="text" placeholder="جستجو" />
             </span>
-            <div class="add-new">
+            <div class="add-new" (click)="newUserModal = true">
               <i class="ml-2" inlineSVG="assets/icons/Add.svg"></i>
               افزودن کاربر
             </div>
@@ -104,6 +104,42 @@
     <p-paginator class="paginator-custom" [rows]="10" [totalRecords]="120"></p-paginator>
   </div>
 </div>
+
+<p-dialog
+  header="افزودن کاربر جدید"
+  [(visible)]="newUserModal"
+  [closable]="true"
+  [modal]="true"
+  [style]="{ width: '700px' }"
+  [draggable]="false"
+  [resizable]="false"
+  class="modal-custom"
+>
+  <div>
+    <div class="btns search-user mb-5">
+      <i class="search-icon" inlineSVG="assets/icons/chat/search.svg"></i>
+      <input placeholder="کد ملی کاربر مورد نظر را وارد کنید" [(ngModel)]="searchId" />
+      <i *ngIf="searchId" class="remove-icon" inlineSVG="assets/icons/Dismiss-2.svg" (click)="removeId()"></i>
+      <div class="add">جستجو</div>
+    </div>
+
+    <div class="history">
+      <div class="mb-2">سوابق جستجو</div>
+      <ng-container *ngIf="[{}].length; else showMessage">
+        <div class="flex items-center items" *ngFor="let item of [{}, {}]">
+          <i inlineSVG="assets/icons/History.svg"></i>
+          <div>
+            <p>عبدالکریم امکانیان اصل</p>
+            <span>12834270021</span>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #showMessage>
+        <div class="flex items-center justify-center mt-3">سوابقی یافت نشد.</div>
+      </ng-template>
+    </div>
+  </div>
+</p-dialog>
 
 <p-dialog
   header="مشخصات کاربر"

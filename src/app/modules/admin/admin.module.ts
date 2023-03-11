@@ -11,6 +11,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { PaginatorModule } from 'primeng/paginator';
 import { DialogModule } from 'primeng/dialog';
 import { TabViewModule } from 'primeng/tabview';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 
 @NgModule({
   declarations: [AsideComponent, SystemUsersComponent, AdminDashboardComponent],
@@ -24,6 +25,7 @@ import { TabViewModule } from 'primeng/tabview';
     PaginatorModule,
     DialogModule,
     TabViewModule,
+    AutoCompleteModule,
   ],
   exports: [AsideComponent],
 })

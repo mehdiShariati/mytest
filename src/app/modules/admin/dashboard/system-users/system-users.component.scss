@@ -134,3 +134,43 @@
     }
   }
 }
+
+.search-user {
+  @apply relative;
+
+  .search-icon {
+    @apply absolute right-[10px] z-20;
+  }
+
+  .remove-icon {
+    @apply absolute left-[135px] z-20 cursor-pointer;
+  }
+
+  input {
+    @apply pr-10;
+  }
+}
+
+.history {
+  @apply text-gray-mid;
+
+  p {
+    @apply text-gray-dark mb-2;
+  }
+
+  .items {
+    @apply py-3 cursor-pointer duration-300;
+
+    i {
+      @apply ml-3;
+    }
+
+    &:hover {
+      @apply bg-[#e1e1e1];
+    }
+  }
+
+  .items:not(:last-child) {
+    @apply border-b-2 border-gray-light;
+  }
+}
