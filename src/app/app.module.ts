@@ -1,33 +1,24 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { AppComponent } from './app.component';
 import { registerLocaleData } from '@angular/common';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import en from '@angular/common/locales/en';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
+import { MessageService } from 'primeng/api';
+import { MessageModule } from 'primeng/message';
+import { MessagesModule } from 'primeng/messages';
+import { ToastModule } from 'primeng/toast';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { BasicAuthInterceptor } from './core/interceptors/basic-auth.interceptor';
+import { HttpErrorInterceptor } from './core/interceptors/http-error.interceptor';
+import { LayoutsModule } from './layouts/layouts.module';
+import { AdminModule } from './modules/admin/admin.module';
 import { AuthModule } from './modules/auth/auth.module';
-import { RouterModule, Routes } from '@angular/router';
 import { ChatModule } from './modules/chat/chat.module';
-
 registerLocaleData(en);
-
-const routes: Routes = [
-  {
-    path: 'auth',
-    loadChildren: () =>
-      import('./modules/auth/auth-routing.module').then(
-        (m) => m.AuthRoutingModule
-      ),
-  },
-  {
-    path: 'app',
-    loadChildren: () =>
-      import('./modules/chat/chat-routing.module').then(
-        (m) => m.ChatRoutingModule
-      ),
-  },
-];
 
 @NgModule({
   declarations: [AppComponent],
@@ -36,11 +27,20 @@ const routes: Routes = [
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    AppRoutingModule,
+    LayoutsModule,
+    MessageModule,
+    MessagesModule,
     AuthModule,
     ChatModule,
-    RouterModule.forRoot(routes),
+    ToastModule,
+    AdminModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
+    MessageService,
+  ],
   bootstrap: [AppComponent],
   exports: [RouterModule],
 })

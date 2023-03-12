@@ -3,24 +3,24 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "dana-fanum";
+  font-family: 'dana-fanum';
   font-weight: 300;
-  src: url("/assets/fonts/dana-fanum-regular.woff") format("woff");
-  src: url("/assets/fonts/dana-fanum-regular.woff2") format("woff2");
-  src: url("/assets/fonts/dana-fanum-regular.eot") format("eot");
+  src: url('/assets/fonts/dana-fanum-regular.woff') format('woff');
+  src: url('/assets/fonts/dana-fanum-regular.woff2') format('woff2');
+  src: url('/assets/fonts/dana-fanum-regular.eot') format('eot');
 }
 
 @font-face {
-  font-family: "dana-fanum";
+  font-family: 'dana-fanum';
   font-weight: 500;
-  src: url("/assets/fonts/dana-fanum-medium.woff") format("woff");
-  src: url("/assets/fonts/dana-fanum-medium.woff2") format("woff2");
-  src: url("/assets/fonts/dana-fanum-medium.eot") format("eot");
+  src: url('/assets/fonts/dana-fanum-medium.woff') format('woff');
+  src: url('/assets/fonts/dana-fanum-medium.woff2') format('woff2');
+  src: url('/assets/fonts/dana-fanum-medium.eot') format('eot');
 }
 
 * {
   direction: rtl;
-  font-family: "dana-fanum", sans-serif;
+  font-family: 'dana-fanum', sans-serif;
 }
 
 :root {
@@ -33,53 +33,137 @@
 }
 
 .form-group {
-  border: none;
-  padding: 15px;
-  border-radius: 8px;
+  @apply border-none p-[15px] rounded-lg;
   box-shadow: inset 0px -1px 0px #e0e0e0;
 }
 
 input:focus-visible {
   outline: none;
 }
+
 svg {
   display: inline-block;
 }
+
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
 
+//import custom components styles
 /* For IE, Edge and Firefox */
 .scrollbar-hide {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
 
-/*------------------------- overRide ant style -----------------------------*/
+@import './assets/components/p-carousel';
 
-// .ant-input-focused, .ant-input:focus {
-//   transition: 0s;
-//   border: none;
-//   box-shadow: none;
-//   outline: 2px solid var(--primary);
-// }
+/*------------------------- overRide primeng -----------------------------*/
 
-// .ant-checkbox-wrapper span {
-//   color: var(--gray-dark);
-//   font-size: 15px;
-// }
+.users-table {
+  tr {
+    @apply bg-white;
 
-// .ant-checkbox-input:focus + .ant-checkbox-inner, .ant-checkbox-wrapper:hover .ant-checkbox-inner, .ant-checkbox:hover .ant-checkbox-inner {
-//   border-color: var(--gray-dark);
-// }
+    &:hover {
+      @apply bg-white cursor-default;
+    }
+  }
 
-// .ant-checkbox-checked .ant-checkbox-inner {
-//   border-color: var(--gray-dark);
-//   background-color: var(--gray-dark);
-// }
+  .p-datatable.p-datatable-hoverable-rows .p-datatable-tbody > tr:not(.p-highlight):hover {
+    @apply bg-white;
+  }
 
-// .ant-checkbox-wrapper:hover .ant-checkbox::after, .ant-checkbox:hover::after {
-//   visibility: hidden;
-// }
+  tr:not(:last-child) {
+    @apply border-b-[1px] border-solid border-body;
+  }
 
-/*------------------------- overRide ant style -----------------------------*/
+  .p-datatable .p-datatable-header {
+    @apply bg-white border-t-0 font-[300] border-body;
+  }
+
+  .p-input-icon-left > i:first-of-type {
+    @apply left-[12.75rem];
+  }
+
+  .p-datatable .p-datatable-thead > tr > th {
+    @apply font-[300] bg-white border-body text-gray-dark;
+  }
+
+  .p-datatable .p-datatable-tbody > tr > td {
+    @apply border-b-0 text-start cursor-default text-gray-dark;
+  }
+}
+
+.paginator-custom {
+  .p-paginator.p-component {
+    @apply w-max p-0 mt-[24px] mx-auto;
+    direction: ltr;
+  }
+
+  button {
+    @apply border-solid border-r-[1px] border-body font-body rounded-none m-0 #{!important};
+  }
+
+  .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+    @apply bg-secondary text-white;
+  }
+
+  .p-paginator-pages {
+    @apply flex flex-row-reverse;
+  }
+
+  .p-paginator .p-paginator-last {
+    @apply border-none #{!important};
+  }
+}
+
+.modal-custom {
+  .p-dialog {
+    .p-dialog-content,
+    .p-dialog-header {
+      @apply bg-body #{!important};
+    }
+
+    .p-dialog-header .p-dialog-title {
+      @apply font-[400] #{!important};
+    }
+  }
+}
+
+.tab-custom {
+  .p-tabview .p-tabview-nav {
+    @apply mt-[24px];
+  }
+
+  .p-tabview .p-tabview-nav li {
+    @apply w-[33%];
+  }
+
+  .p-tabview .p-tabview-nav li .p-tabview-nav-link {
+    @apply justify-center font-[300];
+  }
+
+  .p-tabview .p-tabview-nav li .p-tabview-nav-link:not(.p-disabled):focus {
+    @apply shadow-none;
+  }
+}
+
+.custom-auto-complete {
+  @apply w-full pl-[16px];
+
+  .p-autocomplete,
+  .p-inputtext {
+    @apply w-full;
+    font-family: 'dana-fanum', sans-serif;
+  }
+
+  .p-inputtext {
+    @apply pr-[2.5rem];
+  }
+
+  .p-autocomplete-loader {
+    @apply hidden;
+  }
+}
+
+/*------------------------- overRide primeng -----------------------------*/
