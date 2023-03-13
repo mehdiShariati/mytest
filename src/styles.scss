@@ -165,5 +165,18 @@ svg {
     @apply hidden;
   }
 }
+.p-carousel-items-container {
+  direction: ltr;
+}
+@layer utilities {
+  /* Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
 
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
 /*------------------------- overRide primeng -----------------------------*/

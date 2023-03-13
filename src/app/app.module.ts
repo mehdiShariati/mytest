@@ -18,6 +18,7 @@ import { LayoutsModule } from './layouts/layouts.module';
 import { AdminModule } from './modules/admin/admin.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { ChatModule } from './modules/chat/chat.module';
+
 registerLocaleData(en);
 
 @NgModule({

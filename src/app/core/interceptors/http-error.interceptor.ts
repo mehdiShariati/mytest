@@ -18,7 +18,6 @@ export class HttpErrorInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
       catchError(err => {
-        debugger;
         this.messageService.add({ severity: 'error', detail: err.message ? err.message : err.error.message });
         if (err.status === 401) {
           localStorage.removeItem('token');
@@ -39,14 +38,13 @@ export class HttpErrorInterceptor implements HttpInterceptor {
                   DELETE: this.http.delete(request.urlWithParams),
                 };
 
-                return x[request.method].subscribe((res: any) => {
-                  console.log(res);
-                  return from(JSON.parse(res));
+                return x[request.method].next((res: any) => {
+                  return res;
                 });
               },
               () => {
-                this.authenticationService.logout();
-                this.router.navigate(['auth/login']);
+                //   this.authenticationService.logout();
+                //  this.router.navigate(['auth/login']);
               },
             );
           } else {
