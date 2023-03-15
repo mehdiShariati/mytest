@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
-import { SliderComponent } from './components/slider/slider.component';
 import { ProfileService } from '../../core/services/profile-service';
 import { environment } from '../../../environments/environment';
 
@@ -47,6 +46,7 @@ export class DashboardComponent implements OnInit {
   ];
   ngOnInit() {
     this.profileService.getLoginHistory().subscribe((res: any) => {
+      console.log(res.content);
       this.loginHistory = res.content;
     });
     this.profileService.getProfieData().subscribe((res: any) => {

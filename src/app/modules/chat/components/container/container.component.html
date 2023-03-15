@@ -1,5 +1,5 @@
 <div class="bg-gray-300 w-full h-screen p-10">
-  <div class="container bg-white m-4 flex overflow-hidden rounded">
+  <div class="container bg-white w-full min-w-full m-x-auto shadow-border flex overflow-hidden rounded">
     <div class="right-container flex flex-col justify-between w-1/5 relative rounded shadow-border">
       <div class="right-header w-full">
         <div class="flex flex-col justify-evenly">
@@ -24,170 +24,36 @@
               <div class="h-6">جستجو</div>
             </div>
 
-            <div class="cursor-pointer" [inlineSVG]="'assets/icons/chat/edit.svg'"></div>
+            <div class="cursor-pointer mx-auto" [inlineSVG]="'assets/icons/chat/edit.svg'"></div>
           </div>
         </div>
       </div>
 
       <div
-        class="chat-container flex flex-col mt-4 whitespace-nowrap overflow-auto scrollbar-hide divide-y min-h-full h-[40rem]"
+        class="chat-container shadow-border flex flex-col mt-4 whitespace-nowrap overflow-auto scrollbar-hide divide-y min-h-full h-[40rem]"
       >
-        <div class="flex items-center gap-4 p-4 hover:bg-chat-bg-hover">
-          <img class="w-12 h-12 rounded-full" src="assets/icons/chat/bookmark.svg" />
-          <div class="flex flex-col">
-            <div class="flex place-content-between">
-              <strong class="text-slate-900 text-sm font-bold text-right"
-                ><i class="pi pi-bookmark"></i> ذخیره شده ها
-              </strong>
-              <span class="text-gray-500">26/11</span>
+        <!--        <i class="pi pi-bookmark"></i>-->
+        <ng-container *ngIf="sessions.length">
+          <div
+            *ngFor="let session of sessions"
+            class="flex items-center gap-4 p-4 hover:bg-chat-bg-hover"
+            (click)="SetActiveSession(session['id'])"
+          >
+            <img
+              class="w-12 h-12 rounded-full"
+              src="{{ session['imageUrl'] ? resource_path + session['imageUrl'] : './assets/dashboard/Avatar.svg' }}"
+            />
+            <div class="flex flex-col">
+              <div class="flex place-content-between">
+                <strong class="text-slate-900 text-sm font-bold text-right">{{ session['extraInfo']['name'] }} </strong>
+                <span class="text-gray-500">{{ session['messagePreview']['createdDate'] | date : 'M/d' }}</span>
+              </div>
+              <span class="text-slate-500 text-sm font-bold text-right"
+                >{{ session['messagePreview']['type'] === 'TEXT' ? session['messagePreview']['content'] : 'فایل' }}
+              </span>
             </div>
-            <span class="text-slate-500 text-sm font-bold text-right">ایزدخواه، نماینده مجلس:‌ با فروش ا... </span>
           </div>
-        </div>
-        <div class="flex items-center gap-4 p-4 hover:bg-chat-bg-hover">
-          <img
-            class="w-12 h-12 rounded-full"
-            src="https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=4&w=256&h=256&q=80"
-          />
-          <div class="flex flex-col">
-            <div class="flex place-content-between">
-              <strong class="text-slate-900 text-sm font-bold text-right">حسام کامیاران</strong>
-              <span class="text-gray-500">۰۹:۳۲</span>
-            </div>
-            <span class="text-slate-500 text-sm font-bold text-right">ایزدخواه، نماینده مجلس:‌ با فروش ا... </span>
-          </div>
-        </div>
-        <div class="flex items-center gap-4 p-4 hover:bg-chat-bg-hover">
-          <img
-            class="w-12 h-12 rounded-full"
-            src="https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=4&w=256&h=256&q=80"
-          />
-
-          <div class="flex flex-col">
-            <div class="flex place-content-between">
-              <strong class="text-slate-900 text-sm font-bold text-right">گروه ایمنی HSE</strong>
-              <span class="text-gray-500">۰۹:۳۲</span>
-            </div>
-            <span class="text-slate-500 text-sm font-bold text-right">🚨⚠ آتش سوزی شدید در یکی ...</span>
-          </div>
-        </div>
-        <div class="flex items-center gap-4 p-4 hover:bg-chat-bg-hover">
-          <img class="w-12 h-12 rounded-full" src="assets/icons/chat/bookmark.svg" />
-          <div class="flex flex-col">
-            <div class="flex place-content-between">
-              <strong class="text-slate-900 text-sm font-bold text-right"
-                ><i class="pi pi-bookmark"></i> ذخیره شده ها
-              </strong>
-              <span class="text-gray-500">26/11</span>
-            </div>
-            <span class="text-slate-500 text-sm font-bold text-right">ایزدخواه، نماینده مجلس:‌ با فروش ا... </span>
-          </div>
-        </div>
-        <div class="flex items-center gap-4 p-4 hover:bg-chat-bg-hover">
-          <img
-            class="w-12 h-12 rounded-full"
-            src="https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=4&w=256&h=256&q=80"
-          />
-          <div class="flex flex-col">
-            <div class="flex place-content-between">
-              <strong class="text-slate-900 text-sm font-bold text-right">حسام کامیاران</strong>
-              <span class="text-gray-500">۰۹:۳۲</span>
-            </div>
-            <span class="text-slate-500 text-sm font-bold text-right">ایزدخواه، نماینده مجلس:‌ با فروش ا... </span>
-          </div>
-        </div>
-        <div class="flex items-center gap-4 p-4 hover:bg-chat-bg-hover">
-          <img
-            class="w-12 h-12 rounded-full"
-            src="https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=4&w=256&h=256&q=80"
-          />
-
-          <div class="flex flex-col">
-            <div class="flex place-content-between">
-              <strong class="text-slate-900 text-sm font-bold text-right">گروه ایمنی HSE</strong>
-              <span class="text-gray-500">۰۹:۳۲</span>
-            </div>
-            <span class="text-slate-500 text-sm font-bold text-right">🚨⚠ آتش سوزی شدید در یکی ...</span>
-          </div>
-        </div>
-        <div class="flex items-center gap-4 p-4 hover:bg-chat-bg-hover">
-          <img class="w-12 h-12 rounded-full" src="assets/icons/chat/bookmark.svg" />
-          <div class="flex flex-col">
-            <div class="flex place-content-between">
-              <strong class="text-slate-900 text-sm font-bold text-right"
-                ><i class="pi pi-bookmark"></i> ذخیره شده ها
-              </strong>
-              <span class="text-gray-500">26/11</span>
-            </div>
-            <span class="text-slate-500 text-sm font-bold text-right">ایزدخواه، نماینده مجلس:‌ با فروش ا... </span>
-          </div>
-        </div>
-        <div class="flex items-center gap-4 p-4 hover:bg-chat-bg-hover">
-          <img
-            class="w-12 h-12 rounded-full"
-            src="https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=4&w=256&h=256&q=80"
-          />
-          <div class="flex flex-col">
-            <div class="flex place-content-between">
-              <strong class="text-slate-900 text-sm font-bold text-right">حسام کامیاران</strong>
-              <span class="text-gray-500">۰۹:۳۲</span>
-            </div>
-            <span class="text-slate-500 text-sm font-bold text-right">ایزدخواه، نماینده مجلس:‌ با فروش ا... </span>
-          </div>
-        </div>
-        <div class="flex items-center gap-4 p-4 hover:bg-chat-bg-hover">
-          <img
-            class="w-12 h-12 rounded-full"
-            src="https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=4&w=256&h=256&q=80"
-          />
-
-          <div class="flex flex-col">
-            <div class="flex place-content-between">
-              <strong class="text-slate-900 text-sm font-bold text-right">گروه ایمنی HSE</strong>
-              <span class="text-gray-500">۰۹:۳۲</span>
-            </div>
-            <span class="text-slate-500 text-sm font-bold text-right">🚨⚠ آتش سوزی شدید در یکی ...</span>
-          </div>
-        </div>
-        <div class="flex items-center gap-4 p-4 hover:bg-chat-bg-hover">
-          <img class="w-12 h-12 rounded-full" src="assets/icons/chat/bookmark.svg" />
-          <div class="flex flex-col">
-            <div class="flex place-content-between">
-              <strong class="text-slate-900 text-sm font-bold text-right"
-                ><i class="pi pi-bookmark"></i> ذخیره شده ها
-              </strong>
-              <span class="text-gray-500">26/11</span>
-            </div>
-            <span class="text-slate-500 text-sm font-bold text-right">ایزدخواه، نماینده مجلس:‌ با فروش ا... </span>
-          </div>
-        </div>
-        <div class="flex items-center gap-4 p-4 hover:bg-chat-bg-hover">
-          <img
-            class="w-12 h-12 rounded-full"
-            src="https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=4&w=256&h=256&q=80"
-          />
-          <div class="flex flex-col">
-            <div class="flex place-content-between">
-              <strong class="text-slate-900 text-sm font-bold text-right">حسام کامیاران</strong>
-              <span class="text-gray-500">۰۹:۳۲</span>
-            </div>
-            <span class="text-slate-500 text-sm font-bold text-right">ایزدخواه، نماینده مجلس:‌ با فروش ا... </span>
-          </div>
-        </div>
-        <div class="flex items-center gap-4 p-4 hover:bg-chat-bg-hover">
-          <img
-            class="w-12 h-12 rounded-full"
-            src="https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=4&w=256&h=256&q=80"
-          />
-
-          <div class="flex flex-col">
-            <div class="flex place-content-between">
-              <strong class="text-slate-900 text-sm font-bold text-right">گروه ایمنی HSE</strong>
-              <span class="text-gray-500">۰۹:۳۲</span>
-            </div>
-            <span class="text-slate-500 text-sm font-bold text-right">🚨⚠ آتش سوزی شدید در یکی ...</span>
-          </div>
-        </div>
+        </ng-container>
       </div>
       <div
         class="icon-container flex flex-row absolute bottom-0 right-0 left-0 place-content-between justify-center bg-white h-12 w-full shadow-[#0000001A]"
@@ -205,11 +71,16 @@
       <div class="header flex place-content-between w-full p-5 shadow-border">
         <div class="flex">
           <img
+            *ngIf="active_session"
             class="w-12 h-12 rounded-full"
-            src="https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=4&w=256&h=256&q=80"
+            src="{{
+              getActiveSessionInfo()['imageUrl']
+                ? resource_path + getActiveSessionInfo()['imageUrl']
+                : './assets/dashboard/Avatar.svg'
+            }}"
           />
-          <div class="flex flex-col mr-3">
-            <span>حسام کامیاران</span>
+          <div class="flex flex-col mr-3" *ngIf="active_session">
+            <span>{{ getActiveSessionInfo()['extraInfo']['name'] }}</span>
             <span>آخرین فعالیت: ۸ ساعت پیش</span>
           </div>
         </div>
@@ -220,18 +91,36 @@
         </div>
       </div>
       <div
-        class="chat-conatainer bg-gray-300 flex flex-col whitespace-nowrap overflow-auto scrollbar-hide min-h-full h-[40rem]"
+        class="chat-conatainer shadow-border bg-gray-300 flex flex-col whitespace-nowrap overflow-auto scrollbar-hide min-h-full h-[40rem]"
       >
-        <div class="flex message bg-chat-self-msg float-right" *ngFor="let item of messages">
-          {{ item.text }}
-        </div>
+        <ng-container *ngIf="messages.length">
+          <div
+            *ngFor="let item of messages"
+            class="flex slef-left float-left flex-col justify-center items-center w-[50%] relative gap-1 p-2 rounded-tl-2xl rounded-tr-2xl rounded-bl rounded-br-2xl bg-[#edf5ff] border border-[#a6c8ff]"
+          >
+            <p class="flex-grow-0 flex-shrink-0 w-[351px] text-sm text-right text-neutral-800">
+              {{ item['content'] }}
+            </p>
+            <div class="flex justify-start items-center self-stretch flex-grow-0 flex-shrink-0 relative gap-2">
+              <p class="flex-grow-0 flex-shrink-0 text-xs text-left text-[#4589ff]">
+                {{ item['createdDate'] | date : 'M/d' }}
+              </p>
+            </div>
+          </div>
+        </ng-container>
       </div>
       <div
         class="icon-container flex flex-row absolute bottom-0 right-0 left-0 place-content-between justify-center bg-white h-12 w-full shadow-[#0000001A]"
       >
         <div class="w-11/12 text-right self-center cursor-pointer flex">
           <i class="flex-none self-center cursnor-poiter" [inlineSVG]="'assets/icons/chat/file.svg'"></i>
-          <input type="text" placeholder="پیامی بنویسید ..." class="w-full border-b-2 py-2 mr-3 self-center" />
+          <input
+            (keydown.enter)="sendMessage($event)"
+            [(ngModel)]="message"
+            type="text"
+            placeholder="پیامی بنویسید ..."
+            class="w-full border-b-2 py-2 mr-3 self-center"
+          />
         </div>
 
         <div class="w-1/12 text-left self-center cursor-pointer flex place-content-evenly">

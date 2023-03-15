@@ -43,6 +43,7 @@ const routes: Routes = [
   {
     path: 'app',
     loadChildren: () => import('./modules/chat/chat-routing.module').then(m => m.ChatRoutingModule),
+    data: { layout: Layouts.Main },
   },
   // {
   //   path: 'auth',
