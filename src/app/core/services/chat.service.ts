@@ -3,9 +3,6 @@ import { BehaviorSubject, map, Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { User } from '../models/user';
-import { HttpHeaders } from '@angular/common/http';
-
-import { io } from 'socket.io-client';
 
 @Injectable({
   providedIn: 'root',
@@ -28,11 +25,25 @@ export class ChatService {
     return this.currentUserSubject.value;
   }
 
-  getSessions() {
-    return this.http.get(`${environment.apiUrl}/chat/sessions`);
+  getSessions(page_number: number = 0, page_size: number = 100) {
+    return this.http.get(`${environment.apiUrl}/chat/sessions?pageNumber=${page_number}&pageSize=${page_size}`);
   }
-  getMessages(session_id: string) {
-    return this.http.get(`${environment.apiUrl}/chat/messages/${session_id}`);
+  getMessages(session_id: string, page_number: number = 0, page_size: number = 100) {
+    return this.http.get(
+      `${environment.apiUrl}/chat/messages/${session_id}?pageNumber=${page_number}&pageSize=${page_size}&sort=DESC&sortKey=createdDate`,
+    );
+  }
+  deleteMessage(message_id: string) {
+    return this.http.delete(`${environment.apiUrl}/chat/messages/${message_id}`);
+  }
+  editMessage(message_id: string, text: string) {
+    const headers = { 'content-type': 'application/json', accept: '*/*' };
+
+    return this.http.patch(
+      `${environment.apiUrl}/chat/messages/${message_id}`,
+      { content: text },
+      { headers: headers },
+    );
   }
   sendMessage(message: string, session_id: string) {
     const headers = { 'content-type': 'multipart/form-data', accept: '*/*' };
@@ -40,9 +51,7 @@ export class ChatService {
     let value = new FormData();
     value.set('type', 'TEXT');
     value.set('text', message);
-    return this.http.post(`${environment.apiUrl}/chat/messages/send/${session_id}`, value, {
-      // 'headers': headers,
-    });
+    return this.http.post(`${environment.apiUrl}/chat/messages/send/${session_id}`, value, {});
   }
 
   public getNewMessage = () => {

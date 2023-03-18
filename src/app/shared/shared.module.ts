@@ -22,6 +22,7 @@ import { DialogModule } from 'primeng/dialog';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
+import { ScrollPanelModule } from 'primeng/scrollpanel';
 
 @NgModule({
   declarations: [],
@@ -49,6 +50,7 @@ import { MessageModule } from 'primeng/message';
     ProgressSpinnerModule,
     MessageModule,
     MessagesModule,
+    ScrollPanelModule,
   ],
   exports: [
     FormsModule,

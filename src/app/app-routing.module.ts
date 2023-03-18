@@ -7,6 +7,7 @@ import { LoginComponent } from './modules/auth/login/login.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { AdminDashboardComponent } from './modules/admin/dashboard/dashboard.component';
 import { SystemUsersComponent } from './modules/admin/dashboard/system-users/system-users.component';
+import { LogoutComponent } from './modules/auth/logout/logout.component';
 
 const routes: Routes = [
   // {
@@ -31,6 +32,10 @@ const routes: Routes = [
       {
         path: 'new-password',
         component: ChangePasswordComponent,
+      },
+      {
+        path: 'logout',
+        component: LogoutComponent,
       },
     ],
     data: { layout: Layouts.Auth },

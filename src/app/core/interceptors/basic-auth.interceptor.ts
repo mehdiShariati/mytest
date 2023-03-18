@@ -13,8 +13,8 @@ export class BasicAuthInterceptor implements HttpInterceptor {
     request = request.clone({
       setHeaders: {
         Authorization: token ? `Bearer ${token}` : `Basic ${basicToken}`,
-        // 'Content-Type': headers.get('Content-Type') ? headers.get('Content-Type') :'application/x-www-form-urlencoded',
-        'Accept-Language': 'fa',
+        //'Content-Type': headers.get('Content-Type') ? headers.get('Content-Type') :'application/x-www-form-urlencoded',
+        'Accept-Language': '*',
       },
     });
 
