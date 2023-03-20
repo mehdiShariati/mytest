@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, AfterContentInit, ViewChild } from '@angular/core';
 import { ChatService } from '../../../../core/services/chat.service';
 import { environment } from '../../../../../environments/environment';
 import { WebsocketService } from '../../../../core/services/websocket.service';
@@ -13,7 +13,7 @@ import { ScrollToBottomDirective } from '../../../../core/directives/scroll-to-b
   templateUrl: './container.component.html',
   styleUrls: ['./container.component.scss'],
 })
-export class ContainerComponent implements OnInit {
+export class ContainerComponent implements AfterContentInit {
   public active_session: null | string = null;
   public messages: any = [];
   public sessions = [];
@@ -29,13 +29,13 @@ export class ContainerComponent implements OnInit {
   obsSelectedSession: BehaviorSubject<any> = new BehaviorSubject<any>({});
   selected_session$: Observable<any> = this.obsSelectedSession.asObservable();
   contextMenuItems: MenuItem[] = [];
-  threeDotMenuItems: any = [];
+  public threeDotMenuShow: boolean = false;
   select_edit_message_id: string = '';
   is_editing_message: boolean = false;
   public initial_scroll: boolean = true;
   public scroll_height: number = 0;
   public show_search_modal: boolean = false;
-  public tests: Array<string> = ['123213', '123213213', '12321321321', 'mdahjhadjas'];
+  public isAllowToFetchMessages: boolean = false;
 
   @ViewChild('contextMenu', { static: false })
   contextMenu!: ContextMenu;
@@ -56,36 +56,12 @@ export class ContainerComponent implements OnInit {
         icon: 'pi pi-fw pi-trash',
       },
     ];
-    this.threeDotMenuItems = [
-      {
-        label: 'پیام جدید',
-        icon: 'message',
-        svgIcon: 'newMessage',
-        command: (event: any) => {
-          return console.log(event.target);
-        },
-      },
-      {
-        label: 'ایجاد کانال',
-        icon: 'newChannel',
-        svgIcon: 'newChannel',
-        command: (event: any) => {
-          return console.log(event.target);
-        },
-      },
-      {
-        label: 'ایجاد گروه',
-        styleClass: 'newGroup',
-        command: (event: any) => {
-          return console.log(event.target);
-        },
-      },
-    ];
-    WebsocketService.messages.subscribe((msg: any) => {
-      const currentValue = this.obsArrayMessages.value;
-      const updatedValue = [...currentValue, msg.data];
-      this.obsArrayMessages.next(updatedValue);
-    });
+
+    // WebsocketService.messages.subscribe((msg: any) => {
+    //   const currentValue = this.obsArrayMessages.value;
+    //   const updatedValue = [...currentValue, msg.data];
+    //   this.obsArrayMessages.next(updatedValue);
+    // });
   }
   openContextMenu(event: MouseEvent, id: any): void {
     this.contextMenuItems = [
@@ -126,8 +102,44 @@ export class ContainerComponent implements OnInit {
       this.obsArrayMessages.next(messagesArr);
     });
   }
+  ngOnInit() {
+    this.chatService.getSelectedUser().subscribe((res: any) => {
+      if (res) {
+        this.active_session = res;
+        this.getActiveSessionInfo();
+        if (this.chatService.isAllowToFetchMessages) {
+          this.currentPage_messages = 0;
+          this.chatService.getMessages(res, this.currentPage_messages, this.pageSize).subscribe((res: any) => {
+            this.obsArrayMessages.next(res.content.reverse());
+          });
+          const content = document.querySelector('.chat-conatainer');
+          const scroll$ = fromEvent(content!, 'scroll').pipe(
+            map(() => {
+              return content!.scrollTop;
+            }),
+          );
 
-  ngOnInit(): void {
+          scroll$.subscribe(scrollPos => {
+            let limit = 0;
+
+            if (scrollPos === limit) {
+              this.initial_scroll = false;
+              this.currentPage_messages++;
+              forkJoin([
+                this.itemsMessages$.pipe(take(1)),
+                this.chatService.getMessages(res, this.currentPage_messages, this.pageSize),
+              ]).subscribe((data: any) => {
+                this.obsArrayMessages.next([...data[1].content.reverse(), ...data[0]]);
+              });
+              this.scroll_height = content!.scrollHeight;
+            }
+          });
+        }
+      }
+    });
+  }
+
+  ngAfterContentInit(): void {
     this.chatService.getSessions(this.currentPage_sessions, this.pageSize).subscribe((res: any) => {
       this.obsArraySessions.next(res);
     });
@@ -152,43 +164,38 @@ export class ContainerComponent implements OnInit {
       }
     });
   }
-  SetActiveSession(active_id: string) {
-    this.active_session = active_id;
-    this.getActiveSessionInfo();
-    this.currentPage_messages = 0;
-    this.chatService.getMessages(active_id, this.currentPage_messages, this.pageSize).subscribe((res: any) => {
-      this.obsArrayMessages.next(res.content.reverse());
-    });
-    const content = document.querySelector('.chat-conatainer');
-    const scroll$ = fromEvent(content!, 'scroll').pipe(
-      map(() => {
-        return content!.scrollTop;
-      }),
-    );
-
-    scroll$.subscribe(scrollPos => {
-      let limit = 0;
-
-      if (scrollPos === limit) {
-        this.initial_scroll = false;
-        this.currentPage_messages++;
-        forkJoin([
-          this.itemsMessages$.pipe(take(1)),
-          this.chatService.getMessages(active_id, this.currentPage_messages, this.pageSize),
-        ]).subscribe((data: any) => {
-          this.obsArrayMessages.next([...data[1].content.reverse(), ...data[0]]);
-        });
-        this.scroll_height = content!.scrollHeight;
-      }
-    });
+  SetActiveSession(active_user: object) {
+    this.chatService.setSelectedSession(active_user);
   }
   getActiveSessionInfo(): any {
     if (this.active_session) {
       let session = this.obsArraySessions.value.filter((item: any) => {
         return item.id === this.active_session;
       });
-      console.log(session);
-      this.obsSelectedSession.next(session[0]);
+      if (session.length) {
+        this.chatService.isAllowToFetchMessages = true;
+        this.obsSelectedSession.next(session[0]);
+      } else {
+        this.chatService.getSelectedUserData().subscribe((res: any) => {
+          if (res?.id) {
+            let currentValue = this.obsArraySessions.value;
+            let newSession = {
+              id: this.active_session,
+              imageUrl: res?.personnel?.personnelPhotoUrl,
+              messagePreview: null,
+              extraInfo: {
+                name:
+                  res?.personnel?.firstName || res?.personnel?.lastName
+                    ? `${res?.personnel?.firstName}  ${res?.personnel?.lastName}`
+                    : res.username,
+              },
+            };
+            let updatedValue = [...currentValue, newSession];
+            this.obsArraySessions.next(updatedValue);
+            this.obsSelectedSession.next(newSession);
+          }
+        });
+      }
     }
   }
   sendMessage(event: any) {
@@ -226,5 +233,11 @@ export class ContainerComponent implements OnInit {
     } else {
       return InputDate.toLocaleDateString('fa-IR', { month: 'numeric', day: 'numeric' });
     }
+  }
+  toggleThreeDotMenu() {
+    this.chatService.toggleThreeDotMenu();
+  }
+  showCreateGroupContainer() {
+    return this.chatService.showCreateGroupContainer;
   }
 }

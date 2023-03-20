@@ -1,0 +1,137 @@
+<ng-container *ngIf="isMessageTypeText">
+  <!--versus message text-->
+  <div
+    class="message-versus flex {{
+      isMessageSelf() ? 'self-end' : 'self-start'
+    }} flex-col min-w-[50px]  items-right max-w-fit		  gap-1 p-3 rounded-tl-2xl rounded-tr-2xl rounded-bl rounded-br-2xl bg-[#edf5ff] border border-[#a6c8ff]"
+  >
+    <p class="whitespace-wrap flex-shrink-0 max-w-[351px] text-sm text-right text-neutral-800">
+      {{ message.content }}
+    </p>
+    <div class="flex justify-start items-center self-stretch flex-grow-0 flex-shrink-0 relative gap-2">
+      <p class="flex-grow-0 flex-shrink-0 text-xs text-left text-[#4589ff]">{{ getDateOrTime() }}</p>
+    </div>
+  </div>
+  <!--end versus message text-->
+</ng-container>
+
+<ng-container *ngIf="false">
+  <!--end versus message text-->
+
+  <!--video message forwarded versus -->
+  <div
+    class="forwarded-message flex flex-col justify-center items-center w-[368px] left-[553px] top-[219px] gap-1 py-2 rounded-tl-2xl rounded-tr-2xl rounded-bl-2xl rounded-br bg-[#d9fbfb] border border-[#3ddbd9]"
+  >
+    <p class="flex-grow-0 flex-shrink-0 w-[351px] text-xs text-right">
+      <span class="flex-grow-0 flex-shrink-0 w-[351px] text-xs text-right text-[#009d9a]">فوروارد شده از:</span
+      ><span class="flex-grow-0 flex-shrink-0 w-[351px] text-xs text-right text-neutral-800"> </span
+      ><span class="flex-grow-0 flex-shrink-0 w-[351px] text-xs font-medium text-right text-[#005d5d]"
+        >محمد کاتبیان</span
+      >
+    </p>
+    <div class="self-stretch flex-grow-0 flex-shrink-0 h-[207px] relative">
+      <img src="pic.jpeg" class="w-[368px] h-[207px] left-[-1px] top-[-1px] object-contain" /><svg
+        width="64"
+        height="64"
+        viewBox="0 0 64 64"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        class="w-16 h-16 left-[152px] top-[72px] absolute"
+        preserveAspectRatio="xMidYMid meet"
+      >
+        <rect opacity="0.5" x="5" y="5" width="54" height="54" rx="27" fill="#262626"></rect>
+        <path
+          d="M28.95 21.7463C28.4426 21.4651 27.8706 21.3211 27.2905 21.3287C26.7104 21.3363 26.1424 21.4951 25.6425 21.7895C25.1426 22.0839 24.7282 22.5036 24.4403 23.0072C24.1523 23.5108 24.0008 24.0809 24.0007 24.661V39.3383C24.0008 39.9185 24.1523 40.4885 24.4403 40.9921C24.7282 41.4957 25.1426 41.9155 25.6425 42.2099C26.1424 42.5043 26.7104 42.6631 27.2905 42.6706C27.8706 42.6782 28.4426 42.5343 28.95 42.253L44.302 33.749C44.6143 33.576 44.8745 33.3225 45.0557 33.0148C45.237 32.7072 45.3325 32.3567 45.3325 31.9997C45.3325 31.6426 45.237 31.2921 45.0557 30.9845C44.8745 30.6769 44.6143 30.4234 44.302 30.2503L28.95 21.7463ZM32.0007 5.33301C17.2727 5.33301 5.33398 17.2717 5.33398 31.9997C5.33398 46.7277 17.2727 58.6663 32.0007 58.6663C46.7287 58.6663 58.6673 46.7277 58.6673 31.9997C58.6673 17.2717 46.7287 5.33301 32.0007 5.33301ZM9.33398 31.9997C9.33398 25.9881 11.7221 20.2227 15.9729 15.9719C20.2237 11.7211 25.9891 9.33301 32.0007 9.33301C38.0122 9.33301 43.7776 11.7211 48.0284 15.9719C52.2792 20.2227 54.6673 25.9881 54.6673 31.9997C54.6673 38.0112 52.2792 43.7766 48.0284 48.0274C43.7776 52.2783 38.0122 54.6663 32.0007 54.6663C25.9891 54.6663 20.2237 52.2783 15.9729 48.0274C11.7221 43.7766 9.33398 38.0112 9.33398 31.9997Z"
+          fill="white"
+        ></path>
+      </svg>
+      <div
+        class="flex justify-center items-center w-[95px] absolute left-2 top-2 gap-1.5 px-2.5 py-1 rounded-lg bg-black/50"
+      >
+        <div class="flex flex-col justify-start items-end flex-grow-0 flex-shrink-0 relative">
+          <p class="flex-grow-0 flex-shrink-0 text-[10px] text-left text-white">12.8 مگابایت</p>
+          <p class="flex-grow-0 flex-shrink-0 text-[10px] text-left text-white">۰۶:۵۴</p>
+        </div>
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 16 16"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          class="flex-grow-0 flex-shrink-0 w-4 h-4 relative"
+          preserveAspectRatio="xMidYMid meet"
+        >
+          <path
+            d="M12.1667 13.6669C12.2993 13.6669 12.4265 13.7196 12.5202 13.8134C12.614 13.9071 12.6667 14.0343 12.6667 14.1669C12.6667 14.2995 12.614 14.4267 12.5202 14.5205C12.4265 14.6142 12.2993 14.6669 12.1667 14.6669L3.5 14.6696C3.36739 14.6696 3.24021 14.6169 3.14645 14.5231C3.05268 14.4294 3 14.3022 3 14.1696C3 14.037 3.05268 13.9098 3.14645 13.816C3.24021 13.7223 3.36739 13.6696 3.5 13.6696L12.1667 13.6669ZM7.76533 1.34158L7.83333 1.33691C7.95416 1.33692 8.07089 1.38068 8.16195 1.46009C8.25301 1.53951 8.31223 1.64921 8.32867 1.76891L8.33333 1.83691L8.33267 10.9602L10.814 8.48025C10.8987 8.39557 11.0109 8.34408 11.1303 8.33515C11.2497 8.32622 11.3684 8.36044 11.4647 8.43158L11.5213 8.48025C11.6059 8.56499 11.6573 8.67727 11.6661 8.79667C11.6749 8.91608 11.6406 9.03468 11.5693 9.13091L11.5207 9.18691L8.18933 12.5182C8.10467 12.6029 7.99244 12.6544 7.87303 12.6633C7.75363 12.6723 7.63498 12.6381 7.53867 12.5669L7.482 12.5182L4.14667 9.18758C4.05697 9.09848 4.00437 8.9787 3.99944 8.85237C3.9945 8.72604 4.03761 8.60253 4.12009 8.5067C4.20256 8.41088 4.31828 8.34985 4.44393 8.33591C4.56959 8.32198 4.69587 8.35616 4.79733 8.43158L4.85333 8.47958L7.33267 10.9556L7.33333 1.83691C7.33334 1.71609 7.3771 1.59935 7.45651 1.50829C7.53593 1.41723 7.64563 1.35801 7.76533 1.34158L7.83333 1.33691L7.76533 1.34158Z"
+            fill="white"
+          ></path>
+        </svg>
+      </div>
+    </div>
+    <p class="flex-grow-0 flex-shrink-0 w-[351px] text-sm text-right text-neutral-800">
+      <span class="flex-grow-0 flex-shrink-0 w-[351px] text-sm text-right text-neutral-800"
+        >ایزدخواه، نماینده مجلس:</span
+      ><br /><span class="flex-grow-0 flex-shrink-0 w-[351px] text-sm text-right text-neutral-800"
+        >با فروش اموال دولت، مردمی سازی اقتصاد دچار مشکل می شود / با این روش، نهال فساد کاشته می شود.</span
+      >
+    </p>
+    <div class="flex justify-end items-start self-stretch flex-grow-0 flex-shrink-0 relative gap-2.5 p-2">
+      <p class="flex-grow-0 flex-shrink-0 text-xs text-left text-[#005d5d]">khabar_247@</p>
+    </div>
+    <div class="flex justify-start items-center self-stretch flex-grow-0 flex-shrink-0 relative gap-2 px-2">
+      <svg
+        width="20"
+        height="16"
+        viewBox="0 0 20 16"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        class="flex-grow-0 flex-shrink-0 w-[18.67px] h-4 relative"
+        preserveAspectRatio="xMidYMid meet"
+      >
+        <path
+          d="M7.02055 8.64624C6.92577 8.55792 6.8004 8.50984 6.67087 8.51212C6.54133 8.51441 6.41774 8.56688 6.32613 8.65849C6.23453 8.7501 6.18205 8.87369 6.17977 9.00322C6.17748 9.13276 6.22556 9.25812 6.31388 9.35291L9.31388 12.3529C9.40763 12.4465 9.53471 12.4991 9.66722 12.4991C9.79972 12.4991 9.9268 12.4465 10.0205 12.3529L17.3539 5.01957C17.4422 4.92479 17.4903 4.79942 17.488 4.66989C17.4857 4.54036 17.4332 4.41677 17.3416 4.32516C17.25 4.23355 17.1264 4.18107 16.9969 4.17879C16.8674 4.1765 16.742 4.22459 16.6472 4.31291L9.66722 11.2929L7.02055 8.64624Z"
+          fill="#009D9A"
+        ></path>
+        <path
+          d="M3.02055 8.64624C2.92577 8.55792 2.8004 8.50984 2.67087 8.51212C2.54133 8.51441 2.41774 8.56688 2.32613 8.65849C2.23453 8.7501 2.18205 8.87369 2.17977 9.00322C2.17748 9.13276 2.22556 9.25812 2.31388 9.35291L5.31388 12.3529C5.40763 12.4465 5.53471 12.4991 5.66722 12.4991C5.79972 12.4991 5.9268 12.4465 6.02055 12.3529L13.3539 5.01957C13.4422 4.92479 13.4903 4.79942 13.488 4.66989C13.4857 4.54036 13.4332 4.41677 13.3416 4.32516C13.25 4.23355 13.1264 4.18107 12.9969 4.17879C12.8674 4.1765 12.742 4.22459 12.6472 4.31291L5.66722 11.2929L3.02055 8.64624Z"
+          fill="#009D9A"
+        ></path>
+      </svg>
+      <p class="flex-grow-0 flex-shrink-0 text-xs text-left text-[#009d9a]">22:30</p>
+    </div>
+  </div>
+  <!--end message forwarded versus -->
+
+  <!--forwarded indicator-->
+  <div
+    class="flex flex-col justify-center items-center w-8 h-8 absolute left-[424px] top-[187px] overflow-hidden p-0.5 rounded-3xl bg-white"
+  >
+    <div
+      class="flex justify-center items-center flex-grow-0 flex-shrink-0 w-8 h-8 relative overflow-hidden gap-2 p-3.5 rounded-[22px]"
+    >
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        class="flex-grow-0 flex-shrink-0 w-6 h-6 relative"
+        preserveAspectRatio="xMidYMid meet"
+      >
+        <path
+          d="M14.7227 7.77844C14.6511 7.70922 14.594 7.62643 14.5547 7.53491C14.5154 7.44339 14.4948 7.34497 14.494 7.24538C14.4932 7.1458 14.5122 7.04705 14.5499 6.95489C14.5877 6.86274 14.6434 6.77903 14.7139 6.70864C14.7843 6.63825 14.8681 6.5826 14.9603 6.54494C15.0525 6.50727 15.1512 6.48834 15.2508 6.48925C15.3504 6.49016 15.4488 6.5109 15.5403 6.55025C15.6318 6.5896 15.7145 6.64677 15.7837 6.71844L20.7807 11.7214C20.9211 11.8621 21 12.0527 21 12.2514C21 12.4502 20.9211 12.6408 20.7807 12.7814L15.7837 17.7794C15.6423 17.9161 15.4529 17.9918 15.2562 17.9902C15.0596 17.9886 14.8714 17.9098 14.7323 17.7708C14.5932 17.6318 14.5142 17.4437 14.5124 17.2471C14.5106 17.0504 14.5861 16.861 14.7227 16.7194L18.4427 12.9994L10.6007 12.9994C9.00566 12.9994 7.79066 12.7574 6.71166 12.2354L6.46566 12.1094C5.36852 11.528 4.47114 10.6306 3.88966 9.53344C3.27966 8.39344 2.99966 7.11544 2.99966 5.39844C2.99966 5.19953 3.07868 5.00876 3.21933 4.86811C3.35998 4.72746 3.55075 4.64844 3.74966 4.64844C3.94857 4.64844 4.13934 4.72746 4.27999 4.86811C4.42064 5.00876 4.49966 5.19953 4.49966 5.39844C4.49966 6.88244 4.72766 7.91844 5.21266 8.82644C5.6542 9.66188 6.33722 10.3449 7.17266 10.7864C8.01066 11.2344 8.95866 11.4624 10.2667 11.4954L10.6007 11.4994L18.4377 11.4994L14.7227 7.77844Z"
+          fill="#A6C8FF"
+        ></path>
+      </svg>
+    </div>
+  </div>
+  <!--end forwarded indicator-->
+
+  <!--date tag-->
+  <div
+    class="date-tag self-center flex w-[85px] justify-center items-center relative gap-1.5 px-2.5 py-1 rounded-[14px] bg-white border border-[#8d8d8d]"
+  >
+    <p class="flex-grow-0 flex-shrink-0 text-xs text-left text-[#8d8d8d]">22 بهمن</p>
+  </div>
+  <!--end date tag-->
+</ng-container>

@@ -1,0 +1,26 @@
+<!--<swiper-->
+<!--  [config]="config"-->
+<!--  (swiper)="onSwiper($event)"-->
+<!--  (slideChange)="onSlideChange()"-->
+<!--&gt;-->
+<!--  <ng-template *ngFor="let item of items" swiperSlide><img src="{{item}}" /></ng-template>-->
+
+<!--</swiper>-->
+<swiper
+  [slidesPerView]="1"
+  [spaceBetween]="50"
+  [navigation]="true"
+  [pagination]="{ type: 'fraction' }"
+  [centeredSlides]="true"
+  [keyboard]="{
+    enabled: true
+  }"
+  [virtual]="true"
+  class="swiper-container relative"
+>
+  <ng-template class="swiper-wrapper" swiperSlide *ngFor="let slide of items">
+    <div class="swiper-slide">
+      <img src="{{ slide }}" alt="" />
+    </div>
+  </ng-template>
+</swiper>

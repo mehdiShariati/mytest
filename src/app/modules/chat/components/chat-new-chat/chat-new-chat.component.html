@@ -1,0 +1,90 @@
+<div
+  class="flex {{
+    showNewChatModal() ? '' : 'hidden'
+  }} z-10 flex-col justify-center absolute left-0 top-16 items-center w-80  overflow-hidden gap-px pb-2 rounded-lg bg-white"
+>
+  <div class="flex flex-row-reverse justify-between items-center self-stretch flex-grow-0 flex-shrink-0 relative p-4">
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      class="flex-grow-0 flex-shrink-0 w-4 h-4 relative cursor-pointer"
+      preserveAspectRatio="xMidYMid meet"
+      (click)="toggleNewChatModal()"
+    >
+      <path
+        d="M2.93209 3.03629L2.98076 2.98029C3.06541 2.89561 3.17765 2.84412 3.29706 2.83519C3.41646 2.82626 3.53511 2.86048 3.63142 2.93162L3.68742 2.98029L8.00076 7.29295L12.3141 2.97962C12.3602 2.93189 12.4154 2.89382 12.4764 2.86765C12.5375 2.84147 12.6031 2.82771 12.6695 2.82717C12.7358 2.82662 12.8017 2.8393 12.8631 2.86447C12.9246 2.88964 12.9804 2.92679 13.0273 2.97376C13.0742 3.02073 13.1113 3.07657 13.1364 3.13803C13.1615 3.19949 13.1742 3.26534 13.1735 3.33173C13.1729 3.39812 13.1591 3.46372 13.1329 3.52471C13.1066 3.5857 13.0685 3.64085 13.0208 3.68695L8.70809 8.00029L13.0214 12.3136C13.106 12.3984 13.1574 12.5106 13.1662 12.63C13.175 12.7494 13.1407 12.868 13.0694 12.9643L13.0208 13.0203C12.9361 13.105 12.8239 13.1565 12.7045 13.1654C12.585 13.1743 12.4664 13.1401 12.3701 13.069L12.3141 13.0203L8.00076 8.70762L3.68742 13.021C3.59308 13.112 3.46675 13.1623 3.33566 13.1611C3.20456 13.1599 3.07918 13.1073 2.98651 13.0145C2.89385 12.9218 2.84133 12.7964 2.84025 12.6653C2.83917 12.5342 2.88963 12.4079 2.98076 12.3136L7.29342 8.00029L2.98009 3.68695C2.89551 3.60221 2.84415 3.48993 2.83534 3.37053C2.82653 3.25112 2.86086 3.13252 2.93209 3.03629L2.98076 2.98029L2.93209 3.03629Z"
+        fill="#262626"
+      ></path>
+    </svg>
+    <p class="flex-grow-0 flex-shrink-0 text-sm text-center text-neutral-800">پیام جدید</p>
+  </div>
+  <div class="flex flex-col justify-start items-start self-stretch flex-grow-0 flex-shrink-0 gap-3 py-3 bg-white">
+    <div class="flex justify-center items-center self-stretch flex-grow-0 flex-shrink-0 gap-3 px-3">
+      <div class="flex flex-col justify-center items-center flex-grow h-10 overflow-hidden rounded-xl bg-white">
+        <div class="flex flex-col justify-center items-end self-stretch flex-grow gap-1">
+          <div class="flex flex-col justify-center items-end self-stretch flex-grow gap-2">
+            <div
+              class="flex justify-end items-center self-stretch flex-grow gap-4 px-4 py-[15px] rounded-lg bg-[#f4f4f4]"
+            >
+              <div class="flex items-center flex-grow relative gap-2">
+                <input
+                  placeholder="جستجو"
+                  class="bg-inherit flex-grow-0 flex-shrink-0 text-sm text-right text-[#8d8d8d]"
+                />
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="flex-grow-0 flex-shrink-0 w-4 h-4 absolute right-12"
+                  preserveAspectRatio="xMidYMid meet"
+                >
+                  <path
+                    d="M6.66658 1.83301C7.57997 1.83289 8.47471 2.0916 9.2471 2.57915C10.0195 3.0667 10.6379 3.76314 11.0307 4.58776C11.4235 5.41237 11.5746 6.33142 11.4665 7.2384C11.3584 8.14538 10.9955 9.00315 10.4199 9.71234L13.6866 12.979C13.7763 13.0681 13.8289 13.1879 13.8338 13.3142C13.8387 13.4406 13.7956 13.5641 13.7132 13.6599C13.6307 13.7557 13.515 13.8167 13.3893 13.8307C13.2637 13.8446 13.1374 13.8104 13.0359 13.735L12.9799 13.6863L9.71258 10.4197C9.11183 10.9071 8.40287 11.2432 7.64526 11.3997C6.88766 11.5562 6.10355 11.5286 5.35883 11.3192C4.61411 11.1098 3.93054 10.7246 3.36557 10.1962C2.8006 9.66769 2.37074 9.01133 2.1121 8.28224C1.85347 7.55315 1.77362 6.77263 1.87927 6.00627C1.98492 5.23991 2.27298 4.51011 2.71924 3.87819C3.1655 3.24628 3.75692 2.73071 4.44381 2.37482C5.1307 2.01894 5.89297 1.83313 6.66658 1.83301ZM6.66658 2.83301C6.16318 2.83301 5.66471 2.93216 5.19962 3.1248C4.73454 3.31745 4.31196 3.59981 3.956 3.95577C3.60004 4.31172 3.31768 4.73431 3.12504 5.19939C2.9324 5.66447 2.83324 6.16294 2.83324 6.66634C2.83324 7.16974 2.9324 7.66821 3.12504 8.13329C3.31768 8.59838 3.60004 9.02096 3.956 9.37692C4.31196 9.73287 4.73454 10.0152 5.19962 10.2079C5.66471 10.4005 6.16318 10.4997 6.66658 10.4997C7.68324 10.4997 8.65826 10.0958 9.37715 9.37692C10.096 8.65803 10.4999 7.683 10.4999 6.66634C10.4999 5.64968 10.096 4.67465 9.37715 3.95577C8.65826 3.23688 7.68324 2.83301 6.66658 2.83301Z"
+                    fill="#8D8D8D"
+                  ></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="overflow-y-scroll divide-y h-80 scrollbar-hide new-chat-users">
+    <div
+      *ngFor="let user of itemsUsers$ | async"
+      (click)="selectUser(user)"
+      class="flex flex-row-reverse justify-start items-center self-stretch flex-grow-0 flex-shrink-0 relative gap-2 px-4 py-2 bg-white hover:bg-[#edf5ff] hover:cursor-pointer"
+    >
+      <div class="flex flex-col justify-start items-end flex-grow gap-1">
+        <div class="flex items-center self-stretch flex-grow-0 flex-shrink-0 relative gap-1">
+          <p class="flex-grow-0 flex-shrink-0 text-sm text-center text-neutral-800">
+            {{
+              user.personnel?.firstName || user.personnel?.lastName
+                ? user.personnel?.firstName + ' ' + user.personnel?.lastName
+                : user.username
+            }}
+          </p>
+        </div>
+        <div class="flex justify-end items-start self-stretch flex-grow-0 flex-shrink-0 relative gap-1">
+          <p class="self-stretch flex-grow w-[248px] h-4 text-xs font-medium text-right text-[#8d8d8d]">
+            آخرین فعالیت: ۸ ساعت پیش
+          </p>
+        </div>
+      </div>
+      <div
+        class="flex-grow-0 flex-shrink-0 w-8 h-8 relative overflow-hidden rounded-3xl bg-cover bg-no-repeat bg-center border border-[#e0e0e0]"
+        style="background-image: url('{{
+          user.personnel && user.personnel.personnelPhotoUrl
+            ? resource_path + user.personnel?.personnelPhotoUrl
+            : './assets/dashboard/Avatar.svg'
+        }}')"
+      ></div>
+    </div>
+  </div>
+</div>
