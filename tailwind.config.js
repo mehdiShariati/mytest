@@ -18,6 +18,7 @@ module.exports = {
         'chat-bg-hover': '#EDF5FF',
         'chat-self-msg': '#3DDBD9',
         'chat-others-msg': '#A6C8FF',
+        story: '#08BDBA',
       },
 
       fontFamily: {

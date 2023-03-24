@@ -1,6 +1,3 @@
-.dashboard-cont {
-  height: calc(100vh - 192px);
-}
 .swiper-container {
   width: 100%;
   height: 300px;
@@ -12,4 +9,31 @@
   color: #000;
   text-align: center;
   line-height: 300px;
+}
+
+.bookmark-app {
+  @apply max-w-max bg-[#8D8D8D1A] rounded-[24px] p-[16px] mx-auto;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: #e1e1e1;
+  border: 10px;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #a9a9a9;
+  border: 10px;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+  border: 10px;
+  border-radius: 10px;
 }
