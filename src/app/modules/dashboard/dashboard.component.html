@@ -86,7 +86,12 @@
         </div>
       </div>
       <div class="bookmark-app my-10 flex items-center" pDroppable="apps" (onDrop)="dragEnd()">
-        <div class="flex justify-center items-center flex-wrap" *ngFor="let item of bookmarkedApps">
+        <div
+          [pTooltip]="item.subject"
+          tooltipPosition="top"
+          *ngFor="let item of bookmarkedApps"
+          class="flex justify-center cursor-pointer items-center flex-wrap"
+        >
           <i [inlineSVG]="item.icon" class="mx-2"></i>
         </div>
       </div>
