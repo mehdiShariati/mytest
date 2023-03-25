@@ -12,7 +12,11 @@
 }
 
 .bookmark-app {
-  @apply max-w-max bg-[#8D8D8D1A] rounded-[24px] p-[16px] mx-auto;
+  @apply max-w-max bg-[#8D8D8D1A] rounded-[24px] mx-auto;
+}
+
+.app-container {
+  @apply flex items-center justify-center w-[57px] h-[57px] rounded-[12px];
 }
 
 ::-webkit-scrollbar {

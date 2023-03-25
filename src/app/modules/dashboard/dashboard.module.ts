@@ -7,6 +7,7 @@ import { DashboardComponent } from './dashboard.component';
 import { InlineSVGModule } from 'ng-inline-svg-2';
 import { DragDropModule } from 'primeng/dragdrop';
 import { TooltipModule } from 'primeng/tooltip';
+import { DockModule } from 'primeng/dock';
 
 @NgModule({
   declarations: [DashboardComponent],
@@ -18,6 +19,7 @@ import { TooltipModule } from 'primeng/tooltip';
     InlineSVGModule,
     DragDropModule,
     TooltipModule,
+    DockModule,
   ],
 })
 export class DashboardModule {}
