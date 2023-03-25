@@ -2,7 +2,7 @@ aside {
   @apply w-[230px] bg-white h-[100vh] px-[30px] py-[24px];
 
   .exit-container {
-    @apply h-[calc(100vh_-_365px)] flex items-end justify-center flex-wrap;
+    @apply h-[calc(100vh_-_320px)] flex items-end justify-center flex-wrap;
 
     .exit {
       @apply flex items-center cursor-pointer justify-center flex-wrap;

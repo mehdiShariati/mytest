@@ -108,22 +108,23 @@ export class DashboardComponent {
   ];
 
   apps = [
-    { id: 1, subject: 'اطلاعات پایه', icon: 'assets/icons/plan.svg' },
-    { id: 2, subject: 'خطای سامانه', icon: 'assets/icons/system-error.svg' },
-    { id: 3, subject: 'نیروی انسانی', icon: 'assets/icons/manpower.svg' },
-    { id: 4, subject: 'طرح و برنامه', icon: 'assets/icons/plan.svg' },
-    { id: 5, subject: 'فناوری', icon: 'assets/icons/technology.svg' },
-    { id: 6, subject: 'پرسشنامه', icon: 'assets/icons/questionnaire.svg' },
-    { id: 7, subject: 'اشراف', icon: 'assets/icons/nobles.svg' },
-    { id: 8, subject: 'مدیریت پروژه', icon: 'assets/icons/project-management.svg' },
-    { id: 9, subject: 'داشبورد پرسنل', icon: 'assets/icons/personnel-dashboard.svg' },
-    { id: 10, subject: 'وقایع سامانه', icon: 'assets/icons/system-events.svg' },
+    { id: 1, subject: 'اطلاعات پایه', icon: 'assets/icons/plan.svg', url: null },
+    { id: 2, subject: 'خطای سامانه', icon: 'assets/icons/system-error.svg', url: null },
+    { id: 3, subject: 'نیروی انسانی', icon: 'assets/icons/manpower.svg', url: null },
+    { id: 4, subject: 'طرح و برنامه', icon: 'assets/icons/plan.svg', url: null },
+    { id: 5, subject: 'فناوری', icon: 'assets/icons/technology.svg', url: null },
+    { id: 6, subject: 'پرسشنامه', icon: 'assets/icons/questionnaire.svg', url: null },
+    { id: 7, subject: 'اشراف', icon: 'assets/icons/nobles.svg', url: null },
+    { id: 8, subject: 'مدیریت پروژه', icon: 'assets/icons/project-management.svg', url: null },
+    { id: 9, subject: 'داشبورد پرسنل', icon: 'assets/icons/personnel-dashboard.svg', url: null },
+    { id: 10, subject: 'وقایع سامانه', icon: 'assets/icons/system-events.svg', url: null },
   ];
 
   bookmarkedApps = [
-    { id: 11, subject: 'خطای سامانه', icon: 'assets/icons/system-error.svg' },
-    { id: 12, subject: 'نیروی انسانی', icon: 'assets/icons/manpower.svg' },
-    { id: 13, subject: 'طرح و برنامه', icon: 'assets/icons/plan.svg' },
+    { id: 11, subject: 'خطای سامانه', icon: 'assets/icons/system-error.svg', url: null },
+    { id: 12, subject: 'نیروی انسانی', icon: 'assets/icons/manpower.svg', url: null },
+    { id: 13, subject: 'طرح و برنامه', icon: 'assets/icons/plan.svg', url: null },
+    { id: 14, subject: 'چت', icon: 'assets/icons/chat.svg', url: '/app/chat' },
   ];
 
   ngOnInit() {
@@ -134,11 +135,20 @@ export class DashboardComponent {
     this.itemWasDrag = item;
   }
 
-  dragEnd() {
-    this.apps.splice(
-      this.apps.findIndex(item => item.id == this.itemWasDrag.id),
+  dragEnd(doBookmark: boolean = false) {
+    if (doBookmark) {
+      this.apps.splice(
+        this.apps.findIndex(item => item.id == this.itemWasDrag.id),
+        1,
+      );
+      this.bookmarkedApps.push(this.itemWasDrag);
+      return;
+    }
+
+    this.bookmarkedApps.splice(
+      this.bookmarkedApps.findIndex(item => item.id == this.itemWasDrag.id),
       1,
     );
-    this.bookmarkedApps.push(this.itemWasDrag);
+    this.apps.push(this.itemWasDrag);
   }
 }

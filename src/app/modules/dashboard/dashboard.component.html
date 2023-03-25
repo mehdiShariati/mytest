@@ -68,29 +68,35 @@
           [autoplayInterval]="3000"
           [showNavigators]="false"
           [showIndicators]="true"
+          class="slider-custom"
         >
           <ng-template let-slide pTemplate="item">
             <img class="w-full" [src]="slide" alt="" />
           </ng-template>
         </p-carousel>
       </div>
-      <div class="flex items-center flex-wrap mt-[6rem]">
+      <div class="flex items-center flex-wrap mt-[6rem]" pDroppable="true" (onDrop)="dragEnd()">
         <div
           class="w-[16%] flex justify-center items-center flex-wrap mb-5"
           pDraggable="apps"
           *ngFor="let item of apps"
           (onDragStart)="dragStart(item)"
+          [class.cursor-pointer]="item.url"
         >
           <i [inlineSVG]="item.icon" class="mb-3"></i>
           <span class="w-full text-center text-[12px] text-gray-dark">{{ item.subject }}</span>
         </div>
       </div>
-      <div class="bookmark-app my-10 flex items-center" pDroppable="apps" (onDrop)="dragEnd()">
+      <div class="bookmark-app my-10 flex items-center" pDroppable="apps" (onDrop)="dragEnd(true)">
         <div
           [pTooltip]="item.subject"
           tooltipPosition="top"
           *ngFor="let item of bookmarkedApps"
-          class="flex justify-center cursor-pointer items-center flex-wrap"
+          pDraggable="true"
+          class="flex justify-center items-center flex-wrap"
+          (onDragStart)="dragStart(item)"
+          [class.cursor-pointer]="item.url"
+          [routerLink]="item.url ? item.url : null"
         >
           <i [inlineSVG]="item.icon" class="mx-2"></i>
         </div>
