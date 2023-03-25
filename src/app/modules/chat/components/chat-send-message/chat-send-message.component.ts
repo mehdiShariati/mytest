@@ -7,7 +7,6 @@ import { ChatService } from '../../../../core/services/chat.service';
   styleUrls: ['./chat-send-message.component.scss'],
 })
 export class ChatSendMessageComponent {
-  public message: string = '';
   private allow_to_type_message: boolean = false;
   constructor(private chatService: ChatService) {}
   ngOnInit(): void {
@@ -19,9 +18,10 @@ export class ChatSendMessageComponent {
   }
 
   sendMessage(event: any) {
-    if (this.message && this.allow_to_type_message) {
-      this.chatService.onMessage(this.message);
-      this.message = '';
+    let mesg = event.target.value;
+    if (mesg.length && this.allow_to_type_message) {
+      this.chatService.onMessage(mesg);
+      event.target.value = '';
     }
   }
 }

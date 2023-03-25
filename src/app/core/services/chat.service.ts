@@ -54,6 +54,9 @@ export class ChatService {
   obsArraySessions: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   itemsSession$: Observable<any> = this.obsArraySessions.asObservable();
 
+  obsSelectedSession: BehaviorSubject<any> = new BehaviorSubject<any>({});
+  selected_session$: Observable<any> = this.obsSelectedSession.asObservable();
+
   private _isEditingMessage: boolean = false;
   private _isRepliengToAMessage: boolean = false;
   public selfUserId: string = '';
@@ -128,9 +131,34 @@ export class ChatService {
   setSelectedSession(user: any) {
     this.isAllowToFetchMessages = false;
     this.selectedUser = user['id'];
-    console.log(user['id']);
     this.SelectedUserObs.next(user['id']);
     this.SelectedUserDataObs.next(user);
+
+    let session = this.obsArraySessions.value.filter((item: any) => {
+      return item.id === user['id'];
+    });
+    if (session.length) {
+      this.getMessages(user['id'], this.currentPage_messages, this.page_size);
+      this.obsSelectedSession.next(session[0]);
+    } else {
+      if (user?.id) {
+        let currentValue = this.obsArraySessions.value;
+        let newSession = {
+          id: user['id'],
+          imageUrl: user?.personnel?.personnelPhotoUrl,
+          messagePreview: null,
+          extraInfo: {
+            name:
+              user?.personnel?.firstName || user?.personnel?.lastName
+                ? `${user?.personnel?.firstName}  ${user?.personnel?.lastName}`
+                : user.username,
+          },
+        };
+        let updatedValue = [...currentValue, newSession];
+        this.obsArraySessions.next(updatedValue);
+        this.obsSelectedSession.next(newSession);
+      }
+    }
   }
   setSelectedMessage(message: any) {
     this.SelectedMessageDataObs.next(message);
@@ -138,6 +166,9 @@ export class ChatService {
   }
   getSelectedUser() {
     return this.itemUser;
+  }
+  getSelectedSession() {
+    return this.selected_session$;
   }
   getSelectedUserData() {
     return this.itemUserData;
@@ -189,12 +220,17 @@ export class ChatService {
     return this.itemsMessages$;
   }
 
-  getMoreMessage(current_page: number) {
+  getMoreMessage() {
+    this.currentPage_messages++;
     forkJoin([
       this.itemsMessages$.pipe(take(1)),
-      this.getMessages(this.selectedUser, current_page, this.page_size),
+      this.getMessages(this.selectedUser, this.currentPage_messages, this.page_size),
     ]).subscribe((data: any) => {
-      this.obsArrayMessages.next([...data[1].content.reverse(), ...data[0]]);
+      if (data.content.length) {
+        this.obsArrayMessages.next([...data[1].content.reverse(), ...data[0]]);
+      } else {
+        this.obsArrayMessages.complete();
+      }
     });
   }
 

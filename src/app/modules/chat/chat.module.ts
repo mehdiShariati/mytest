@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ContainerComponent } from './components/container/container.component';
-import { HeaderComponent } from './components/header/header.component';
 import { BadgeModule } from 'primeng/badge';
 import { InputTextModule } from 'primeng/inputtext';
 import { InlineSVGModule } from 'ng-inline-svg-2';
@@ -22,11 +21,11 @@ import { ChatSendMessageComponent } from './components/chat-send-message/chat-se
 import { ChatCreateGroupContainerComponent } from './components/chat-create-group-container/chat-create-group-container.component';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ChatSessionContainerComponent } from './components/chat-session-container/chat-session-container.component';
+import { ChatHeaderContainerComponent } from './components/chat-header-container/chat-header-container.component';
 
 @NgModule({
   declarations: [
     ContainerComponent,
-    HeaderComponent,
     ChatMenuContainerComponent,
     ChatNewChatComponent,
     ChatContainerComponent,
@@ -38,6 +37,7 @@ import { ChatSessionContainerComponent } from './components/chat-session-contain
     ChatSendMessageComponent,
     ChatCreateGroupContainerComponent,
     ChatSessionContainerComponent,
+    ChatHeaderContainerComponent,
   ],
   imports: [
     CommonModule,

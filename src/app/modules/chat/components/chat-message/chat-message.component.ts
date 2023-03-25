@@ -11,10 +11,12 @@ export class ChatMessageComponent {
 
   constructor(private chatService: ChatService) {}
   isMessageSelf() {
+    console.log(this.message.senderId);
+    console.log(this.chatService.selfUserId);
     if (this.message.senderId === this.chatService.selfUserId) {
       return true;
     }
-    return true;
+    return false;
   }
   isMessageTypeText() {
     return this.message.type === 'TEXT';

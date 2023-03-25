@@ -9,8 +9,6 @@ import { map, take, debounceTime, distinct } from 'rxjs/operators';
   styleUrls: ['./chat-container.component.scss'],
 })
 export class ChatContainerComponent implements AfterContentInit {
-  public currentPage_messages: number = 0;
-  public pageSize: number = 20;
   public messagesObserver$: Observable<any[]> = new BehaviorSubject<any[]>([]);
   constructor(private chatService: ChatService) {}
 
@@ -30,9 +28,9 @@ export class ChatContainerComponent implements AfterContentInit {
 
         scroll$.subscribe(scrollPos => {
           let limit = 0;
-
+          console.log(scrollPos);
           if (scrollPos === limit) {
-            this.chatService.getMoreMessage(this.currentPage_messages);
+            this.chatService.getMoreMessage();
           }
         });
       }
