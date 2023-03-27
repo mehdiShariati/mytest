@@ -171,6 +171,10 @@ svg {
     @apply w-full mx-auto;
   }
 
+  .p-carousel-items-container {
+    direction: ltr;
+  }
+
   .p-carousel-content {
     @apply relative;
 
