@@ -40,7 +40,6 @@ export class SystemUsersComponent implements OnInit {
         city: 'تهران',
       },
     ];
-    console.log(this.users);
   }
 
   showUserInfo(userId: number) {
@@ -53,6 +52,7 @@ export class SystemUsersComponent implements OnInit {
   cancel() {
     this.newGroup = false;
     this.newRole = false;
+    this.searchId = null;
     this.foundedUser = null;
   }
 
