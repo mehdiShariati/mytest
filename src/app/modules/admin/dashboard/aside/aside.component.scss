@@ -2,7 +2,7 @@ aside {
   @apply w-[230px] bg-white h-[100vh] px-[30px] py-[24px];
 
   .exit-container {
-    @apply h-[calc(100vh_-_320px)] flex items-end justify-center flex-wrap;
+    @apply flex items-end justify-center flex-wrap;
 
     .exit {
       @apply flex items-center cursor-pointer justify-center flex-wrap;
@@ -17,7 +17,26 @@ aside {
     }
   }
 
-  ul {
+  .items {
+    @apply h-[calc(100vh_-_120px)] overflow-auto;
+
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #b8b7b7;
+      border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: #989797;
+    }
+
     li {
       @apply px-[20px] py-[8px] mb-[20px] rounded-[8px] text-gray-mid flex items-center cursor-pointer duration-[150ms];
 

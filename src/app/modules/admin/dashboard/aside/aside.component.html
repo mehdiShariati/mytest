@@ -1,10 +1,12 @@
 <aside>
-  <ul>
-    <li *ngFor="let item of items" (click)="change(item.id)" [class.active]="item.isSelected">
-      <i [inlineSVG]="item.icon"></i>
-      {{ item.title }}
-    </li>
-  </ul>
+  <div class="items">
+    <ul>
+      <li *ngFor="let item of items" [routerLink]="item?.link ?? null" [routerLinkActive]="'active'">
+        <i [inlineSVG]="item.icon"></i>
+        {{ item.title }}
+      </li>
+    </ul>
+  </div>
   <div class="exit-container">
     <div class="exit">
       <span>یک مدیر نسخه ۰.۰.۱</span>

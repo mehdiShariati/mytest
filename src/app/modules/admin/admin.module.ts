@@ -13,9 +13,16 @@ import { DialogModule } from 'primeng/dialog';
 import { TabViewModule } from 'primeng/tabview';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { CardInformationComponent } from './dashboard/system-users/card-information/card-information.component';
+import { TicketsComponent } from './dashboard/tickets/tickets.component';
 
 @NgModule({
-  declarations: [AsideComponent, SystemUsersComponent, AdminDashboardComponent, CardInformationComponent],
+  declarations: [
+    AsideComponent,
+    SystemUsersComponent,
+    AdminDashboardComponent,
+    CardInformationComponent,
+    TicketsComponent,
+  ],
   imports: [
     CommonModule,
     InlineSVGModule,

@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { Layouts } from './core/enums/layouts.enum';
-// import { DashboardAdminComponent } from './modules/admin/dashboard/dashboard.component';
 import { ChangePasswordComponent } from './modules/auth/change-password/change-password.component';
 import { LoginComponent } from './modules/auth/login/login.component';
-import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { AdminDashboardComponent } from './modules/admin/dashboard/dashboard.component';
 import { SystemUsersComponent } from './modules/admin/dashboard/system-users/system-users.component';
+import { TicketsComponent } from './modules/admin/dashboard/tickets/tickets.component';
 
 const routes: Routes = [
   // {
@@ -17,7 +16,10 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminDashboardComponent,
-    children: [{ path: 'system-users', component: SystemUsersComponent }],
+    children: [
+      { path: 'system-users', component: SystemUsersComponent },
+      { path: 'tickets', component: TicketsComponent },
+    ],
     data: { layout: Layouts.Admin },
   },
   {
