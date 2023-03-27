@@ -119,11 +119,6 @@ svg {
 
 .modal-custom {
   .p-dialog {
-    .p-dialog-content,
-    .p-dialog-header {
-      @apply bg-body #{!important};
-    }
-
     .p-dialog-header .p-dialog-title {
       @apply font-[400] #{!important};
     }
@@ -131,12 +126,19 @@ svg {
 }
 
 .tab-custom {
+  .p-component,
+  ul,
+  a,
+  .p-tabview .p-tabview-panels {
+    @apply bg-body #{!important};
+  }
+
   .p-tabview .p-tabview-nav {
     @apply mt-[24px];
   }
 
   .p-tabview .p-tabview-nav li {
-    @apply w-[33%];
+    @apply w-[33%] #{!important};
   }
 
   .p-tabview .p-tabview-nav li .p-tabview-nav-link {

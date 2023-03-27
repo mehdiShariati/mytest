@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../../core/services/user.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-system-users',
@@ -15,8 +16,9 @@ export class SystemUsersComponent implements OnInit {
   newGroup: boolean = false;
   newRole: boolean = false;
   totalCount!: boolean;
+  foundedUser!: any;
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private messageService: MessageService) {}
 
   ngOnInit(): void {
     this.userService
@@ -25,9 +27,20 @@ export class SystemUsersComponent implements OnInit {
         pageSize: 10,
       })
       .subscribe((res: any) => {
-        this.users = res.content;
-        debugger;
+        // this.users = res.content;
       });
+
+    this.users = [
+      {
+        personnel: {
+          firstName: 'امیرحسین',
+          lastName: 'بابایی',
+        },
+        state: 'تهران',
+        city: 'تهران',
+      },
+    ];
+    console.log(this.users);
   }
 
   showUserInfo(userId: number) {
@@ -40,9 +53,26 @@ export class SystemUsersComponent implements OnInit {
   cancel() {
     this.newGroup = false;
     this.newRole = false;
+    this.foundedUser = null;
   }
 
   removeId() {
     this.searchId = null;
+  }
+
+  searchUser() {
+    this.foundedUser = {
+      personnel: {
+        firstName: 'امیرحسین',
+        lastName: 'بابایی',
+      },
+      state: 'تهران',
+      city: 'تهران',
+    };
+  }
+
+  addNewUser() {
+    this.messageService.add({ severity: 'success', detail: 'کاربر جدید با موفقیت افزوده شد.' });
+    this.foundedUser = null;
   }
 }

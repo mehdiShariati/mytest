@@ -1,51 +1,3 @@
-.component-container {
-  @apply h-[calc(100vh_-_90px)] overflow-auto;
-
-  .header {
-    @apply w-full flex justify-between items-center;
-
-    span {
-      @apply text-[24px] font-bold;
-    }
-
-    .return {
-      @apply flex items-center text-gray-mid cursor-pointer;
-
-      i {
-        @apply mr-3;
-      }
-    }
-  }
-
-  .table {
-    @apply w-full mt-6 rounded-[12px] overflow-hidden;
-
-    .table-header {
-      @apply flex items-center justify-between bg-white;
-
-      .add-new {
-        @apply flex items-center justify-between py-[13px] px-[14px] bg-secondary text-white rounded-[8px] mr-[16px] cursor-pointer;
-      }
-
-      .search-input {
-        @apply bg-background border-[1px] border-solid border-gray-light w-full pr-[40px] font-body;
-      }
-
-      i {
-        @apply left-0 w-max right-[15px];
-      }
-    }
-
-    .edit {
-      @apply flex justify-center items-center;
-
-      i {
-        @apply cursor-pointer;
-      }
-    }
-  }
-}
-
 .modal-content {
   @apply bg-body rounded-[8px] p-[16px] pb-0;
 
@@ -66,7 +18,7 @@
   }
 
   .data {
-    @apply px-0 h-[230px] overflow-auto;
+    @apply px-0 max-h-[230px] overflow-auto;
 
     > div {
       @apply py-[18px] flex justify-between items-center;
