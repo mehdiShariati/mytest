@@ -14,6 +14,8 @@ import { TabViewModule } from 'primeng/tabview';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { CardInformationComponent } from './dashboard/system-users/card-information/card-information.component';
 import { TicketsComponent } from './dashboard/tickets/tickets.component';
+import { RolesComponent } from './dashboard/roles/roles.component';
+import { GroupsComponent } from './dashboard/groups/groups.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import { TicketsComponent } from './dashboard/tickets/tickets.component';
     AdminDashboardComponent,
     CardInformationComponent,
     TicketsComponent,
+    RolesComponent,
+    GroupsComponent,
   ],
   imports: [
     CommonModule,

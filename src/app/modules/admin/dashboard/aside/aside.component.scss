@@ -38,10 +38,10 @@ aside {
     }
 
     li {
-      @apply px-[20px] py-[8px] mb-[20px] rounded-[8px] text-gray-mid flex items-center cursor-pointer duration-[150ms];
+      @apply pr-[15px] py-[8px] mb-[20px] rounded-[8px] text-gray-mid flex items-center cursor-pointer duration-[150ms];
 
       i {
-        @apply fill-gray-mid bg-body rounded-[8px] ml-2;
+        @apply fill-gray-mid bg-body rounded-[8px] ml-2 min-w-[32px] min-h-[32px] flex items-center justify-center;
       }
     }
 

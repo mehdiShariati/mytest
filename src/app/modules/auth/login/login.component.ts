@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private authService: AuthServiceService, private router: Router) {
     if (localStorage.getItem('token')) {
-      this.router.navigate(['']);
+      this.router.navigate(['/dashboard']);
       return;
     }
   }
@@ -56,6 +56,7 @@ export class LoginComponent implements OnInit {
         this.notRobot = false;
         localStorage.setItem('token', res.access_token);
         localStorage.setItem('refresh-token', res.refresh_token);
+        this.router.navigate(['/dashboard']);
       },
       res => {
         if (res.status == 428 && res.error.fingerPrint == 'temporary.password') {

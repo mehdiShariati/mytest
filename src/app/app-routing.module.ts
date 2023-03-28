@@ -6,6 +6,8 @@ import { LoginComponent } from './modules/auth/login/login.component';
 import { AdminDashboardComponent } from './modules/admin/dashboard/dashboard.component';
 import { SystemUsersComponent } from './modules/admin/dashboard/system-users/system-users.component';
 import { TicketsComponent } from './modules/admin/dashboard/tickets/tickets.component';
+import { RolesComponent } from './modules/admin/dashboard/roles/roles.component';
+import { GroupsComponent } from './modules/admin/dashboard/groups/groups.component';
 
 const routes: Routes = [
   // {
@@ -14,11 +16,18 @@ const routes: Routes = [
   //   data: { layout: Layouts.Main },
   // },
   {
+    path: '',
+    redirectTo: 'auth/login',
+    pathMatch: 'full',
+  },
+  {
     path: 'admin',
     component: AdminDashboardComponent,
     children: [
       { path: 'system-users', component: SystemUsersComponent },
       { path: 'tickets', component: TicketsComponent },
+      { path: 'roles', component: RolesComponent },
+      { path: 'groups', component: GroupsComponent },
     ],
     data: { layout: Layouts.Admin },
   },
