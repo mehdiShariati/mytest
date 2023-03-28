@@ -2,7 +2,7 @@
   <div class="information">
     <img alt="" [src]="userInfo?.profileImageUrl ? userInfo?.profileImageUrl : 'assets/icons/profile-image.svg'" />
     <div>
-      <p>{{ userInfo?.personnel?.firstName }} {{ userInfo?.personnel?.lastName }}</p>
+      <p>{{ userInfo?.personnel?.firstName ?? '-' }} {{ userInfo?.personnel?.lastName }}</p>
       <span>{{ userInfo?.state }} - {{ userInfo?.city }}</span>
     </div>
   </div>
@@ -13,9 +13,9 @@
         <div class="add">ذخیره</div>
       </div>
       <div class="data" *ngIf="!newRole">
-        <ng-container *ngIf="[{}]?.length; else showMessage">
-          <div *ngFor="let item of [{}, {}, {}, {}, {}, {}]">
-            <p>راننده کامیونت بنز</p>
+        <ng-container *ngIf="userInfo?.roles?.length; else showMessage">
+          <div *ngFor="let item of userInfo?.roles">
+            <p>{{ item?.title ?? '-' }}</p>
             <i inlineSVG="assets/icons/recycle.svg"></i>
           </div>
         </ng-container>

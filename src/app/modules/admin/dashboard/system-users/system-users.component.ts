@@ -15,8 +15,8 @@ export class SystemUsersComponent implements OnInit {
   userInfo!: any;
   newGroup: boolean = false;
   newRole: boolean = false;
-  totalCount!: boolean;
   foundedUser!: any;
+  totalCount!: number;
 
   constructor(private userService: UserService, private messageService: MessageService) {}
 
@@ -27,19 +27,9 @@ export class SystemUsersComponent implements OnInit {
         pageSize: 10,
       })
       .subscribe((res: any) => {
-        // this.users = res.content;
+        this.users = res.content;
+        this.totalCount = res.totalElements;
       });
-
-    this.users = [
-      {
-        personnel: {
-          firstName: 'امیرحسین',
-          lastName: 'بابایی',
-        },
-        state: 'تهران',
-        city: 'تهران',
-      },
-    ];
   }
 
   showUserInfo(userId: number) {

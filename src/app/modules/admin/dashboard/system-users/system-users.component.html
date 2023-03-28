@@ -56,12 +56,12 @@
               <p-sortIcon class="mr-4" field="representative.name"></p-sortIcon>
             </div>
           </th>
-          <th style="min-width: 8rem">
-            <div class="flex justify-content-between align-items-center">استان و شهر</div>
-          </th>
-          <th style="min-width: 8rem">
-            <div class="flex justify-content-between align-items-center">حوزه فعالیت</div>
-          </th>
+          <!--          <th style="min-width: 8rem">-->
+          <!--            <div class="flex justify-content-between align-items-center">استان و شهر</div>-->
+          <!--          </th>-->
+          <!--          <th style="min-width: 8rem">-->
+          <!--            <div class="flex justify-content-between align-items-center">حوزه فعالیت</div>-->
+          <!--          </th>-->
           <th style="min-width: 8rem">
             <div class="flex justify-content-between align-items-center">نقش</div>
           </th>
@@ -71,20 +71,20 @@
       <ng-template pTemplate="body" let-user>
         <tr class="p-selectable-row">
           <td style="color: #0f62fe !important">
-            {{ user?.personnel?.personnelCode }}
+            {{ user?.personnel?.personnelCode ?? '-' }}
           </td>
           <td>
-            <span class="image-text">{{ user?.personnel?.firstName }}</span>
+            <span class="image-text">{{ user?.personnel?.firstName ?? '-' }}</span>
           </td>
           <td>
-            <span class="image-text">{{ user?.personnel?.lastName }}</span>
+            <span class="image-text">{{ user?.personnel?.lastName ?? '-' }}</span>
           </td>
-          <td>{{ user.state }} - {{ user.city }}</td>
+          <!--          <td>{{ user.state }} - {{ user.city }}</td>-->
+          <!--          <td>-->
+          <!--            {{ user.activity }}-->
+          <!--          </td>-->
           <td>
-            {{ user.activity }}
-          </td>
-          <td>
-            <span>{{ user.role }}</span>
+            <span>{{ user.roles[0]?.title ?? '-' }}</span>
           </td>
           <td>
             <div class="edit">
@@ -101,7 +101,7 @@
     </p-table>
   </div>
   <div>
-    <p-paginator class="paginator-custom" [rows]="10" [totalRecords]="120"></p-paginator>
+    <p-paginator class="paginator-custom" [rows]="10" [totalRecords]="totalCount"></p-paginator>
   </div>
 </div>
 
@@ -168,8 +168,4 @@
   class="modal-custom"
 >
   <app-card-information [userInfo]="userInfo"></app-card-information>
-  <!--  <div *ngIf="newGroup || newRole" class="btns">-->
-  <!--    <div (click)="cancel()">انصراف</div>-->
-  <!--    <div class="add">افزودن کاربر</div>-->
-  <!--  </div>-->
 </p-dialog>

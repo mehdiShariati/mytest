@@ -10,6 +10,7 @@ import { RolesComponent } from './modules/admin/dashboard/roles/roles.component'
 import { GroupsComponent } from './modules/admin/dashboard/groups/groups.component';
 import { OrganizationComponent } from './modules/admin/dashboard/organization/organization.component';
 import { StructuresComponent } from './modules/admin/dashboard/structures/structures.component';
+import { AuthGuard } from './core/guarda/auth.guard';
 
 const routes: Routes = [
   // {
@@ -25,6 +26,7 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminDashboardComponent,
+    canActivate: [AuthGuard],
     children: [
       { path: 'system-users', component: SystemUsersComponent },
       { path: 'tickets', component: TicketsComponent },
@@ -52,11 +54,13 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
+    canActivate: [AuthGuard],
     loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule),
     data: { layout: Layouts.Main },
   },
   {
     path: 'app',
+    canActivate: [AuthGuard],
     loadChildren: () => import('./modules/chat/chat-routing.module').then(m => m.ChatRoutingModule),
   },
   // {
