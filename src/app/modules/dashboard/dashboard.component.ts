@@ -1,75 +1,17 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import * as L from 'leaflet';
+import { AuthServiceService } from '../../core/services/auth-service.service';
+import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
+import { UserService } from '../../core/services/user.service';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
   itemWasDrag!: any;
-  loginHistory = [
-    {
-      platform: 'safari',
-      date: '۱۱/۱۲/۱۴۰۱',
-      time: '۱۳:۴۵',
-    },
-    {
-      platform: 'chrome',
-      date: '۱۱/۱۲/۱۴۰۱',
-      time: '۱۳:۴۵',
-    },
-    {
-      platform: 'mozila',
-      date: '۱۱/۱۲/۱۴۰۱',
-      time: '۱۳:۴۵',
-    },
-    {
-      platform: 'mozila',
-      date: '۱۱/۱۲/۱۴۰۱',
-      time: '۱۳:۴۵',
-    },
-    {
-      platform: 'chrome',
-      date: '۱۱/۱۲/۱۴۰۱',
-      time: '۱۳:۴۵',
-    },
-    {
-      platform: 'safari',
-      date: '۱۱/۱۲/۱۴۰۱',
-      time: '۱۳:۴۵',
-    },
-    {
-      platform: 'safari',
-      date: '۱۱/۱۲/۱۴۰۱',
-      time: '۱۳:۴۵',
-    },
-    {
-      platform: 'chrome',
-      date: '۱۱/۱۲/۱۴۰۱',
-      time: '۱۳:۴۵',
-    },
-    {
-      platform: 'mozila',
-      date: '۱۱/۱۲/۱۴۰۱',
-      time: '۱۳:۴۵',
-    },
-    {
-      platform: 'mozila',
-      date: '۱۱/۱۲/۱۴۰۱',
-      time: '۱۳:۴۵',
-    },
-    {
-      platform: 'chrome',
-      date: '۱۱/۱۲/۱۴۰۱',
-      time: '۱۳:۴۵',
-    },
-    {
-      platform: 'safari',
-      date: '۱۱/۱۲/۱۴۰۱',
-      time: '۱۳:۴۵',
-    },
-  ];
+  loginHistory: any = [];
 
   options = {
     layers: [L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18 })],
@@ -113,8 +55,49 @@ export class DashboardComponent {
   @ViewChild('dock') dock!: any;
   @ViewChild('scrollContainer') container!: ElementRef;
   startY!: number | null;
+  isScrolling: Subject<any> = new Subject<any>();
+  isOver: boolean = false;
+  page: number = 0;
+  pageSize: number = 10;
+  userInformation!: any;
 
-  ngOnInit() {}
+  constructor(private authService: AuthServiceService, private userService: UserService) {}
+
+  ngOnInit() {
+    this.isScrolling.pipe(debounceTime(500), distinctUntilChanged()).subscribe(res => {
+      if (
+        Math.floor(res.target.scrollTop) + Math.floor(res.target.clientHeight) + 30 >=
+          Math.floor(res.target.scrollHeight) &&
+        !this.isOver
+      ) {
+        this.page += 1;
+        this.getHistory();
+      }
+    });
+
+    this.getHistory();
+    this.getUserCurrent();
+  }
+
+  getUserCurrent() {
+    this.userService.getCurrentUserWithToken().subscribe(res => {
+      this.userInformation = res;
+    });
+  }
+
+  getHistory() {
+    this.authService
+      .getAuthenticationHistory({
+        pageNumber: this.page,
+        pageSize: this.pageSize,
+      })
+      .subscribe((res: any) => {
+        this.loginHistory = this.loginHistory.concat(res?.content);
+        if (res?.content?.length < this.pageSize || this.loginHistory?.length == res?.totalElements) {
+          this.isOver = true;
+        }
+      });
+  }
 
   dragStart(item: any) {
     this.itemWasDrag = item;
@@ -148,5 +131,9 @@ export class DashboardComponent {
 
   ngAfterViewInit() {
     this.container.nativeElement.addEventListener('wheel', this.onScroll.bind(this));
+  }
+
+  scrolling(event: any) {
+    this.isScrolling.next(event);
   }
 }

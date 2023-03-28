@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { User } from '../models/user';
 
@@ -64,5 +64,17 @@ export class AuthServiceService {
     value.append('refresh_token', <string>localStorage.getItem('refresh-token'));
 
     return this.http.post(`${environment.apiToken}/oauth2/token`, value);
+  }
+
+  getAuthenticationHistory(filter: any | null = null) {
+    let params = new HttpParams();
+
+    for (const key in filter) {
+      if (filter[key]) params = params.append(key, filter[key]);
+    }
+
+    return this.http.get(`${environment.apiUrl}/usermanagement/authentication-history/success-logins/self`, {
+      params: params,
+    });
   }
 }

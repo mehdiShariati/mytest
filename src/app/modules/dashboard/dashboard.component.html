@@ -9,8 +9,12 @@
             <img class="w-full" src="./assets/dashboard/Avatar.png" alt="" />
           </div>
           <div class="flex flex-col">
-            <div class="title text-gray-dark font-dana font-normal">محمدرضا شفاعتی اصل</div>
-            <div class="subtitle text-[#8b8b8b] font-dana font-normal text-sm mt-2">مدیر ارشد بخش فنی</div>
+            <div class="title text-gray-dark font-dana font-normal">
+              {{ userInformation?.personnel?.firstName }} {{ userInformation?.personnel?.lastName }}
+            </div>
+            <div class="subtitle text-[#8b8b8b] font-dana font-normal text-sm mt-2">
+              {{ userInformation?.currentRole?.formation?.title }}
+            </div>
           </div>
         </div>
         <div class="mt-4 w-full">
@@ -22,7 +26,9 @@
             </div>
             <div class="flex items-center justify-between grow">
               <span class="mr-3 font-gray-dark font-normal text-sm"> نقش های دیگر </span>
-              <div class="bg-red-500 rounded-full text-white flex justify-center items-center w-6 h-6 pt-1">۳</div>
+              <div class="bg-red-500 rounded-full text-white flex justify-center items-center w-6 h-6 pt-1">
+                {{ userInformation?.roles?.length ? userInformation?.roles?.length - 1 : 0 }}
+              </div>
             </div>
           </div>
           <div class="flex pt-4 border-t">
@@ -134,29 +140,35 @@
             <div class="subtitle text-[#8b8b8b] font-dana font-normal text-sm mt-2">به روز رسانی: ۱ دقیقه پیش</div>
           </div>
         </div>
-        <div class="my-4 w-full h-[400px] overflow-auto">
+        <div class="my-4 w-full h-[400px] overflow-auto" (scroll)="scrolling($event)">
           <ng-container *ngFor="let item of loginHistory">
             <div class="flex py-4 border-t">
               <div class="image flex items-center justify-center">
-                <ng-container [ngSwitch]="item.platform">
-                  <div class="bg-[#F4F4F4] p-[6px] rounded-lg" *ngSwitchCase="'mozila'">
+                <ng-container [ngSwitch]="item.browserType">
+                  <div class="bg-[#F4F4F4] p-[6px] rounded-lg" *ngSwitchCase="'FIREFOX'">
                     <img class="w-5 h-5" src="./assets/dashboard/mozila.png" alt="" />
                   </div>
                   <div class="bg-[#F4F4F4] p-[6px] rounded-lg" *ngSwitchCase="'safari'">
                     <img class="w-5 h-5" src="./assets/dashboard/safari.png" alt="" />
                   </div>
-                  <div class="bg-[#F4F4F4] p-[6px] rounded-lg" *ngSwitchCase="'chrome'">
+                  <div class="bg-[#F4F4F4] p-[6px] rounded-lg" *ngSwitchCase="'CHROME'">
                     <img class="w-5 h-5" src="./assets/dashboard/chrome.png" alt="" />
+                  </div>
+                  <div class="bg-[#F4F4F4] p-[6px] rounded-lg" *ngSwitchCase="null">
+                    <img class="w-5 h-5" src="./assets/icons/alert.svg" alt="" />
                   </div>
                 </ng-container>
               </div>
               <div class="flex items-center mr-3 font-thin">
-                <span class="time ml-1">{{ item.time }}</span
-                >,
-                <span class="date mr-1">{{ item.date }}</span>
+                <span class="date ml-1">{{ item.createdDate | jalali : 'HH/mm' }}</span>
+                ,
+                <span class="time mr-1">{{ item.createdDate | jalali : 'YYYY/MM/DD' }}</span>
               </div>
             </div>
           </ng-container>
+          <div class="flex justify-center" *ngIf="!isOver">
+            <p-progressSpinner class="custom-spinner"></p-progressSpinner>
+          </div>
         </div>
       </div>
       <div class="flex flex-col bg-white h-[250px] mb-6 p-4 rounded-3xl">

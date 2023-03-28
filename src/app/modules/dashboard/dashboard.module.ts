@@ -8,9 +8,11 @@ import { InlineSVGModule } from 'ng-inline-svg-2';
 import { DragDropModule } from 'primeng/dragdrop';
 import { TooltipModule } from 'primeng/tooltip';
 import { DockModule } from 'primeng/dock';
+import { JalaliPipe } from '../../core/pipes/jalali.pipe';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @NgModule({
-  declarations: [DashboardComponent],
+  declarations: [DashboardComponent, JalaliPipe],
   imports: [
     CommonModule,
     DashboardRoutingModule,
@@ -20,6 +22,7 @@ import { DockModule } from 'primeng/dock';
     DragDropModule,
     TooltipModule,
     DockModule,
+    ProgressSpinnerModule,
   ],
 })
 export class DashboardModule {}

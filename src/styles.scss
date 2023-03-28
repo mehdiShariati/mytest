@@ -213,4 +213,10 @@ svg {
   max-height: calc(100vh - 315px);
 }
 
+.custom-spinner {
+  .p-progress-spinner {
+    @apply w-[30px] h-[30px];
+  }
+}
+
 /*------------------------- overRide primeng -----------------------------*/

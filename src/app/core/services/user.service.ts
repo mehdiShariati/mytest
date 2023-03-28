@@ -16,4 +16,8 @@ export class UserService {
 
     return this.http.get(`${environment.apiUrl}/usermanagement/users`, { params: params });
   }
+
+  getCurrentUserWithToken() {
+    return this.http.get(`${environment.apiUrl}/usermanagement/users/self`);
+  }
 }
