@@ -118,14 +118,16 @@
   <div>
     <div class="btns search-user mb-5">
       <i class="search-icon" inlineSVG="assets/icons/Search2.svg"></i>
-      <input
+      <p-autoComplete
         placeholder="کد ملی کاربر مورد نظر را وارد کنید"
         [(ngModel)]="searchId"
-        (keydown.enter)="searchUser()"
-        autofocus
-      />
+        (ngModelChange)="searchUser()"
+        [suggestions]="personnelUserInfo"
+        field="fullName"
+        class="custom-auto-complete"
+      ></p-autoComplete>
       <i *ngIf="searchId" class="remove-icon" inlineSVG="assets/icons/Dismiss-2.svg" (click)="removeId()"></i>
-      <div class="add" (click)="searchUser()">جستجو</div>
+      <div class="add" (click)="foundProfile()">جستجو</div>
     </div>
 
     <div class="history" *ngIf="!foundedUser">

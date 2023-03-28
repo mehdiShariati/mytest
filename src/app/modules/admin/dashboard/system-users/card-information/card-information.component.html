@@ -2,7 +2,10 @@
   <div class="information">
     <img alt="" [src]="userInfo?.profileImageUrl ? userInfo?.profileImageUrl : 'assets/icons/profile-image.svg'" />
     <div>
-      <p>{{ userInfo?.personnel?.firstName ?? '-' }} {{ userInfo?.personnel?.lastName }}</p>
+      <p>
+        {{ userInfo?.personnel?.firstName ?? userInfo?.firstName ?? '-' }}
+        {{ userInfo?.personnel?.lastName ?? userInfo?.lastName }}
+      </p>
       <span>{{ userInfo?.state }} - {{ userInfo?.city }}</span>
     </div>
   </div>

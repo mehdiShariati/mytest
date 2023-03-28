@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../../core/services/user.service';
 import { MessageService } from 'primeng/api';
+import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-system-users',
@@ -17,10 +18,21 @@ export class SystemUsersComponent implements OnInit {
   newRole: boolean = false;
   foundedUser!: any;
   totalCount!: number;
+  searchingUser: Subject<any> = new Subject<any>();
+  personnelUserInfo!: any;
 
   constructor(private userService: UserService, private messageService: MessageService) {}
 
   ngOnInit(): void {
+    this.searchingUser.pipe(debounceTime(700), distinctUntilChanged()).subscribe(res => {
+      if (!res.id) {
+        this.userService.getMainPersonnel({ nationalId: res }).subscribe((res: any) => {
+          this.personnelUserInfo = res?.content;
+          this.personnelUserInfo.forEach((item: any) => (item.fullName = item.firstName + ' ' + item.lastName));
+        });
+      }
+    });
+
     this.userService
       .getUser({
         pageNumber: 0,
@@ -51,18 +63,15 @@ export class SystemUsersComponent implements OnInit {
   }
 
   searchUser() {
-    this.foundedUser = {
-      personnel: {
-        firstName: 'امیرحسین',
-        lastName: 'بابایی',
-      },
-      state: 'تهران',
-      city: 'تهران',
-    };
+    this.searchingUser.next(this.searchId);
   }
 
   addNewUser() {
     this.messageService.add({ severity: 'success', detail: 'کاربر جدید با موفقیت افزوده شد.' });
     this.foundedUser = null;
+  }
+
+  foundProfile() {
+    this.foundedUser = this.searchId;
   }
 }
