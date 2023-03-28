@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -6,23 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  clock!: string;
   date!: string;
   day!: string;
 
-  constructor() {}
+  constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
-    const currentDate = new Date();
-    const dayOfWeek = currentDate.getDay();
-    const weekdays = ['یکشنبه', 'دوشنبه', 'سه شنبه', 'چهارشنبه', 'پنجشنبه', 'جمعه', 'شنبه'];
-    this.day = weekdays[dayOfWeek];
-    this.date = currentDate.toLocaleDateString('fa-IR', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
-
+    this.displayDate();
     this.displayTime();
     setInterval(this.displayTime, 1000);
   }
@@ -31,9 +21,30 @@ export class HeaderComponent implements OnInit {
     let now = new Date();
     let hours = now.getHours();
     let minutes: any = now.getMinutes();
+    let second: any = now.getSeconds();
     if (minutes < 10) {
       minutes = '0' + minutes;
     }
-    this.clock = hours + ':' + minutes;
+    let clock: any = document.getElementById('clock');
+    clock.textContent = hours + ':' + minutes;
+
+    if (hours == 0 && minutes == 0 && second < 1) {
+      this.displayDate();
+    }
+  }
+
+  displayDate() {
+    const currentDate = new Date();
+    const dayOfWeek = currentDate.getDay();
+    const weekdays = ['یکشنبه', 'دوشنبه', 'سه شنبه', 'چهارشنبه', 'پنجشنبه', 'جمعه', 'شنبه'];
+    let day = weekdays[dayOfWeek];
+    let date = currentDate.toLocaleDateString('fa-IR', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+
+    let res: any = document.getElementById('date');
+    res.textContent = `${day} ${date}`;
   }
 }
