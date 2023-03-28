@@ -8,6 +8,8 @@ import { SystemUsersComponent } from './modules/admin/dashboard/system-users/sys
 import { TicketsComponent } from './modules/admin/dashboard/tickets/tickets.component';
 import { RolesComponent } from './modules/admin/dashboard/roles/roles.component';
 import { GroupsComponent } from './modules/admin/dashboard/groups/groups.component';
+import { OrganizationComponent } from './modules/admin/dashboard/organization/organization.component';
+import { StructuresComponent } from './modules/admin/dashboard/structures/structures.component';
 
 const routes: Routes = [
   // {
@@ -28,6 +30,8 @@ const routes: Routes = [
       { path: 'tickets', component: TicketsComponent },
       { path: 'roles', component: RolesComponent },
       { path: 'groups', component: GroupsComponent },
+      { path: 'organization', component: OrganizationComponent },
+      { path: 'structures', component: StructuresComponent },
     ],
     data: { layout: Layouts.Admin },
   },

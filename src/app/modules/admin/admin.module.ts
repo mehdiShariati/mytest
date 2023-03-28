@@ -16,6 +16,8 @@ import { CardInformationComponent } from './dashboard/system-users/card-informat
 import { TicketsComponent } from './dashboard/tickets/tickets.component';
 import { RolesComponent } from './dashboard/roles/roles.component';
 import { GroupsComponent } from './dashboard/groups/groups.component';
+import { OrganizationComponent } from './dashboard/organization/organization.component';
+import { StructuresComponent } from './dashboard/structures/structures.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { GroupsComponent } from './dashboard/groups/groups.component';
     TicketsComponent,
     RolesComponent,
     GroupsComponent,
+    OrganizationComponent,
+    StructuresComponent,
   ],
   imports: [
     CommonModule,
