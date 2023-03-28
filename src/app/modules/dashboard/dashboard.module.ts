@@ -24,5 +24,6 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     DockModule,
     ProgressSpinnerModule,
   ],
+  exports: [JalaliPipe],
 })
 export class DashboardModule {}
