@@ -2,7 +2,8 @@
 version: '3.7'
 services:
   app:
-    container_name: 'your-container-name'
+    container_name: 'samava-frontEnd'
+    mem_reservation: 1g
     build:
       context: .
       dockerfile: ./dev.dockerfile
