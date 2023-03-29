@@ -13,6 +13,13 @@ import { JwtService } from './jwt.service';
   providedIn: 'root',
 })
 export class ChatService {
+  get isMessagesOver(): boolean {
+    return this._isMessagesOver;
+  }
+
+  set isMessagesOver(value: boolean) {
+    this._isMessagesOver = value;
+  }
   get showCreateChannelContainer(): boolean {
     return this._showCreateChannelContainer;
   }
@@ -33,6 +40,7 @@ export class ChatService {
   private showThreeDowMenu: boolean = false;
   private _showCreateGroupContainer: boolean = false;
   private _showCreateChannelContainer: boolean = false;
+  private _isMessagesOver: boolean = false;
   private token = localStorage.getItem('token');
   public showNewMessageModal: boolean = false;
   public selectedUser: string = '';
@@ -146,6 +154,7 @@ export class ChatService {
   }
   setSelectedSession(user: any) {
     this.isAllowToFetchMessages = false;
+    this.isMessagesOver = false;
     this.selectedUser = user['id'];
     this.SelectedUserObs.next(user['id']);
     this.SelectedUserDataObs.next(user);
@@ -158,6 +167,7 @@ export class ChatService {
       this.isAllowToFetchMessages = true;
       this.initialMessageSubject();
     } else {
+      this.isMessagesOver = true;
       if (user?.id) {
         let currentValue = this.obsArraySessions.value;
         let newSession = {
@@ -222,7 +232,6 @@ export class ChatService {
   initialMessageSubject() {
     this.getSelectedUser().subscribe((res: any) => {
       if (res) {
-        console.log('here');
         if (this.isAllowToFetchMessages) {
           this.currentPage_messages = 0;
           this.getMessages(this.selectedUser, this.currentPage_messages, this.page_size).subscribe((result: any) => {
@@ -239,18 +248,21 @@ export class ChatService {
   }
 
   getMoreMessage() {
-    this.currentPage_messages++;
-    forkJoin([
-      this.itemsMessages$.pipe(take(1)),
-      this.getMessages(this.selectedUser, this.currentPage_messages, this.page_size),
-    ]).subscribe((data: any) => {
-      console.log(data[1]);
-      if (data[1].content.length) {
-        this.obsArrayMessages.next([...data[1].content.reverse(), ...data[0]]);
-      } else {
-        this.obsArrayMessages.complete();
-      }
-    });
+    if (!this.isMessagesOver) {
+      this.currentPage_messages++;
+      forkJoin([
+        this.itemsMessages$.pipe(take(1)),
+        this.getMessages(this.selectedUser, this.currentPage_messages, this.page_size),
+      ]).subscribe((data: any) => {
+        console.log(data[1]);
+        if (data[1].content.length) {
+          this.obsArrayMessages.next([...data[1].content.reverse(), ...data[0]]);
+        } else {
+          this.isMessagesOver = true;
+          this.currentPage_messages = 0;
+        }
+      });
+    }
   }
 
   onMessage(message: string): void {
