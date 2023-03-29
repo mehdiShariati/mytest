@@ -12,8 +12,15 @@
   <p-tabView class="tab-custom">
     <p-tabPanel header="نقش ها">
       <div class="btns mb-5" *ngIf="newRole">
-        <input />
-        <div class="add">ذخیره</div>
+        <p-autoComplete
+          placeholder="نقش مورد نظر خود را وارد کنید."
+          [(ngModel)]="searchTxtRole"
+          (ngModelChange)="searchingRole()"
+          [suggestions]="roles"
+          field="title"
+          class="custom-auto-complete role-auto-complete"
+        ></p-autoComplete>
+        <div class="add" (click)="addRole()">ذخیره</div>
       </div>
       <div class="data" *ngIf="!newRole">
         <ng-container *ngIf="userInfo?.roles?.length; else showMessage">
@@ -44,14 +51,29 @@
     </p-tabPanel>
     <p-tabPanel header="گروه های کاربری">
       <div class="btns mb-5" *ngIf="newGroup">
-        <input />
-        <div class="add">ذخیره</div>
+        <p-autoComplete
+          placeholder="گروه کاربری مورد نظر خود را وارد کنید."
+          [(ngModel)]="searchTxtGroup"
+          (ngModelChange)="searchingGroup()"
+          [suggestions]="groups"
+          field="title"
+          class="custom-auto-complete group-auto-complete"
+        ></p-autoComplete>
+        <div class="add" (click)="addGroup()">ذخیره</div>
       </div>
       <div class="data" *ngIf="!newGroup">
-        <div *ngFor="let item of [{}, {}, {}, {}, {}, {}]">
-          <p>راننده کامیونت بنز</p>
-          <i inlineSVG="assets/icons/recycle.svg"></i>
-        </div>
+        <ng-container *ngIf="userInfo?.groups?.length; else showEmpty">
+          <div *ngFor="let item of userInfo?.groups">
+            <p>{{ item?.title }}</p>
+            <i inlineSVG="assets/icons/recycle.svg"></i>
+          </div>
+        </ng-container>
+        <ng-template #showEmpty>
+          <div class="flex flex-wrap" style="justify-content: center !important">
+            <i inlineSVG="assets/icons/alert.svg"></i>
+            <div class="w-full text-gray-mid mt-3 text-center">تا کنون گروهی برای این کاربر ایجاد نشده</div>
+          </div>
+        </ng-template>
       </div>
       <div *ngIf="!newGroup" class="add-new-btn" (click)="newGroup = true">
         <i inlineSVG="assets/icons/Add-blue.svg"></i>

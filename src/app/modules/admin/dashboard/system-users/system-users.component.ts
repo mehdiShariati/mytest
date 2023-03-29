@@ -12,7 +12,7 @@ export class SystemUsersComponent implements OnInit {
   users!: any[];
   displayModal: boolean = false;
   newUserModal: boolean = false;
-  searchId!: number | null;
+  searchId!: any;
   userInfo!: any;
   newGroup: boolean = false;
   newRole: boolean = false;
@@ -20,6 +20,7 @@ export class SystemUsersComponent implements OnInit {
   totalCount!: number;
   searchingUser: Subject<any> = new Subject<any>();
   personnelUserInfo!: any;
+  notFoundUser: boolean = false;
 
   constructor(private userService: UserService, private messageService: MessageService) {}
 
@@ -72,6 +73,13 @@ export class SystemUsersComponent implements OnInit {
   }
 
   foundProfile() {
+    if (!this.searchId?.id) {
+      this.notFoundUser = true;
+      this.foundedUser = null;
+      return;
+    }
+
+    this.notFoundUser = false;
     this.foundedUser = this.searchId;
   }
 }

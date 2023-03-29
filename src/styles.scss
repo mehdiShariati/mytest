@@ -168,6 +168,13 @@ svg {
   }
 }
 
+.role-auto-complete,
+.group-auto-complete {
+  .p-inputtext {
+    @apply pr-[0.5rem] bg-white #{!important};
+  }
+}
+
 .slider-custom {
   .p-carousel-items-content {
     @apply w-full mx-auto;

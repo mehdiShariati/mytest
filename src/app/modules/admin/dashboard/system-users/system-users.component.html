@@ -130,7 +130,7 @@
       <div class="add" (click)="foundProfile()">جستجو</div>
     </div>
 
-    <div class="history" *ngIf="!foundedUser">
+    <div class="history" *ngIf="!foundedUser && !notFoundUser">
       <div class="mb-2">سوابق جستجو</div>
       <ng-container *ngIf="[{}].length; else showMessage">
         <div class="flex items-center items" *ngFor="let item of [{}, {}]">
@@ -155,6 +155,11 @@
     <div *ngIf="foundedUser" class="btns">
       <div (click)="cancel()">انصراف</div>
       <div class="add" (click)="addNewUser()">افزودن کاربر</div>
+    </div>
+
+    <div class="flex flex-wrap items-center justify-center" *ngIf="notFoundUser">
+      <i inlineSVG="assets/icons/alert.svg"></i>
+      <div class="w-full text-center text-gray-mid mt-4">موردی یافت نشد!</div>
     </div>
   </div>
 </p-dialog>
