@@ -1,13 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { Layouts } from './core/enums/layouts.enum';
-// import { DashboardAdminComponent } from './modules/admin/dashboard/dashboard.component';
 import { ChangePasswordComponent } from './modules/auth/change-password/change-password.component';
 import { LoginComponent } from './modules/auth/login/login.component';
-import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { AdminDashboardComponent } from './modules/admin/dashboard/dashboard.component';
 import { SystemUsersComponent } from './modules/admin/dashboard/system-users/system-users.component';
-import { LogoutComponent } from './modules/auth/logout/logout.component';
+import { TicketsComponent } from './modules/admin/dashboard/tickets/tickets.component';
+import { RolesComponent } from './modules/admin/dashboard/roles/roles.component';
+import { GroupsComponent } from './modules/admin/dashboard/groups/groups.component';
+import { OrganizationComponent } from './modules/admin/dashboard/organization/organization.component';
+import { StructuresComponent } from './modules/admin/dashboard/structures/structures.component';
+import { AuthGuard } from './core/guarda/auth.guard';
 
 const routes: Routes = [
   // {
@@ -16,9 +19,22 @@ const routes: Routes = [
   //   data: { layout: Layouts.Main },
   // },
   {
+    path: '',
+    redirectTo: 'auth/login',
+    pathMatch: 'full',
+  },
+  {
     path: 'admin',
     component: AdminDashboardComponent,
-    children: [{ path: 'system-users', component: SystemUsersComponent }],
+    canActivate: [AuthGuard],
+    children: [
+      { path: 'system-users', component: SystemUsersComponent },
+      { path: 'tickets', component: TicketsComponent },
+      { path: 'roles', component: RolesComponent },
+      { path: 'groups', component: GroupsComponent },
+      { path: 'organization', component: OrganizationComponent },
+      { path: 'structures', component: StructuresComponent },
+    ],
     data: { layout: Layouts.Admin },
   },
   {
@@ -33,22 +49,19 @@ const routes: Routes = [
         path: 'new-password',
         component: ChangePasswordComponent,
       },
-      {
-        path: 'logout',
-        component: LogoutComponent,
-      },
     ],
     data: { layout: Layouts.Auth },
   },
   {
     path: 'dashboard',
+    canActivate: [AuthGuard],
     loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule),
     data: { layout: Layouts.Main },
   },
   {
     path: 'app',
+    canActivate: [AuthGuard],
     loadChildren: () => import('./modules/chat/chat-routing.module').then(m => m.ChatRoutingModule),
-    data: { layout: Layouts.Main },
   },
   // {
   //   path: 'auth',

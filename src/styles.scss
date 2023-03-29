@@ -10,6 +10,14 @@
     url('/assets/fonts/dana-fanum-regular.eot') format('eot');
 }
 
+@font-face {
+  font-family: 'dana-fanum';
+  font-weight: 500;
+  src: url('/assets/fonts/dana-fanum-medium.woff') format('woff'),
+    url('/assets/fonts/dana-fanum-medium.woff2') format('woff2'),
+    url('/assets/fonts/dana-fanum-medium.eot') format('eot');
+}
+
 * {
   direction: rtl;
   font-family: 'dana-fanum', sans-serif;
@@ -111,11 +119,6 @@ svg {
 
 .modal-custom {
   .p-dialog {
-    .p-dialog-content,
-    .p-dialog-header {
-      @apply bg-body #{!important};
-    }
-
     .p-dialog-header .p-dialog-title {
       @apply font-[400] #{!important};
     }
@@ -123,12 +126,19 @@ svg {
 }
 
 .tab-custom {
+  .p-component,
+  ul,
+  a,
+  .p-tabview .p-tabview-panels {
+    @apply bg-body #{!important};
+  }
+
   .p-tabview .p-tabview-nav {
     @apply mt-[24px];
   }
 
   .p-tabview .p-tabview-nav li {
-    @apply w-[33%];
+    @apply w-[33%] #{!important};
   }
 
   .p-tabview .p-tabview-nav li .p-tabview-nav-link {
@@ -150,25 +160,63 @@ svg {
   }
 
   .p-inputtext {
-    @apply pr-[2.5rem];
+    @apply pr-[2.5rem] bg-body;
   }
 
   .p-autocomplete-loader {
     @apply hidden;
   }
 }
-.p-carousel-items-container {
-  direction: ltr;
-}
-@layer utilities {
-  /* Chrome, Safari and Opera */
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
+
+.slider-custom {
+  .p-carousel-items-content {
+    @apply w-full mx-auto;
   }
 
-  .no-scrollbar {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+  .p-carousel-items-container {
+    direction: ltr;
+  }
+
+  .p-carousel-content {
+    @apply relative;
+
+    .p-carousel-indicators {
+      @apply absolute bottom-[5px] left-[290px] p-0;
+
+      button {
+        @apply bg-white opacity-50 w-[1rem] h-[1rem] rounded-full;
+      }
+    }
+
+    .p-carousel-indicators .p-carousel-indicator.p-highlight button {
+      @apply bg-white opacity-100 #{!important};
+    }
   }
 }
+
+.custom-dock {
+  .p-dock .p-dock-list {
+    @apply max-w-max bg-[#8D8D8D1A] rounded-[24px] mb-2;
+
+    ul {
+    }
+  }
+
+  .p-dock-list {
+    li {
+      @apply p-0 mx-1;
+    }
+  }
+}
+
+.p-datatable > .p-datatable-wrapper {
+  max-height: calc(100vh - 315px);
+}
+
+.custom-spinner {
+  .p-progress-spinner {
+    @apply w-[30px] h-[30px];
+  }
+}
+
 /*------------------------- overRide primeng -----------------------------*/

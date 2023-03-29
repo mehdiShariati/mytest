@@ -12,9 +12,25 @@ import { PaginatorModule } from 'primeng/paginator';
 import { DialogModule } from 'primeng/dialog';
 import { TabViewModule } from 'primeng/tabview';
 import { AutoCompleteModule } from 'primeng/autocomplete';
+import { CardInformationComponent } from './dashboard/system-users/card-information/card-information.component';
+import { TicketsComponent } from './dashboard/tickets/tickets.component';
+import { RolesComponent } from './dashboard/roles/roles.component';
+import { GroupsComponent } from './dashboard/groups/groups.component';
+import { OrganizationComponent } from './dashboard/organization/organization.component';
+import { StructuresComponent } from './dashboard/structures/structures.component';
 
 @NgModule({
-  declarations: [AsideComponent, SystemUsersComponent, AdminDashboardComponent],
+  declarations: [
+    AsideComponent,
+    SystemUsersComponent,
+    AdminDashboardComponent,
+    CardInformationComponent,
+    TicketsComponent,
+    RolesComponent,
+    GroupsComponent,
+    OrganizationComponent,
+    StructuresComponent,
+  ],
   imports: [
     CommonModule,
     InlineSVGModule,

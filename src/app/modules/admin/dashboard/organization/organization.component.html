@@ -1,0 +1,87 @@
+<div class="component-container">
+  <div class="header">
+    <span>مدیریت تشکیلات</span>
+    <div class="return" routerLink="/dashboard">
+      بازگشت
+      <i inlineSVG="assets/icons/return-arrow.svg"></i>
+    </div>
+  </div>
+
+  <div class="table">
+    <p-table
+      dataKey="id"
+      [rowHover]="true"
+      class="users-table"
+      [value]="items"
+      [rows]="10"
+      [showCurrentPageReport]="true"
+      [rowsPerPageOptions]="[10, 25, 50]"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [filterDelay]="0"
+      [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
+    >
+      <ng-template pTemplate="caption">
+        <div class="table-header">
+          <div class="text-[18px] font-bold">لیست تشکیلات</div>
+          <div class="flex items-center">
+            <span class="p-input-icon-left w-[500px]">
+              <i class="pi pi-search"></i>
+              <input class="search-input" pInputText type="text" placeholder="جستجو" />
+            </span>
+            <div class="add-new">
+              <i class="ml-2" inlineSVG="assets/icons/Add.svg"></i>
+              افزودن تشکیلات
+            </div>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="name" style="min-width: 10rem">
+            <div class="flex justify-content-between align-items-center">
+              عنوان تشکیلات
+              <p-sortIcon class="mr-4" field="name"></p-sortIcon>
+            </div>
+          </th>
+          <th pSortableColumn="country.name" style="min-width: 10rem">
+            <div class="flex justify-content-between align-items-center">
+              مجموعه
+              <p-sortIcon class="mr-4" field="country.name"></p-sortIcon>
+            </div>
+          </th>
+          <th pSortableColumn="representative.name" style="min-width: 10rem">
+            <div class="flex justify-content-between align-items-center">
+              زیرمجموعه
+              <p-sortIcon class="mr-4" field="representative.name"></p-sortIcon>
+            </div>
+          </th>
+          <th style="min-width: 8rem">
+            <div class="flex justify-content-between align-items-center">سطح دسترسی</div>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-user>
+        <tr class="p-selectable-row">
+          <td style="color: #0f62fe !important">
+            {{ user?.personnel?.personnelCode }}
+          </td>
+          <td>
+            <span class="image-text">{{ user?.personnel?.firstName }}</span>
+          </td>
+          <td>
+            <span class="image-text">{{ user?.personnel?.lastName }}</span>
+          </td>
+          <td>{{ user.state }} - {{ user.city }}</td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="8">تشکیلاتی یافت نشد.</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  <div>
+    <p-paginator class="paginator-custom" [rows]="10" [totalRecords]="120"></p-paginator>
+  </div>
+</div>

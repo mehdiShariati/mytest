@@ -16,4 +16,17 @@ export class UserService {
 
     return this.http.get(`${environment.apiUrl}/usermanagement/users`, { params: params });
   }
+
+  getCurrentUserWithToken() {
+    return this.http.get(`${environment.apiUrl}/usermanagement/users/self`);
+  }
+
+  getMainPersonnel(filter: any | null) {
+    let params = new HttpParams();
+    for (const key in filter) {
+      filter[key] ? (params = params.append(key, filter[key])) : null;
+    }
+
+    return this.http.get(`${environment.apiUrl}/usermanagement/main-personnel`, { params: params });
+  }
 }

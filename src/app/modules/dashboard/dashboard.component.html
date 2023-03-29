@@ -1,26 +1,23 @@
-<div class="container mx-auto">
+<div class="max-w-[1420px] bg-background min-h-[705px] mx-auto">
   <div
-    class="py-6 px-[30px] w-full grid gap-[30px] dashboard-cont grid-cols-[minmax(282px,_1fr)_minmax(595px,_2fr)_minmax(283px,_1fr)]"
+    class="pt-6 px-[30px] w-full grid gap-[30px] grid-cols-[minmax(282px,_1fr)_minmax(595px,_2fr)_minmax(283px,_1fr)]"
   >
-    <div class="left-col w-full scrollbar-hide">
-      <div class="flex flex-col bg-white mb-6 p-4 rounded-3xl no-scrollbar">
+    <div class="left-col w-full">
+      <div class="flex flex-col bg-white mb-6 p-4 rounded-3xl">
         <div class="flex items-start w-full">
-          <div class="image w-12 h-12 ml-5 rounded-full no-scrollbar">
-            <img
-              *ngIf="profileData?.personnel?.personnelPhotoUrl"
-              class="w-full w-12 h-12 rounded-full"
-              src="{{ profileData.personnel.personnelPhotoUrl }}"
-              alt=""
-            />
+          <div class="image w-12 h-12 ml-5 rounded-full">
+            <img class="w-full" src="./assets/dashboard/Avatar.png" alt="" />
           </div>
           <div class="flex flex-col">
-            <div *ngIf="profileData?.personnel" class="title text-gray-dark font-dana font-normal">
-              {{ profileData.personnel.firstName }} {{ profileData.personnel.lastName }}
+            <div class="title text-gray-dark font-dana font-normal">
+              {{ userInformation?.personnel?.firstName }} {{ userInformation?.personnel?.lastName }}
             </div>
-            <div class="subtitle text-[#8b8b8b] font-dana font-normal text-sm mt-2">مدیر ارشد بخش فنی</div>
+            <div class="subtitle text-[#8b8b8b] font-dana font-normal text-sm mt-2">
+              {{ userInformation?.currentRole?.formation?.title }}
+            </div>
           </div>
         </div>
-        <div class="mt-4 w-full no-scrollbar">
+        <div class="mt-4 w-full">
           <div class="flex py-4 border-t">
             <div class="image flex items-center justify-center">
               <div class="">
@@ -29,10 +26,12 @@
             </div>
             <div class="flex items-center justify-between grow">
               <span class="mr-3 font-gray-dark font-normal text-sm"> نقش های دیگر </span>
-              <span class="bg-red-500 rounded-full text-white flex justify-center items-center w-6 h-6">۳</span>
+              <div class="bg-red-500 rounded-full text-white flex justify-center items-center w-6 h-6 pt-1">
+                {{ userInformation?.roles?.length ? userInformation?.roles?.length - 1 : 0 }}
+              </div>
             </div>
           </div>
-          <div class="flex pt-4 border-t no-scrollbar">
+          <div class="flex pt-4 border-t">
             <div class="image flex items-center justify-center">
               <div class="">
                 <img class="w-8 h-8" src="./assets/dashboard/Notification.svg" alt="" />
@@ -43,871 +42,95 @@
         </div>
       </div>
       <div class="overflow-hidden rounded-2xl h-[353px] mb-6" leaflet [leafletOptions]="options"></div>
-      <div class="quote p-4 bg-white rounded-2xl">
-        <div class="text-xs font-dana font-normal text-[#828282] mb-3">امیرالمونین (ع):</div>
-        <div class="font-dana font-normal text-sm text-gray-dark">“ادب بهترین خوی و خصلت است.”</div>
-      </div>
+      <!--      <div class='quote p-4 bg-white rounded-2xl'>-->
+      <!--        <div class='text-xs font-dana font-normal text-[#828282] mb-3'>امیرالمونین (ع):</div>-->
+      <!--        <div class='font-dana font-normal text-sm text-gray-dark'>“ادب بهترین خوی و خصلت است.”</div>-->
+      <!--      </div>-->
     </div>
-    <div class="center-col w-full no-scrollbar">
-      <div class="h-[140px] bg-white w-full rounded-3xl overflow-y-hidden p-4 flex overflow-x-scroll">
-        <div class="flex flex-col mx-2 items-center">
+    <div class="center-col w-full">
+      <div class="h-[125px] bg-white w-full rounded-3xl p-4 flex overflow-auto mb-5" #scrollContainer>
+        <div class="flex flex-col items-center ml-6 cursor-pointer">
           <div class="image w-16 h-16">
             <img src="./assets/dashboard/Avatar.svg" alt="" />
           </div>
           <div class="cap mt-2 text-gray-dark text-xs font-normal font-dana">استوری شما</div>
         </div>
-        <div class="flex flex-col mx-2 items-center">
-          <div class="image w-16 h-16">
-            <img src="./assets/dashboard/Avatar.svg" alt="" />
+        <div class="flex flex-col items-center ml-6 cursor-pointer" *ngFor="let story of stories">
+          <div class="flex items-center justify-center w-16 h-16 outline outline-story outline-[3px] rounded-full">
+            <img
+              class="w-full h-full border-solid border-[#fff] border-2 overflow-hidden object-contain rounded-full"
+              [src]="story.photo"
+              alt=""
+            />
           </div>
-          <div class="cap mt-2 text-gray-dark text-xs font-normal font-dana">استوری شما</div>
-        </div>
-        <div class="flex flex-col mx-2 items-center">
-          <div class="image w-16 h-16">
-            <img src="./assets/dashboard/Avatar.svg" alt="" />
-          </div>
-          <div class="cap mt-2 text-gray-dark text-xs font-normal font-dana">استوری شما</div>
-        </div>
-        <div class="flex flex-col mx-2 items-center">
-          <div class="image w-16 h-16">
-            <img src="./assets/dashboard/Avatar.svg" alt="" />
-          </div>
-          <div class="cap mt-2 text-gray-dark text-xs font-normal font-dana">استوری شما</div>
-        </div>
-        <div class="flex flex-col mx-2 items-center">
-          <div class="image w-16 h-16">
-            <img src="./assets/dashboard/Avatar.svg" alt="" />
-          </div>
-          <div class="cap mt-2 text-gray-dark text-xs font-normal font-dana">استوری شما</div>
-        </div>
-        <div class="flex flex-col mx-2 items-center">
-          <div class="image w-16 h-16">
-            <img src="./assets/dashboard/Avatar.svg" alt="" />
-          </div>
-          <div class="cap mt-2 text-gray-dark text-xs font-normal font-dana">استوری شما</div>
-        </div>
-        <div class="flex flex-col mx-2 items-center">
-          <div class="image w-16 h-16">
-            <img src="./assets/dashboard/Avatar.svg" alt="" />
-          </div>
-          <div class="cap mt-2 text-gray-dark text-xs font-normal font-dana">استوری شما</div>
-        </div>
-        <div class="flex flex-col mx-2 items-center">
-          <div class="image w-16 h-16">
-            <img src="./assets/dashboard/Avatar.svg" alt="" />
-          </div>
-          <div class="cap mt-2 text-gray-dark text-xs font-normal font-dana">استوری شما</div>
-        </div>
-        <div class="flex flex-col mx-2 items-center">
-          <div class="image w-16 h-16">
-            <img src="./assets/dashboard/Avatar.svg" alt="" />
-          </div>
-          <div class="cap mt-2 text-gray-dark text-xs font-normal font-dana">استوری شما</div>
-        </div>
-        <div class="flex flex-col mx-2 items-center">
-          <div class="image w-16 h-16">
-            <img src="./assets/dashboard/Avatar.svg" alt="" />
-          </div>
-          <div class="cap mt-2 text-gray-dark text-xs font-normal font-dana">استوری شما</div>
-        </div>
-        <div class="flex flex-col mx-2 items-center">
-          <div class="image w-16 h-16">
-            <img src="./assets/dashboard/Avatar.svg" alt="" />
-          </div>
-          <div class="cap mt-2 text-gray-dark text-xs font-normal font-dana">استوری شما</div>
-        </div>
-        <div class="flex flex-col mx-2 items-center">
-          <div class="image w-16 h-16">
-            <img src="./assets/dashboard/Avatar.svg" alt="" />
-          </div>
-          <div class="cap mt-2 text-gray-dark text-xs font-normal font-dana">استوری شما</div>
+          <div class="cap mt-2 text-gray-dark text-xs font-normal font-dana">{{ story.title }}</div>
         </div>
       </div>
-      <div class="h-[237px] w-full ltr mt-2">
-        <p-carousel [value]="slides" [numVisible]="1" [numScroll]="1" [autoplayInterval]="3000" [showIndicators]="true">
+      <div class="h-[237px] w-full rounded-3xl">
+        <p-carousel
+          [value]="slides"
+          [autoplayInterval]="4000"
+          [showNavigators]="false"
+          [showIndicators]="true"
+          class="slider-custom"
+        >
           <ng-template let-slide pTemplate="item">
-            <img [src]="slide" alt="" />
+            <img class="w-full object-contain h-[258px]" [src]="slide.photo" alt="" [id]="slide" />
           </ng-template>
-          <ng-template p-carousel-dot-icon> </ng-template>
         </p-carousel>
-        <!--        <app-slider [items]="slides"></app-slider>-->
       </div>
-      <div class="h-[237px] w-full ltr mt-12 flex flex-wrap">
-        <div class="flex flex-col cursor-pointer justify-start items-center w-[74px] h-[81px] relative gap-[5px]">
-          <svg
-            width="58"
-            height="57"
-            viewBox="0 0 58 57"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            class="flex-grow-0 flex-shrink-0 w-[57px] h-[57px] relative"
-            preserveAspectRatio="xMidYMid meet"
-          >
-            <rect x="0.5" width="57" height="57" rx="12" fill="#FF7EB6"></rect>
-            <path
-              d="M14 15.5V42.5C14 43.6935 14.4741 44.8381 15.318 45.682C16.1619 46.5259 17.3065 47 18.5 47H42.35C42.708 47 43.0514 46.8578 43.3046 46.6046C43.5578 46.3514 43.7 46.008 43.7 45.65C43.7 45.292 43.5578 44.9486 43.3046 44.6954C43.0514 44.4422 42.708 44.3 42.35 44.3H18.5C18.0226 44.3 17.5648 44.1104 17.2272 43.7728C16.8896 43.4352 16.7 42.9774 16.7 42.5H42.35C42.708 42.5 43.0514 42.3578 43.3046 42.1046C43.5578 41.8514 43.7 41.508 43.7 41.15V15.5C43.7 14.9091 43.5836 14.3239 43.3575 13.7779C43.1313 13.232 42.7998 12.7359 42.382 12.318C41.9641 11.9002 41.468 11.5687 40.9221 11.3425C40.3761 11.1164 39.7909 11 39.2 11H18.5C17.3065 11 16.1619 11.4741 15.318 12.318C14.4741 13.1619 14 14.3065 14 15.5ZM26.6 21.8324C26.5915 22.1848 26.4456 22.5199 26.1933 22.7661C25.9411 23.0123 25.6025 23.1501 25.25 23.15C23.9 23.15 23.9 21.7982 23.9 21.7982V21.782C23.9009 21.7014 23.9058 21.6209 23.9144 21.5408C23.994 20.8455 24.2547 20.1832 24.6704 19.6202C25.4876 18.5168 26.9564 17.7086 29.3234 17.75C31.0334 17.7806 32.5508 18.497 33.5012 19.676C34.4678 20.8766 34.7936 22.502 34.1528 24.1022C33.5012 25.7312 32.027 26.3792 31.1792 26.75L31.0892 26.7914C30.5852 27.0128 30.3458 27.128 30.2018 27.2432L30.2 27.245V28.5482C30.2002 28.9062 30.0582 29.2497 29.8052 29.5031C29.5522 29.7564 29.2089 29.8989 28.8509 29.8991C28.4929 29.8993 28.1494 29.7573 27.896 29.5043C27.6427 29.2513 27.5002 28.908 27.5 28.55V27.2C27.5 26.2586 27.9536 25.5854 28.5134 25.1354C28.9634 24.7754 29.5304 24.527 29.9282 24.3506L29.9966 24.32C30.9722 23.8898 31.4366 23.6234 31.6472 23.0978C31.7708 22.8152 31.8131 22.5037 31.7692 22.1984C31.7253 21.8931 31.597 21.6061 31.3988 21.3698C30.9992 20.8748 30.2666 20.4662 29.2766 20.45C27.5936 20.4212 27.0356 20.963 26.8412 21.2276C26.7125 21.4024 26.6295 21.6066 26.6 21.8216V21.8324ZM30.65 33.5C30.65 33.9774 30.4604 34.4352 30.1228 34.7728C29.7852 35.1104 29.3274 35.3 28.85 35.3C28.3726 35.3 27.9148 35.1104 27.5772 34.7728C27.2396 34.4352 27.05 33.9774 27.05 33.5C27.05 33.0226 27.2396 32.5648 27.5772 32.2272C27.9148 31.8896 28.3726 31.7 28.85 31.7C29.3274 31.7 29.7852 31.8896 30.1228 32.2272C30.4604 32.5648 30.65 33.0226 30.65 33.5Z"
-              fill="white"
-            ></path>
-          </svg>
-          <p class="flex-grow-0 flex-shrink-0 text-xs text-center text-neutral-800">پرسشنامه</p>
-        </div>
-        <div class="flex flex-col cursor-pointer justify-start items-center w-[74px] h-[81px] relative gap-[5px]">
-          <svg
-            width="58"
-            height="57"
-            viewBox="0 0 58 57"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            class="flex-grow-0 flex-shrink-0 w-[57px] h-[57px] relative"
-            preserveAspectRatio="none"
-          >
-            <rect x="0.5" width="57" height="57" rx="12" fill="#08BDBA"></rect>
-            <path
-              d="M21.8208 21.3392C23.6742 21.3392 25.175 22.8419 25.175 24.6934V42.9017C25.175 43.7913 24.8216 44.6445 24.1926 45.2735C23.5635 45.9025 22.7104 46.2559 21.8208 46.2559H13.1882C12.2986 46.2559 11.4454 45.9025 10.8164 45.2735C10.1874 44.6445 9.83398 43.7913 9.83398 42.9017V24.6934C9.83398 22.8419 11.3367 21.3392 13.1882 21.3392H21.8208ZM17.9837 39.538H17.0253C16.6441 39.538 16.2784 39.6894 16.0089 39.959C15.7393 40.2286 15.5878 40.5942 15.5878 40.9755C15.5878 41.3567 15.7393 41.7224 16.0089 41.992C16.2784 42.2615 16.6441 42.413 17.0253 42.413H17.9837C18.3649 42.413 18.7305 42.2615 19.0001 41.992C19.2697 41.7224 19.4212 41.3567 19.4212 40.9755C19.4212 40.5942 19.2697 40.2286 19.0001 39.959C18.7305 39.6894 18.3649 39.538 17.9837 39.538ZM46.7298 37.6252C47.094 37.6253 47.4446 37.7636 47.7108 38.0123C47.9769 38.2609 48.1387 38.6013 48.1635 38.9647C48.1884 39.328 48.0743 39.6873 47.8445 39.9698C47.6146 40.2523 47.2861 40.4371 46.9253 40.4867L46.7298 40.5002H27.084V37.6252H46.7298ZM40.9798 15.5835C42.8313 15.5835 44.334 17.0862 44.334 18.9377V33.3127C44.334 34.2022 43.9806 35.0554 43.3516 35.6844C42.7225 36.3134 41.8694 36.6668 40.9798 36.6668H27.084V23.2502C27.0838 22.2834 26.7183 21.3524 26.0608 20.6437C25.4033 19.9349 24.5022 19.5008 23.5381 19.4283L23.2507 19.4168H13.6673V18.9377C13.6673 17.0862 15.17 15.5835 17.0215 15.5835H40.9798Z"
-              fill="white"
-            ></path>
-          </svg>
-          <p class="flex-grow-0 flex-shrink-0 text-xs text-center text-neutral-800">فناوری</p>
-        </div>
-        <div class="flex flex-col cursor-pointer justify-start items-center w-[74px] h-[81px] relative gap-[5px]">
-          <svg
-            width="58"
-            height="57"
-            viewBox="0 0 58 57"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            class="flex-grow-0 flex-shrink-0 w-[57px] h-[57px] relative"
-            preserveAspectRatio="none"
-          >
-            <rect x="0.5" width="57" height="57" rx="12" fill="#BE95FF"></rect>
-            <path
-              d="M29.4 21.8V11H18.6C17.6452 11 16.7295 11.3793 16.0544 12.0544C15.3793 12.7295 15 13.6452 15 14.6V43.4C15 44.3548 15.3793 45.2705 16.0544 45.9456C16.7295 46.6207 17.6452 47 18.6 47H40.2C41.1548 47 42.0705 46.6207 42.7456 45.9456C43.4207 45.2705 43.8 44.3548 43.8 43.4V25.4H33C32.0452 25.4 31.1295 25.0207 30.4544 24.3456C29.7793 23.6705 29.4 22.7548 29.4 21.8ZM20.4 29.45C20.4 29.092 20.5422 28.7486 20.7954 28.4954C21.0486 28.2422 21.392 28.1 21.75 28.1C22.108 28.1 22.4514 28.2422 22.7046 28.4954C22.9578 28.7486 23.1 29.092 23.1 29.45C23.1 29.808 22.9578 30.1514 22.7046 30.4046C22.4514 30.6578 22.108 30.8 21.75 30.8C21.392 30.8 21.0486 30.6578 20.7954 30.4046C20.5422 30.1514 20.4 29.808 20.4 29.45ZM20.4 34.85C20.4 34.492 20.5422 34.1486 20.7954 33.8954C21.0486 33.6422 21.392 33.5 21.75 33.5C22.108 33.5 22.4514 33.6422 22.7046 33.8954C22.9578 34.1486 23.1 34.492 23.1 34.85C23.1 35.208 22.9578 35.5514 22.7046 35.8046C22.4514 36.0578 22.108 36.2 21.75 36.2C21.392 36.2 21.0486 36.0578 20.7954 35.8046C20.5422 35.5514 20.4 35.208 20.4 34.85ZM20.4 40.25C20.4 39.892 20.5422 39.5486 20.7954 39.2954C21.0486 39.0422 21.392 38.9 21.75 38.9C22.108 38.9 22.4514 39.0422 22.7046 39.2954C22.9578 39.5486 23.1 39.892 23.1 40.25C23.1 40.608 22.9578 40.9514 22.7046 41.2046C22.4514 41.4578 22.108 41.6 21.75 41.6C21.392 41.6 21.0486 41.4578 20.7954 41.2046C20.5422 40.9514 20.4 40.608 20.4 40.25ZM25.8 29.45C25.8 29.092 25.9422 28.7486 26.1954 28.4954C26.4486 28.2422 26.792 28.1 27.15 28.1H37.05C37.408 28.1 37.7514 28.2422 38.0046 28.4954C38.2578 28.7486 38.4 29.092 38.4 29.45C38.4 29.808 38.2578 30.1514 38.0046 30.4046C37.7514 30.6578 37.408 30.8 37.05 30.8H27.15C26.792 30.8 26.4486 30.6578 26.1954 30.4046C25.9422 30.1514 25.8 29.808 25.8 29.45ZM25.8 34.85C25.8 34.492 25.9422 34.1486 26.1954 33.8954C26.4486 33.6422 26.792 33.5 27.15 33.5H37.05C37.408 33.5 37.7514 33.6422 38.0046 33.8954C38.2578 34.1486 38.4 34.492 38.4 34.85C38.4 35.208 38.2578 35.5514 38.0046 35.8046C37.7514 36.0578 37.408 36.2 37.05 36.2H27.15C26.792 36.2 26.4486 36.0578 26.1954 35.8046C25.9422 35.5514 25.8 35.208 25.8 34.85ZM25.8 40.25C25.8 39.892 25.9422 39.5486 26.1954 39.2954C26.4486 39.0422 26.792 38.9 27.15 38.9H37.05C37.408 38.9 37.7514 39.0422 38.0046 39.2954C38.2578 39.5486 38.4 39.892 38.4 40.25C38.4 40.608 38.2578 40.9514 38.0046 41.2046C37.7514 41.4578 37.408 41.6 37.05 41.6H27.15C26.792 41.6 26.4486 41.4578 26.1954 41.2046C25.9422 40.9514 25.8 40.608 25.8 40.25ZM32.1 21.8V11.9L42.9 22.7H33C32.7613 22.7 32.5324 22.6052 32.3636 22.4364C32.1948 22.2676 32.1 22.0387 32.1 21.8Z"
-              fill="white"
-            ></path>
-          </svg>
-          <p class="flex-grow-0 flex-shrink-0 text-xs text-center text-neutral-800">طرح و برنامه</p>
-        </div>
-        <div class="flex flex-col cursor-pointer justify-start items-center w-[74px] h-[81px] relative gap-[5px]">
-          <svg
-            width="58"
-            height="57"
-            viewBox="0 0 58 57"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            class="flex-grow-0 flex-shrink-0 w-[57px] h-[57px] relative"
-            preserveAspectRatio="none"
-          >
-            <rect x="0.5" width="57" height="57" rx="12" fill="#33B1FF"></rect>
-            <path
-              d="M34.2715 34.75C36.123 34.75 37.6257 36.2527 37.6257 38.1042L37.6237 39.948C37.848 44.1455 34.7277 46.2673 29.1291 46.2673C23.5516 46.2673 20.3757 44.1781 20.3757 40.0208V38.1042C20.3757 36.2527 21.8783 34.75 23.7298 34.75H34.2715ZM13.1882 25.1667H21.5755C21.2411 26.4681 21.2539 27.8344 21.6128 29.1293C21.9717 30.4242 22.664 31.6022 23.6206 32.5458L23.9311 32.8353L23.7298 32.8333C22.5795 32.8329 21.4606 33.2088 20.5439 33.9037C19.6272 34.5986 18.9629 35.5743 18.6526 36.682L18.5874 36.6839C13.0099 36.6839 9.83398 34.5947 9.83398 30.4375V28.5208C9.83398 26.6693 11.3367 25.1667 13.1882 25.1667ZM44.8131 25.1667C46.6646 25.1667 48.1673 26.6693 48.1673 28.5208L48.1654 30.3647C48.3897 34.5622 45.2693 36.6839 39.6707 36.6839L39.3468 36.6801C39.0521 35.6361 38.4432 34.7081 37.6027 34.0223C36.7622 33.3364 35.731 32.926 34.6491 32.8468L34.2715 32.8333L34.0702 32.8353C35.1342 31.9007 35.9178 30.6891 36.3337 29.3355C36.7496 27.9818 36.7815 26.5393 36.4258 25.1686L44.8131 25.1667ZM29.0007 21.3333C29.7558 21.3333 30.5035 21.4821 31.2011 21.771C31.8987 22.06 32.5326 22.4835 33.0665 23.0175C33.6005 23.5514 34.024 24.1853 34.313 24.8829C34.6019 25.5805 34.7507 26.3282 34.7507 27.0833C34.7507 27.8384 34.6019 28.5861 34.313 29.2838C34.024 29.9814 33.6005 30.6153 33.0665 31.1492C32.5326 31.6831 31.8987 32.1067 31.2011 32.3956C30.5035 32.6846 29.7558 32.8333 29.0007 32.8333C27.4757 32.8333 26.0131 32.2275 24.9348 31.1492C23.8565 30.0709 23.2507 28.6083 23.2507 27.0833C23.2507 25.5583 23.8565 24.0958 24.9348 23.0175C26.0131 21.9391 27.4757 21.3333 29.0007 21.3333ZM18.459 11.75C19.984 11.75 21.4465 12.3558 22.5248 13.4341C23.6032 14.5125 24.209 15.975 24.209 17.5C24.209 19.025 23.6032 20.4875 22.5248 21.5659C21.4465 22.6442 19.984 23.25 18.459 23.25C16.934 23.25 15.4715 22.6442 14.3931 21.5659C13.3148 20.4875 12.709 19.025 12.709 17.5C12.709 15.975 13.3148 14.5125 14.3931 13.4341C15.4715 12.3558 16.934 11.75 18.459 11.75ZM39.5423 11.75C41.0673 11.75 42.5298 12.3558 43.6082 13.4341C44.6865 14.5125 45.2923 15.975 45.2923 17.5C45.2923 19.025 44.6865 20.4875 43.6082 21.5659C42.5298 22.6442 41.0673 23.25 39.5423 23.25C38.0173 23.25 36.5548 22.6442 35.4765 21.5659C34.3981 20.4875 33.7923 19.025 33.7923 17.5C33.7923 15.975 34.3981 14.5125 35.4765 13.4341C36.5548 12.3558 38.0173 11.75 39.5423 11.75Z"
-              fill="white"
-            ></path>
-          </svg>
-          <p class="flex-grow-0 flex-shrink-0 text-xs text-center text-neutral-800">نیروی انسانی</p>
-        </div>
-        <div class="flex flex-col cursor-pointer justify-start items-center w-[74px] h-[81px] relative gap-[5px]">
-          <svg
-            width="58"
-            height="57"
-            viewBox="0 0 58 57"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            class="flex-grow-0 flex-shrink-0 w-[57px] h-[57px] relative"
-            preserveAspectRatio="none"
-          >
-            <rect x="0.5" width="57" height="57" rx="12" fill="#FF8389"></rect>
-            <path
-              d="M33.0467 12C33.3729 12 33.688 12.1181 33.9338 12.3325C34.1797 12.5469 34.3395 12.8431 34.3839 13.1662L34.3965 13.3498V14.7032C34.3965 15.8424 34.0437 16.8989 33.4426 17.7699C34.6972 18.2017 35.7966 18.9936 36.6036 20.0467C37.4105 21.0998 37.8892 22.3674 37.9798 23.691H38.4405C39.5141 23.6863 40.542 23.2553 41.2979 22.4929C42.0539 21.7305 42.4762 20.6991 42.4719 19.6255L42.4611 16.9529C42.4597 16.5949 42.6005 16.251 42.8526 15.9968C43.1047 15.7427 43.4475 15.5991 43.8055 15.5977C44.1635 15.5962 44.5074 15.7371 44.7615 15.9892C45.0157 16.2413 45.1592 16.5841 45.1607 16.9421L45.1733 19.6147C45.1807 21.3429 44.5248 23.0082 43.3408 24.2672C42.1568 25.5262 40.5349 26.283 38.8094 26.3816L38.4243 26.3924L37.996 26.3906V29.0938H45.6502C45.9767 29.0939 46.292 29.2123 46.5379 29.427C46.7837 29.6418 46.9434 29.9384 46.9874 30.2619L47 30.4454C47 30.7716 46.8819 31.0868 46.6675 31.3326C46.4531 31.5784 46.1569 31.7383 45.8338 31.7826L45.6502 31.7952H37.996V35.3929H38.4243L38.8094 35.4055C40.4727 35.5008 42.0419 36.2079 43.2151 37.3907C44.3883 38.5736 45.0826 40.1485 45.1643 41.8125L45.1733 42.1725L45.1607 44.8451C45.1575 45.186 45.0254 45.5132 44.7909 45.7607C44.5564 46.0083 44.2369 46.1579 43.8967 46.1796C43.5564 46.2012 43.2205 46.0933 42.9565 45.8774C42.6926 45.6616 42.5201 45.3539 42.4737 45.016L42.4611 44.8325L42.4737 42.1599C42.4777 41.1339 42.0922 40.1447 41.395 39.392C40.6978 38.6394 39.7409 38.1794 38.7176 38.1051L38.4405 38.0943H37.5838C37.0086 39.9209 35.8658 41.5164 34.3216 42.6491C32.7775 43.7817 30.9123 44.3924 28.9973 44.3924C27.0823 44.3924 25.2171 43.7817 23.673 42.6491C22.1288 41.5164 20.986 39.9209 20.4108 38.0943H19.5307C18.4571 38.099 17.4292 38.53 16.6733 39.2924C15.9173 40.0548 15.495 41.0862 15.4993 42.1599L15.5083 44.8325C15.5092 45.0097 15.4751 45.1854 15.408 45.3495C15.3409 45.5136 15.2422 45.6628 15.1174 45.7888C14.9927 45.9147 14.8443 46.0148 14.6809 46.0834C14.5174 46.152 14.3421 46.1877 14.1648 46.1886C13.9876 46.1894 13.8119 46.1553 13.6478 46.0882C13.4837 46.0212 13.3345 45.9224 13.2085 45.7977C13.0826 45.6729 12.9825 45.5246 12.9139 45.3611C12.8453 45.1977 12.8096 45.0223 12.8087 44.8451L12.7997 42.1707C12.7923 40.4427 13.4479 38.7777 14.6315 37.5187C15.8152 36.2597 17.4366 35.5027 19.1618 35.4037L19.5487 35.3947L19.9987 35.3929V31.7934H12.3498C12.0236 31.7934 11.7085 31.6753 11.4627 31.4609C11.2168 31.2465 11.057 30.9504 11.0126 30.6272L11 30.4454C11 30.1193 11.1181 29.8041 11.3325 29.5583C11.5469 29.3125 11.8431 29.1526 12.1662 29.1082L12.3498 29.0956L19.9987 29.0938V26.3906H19.5487L19.1618 26.3816C17.4988 26.2859 15.93 25.5786 14.7572 24.3958C13.5844 23.213 12.8904 21.6383 12.8087 19.9746L12.7997 19.6129L12.8105 16.9403C12.8099 16.5968 12.9402 16.2661 13.1749 16.0154C13.4096 15.7647 13.7311 15.6129 14.0738 15.5908C14.4165 15.5688 14.7547 15.6783 15.0196 15.8969C15.2844 16.1155 15.456 16.4268 15.4993 16.7675L15.5101 16.9511L15.4993 19.6255C15.4948 20.6517 15.8801 21.6414 16.5774 22.3945C17.2746 23.1475 18.2318 23.6077 19.2554 23.682L19.5325 23.6928H20.0148C20.1054 22.3688 20.584 21.1007 21.3909 20.047C22.1978 18.9933 23.2973 18.2007 24.552 17.7681C24 16.9738 23.674 16.0445 23.6089 15.0793L23.5981 14.7032V13.3498C23.5982 13.0078 23.7281 12.6786 23.9616 12.4287C24.1951 12.1788 24.5147 12.0269 24.8559 12.0036C25.1971 11.9802 25.5344 12.0873 25.7997 12.3031C26.065 12.519 26.2385 12.8274 26.2851 13.1662L26.2977 13.3498V14.7032C26.2976 15.3966 26.5643 16.0635 27.0426 16.5656C27.5209 17.0677 28.174 17.3665 28.8667 17.4001C29.5593 17.4336 30.2383 17.1994 30.7629 16.7459C31.2874 16.2923 31.6174 15.6544 31.6843 14.9642L31.6969 14.7032V13.3498C31.6969 12.9918 31.8391 12.6485 32.0922 12.3953C32.3454 12.1422 32.6887 12 33.0467 12Z"
-              fill="white"
-            ></path>
-          </svg>
-          <p class="flex-grow-0 flex-shrink-0 text-xs text-center text-neutral-800">خطای سامانه</p>
-        </div>
-        <div class="flex flex-col cursor-pointer justify-start items-center w-[75px] h-[81px] relative gap-[5px]">
-          <div class="flex-grow-0 flex-shrink-0 w-[57px] h-[57px] relative rounded-xl bg-[#78a9ff]">
-            <div
-              class="flex flex-col justify-start items-start w-[519px] absolute left-[4202px] top-[-6069px] gap-[52px] p-[52px] bg-white border border-[#f4f4f4]"
-            >
-              <p class="flex-grow-0 flex-shrink-0 text-[22px] font-medium text-left text-[#78a9ff]">Green palette</p>
-              <div
-                class="flex flex-col justify-start items-start self-stretch flex-grow-0 flex-shrink-0 overflow-hidden border border-[#f4f4f4]"
-              >
-                <div class="flex justify-start items-start self-stretch flex-grow-0 flex-shrink-0">
-                  <div
-                    class="flex flex-col justify-start items-start self-stretch flex-grow relative gap-2 p-4 bg-white"
-                  >
-                    <p
-                      class="self-stretch flex-grow-0 flex-shrink-0 w-[175.5px] text-base font-medium text-left text-[#78a9ff]"
-                    >
-                      Name
-                    </p>
-                  </div>
-                  <div
-                    class="flex flex-col justify-start items-start self-stretch flex-grow relative gap-2 p-4 bg-white"
-                  >
-                    <p
-                      class="self-stretch flex-grow-0 flex-shrink-0 w-[175.5px] text-base font-medium text-left text-[#78a9ff]"
-                    >
-                      Value
-                    </p>
-                  </div>
-                </div>
-                <div class="flex justify-start items-start self-stretch flex-grow-0 flex-shrink-0 bg-[#defbe6]">
-                  <div
-                    class="flex flex-col justify-start items-start self-stretch flex-grow relative gap-2 p-4 bg-[#defbe6]"
-                  >
-                    <p
-                      class="self-stretch flex-grow-0 flex-shrink-0 w-[175.5px] text-sm font-medium text-left text-[#78a9ff]"
-                    >
-                      Green 10
-                    </p>
-                  </div>
-                  <div
-                    class="flex flex-col justify-start items-start self-stretch flex-grow relative gap-2 p-4 bg-[#defbe6]"
-                  >
-                    <p
-                      class="self-stretch flex-grow-0 flex-shrink-0 w-[175.5px] text-sm font-medium text-left text-[#78a9ff]"
-                    >
-                      #DEFBE6
-                    </p>
-                  </div>
-                </div>
-                <div class="flex justify-start items-start self-stretch flex-grow-0 flex-shrink-0">
-                  <div
-                    class="flex flex-col justify-start items-start self-stretch flex-grow relative gap-2 p-4 bg-[#a7f0ba]"
-                  >
-                    <p
-                      class="self-stretch flex-grow-0 flex-shrink-0 w-[175.5px] text-sm font-medium text-left text-[#78a9ff]"
-                    >
-                      Green 20
-                    </p>
-                  </div>
-                  <div
-                    class="flex flex-col justify-start items-start self-stretch flex-grow relative gap-2 p-4 bg-[#a7f0ba]"
-                  >
-                    <p
-                      class="self-stretch flex-grow-0 flex-shrink-0 w-[175.5px] text-sm font-medium text-left text-[#78a9ff]"
-                    >
-                      #A7F0BA
-                    </p>
-                  </div>
-                </div>
-                <div class="flex justify-start items-start self-stretch flex-grow-0 flex-shrink-0">
-                  <div
-                    class="flex flex-col justify-start items-start self-stretch flex-grow relative gap-2 p-4 bg-[#6fdc8c]"
-                  >
-                    <p
-                      class="self-stretch flex-grow-0 flex-shrink-0 w-[175.5px] text-sm font-medium text-left text-[#78a9ff]"
-                    >
-                      Green 30
-                    </p>
-                  </div>
-                  <div
-                    class="flex flex-col justify-start items-start self-stretch flex-grow relative gap-2 p-4 bg-[#6fdc8c]"
-                  >
-                    <p
-                      class="self-stretch flex-grow-0 flex-shrink-0 w-[175.5px] text-sm font-medium text-left text-[#78a9ff]"
-                    >
-                      #6FDC8C
-                    </p>
-                  </div>
-                </div>
-                <div class="flex justify-start items-start self-stretch flex-grow-0 flex-shrink-0">
-                  <div
-                    class="flex flex-col justify-start items-start self-stretch flex-grow relative gap-2 p-4 bg-[#42be65]"
-                  >
-                    <p
-                      class="self-stretch flex-grow-0 flex-shrink-0 w-[175.5px] text-sm font-medium text-left text-[#78a9ff]"
-                    >
-                      Green 40
-                    </p>
-                  </div>
-                  <div
-                    class="flex flex-col justify-start items-start self-stretch flex-grow relative gap-2 p-4 bg-[#42be65]"
-                  >
-                    <p
-                      class="self-stretch flex-grow-0 flex-shrink-0 w-[175.5px] text-sm font-medium text-left text-[#78a9ff]"
-                    >
-                      #42BE65
-                    </p>
-                  </div>
-                </div>
-                <div class="flex justify-start items-start self-stretch flex-grow-0 flex-shrink-0">
-                  <div
-                    class="flex flex-col justify-start items-start self-stretch flex-grow relative gap-2 p-4 bg-[#24a148]"
-                  >
-                    <p
-                      class="self-stretch flex-grow-0 flex-shrink-0 w-[175.5px] text-sm font-medium text-left text-white"
-                    >
-                      Green 50
-                    </p>
-                  </div>
-                  <div
-                    class="flex flex-col justify-start items-start self-stretch flex-grow relative gap-2 p-4 bg-[#24a148]"
-                  >
-                    <p
-                      class="self-stretch flex-grow-0 flex-shrink-0 w-[175.5px] text-sm font-medium text-left text-white"
-                    >
-                      #24A148
-                    </p>
-                  </div>
-                </div>
-                <div class="flex justify-start items-start self-stretch flex-grow-0 flex-shrink-0">
-                  <div
-                    class="flex flex-col justify-start items-start self-stretch flex-grow relative gap-2 p-4 bg-[#198038]"
-                  >
-                    <p
-                      class="self-stretch flex-grow-0 flex-shrink-0 w-[175.5px] text-sm font-medium text-left text-white"
-                    >
-                      Green 60
-                    </p>
-                  </div>
-                  <div
-                    class="flex flex-col justify-start items-start self-stretch flex-grow relative gap-2 p-4 bg-[#198038]"
-                  >
-                    <p
-                      class="self-stretch flex-grow-0 flex-shrink-0 w-[175.5px] text-sm font-medium text-left text-white"
-                    >
-                      #198038
-                    </p>
-                  </div>
-                </div>
-                <div class="flex justify-start items-start self-stretch flex-grow-0 flex-shrink-0">
-                  <div
-                    class="flex flex-col justify-start items-start self-stretch flex-grow relative gap-2 p-4 bg-[#0e6027]"
-                  >
-                    <p
-                      class="self-stretch flex-grow-0 flex-shrink-0 w-[175.5px] text-sm font-medium text-left text-white"
-                    >
-                      Green 70
-                    </p>
-                  </div>
-                  <div
-                    class="flex flex-col justify-start items-start self-stretch flex-grow relative gap-2 p-4 bg-[#0e6027]"
-                  >
-                    <p
-                      class="self-stretch flex-grow-0 flex-shrink-0 w-[175.5px] text-sm font-medium text-left text-white"
-                    >
-                      #0E6027
-                    </p>
-                  </div>
-                </div>
-                <div class="flex justify-start items-start self-stretch flex-grow-0 flex-shrink-0">
-                  <div
-                    class="flex flex-col justify-start items-start self-stretch flex-grow relative gap-2 p-4 bg-[#044317]"
-                  >
-                    <p
-                      class="self-stretch flex-grow-0 flex-shrink-0 w-[175.5px] text-sm font-medium text-left text-white"
-                    >
-                      Green 80
-                    </p>
-                  </div>
-                  <div
-                    class="flex flex-col justify-start items-start self-stretch flex-grow relative gap-2 p-4 bg-[#044317]"
-                  >
-                    <p
-                      class="self-stretch flex-grow-0 flex-shrink-0 w-[175.5px] text-sm font-medium text-left text-white"
-                    >
-                      #044317
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              class="flex flex-col justify-start items-start w-[519px] h-[656px] absolute left-[2489px] top-[-5361px] gap-[52px] p-[52px] bg-white border border-[#f4f4f4]"
-            >
-              <p class="flex-grow-0 flex-shrink-0 text-[22px] font-medium text-left text-[#78a9ff]">Red palette</p>
-              <div
-                class="flex flex-col justify-start items-start self-stretch flex-grow overflow-hidden border border-[#f4f4f4]"
-              >
-                <div class="flex justify-start items-start self-stretch flex-grow-0 flex-shrink-0">
-                  <div
-                    class="flex flex-col justify-start items-start self-stretch flex-grow relative gap-2 p-4 bg-white"
-                  >
-                    <p
-                      class="self-stretch flex-grow-0 flex-shrink-0 w-[175.5px] text-base font-medium text-left text-[#78a9ff]"
-                    >
-                      Name
-                    </p>
-                  </div>
-                  <div
-                    class="flex flex-col justify-start items-start self-stretch flex-grow relative gap-2 p-4 bg-white"
-                  >
-                    <p
-                      class="self-stretch flex-grow-0 flex-shrink-0 w-[175.5px] text-base font-medium text-left text-[#78a9ff]"
-                    >
-                      Value
-                    </p>
-                  </div>
-                </div>
-                <div class="flex justify-start items-start self-stretch flex-grow-0 flex-shrink-0 bg-[#fff1f1]">
-                  <div
-                    class="flex flex-col justify-start items-start self-stretch flex-grow relative gap-2 p-4 bg-[#fff1f1]"
-                  >
-                    <p
-                      class="self-stretch flex-grow-0 flex-shrink-0 w-[175.5px] text-sm font-medium text-left text-[#78a9ff]"
-                    >
-                      Red 10
-                    </p>
-                  </div>
-                  <div
-                    class="flex flex-col justify-start items-start self-stretch flex-grow relative gap-2 p-4 bg-[#fff1f1]"
-                  >
-                    <p
-                      class="self-stretch flex-grow-0 flex-shrink-0 w-[175.5px] text-sm font-medium text-left text-[#78a9ff]"
-                    >
-                      #FFF1F1
-                    </p>
-                  </div>
-                </div>
-                <div class="flex justify-start items-start self-stretch flex-grow-0 flex-shrink-0">
-                  <div
-                    class="flex flex-col justify-start items-start self-stretch flex-grow relative gap-2 p-4 bg-[#ffd7d9]"
-                  >
-                    <p
-                      class="self-stretch flex-grow-0 flex-shrink-0 w-[175.5px] text-sm font-medium text-left text-[#78a9ff]"
-                    >
-                      Red 20
-                    </p>
-                  </div>
-                  <div
-                    class="flex flex-col justify-start items-start self-stretch flex-grow relative gap-2 p-4 bg-[#ffd7d9]"
-                  >
-                    <p
-                      class="self-stretch flex-grow-0 flex-shrink-0 w-[175.5px] text-sm font-medium text-left text-[#78a9ff]"
-                    >
-                      #FFD7D9
-                    </p>
-                  </div>
-                </div>
-                <div class="flex justify-start items-start self-stretch flex-grow-0 flex-shrink-0">
-                  <div
-                    class="flex flex-col justify-start items-start self-stretch flex-grow relative gap-2 p-4 bg-[#ffb3b8]"
-                  >
-                    <p
-                      class="self-stretch flex-grow-0 flex-shrink-0 w-[175.5px] text-sm font-medium text-left text-[#78a9ff]"
-                    >
-                      Red 30
-                    </p>
-                  </div>
-                  <div
-                    class="flex flex-col justify-start items-start self-stretch flex-grow relative gap-2 p-4 bg-[#ffb3b8]"
-                  >
-                    <p
-                      class="self-stretch flex-grow-0 flex-shrink-0 w-[175.5px] text-sm font-medium text-left text-[#78a9ff]"
-                    >
-                      #FFB3B8
-                    </p>
-                  </div>
-                </div>
-                <div class="flex justify-start items-start self-stretch flex-grow-0 flex-shrink-0">
-                  <div
-                    class="flex flex-col justify-start items-start self-stretch flex-grow relative gap-2 p-4 bg-[#ff8389]"
-                  >
-                    <p
-                      class="self-stretch flex-grow-0 flex-shrink-0 w-[175.5px] text-sm font-medium text-left text-[#78a9ff]"
-                    >
-                      Red 40
-                    </p>
-                  </div>
-                  <div
-                    class="flex flex-col justify-start items-start self-stretch flex-grow relative gap-2 p-4 bg-[#ff8389]"
-                  >
-                    <p
-                      class="self-stretch flex-grow-0 flex-shrink-0 w-[175.5px] text-sm font-medium text-left text-[#78a9ff]"
-                    >
-                      #FF8389
-                    </p>
-                  </div>
-                </div>
-                <div class="flex justify-start items-start self-stretch flex-grow-0 flex-shrink-0">
-                  <div
-                    class="flex flex-col justify-start items-start self-stretch flex-grow relative gap-2 p-4 bg-[#fa4d56]"
-                  >
-                    <p
-                      class="self-stretch flex-grow-0 flex-shrink-0 w-[175.5px] text-sm font-medium text-left text-white"
-                    >
-                      Red 50
-                    </p>
-                  </div>
-                  <div
-                    class="flex flex-col justify-start items-start self-stretch flex-grow relative gap-2 p-4 bg-[#fa4d56]"
-                  >
-                    <p
-                      class="self-stretch flex-grow-0 flex-shrink-0 w-[175.5px] text-sm font-medium text-left text-white"
-                    >
-                      #FA4D56
-                    </p>
-                  </div>
-                </div>
-                <div class="flex justify-start items-start self-stretch flex-grow-0 flex-shrink-0">
-                  <div
-                    class="flex flex-col justify-start items-start self-stretch flex-grow relative gap-2 p-4 bg-[#da1e28]"
-                  >
-                    <p
-                      class="self-stretch flex-grow-0 flex-shrink-0 w-[175.5px] text-sm font-medium text-left text-white"
-                    >
-                      Red 60
-                    </p>
-                  </div>
-                  <div
-                    class="flex flex-col justify-start items-start self-stretch flex-grow relative gap-2 p-4 bg-[#da1e28]"
-                  >
-                    <p
-                      class="self-stretch flex-grow-0 flex-shrink-0 w-[175.5px] text-sm font-medium text-left text-white"
-                    >
-                      #DA1E28
-                    </p>
-                  </div>
-                </div>
-                <div class="flex justify-start items-start self-stretch flex-grow-0 flex-shrink-0">
-                  <div
-                    class="flex flex-col justify-start items-start self-stretch flex-grow relative gap-2 p-4 bg-[#a2191f]"
-                  >
-                    <p
-                      class="self-stretch flex-grow-0 flex-shrink-0 w-[175.5px] text-sm font-medium text-left text-white"
-                    >
-                      Red 70
-                    </p>
-                  </div>
-                  <div
-                    class="flex flex-col justify-start items-start self-stretch flex-grow relative gap-2 p-4 bg-[#a2191f]"
-                  >
-                    <p
-                      class="self-stretch flex-grow-0 flex-shrink-0 w-[175.5px] text-sm font-medium text-left text-white"
-                    >
-                      #A2191F
-                    </p>
-                  </div>
-                </div>
-                <div class="flex justify-start items-start self-stretch flex-grow-0 flex-shrink-0">
-                  <div
-                    class="flex flex-col justify-start items-start self-stretch flex-grow relative gap-2 p-4 bg-[#750e13]"
-                  >
-                    <p
-                      class="self-stretch flex-grow-0 flex-shrink-0 w-[175.5px] text-sm font-medium text-left text-white"
-                    >
-                      Red 80
-                    </p>
-                  </div>
-                  <div
-                    class="flex flex-col justify-start items-start self-stretch flex-grow relative gap-2 p-4 bg-[#750e13]"
-                  >
-                    <p
-                      class="self-stretch flex-grow-0 flex-shrink-0 w-[175.5px] text-sm font-medium text-left text-white"
-                    >
-                      #750E13
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              class="flex flex-col justify-start items-start w-[519px] absolute left-[4202px] top-[-5361px] gap-[52px] p-[52px] bg-white border border-[#f4f4f4]"
-            >
-              <p class="flex-grow-0 flex-shrink-0 text-[22px] font-medium text-left text-[#78a9ff]">Yellow palette</p>
-              <div
-                class="flex flex-col justify-start items-start self-stretch flex-grow-0 flex-shrink-0 overflow-hidden border border-[#f4f4f4]"
-              >
-                <div class="flex justify-start items-start self-stretch flex-grow-0 flex-shrink-0">
-                  <div
-                    class="flex flex-col justify-start items-start self-stretch flex-grow relative gap-2 p-4 bg-white"
-                  >
-                    <p
-                      class="self-stretch flex-grow-0 flex-shrink-0 w-[175.5px] text-base font-medium text-left text-[#78a9ff]"
-                    >
-                      Name
-                    </p>
-                  </div>
-                  <div
-                    class="flex flex-col justify-start items-start self-stretch flex-grow relative gap-2 p-4 bg-white"
-                  >
-                    <p
-                      class="self-stretch flex-grow-0 flex-shrink-0 w-[175.5px] text-base font-medium text-left text-[#78a9ff]"
-                    >
-                      Value
-                    </p>
-                  </div>
-                </div>
-                <div class="flex justify-start items-start self-stretch flex-grow-0 flex-shrink-0">
-                  <div
-                    class="flex flex-col justify-start items-start self-stretch flex-grow relative gap-2 p-4 bg-[#fcf4d6]"
-                  >
-                    <p
-                      class="self-stretch flex-grow-0 flex-shrink-0 w-[175.5px] text-sm font-medium text-left text-[#78a9ff]"
-                    >
-                      Yellow 10
-                    </p>
-                  </div>
-                  <div
-                    class="flex flex-col justify-start items-start self-stretch flex-grow relative gap-2 p-4 bg-[#fcf4d6]"
-                  >
-                    <p
-                      class="self-stretch flex-grow-0 flex-shrink-0 w-[175.5px] text-sm font-medium text-left text-[#78a9ff]"
-                    >
-                      #FCF4D6
-                    </p>
-                  </div>
-                </div>
-                <div class="flex justify-start items-start self-stretch flex-grow-0 flex-shrink-0">
-                  <div
-                    class="flex flex-col justify-start items-start self-stretch flex-grow relative gap-2 p-4 bg-[#f9e59e]"
-                  >
-                    <p
-                      class="self-stretch flex-grow-0 flex-shrink-0 w-[175.5px] text-sm font-medium text-left text-[#78a9ff]"
-                    >
-                      Yellow 20
-                    </p>
-                  </div>
-                  <div
-                    class="flex flex-col justify-start items-start self-stretch flex-grow relative gap-2 p-4 bg-[#f9e59e]"
-                  >
-                    <p
-                      class="self-stretch flex-grow-0 flex-shrink-0 w-[175.5px] text-sm font-medium text-left text-[#78a9ff]"
-                    >
-                      #F9E59E
-                    </p>
-                  </div>
-                </div>
-                <div class="flex justify-start items-start self-stretch flex-grow-0 flex-shrink-0">
-                  <div
-                    class="flex flex-col justify-start items-start self-stretch flex-grow relative gap-2 p-4 bg-[#f1c21b]"
-                  >
-                    <p
-                      class="self-stretch flex-grow-0 flex-shrink-0 w-[175.5px] text-sm font-medium text-left text-[#78a9ff]"
-                    >
-                      Yellow 30
-                    </p>
-                  </div>
-                  <div
-                    class="flex flex-col justify-start items-start self-stretch flex-grow relative gap-2 p-4 bg-[#f1c21b]"
-                  >
-                    <p
-                      class="self-stretch flex-grow-0 flex-shrink-0 w-[175.5px] text-sm font-medium text-left text-[#78a9ff]"
-                    >
-                      #F1C21B
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <svg
-              width="46"
-              height="46"
-              viewBox="0 0 46 46"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              class="w-[46px] h-[46px] absolute left-1.5 top-1.5"
-              preserveAspectRatio="xMidYMid meet"
-            >
-              <path
-                d="M23.0006 3.83154C33.5882 3.83154 42.1711 12.4144 42.1711 23.002C42.1711 33.5878 33.5882 42.1706 23.0006 42.1706C12.4129 42.1706 3.83008 33.5878 3.83008 23.002C3.83008 12.4144 12.4129 3.83154 23.0006 3.83154ZM22.9929 19.644C22.5232 19.6447 22.0701 19.8178 21.7196 20.1305C21.3691 20.4432 21.1456 20.8737 21.0916 21.3403L21.0782 21.5626L21.0839 32.1081L21.0973 32.3324C21.1514 32.7998 21.3755 33.2311 21.7269 33.5439C22.0784 33.8568 22.5327 34.0294 23.0032 34.029C23.4738 34.0285 23.9277 33.8549 24.2786 33.5414C24.6294 33.2278 24.8527 32.7961 24.9057 32.3285L24.9172 32.1043L24.9115 21.5607L24.8981 21.3365C24.8427 20.8702 24.6181 20.4406 24.2669 20.129C23.9157 19.8174 23.4624 19.6455 22.9929 19.646V19.644ZM23.0006 12.4585C22.3644 12.4585 21.7543 12.7112 21.3044 13.161C20.8546 13.6109 20.6019 14.221 20.6019 14.8572C20.6019 15.4933 20.8546 16.1035 21.3044 16.5533C21.7543 17.0032 22.3644 17.2559 23.0006 17.2559C23.6368 17.2559 24.2469 17.0032 24.6967 16.5533C25.1466 16.1035 25.3993 15.4933 25.3993 14.8572C25.3993 14.221 25.1466 13.6109 24.6967 13.161C24.2469 12.7112 23.6368 12.4585 23.0006 12.4585Z"
-                fill="white"
-              ></path>
-            </svg>
+      <div class="flex items-center flex-wrap mt-10" pDroppable="true" (onDrop)="dragEnd()">
+        <div
+          class="w-[92px] flex justify-center items-center flex-wrap mb-3"
+          pDraggable="apps"
+          *ngFor="let item of apps"
+          (onDragStart)="dragStart(item)"
+          [class.cursor-pointer]="item.location"
+          [routerLink]="item?.location ? item?.location : null"
+        >
+          <div class="app-container" [ngStyle]="{ backgroundColor: item.color }">
+            <i [inlineSVG]="item.icon"></i>
           </div>
-          <p class="flex-grow-0 flex-shrink-0 text-xs text-center text-neutral-800">اطلاعات پایه</p>
-        </div>
-        <div class="flex flex-col cursor-pointer justify-start items-center w-[74px] h-[81px] relative gap-[5px]">
-          <svg
-            width="58"
-            height="57"
-            viewBox="0 0 58 57"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            class="flex-grow-0 flex-shrink-0 w-[57px] h-[57px] relative"
-            preserveAspectRatio="none"
-          >
-            <rect x="0.5" width="57" height="57" rx="12" fill="#BE95FF"></rect>
-            <path
-              d="M23.7208 25.1667C21.8694 25.1667 20.3667 26.6693 20.3667 28.5208V37.6231C20.3667 39.9111 21.2756 42.1054 22.8934 43.7232C24.5113 45.3411 26.7056 46.25 28.9936 46.25C31.2816 46.25 33.4759 45.3411 35.0938 43.7232C36.7116 42.1054 37.6205 39.9111 37.6205 37.6231V28.5208C37.6205 26.6693 36.1198 25.1667 34.2663 25.1667H23.7208ZM38.3316 25.1667C39.0024 25.9755 39.4337 26.9875 39.5199 28.0992L39.5391 28.5208V37.6231C39.5391 39.2465 39.1711 40.7837 38.5156 42.156C39.6516 42.4599 40.8424 42.4985 41.9957 42.2687C43.149 42.039 44.2341 41.547 45.1669 40.8309C46.0998 40.1149 46.8554 39.1938 47.3755 38.1391C47.8955 37.0843 48.166 35.9241 48.166 34.7481V28.5208C48.166 27.6791 47.8494 26.8681 47.2792 26.2488C46.709 25.6296 45.9268 25.2474 45.0878 25.1782L44.8118 25.1667H38.3316ZM19.6556 25.1667H13.1869C11.3354 25.1667 9.83268 26.6693 9.83268 28.5208V34.75C9.83242 35.9252 10.1023 37.0848 10.6216 38.1391C11.1409 39.1934 11.8955 40.1142 12.8274 40.8304C13.7592 41.5465 14.8431 42.0389 15.9955 42.2694C17.1479 42.5 18.3379 42.4625 19.4735 42.1598C18.8985 40.9562 18.5458 39.6298 18.4673 38.2268L18.45 37.6231V28.5208C18.45 27.2462 18.9023 26.0771 19.6575 25.1667H19.6556ZM28.9993 11.75C27.4744 11.75 26.0118 12.3558 24.9335 13.4341C23.8552 14.5125 23.2493 15.975 23.2493 17.5C23.2493 19.025 23.8552 20.4875 24.9335 21.5659C26.0118 22.6442 27.4744 23.25 28.9993 23.25C30.5243 23.25 31.9869 22.6442 33.0652 21.5659C34.1435 20.4875 34.7493 19.025 34.7493 17.5C34.7493 15.975 34.1435 14.5125 33.0652 13.4341C31.9869 12.3558 30.5243 11.75 28.9993 11.75ZM16.541 13.6667C15.2702 13.6667 14.0514 14.1715 13.1528 15.0701C12.2542 15.9687 11.7494 17.1875 11.7494 18.4583C11.7494 19.7292 12.2542 20.9479 13.1528 21.8466C14.0514 22.7452 15.2702 23.25 16.541 23.25C17.8118 23.25 19.0306 22.7452 19.9292 21.8466C20.8278 20.9479 21.3327 19.7292 21.3327 18.4583C21.3327 17.1875 20.8278 15.9687 19.9292 15.0701C19.0306 14.1715 17.8118 13.6667 16.541 13.6667ZM41.4577 13.6667C40.1869 13.6667 38.9681 14.1715 38.0695 15.0701C37.1709 15.9687 36.666 17.1875 36.666 18.4583C36.666 19.7292 37.1709 20.9479 38.0695 21.8466C38.9681 22.7452 40.1869 23.25 41.4577 23.25C42.7285 23.25 43.9473 22.7452 44.8459 21.8466C45.7445 20.9479 46.2493 19.7292 46.2493 18.4583C46.2493 17.1875 45.7445 15.9687 44.8459 15.0701C43.9473 14.1715 42.7285 13.6667 41.4577 13.6667Z"
-              fill="white"
-            ></path>
-          </svg>
-          <p class="flex-grow-0 flex-shrink-0 text-xs text-center text-neutral-800">داشبورد پرسنل</p>
-        </div>
-        <div class="flex flex-col cursor-pointer justify-start items-center w-[74px] h-[81px] relative gap-[5px]">
-          <svg
-            width="58"
-            height="57"
-            viewBox="0 0 58 57"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            class="flex-grow-0 flex-shrink-0 w-[57px] h-[57px] relative"
-            preserveAspectRatio="none"
-          >
-            <rect x="0.5" width="57" height="57" rx="12" fill="#08BDBA"></rect>
-            <path
-              d="M29.0003 11.75C32.4788 11.7501 35.8761 12.8018 38.7462 14.7671C41.6163 16.7325 43.8252 19.5196 45.0829 22.7628C46.3407 26.006 46.5885 29.5536 45.794 32.9402C44.9994 36.3267 43.1996 39.394 40.6307 41.7393C38.0618 44.0847 34.8438 45.5986 31.3991 46.0824C27.9544 46.5662 24.4439 45.9972 21.3283 44.4502C18.2127 42.9032 15.6376 40.4503 13.941 37.4136C12.2444 34.377 11.5055 30.8983 11.8212 27.4341C11.8439 27.1834 11.9157 26.9396 12.0326 26.7167C12.1494 26.4938 12.3091 26.296 12.5023 26.1348C12.6956 25.9735 12.9188 25.8519 13.1591 25.7769C13.3993 25.7019 13.652 25.675 13.9027 25.6976C14.1534 25.7203 14.3972 25.7921 14.6201 25.9089C14.8431 26.0258 15.0408 26.1854 15.2021 26.3787C15.3633 26.572 15.4849 26.7952 15.5599 27.0354C15.6349 27.2757 15.6619 27.5284 15.6392 27.7791C15.4549 29.7392 15.7067 31.7159 16.3764 33.5673C17.0461 35.4187 18.1172 37.0989 19.5128 38.4875C20.2316 39.2063 21.0308 39.8426 21.8933 40.3812C24.0295 41.7147 26.4978 42.4202 29.016 42.4169C31.5343 42.4135 34.0007 41.7015 36.1333 40.3623C38.2659 39.0231 39.9786 37.1107 41.0754 34.8439C42.1723 32.5771 42.609 30.0474 42.3357 27.544C42.0623 25.0407 41.09 22.6648 39.5299 20.688C37.9697 18.7113 35.8847 17.2136 33.5134 16.3661C31.1421 15.5186 28.5801 15.3557 26.1204 15.8958C23.6608 16.436 21.4029 17.6574 19.6048 19.4205L22.2882 19.4224C22.7795 19.4191 23.2533 19.6045 23.6118 19.9405C23.9703 20.2764 24.1861 20.7373 24.2147 21.2277C24.2432 21.7182 24.0823 22.201 23.7652 22.5762C23.448 22.9515 22.9989 23.1906 22.5105 23.2443L22.2882 23.2558H14.6177C14.1482 23.2557 13.6951 23.0834 13.3443 22.7714C12.9935 22.4594 12.7693 22.0296 12.7144 21.5634L12.701 21.3391V13.6724C12.6976 13.1811 12.8831 12.7073 13.219 12.3488C13.555 11.9903 14.0158 11.7744 14.5063 11.7459C14.9968 11.7174 15.4795 11.8783 15.8548 12.1954C16.23 12.5126 16.4692 12.9617 16.5228 13.4501L16.5343 13.6744V17.0745C18.1438 15.3897 20.0785 14.0491 22.2213 13.1338C24.364 12.2186 26.6703 11.7478 29.0003 11.75ZM27.5628 19.4167C27.9102 19.4167 28.2458 19.5425 28.5076 19.7708C28.7694 19.9991 28.9397 20.3145 28.9869 20.6587L29.0003 20.8542V29H33.3128C33.677 29.0001 34.0276 29.1385 34.2938 29.3871C34.5599 29.6358 34.7217 29.9762 34.7465 30.3395C34.7714 30.7029 34.6573 31.0622 34.4275 31.3447C34.1976 31.6272 33.8691 31.812 33.5083 31.8616L33.3128 31.875H27.5628C27.2154 31.875 26.8798 31.7492 26.618 31.5209C26.3562 31.2926 26.186 30.9772 26.1387 30.633L26.1253 30.4375V20.8542C26.1253 20.4729 26.2768 20.1073 26.5464 19.8377C26.8159 19.5681 27.1816 19.4167 27.5628 19.4167Z"
-              fill="white"
-            ></path>
-          </svg>
-          <p class="flex-grow-0 flex-shrink-0 text-xs text-center text-neutral-800">وقایع سامانه</p>
-        </div>
-        <div class="flex flex-col cursor-pointer justify-start items-center w-[74px] h-[81px] relative gap-[5px]">
-          <svg
-            width="58"
-            height="57"
-            viewBox="0 0 58 57"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            class="flex-grow-0 flex-shrink-0 w-[57px] h-[57px] relative"
-            preserveAspectRatio="none"
-          >
-            <rect x="0.5" width="57" height="57" rx="12" fill="#FF8389"></rect>
-            <path
-              d="M32.55 11H26.25C25.2538 11 24.2926 11.3672 23.5501 12.0313C22.8076 12.6955 22.3359 13.61 22.2252 14.6H19.05C17.9759 14.6 16.9457 15.0267 16.1862 15.7862C15.4267 16.5457 15 17.5759 15 18.65V42.95C15 44.0241 15.4267 45.0543 16.1862 45.8138C16.9457 46.5733 17.9759 47 19.05 47H39.75C40.2819 47 40.8085 46.8952 41.2999 46.6917C41.7912 46.4882 42.2377 46.1899 42.6138 45.8138C42.9899 45.4377 43.2882 44.9912 43.4917 44.4999C43.6952 44.0085 43.8 43.4819 43.8 42.95V18.65C43.8 18.1181 43.6952 17.5915 43.4917 17.1001C43.2882 16.6088 42.9899 16.1623 42.6138 15.7862C42.2377 15.4101 41.7912 15.1118 41.2999 14.9083C40.8085 14.7048 40.2819 14.6 39.75 14.6H36.5748C36.4641 13.61 35.9924 12.6955 35.2499 12.0313C34.5074 11.3672 33.5462 11 32.55 11ZM26.25 13.7H32.55C32.908 13.7 33.2514 13.8422 33.5046 14.0954C33.7578 14.3486 33.9 14.692 33.9 15.05C33.9 15.408 33.7578 15.7514 33.5046 16.0046C33.2514 16.2578 32.908 16.4 32.55 16.4H26.25C25.892 16.4 25.5486 16.2578 25.2954 16.0046C25.0422 15.7514 24.9 15.408 24.9 15.05C24.9 14.692 25.0422 14.3486 25.2954 14.0954C25.5486 13.8422 25.892 13.7 26.25 13.7ZM38.904 23.096C39.1568 23.3491 39.2988 23.6922 39.2988 24.05C39.2988 24.4078 39.1568 24.7509 38.904 25.004L35.304 28.604C35.0509 28.8568 34.7078 28.9988 34.35 28.9988C33.9922 28.9988 33.6491 28.8568 33.396 28.604L31.596 26.804C31.4634 26.6804 31.357 26.5314 31.2832 26.3658C31.2094 26.2002 31.1697 26.0214 31.1665 25.8401C31.1633 25.6589 31.1967 25.4788 31.2646 25.3107C31.3325 25.1426 31.4335 24.9899 31.5617 24.8617C31.6899 24.7335 31.8426 24.6325 32.0107 24.5646C32.1788 24.4967 32.3589 24.4633 32.5401 24.4665C32.7214 24.4697 32.9002 24.5094 33.0658 24.5832C33.2314 24.657 33.3804 24.7634 33.504 24.896L34.35 25.742L36.996 23.096C37.2491 22.8432 37.5922 22.7012 37.95 22.7012C38.3078 22.7012 38.6509 22.8432 38.904 23.096ZM38.904 34.904L35.304 38.504C35.0509 38.7568 34.7078 38.8988 34.35 38.8988C33.9922 38.8988 33.6491 38.7568 33.396 38.504L31.596 36.704C31.4634 36.5804 31.357 36.4314 31.2832 36.2658C31.2094 36.1002 31.1697 35.9214 31.1665 35.7401C31.1633 35.5589 31.1967 35.3788 31.2646 35.2107C31.3325 35.0426 31.4335 34.8899 31.5617 34.7617C31.6899 34.6335 31.8426 34.5325 32.0107 34.4646C32.1788 34.3967 32.3589 34.3633 32.5401 34.3665C32.7214 34.3697 32.9002 34.4094 33.0658 34.4832C33.2314 34.557 33.3804 34.6634 33.504 34.796L34.35 35.642L36.996 32.996C37.1196 32.8634 37.2686 32.757 37.4342 32.6832C37.5998 32.6094 37.7786 32.5697 37.9599 32.5665C38.1411 32.5633 38.3212 32.5967 38.4893 32.6646C38.6574 32.7325 38.8101 32.8335 38.9383 32.9617C39.0665 33.0899 39.1675 33.2426 39.2354 33.4107C39.3033 33.5788 39.3367 33.7589 39.3335 33.9401C39.3303 34.1214 39.2906 34.3002 39.2168 34.4658C39.143 34.6314 39.0366 34.7804 38.904 34.904ZM20.4 25.85C20.4 25.492 20.5422 25.1486 20.7954 24.8954C21.0486 24.6422 21.392 24.5 21.75 24.5H28.05C28.408 24.5 28.7514 24.6422 29.0046 24.8954C29.2578 25.1486 29.4 25.492 29.4 25.85C29.4 26.208 29.2578 26.5514 29.0046 26.8046C28.7514 27.0578 28.408 27.2 28.05 27.2H21.75C21.392 27.2 21.0486 27.0578 20.7954 26.8046C20.5422 26.5514 20.4 26.208 20.4 25.85ZM21.75 34.4H28.05C28.408 34.4 28.7514 34.5422 29.0046 34.7954C29.2578 35.0486 29.4 35.392 29.4 35.75C29.4 36.108 29.2578 36.4514 29.0046 36.7046C28.7514 36.9578 28.408 37.1 28.05 37.1H21.75C21.392 37.1 21.0486 36.9578 20.7954 36.7046C20.5422 36.4514 20.4 36.108 20.4 35.75C20.4 35.392 20.5422 35.0486 20.7954 34.7954C21.0486 34.5422 21.392 34.4 21.75 34.4Z"
-              fill="white"
-            ></path>
-          </svg>
-          <p class="flex-grow-0 flex-shrink-0 text-xs text-center text-neutral-800">مدیریت پروژه</p>
-        </div>
-        <div class="flex flex-col cursor-pointer justify-start items-center w-[75px] h-[81px] relative gap-[5px]">
-          <svg
-            width="57"
-            height="57"
-            viewBox="0 0 57 57"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            class="flex-grow-0 flex-shrink-0 w-[57px] h-[57px] relative"
-            preserveAspectRatio="none"
-          >
-            <rect width="57" height="57" rx="12" fill="#42BE65"></rect>
-            <path
-              d="M11 14.15C11 12.4112 12.4112 11 14.15 11H43.85C44.6854 11 45.4866 11.3319 46.0774 11.9226C46.6681 12.5134 47 13.3146 47 14.15C47 14.9854 46.6681 15.7866 46.0774 16.3774C45.4866 16.9681 44.6854 17.3 43.85 17.3H14.15C13.3146 17.3 12.5134 16.9681 11.9226 16.3774C11.3319 15.7866 11 14.9854 11 14.15ZM29 38.9C30.9096 38.9 32.7409 38.1414 34.0912 36.7912C35.4414 35.4409 36.2 33.6096 36.2 31.7C36.2 29.7904 35.4414 27.9591 34.0912 26.6088C32.7409 25.2586 30.9096 24.5 29 24.5C27.0904 24.5 25.2591 25.2586 23.9088 26.6088C22.5586 27.9591 21.8 29.7904 21.8 31.7C21.8 33.6096 22.5586 35.4409 23.9088 36.7912C25.2591 38.1414 27.0904 38.9 29 38.9ZM33.5 31.7C33.5 32.8935 33.0259 34.0381 32.182 34.882C31.3381 35.7259 30.1935 36.2 29 36.2C27.8065 36.2 26.6619 35.7259 25.818 34.882C24.9741 34.0381 24.5 32.8935 24.5 31.7C24.5 30.5065 24.9741 29.3619 25.818 28.518C26.6619 27.6741 27.8065 27.2 29 27.2C30.1935 27.2 31.3381 27.6741 32.182 28.518C33.0259 29.3619 33.5 30.5065 33.5 31.7ZM12.8 20H45.2V30.8C45.2 32.9274 44.781 35.034 43.9669 36.9995C43.1527 38.9649 41.9594 40.7508 40.4551 42.2551C38.9508 43.7594 37.1649 44.9527 35.1995 45.7668C33.234 46.581 31.1274 47 29 47C26.8726 47 24.766 46.581 22.8005 45.7668C20.8351 44.9527 19.0492 43.7594 17.5449 42.2551C16.0406 40.7508 14.8473 38.9649 14.0332 36.9995C13.219 35.034 12.8 32.9274 12.8 30.8V20ZM29 41.6C31.6256 41.6 34.1437 40.557 36.0004 38.7004C37.857 36.8437 38.9 34.3256 38.9 31.7C38.9 29.0744 37.857 26.5563 36.0004 24.6996C34.1437 22.843 31.6256 21.8 29 21.8C26.3744 21.8 23.8563 22.843 21.9996 24.6996C20.143 26.5563 19.1 29.0744 19.1 31.7C19.1 34.3256 20.143 36.8437 21.9996 38.7004C23.8563 40.557 26.3744 41.6 29 41.6Z"
-              fill="white"
-            ></path>
-          </svg>
-          <p class="flex-grow-0 flex-shrink-0 text-xs text-center text-neutral-800">اشراف</p>
+          <span class="w-full text-center mt-3 text-[12px] text-gray-dark">{{ item.subject }}</span>
         </div>
       </div>
-      <div class="flex justify-center">
-        <div class="w-[428px] h-[92px] relative rounded-3xl bg-[#8d8d8d]/10 backdrop-blur-[135.91px]">
-          <div class="w-[60px] h-[60px] absolute left-4 top-4 rounded-xl">
-            <svg
-              width="60"
-              height="60"
-              viewBox="0 0 60 60"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              class="w-[60px] h-[60px] absolute left-0 top-50 bottom-50"
-              preserveAspectRatio="xMidYMid meet"
-            >
-              <rect width="60" height="60" rx="12" fill="#78A9FF"></rect>
-              <path
-                d="M34.0787 24.95C34.7609 24.9496 35.425 25.1745 35.9721 25.5912C36.5193 26.0079 36.9201 26.5941 37.115 27.2625H35.881C34.5612 27.2625 33.2955 27.7985 32.3623 28.7526C31.429 29.7067 30.9048 31.0007 30.9048 32.35V32.4425C29.883 32.6557 28.9646 33.2234 28.3051 34.0493C27.6456 34.8753 27.2855 35.9088 27.2857 36.975V45.0928C25.4874 44.6718 23.882 43.6395 22.7322 42.1645C21.5824 40.6895 20.9562 38.8593 20.956 36.9732V28.1875C20.956 26.4004 22.3729 24.95 24.1227 24.95H34.0787ZM42.2143 27.2625C43.5303 27.2625 44.7927 27.7954 45.7253 28.7447C46.6579 29.694 47.1847 30.9824 47.1905 32.3278V28.1875C47.1905 27.3289 46.8568 26.5054 46.263 25.8982C45.6691 25.2911 44.8637 24.95 44.0238 24.95H37.9167C38.445 25.6031 38.816 26.393 38.9734 27.2625H42.2143ZM20.2847 24.95C19.6513 25.7307 19.2442 26.7075 19.1628 27.7805L19.1447 28.1875V36.9732C19.1447 38.5401 19.4921 40.0238 20.111 41.3484C19.0384 41.6417 17.9143 41.679 16.8254 41.4572C15.7365 41.2354 14.7121 40.7606 13.8314 40.0694C12.9507 39.3783 12.2373 38.4893 11.7464 37.4712C11.2554 36.4531 11 35.3332 11 34.1981V28.1875C11 27.375 11.2989 26.5922 11.8372 25.9945C12.3756 25.3968 13.1141 25.028 13.9061 24.9611L14.1667 24.95H20.2847ZM29.0952 12C30.535 12 31.9158 12.5847 32.9338 13.6256C33.9519 14.6664 34.5238 16.078 34.5238 17.55C34.5238 19.022 33.9519 20.4336 32.9338 21.4744C31.9158 22.5153 30.535 23.1 29.0952 23.1C27.6555 23.1 26.2747 22.5153 25.2567 21.4744C24.2386 20.4336 23.6667 19.022 23.6667 17.55C23.6667 16.078 24.2386 14.6664 25.2567 13.6256C26.2747 12.5847 27.6555 12 29.0952 12ZM40.8571 13.85C42.0569 13.85 43.2076 14.3373 44.056 15.2046C44.9043 16.072 45.381 17.2484 45.381 18.475C45.381 19.7016 44.9043 20.878 44.056 21.7454C43.2076 22.6127 42.0569 23.1 40.8571 23.1C39.6574 23.1 38.5067 22.6127 37.6583 21.7454C36.8099 20.878 36.3333 19.7016 36.3333 18.475C36.3333 17.2484 36.8099 16.072 37.6583 15.2046C38.5067 14.3373 39.6574 13.85 40.8571 13.85ZM17.3333 13.85C18.5331 13.85 19.6838 14.3373 20.5321 15.2046C21.3805 16.072 21.8571 17.2484 21.8571 18.475C21.8571 19.7016 21.3805 20.878 20.5321 21.7454C19.6838 22.6127 18.5331 23.1 17.3333 23.1C16.1335 23.1 14.9829 22.6127 14.1345 21.7454C13.2861 20.878 12.8095 19.7016 12.8095 18.475C12.8095 17.2484 13.2861 16.072 14.1345 15.2046C14.9829 14.3373 16.1335 13.85 17.3333 13.85ZM32.7143 34.2H31.8095C31.0897 34.2 30.3993 34.4924 29.8902 35.0128C29.3812 35.5332 29.0952 36.239 29.0952 36.975V39.75H33.619V39.2875C33.619 38.9195 33.762 38.5666 34.0165 38.3064C34.2711 38.0462 34.6163 37.9 34.9762 37.9C35.3361 37.9 35.6813 38.0462 35.9358 38.3064C36.1903 38.5666 36.3333 38.9195 36.3333 39.2875V39.75H41.7619V39.2875C41.7619 38.9195 41.9049 38.5666 42.1594 38.3064C42.4139 38.0462 42.7591 37.9 43.119 37.9C43.479 37.9 43.8242 38.0462 44.0787 38.3064C44.3332 38.5666 44.4762 38.9195 44.4762 39.2875V39.75H49V36.975C49 36.239 48.714 35.5332 48.205 35.0128C47.696 34.4924 47.0056 34.2 46.2857 34.2H45.381V32.35C45.381 31.4914 45.0473 30.6679 44.4535 30.0607C43.8596 29.4536 43.0541 29.1125 42.2143 29.1125H35.881C35.0411 29.1125 34.2356 29.4536 33.6418 30.0607C33.0479 30.6679 32.7143 31.4914 32.7143 32.35V34.2ZM35.4286 32.35C35.4286 32.2273 35.4762 32.1097 35.5611 32.023C35.6459 31.9362 35.761 31.8875 35.881 31.8875H42.2143C42.3343 31.8875 42.4493 31.9362 42.5342 32.023C42.619 32.1097 42.6667 32.2273 42.6667 32.35V34.2H35.4286V32.35ZM29.0952 46.225V42.525H33.619V43.9125C33.619 44.2805 33.762 44.6334 34.0165 44.8936C34.2711 45.1538 34.6163 45.3 34.9762 45.3C35.3361 45.3 35.6813 45.1538 35.9358 44.8936C36.1903 44.6334 36.3333 44.2805 36.3333 43.9125V42.525H41.7619V43.9125C41.7619 44.2805 41.9049 44.6334 42.1594 44.8936C42.4139 45.1538 42.7591 45.3 43.119 45.3C43.479 45.3 43.8242 45.1538 44.0787 44.8936C44.3332 44.6334 44.4762 44.2805 44.4762 43.9125V42.525H49V46.225C49 46.961 48.714 47.6668 48.205 48.1872C47.696 48.7076 47.0056 49 46.2857 49H31.8095C31.0897 49 30.3993 48.7076 29.8902 48.1872C29.3812 47.6668 29.0952 46.961 29.0952 46.225Z"
-                fill="white"
-              ></path>
-            </svg>
-            <div
-              class="flex flex-col justify-start items-start w-[23px] h-[23px] absolute left-[46px] top-[-9px] gap-2.5 pl-[7px] pr-2 py-0.5 rounded-[100px] bg-[#fa4d56]"
-            >
-              <p class="self-stretch flex-grow w-2 h-[19px] text-base text-center text-white">3</p>
-            </div>
-          </div>
-          <svg
-            width="1"
-            height="32"
-            viewBox="0 0 1 32"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            class="absolute left-[87px] top-[50%] bottom-[50%]"
-            preserveAspectRatio="xMidYMid meet"
+      <!--      <div class="bookmark-app my-2 flex items-center" pDroppable="apps" (onDrop)="dragEnd(true)">-->
+      <!--        <div-->
+      <!--          [pTooltip]="item.subject"-->
+      <!--          tooltipPosition="top"-->
+      <!--          *ngFor="let item of bookmarkedApps"-->
+      <!--          pDraggable="true"-->
+      <!--          class="flex justify-center items-center flex-wrap"-->
+      <!--          (onDragStart)="dragStart(item)"-->
+      <!--          [class.cursor-pointer]="item.url"-->
+      <!--          [routerLink]="item.url ? item.url : null"-->
+      <!--        >-->
+      <!--          <i [inlineSVG]="item.icon" class="m-2"></i>-->
+      <!--        </div>-->
+      <!--      </div>-->
+      <p-dock
+        [model]="bookmarkedApps"
+        [position]="'bottom'"
+        class="custom-dock"
+        pDroppable="apps"
+        (onDrop)="dragEnd(true)"
+        #dock
+      >
+        <ng-template pTemplate="item" let-item>
+          <div
+            class="app-container"
+            [class.cursor-pointer]="item.location"
+            [ngStyle]="{ backgroundColor: item.color }"
+            pDraggable="true"
+            (onDragStart)="dragStart(item)"
           >
-            <line
-              x1="0.5"
-              y1="31.5"
-              x2="0.5"
-              y2="0.5"
-              stroke="#8D8D8D"
-              stroke-opacity="0.5"
-              stroke-linecap="round"
-            ></line>
-          </svg>
-          <div class="flex flex-col justify-start items-end absolute left-[100px] top-4 gap-[5px] rounded-xl">
-            <svg
-              width="60"
-              height="60"
-              viewBox="0 0 60 60"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              class="flex-grow-0 flex-shrink-0 w-[60px] h-[60px] relative"
-              preserveAspectRatio="xMidYMid meet"
-            >
-              <rect width="60" height="60" rx="12" fill="#8D8D8D"></rect>
-              <path
-                d="M30.0227 11.3125C31.4295 11.3278 32.8306 11.4908 34.2048 11.7974C34.4972 11.8627 34.7619 12.0176 34.9619 12.2407C35.1619 12.4637 35.2872 12.7436 35.3203 13.0413L35.6462 15.9681C35.6922 16.3807 35.8344 16.7768 36.0614 17.1244C36.2884 17.4721 36.5938 17.7616 36.9531 17.9696C37.3124 18.1777 37.7155 18.2985 38.13 18.3224C38.5445 18.3463 38.9588 18.2725 39.3396 18.1071L42.0248 16.9283C42.2975 16.8083 42.6007 16.7758 42.8926 16.8356C43.1844 16.8953 43.4505 17.0443 43.654 17.2618C45.5936 19.3339 47.0379 21.8189 47.8783 24.5298C47.9665 24.8147 47.9638 25.12 47.8708 25.4033C47.7777 25.6866 47.5988 25.9339 47.3589 26.1111L44.9784 27.8668C44.6437 28.1127 44.3715 28.4339 44.1839 28.8045C43.9962 29.1751 43.8985 29.5846 43.8985 30C43.8985 30.4154 43.9962 30.8249 44.1839 31.1955C44.3715 31.5661 44.6437 31.8873 44.9784 32.1333L47.3608 33.887C47.6015 34.064 47.781 34.3116 47.8744 34.5953C47.9678 34.879 47.9705 35.1848 47.8822 35.4702C47.0414 38.1809 45.5971 40.6659 43.6578 42.7382C43.4548 42.9552 43.1895 43.104 42.8985 43.1641C42.6074 43.2242 42.3049 43.1926 42.0325 43.0736L39.3358 41.891C38.9555 41.7243 38.5413 41.6494 38.1267 41.6725C37.7121 41.6955 37.3088 41.8159 36.9493 42.0238C36.5899 42.2317 36.2844 42.5213 36.0577 42.8692C35.831 43.217 35.6894 43.6134 35.6443 44.0262L35.3203 46.951C35.2877 47.2455 35.1648 47.5227 34.9686 47.7447C34.7723 47.9667 34.5123 48.1226 34.224 48.1911C31.4478 48.8516 28.5554 48.8516 25.7792 48.1911C25.4909 48.1226 25.2309 47.9667 25.0346 47.7447C24.8384 47.5227 24.7155 47.2455 24.6828 46.951L24.3608 44.03C24.3139 43.6183 24.171 43.2233 23.9436 42.8768C23.7163 42.5303 23.4108 42.2421 23.0517 42.0351C22.6927 41.8282 22.2901 41.7084 21.8763 41.6854C21.4625 41.6623 21.0491 41.7367 20.6693 41.9025L17.9745 43.0832C17.7019 43.2026 17.399 43.2344 17.1075 43.1744C16.8161 43.1143 16.5504 42.9652 16.3473 42.7477C14.407 40.6732 12.9627 38.1856 12.1229 35.4721C12.0346 35.1867 12.0373 34.881 12.1307 34.5972C12.2241 34.3135 12.4036 34.0659 12.6443 33.8889L15.0267 32.1333C15.3618 31.8876 15.6343 31.5664 15.8222 31.1958C16.0101 30.8252 16.1079 30.4155 16.1079 30C16.1079 29.5845 16.0101 29.1748 15.8222 28.8042C15.6343 28.4336 15.3618 28.1124 15.0267 27.8668L12.6443 26.1149C12.404 25.9377 12.2249 25.69 12.1318 25.4063C12.0387 25.1226 12.0363 24.8169 12.1248 24.5318C12.9654 21.8209 14.4097 19.3359 16.3492 17.2638C16.5527 17.0462 16.8188 16.8973 17.1106 16.8375C17.4025 16.7778 17.7057 16.8102 17.9783 16.9303L20.6617 18.109C21.0431 18.2744 21.4581 18.3479 21.8731 18.3238C22.2882 18.2997 22.6918 18.1786 23.0515 17.9702C23.4113 17.7618 23.7171 17.472 23.9445 17.1239C24.1719 16.7759 24.3145 16.3793 24.3608 15.9662L24.6867 13.0413C24.7196 12.743 24.845 12.4625 25.0454 12.239C25.2458 12.0156 25.5111 11.8605 25.8041 11.7955C27.1783 11.4908 28.5833 11.3297 30.0227 11.3125ZM29.9997 24.25C28.4747 24.25 27.0121 24.8558 25.9338 25.9341C24.8555 27.0125 24.2497 28.475 24.2497 30C24.2497 31.525 24.8555 32.9875 25.9338 34.0659C27.0121 35.1442 28.4747 35.75 29.9997 35.75C31.5247 35.75 32.9872 35.1442 34.0655 34.0659C35.1439 32.9875 35.7497 31.525 35.7497 30C35.7497 28.475 35.1439 27.0125 34.0655 25.9341C32.9872 24.8558 31.5247 24.25 29.9997 24.25Z"
-                fill="white"
-              ></path>
-            </svg>
+            <i [inlineSVG]="item.icon" class="m-2" [routerLink]="item.location ? item.location : null"></i>
           </div>
-          <div class="flex flex-col justify-start items-end absolute left-[184px] top-4 gap-[5px] rounded-xl">
-            <svg
-              width="60"
-              height="60"
-              viewBox="0 0 60 60"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              class="flex-grow-0 flex-shrink-0 w-[60px] h-[60px] relative"
-              preserveAspectRatio="xMidYMid meet"
-            >
-              <rect width="60" height="60" rx="12" fill="#BE95FF"></rect>
-              <path
-                d="M11 18.7C11 17.1883 11.6005 15.7384 12.6695 14.6695C13.7384 13.6005 15.1883 13 16.7 13H19.55C20.0539 13 20.5372 13.2002 20.8935 13.5565C21.2498 13.9128 21.45 14.3961 21.45 14.9C21.45 15.4039 21.2498 15.8872 20.8935 16.2435C20.5372 16.5998 20.0539 16.8 19.55 16.8H16.7C16.1961 16.8 15.7128 17.0002 15.3565 17.3565C15.0002 17.7128 14.8 18.1961 14.8 18.7V21.55C14.8 22.0539 14.5998 22.5372 14.2435 22.8935C13.8872 23.2498 13.4039 23.45 12.9 23.45C12.3961 23.45 11.9128 23.2498 11.5565 22.8935C11.2002 22.5372 11 22.0539 11 21.55V18.7ZM38.55 14.9C38.55 14.3961 38.7502 13.9128 39.1065 13.5565C39.4628 13.2002 39.9461 13 40.45 13H43.3C44.8117 13 46.2616 13.6005 47.3305 14.6695C48.3995 15.7384 49 17.1883 49 18.7V21.55C49 22.0539 48.7998 22.5372 48.4435 22.8935C48.0872 23.2498 47.6039 23.45 47.1 23.45C46.5961 23.45 46.1128 23.2498 45.7565 22.8935C45.4002 22.5372 45.2 22.0539 45.2 21.55V18.7C45.2 18.1961 44.9998 17.7128 44.6435 17.3565C44.2872 17.0002 43.8039 16.8 43.3 16.8H40.45C39.9461 16.8 39.4628 16.5998 39.1065 16.2435C38.7502 15.8872 38.55 15.4039 38.55 14.9ZM12.9 36.75C13.4039 36.75 13.8872 36.9502 14.2435 37.3065C14.5998 37.6628 14.8 38.1461 14.8 38.65V41.5C14.8 42.0039 15.0002 42.4872 15.3565 42.8435C15.7128 43.1998 16.1961 43.4 16.7 43.4H19.55C20.0539 43.4 20.5372 43.6002 20.8935 43.9565C21.2498 44.3128 21.45 44.7961 21.45 45.3C21.45 45.8039 21.2498 46.2872 20.8935 46.6435C20.5372 46.9998 20.0539 47.2 19.55 47.2H16.7C15.1883 47.2 13.7384 46.5995 12.6695 45.5305C11.6005 44.4616 11 43.0117 11 41.5V38.65C11 38.1461 11.2002 37.6628 11.5565 37.3065C11.9128 36.9502 12.3961 36.75 12.9 36.75ZM47.1 36.75C47.6039 36.75 48.0872 36.9502 48.4435 37.3065C48.7998 37.6628 49 38.1461 49 38.65V41.5C49 43.0117 48.3995 44.4616 47.3305 45.5305C46.2616 46.5995 44.8117 47.2 43.3 47.2H40.45C39.9461 47.2 39.4628 46.9998 39.1065 46.6435C38.7502 46.2872 38.55 45.8039 38.55 45.3C38.55 44.7961 38.7502 44.3128 39.1065 43.9565C39.4628 43.6002 39.9461 43.4 40.45 43.4H43.3C43.8039 43.4 44.2872 43.1998 44.6435 42.8435C44.9998 42.4872 45.2 42.0039 45.2 41.5V38.65C45.2 38.1461 45.4002 37.6628 45.7565 37.3065C46.1128 36.9502 46.5961 36.75 47.1 36.75ZM18.6 20.125C19.1039 20.125 19.5872 20.3252 19.9435 20.6815C20.2998 21.0378 20.5 21.5211 20.5 22.025V38.175C20.5 38.6789 20.2998 39.1622 19.9435 39.5185C19.5872 39.8748 19.1039 40.075 18.6 40.075C18.0961 40.075 17.6128 39.8748 17.2565 39.5185C16.9002 39.1622 16.7 38.6789 16.7 38.175V22.025C16.7 21.5211 16.9002 21.0378 17.2565 20.6815C17.6128 20.3252 18.0961 20.125 18.6 20.125ZM28.1 22.025C28.1 21.5211 27.8998 21.0378 27.5435 20.6815C27.1872 20.3252 26.7039 20.125 26.2 20.125C25.6961 20.125 25.2128 20.3252 24.8565 20.6815C24.5002 21.0378 24.3 21.5211 24.3 22.025V38.175C24.3 38.6789 24.5002 39.1622 24.8565 39.5185C25.2128 39.8748 25.6961 40.075 26.2 40.075C26.7039 40.075 27.1872 39.8748 27.5435 39.5185C27.8998 39.1622 28.1 38.6789 28.1 38.175V22.025ZM33.8 20.125C34.3039 20.125 34.7872 20.3252 35.1435 20.6815C35.4998 21.0378 35.7 21.5211 35.7 22.025V38.175C35.7 38.6789 35.4998 39.1622 35.1435 39.5185C34.7872 39.8748 34.3039 40.075 33.8 40.075C33.2961 40.075 32.8128 39.8748 32.4565 39.5185C32.1002 39.1622 31.9 38.6789 31.9 38.175V22.025C31.9 21.5211 32.1002 21.0378 32.4565 20.6815C32.8128 20.3252 33.2961 20.125 33.8 20.125ZM43.3 22.025C43.3 21.5211 43.0998 21.0378 42.7435 20.6815C42.3872 20.3252 41.9039 20.125 41.4 20.125C40.8961 20.125 40.4128 20.3252 40.0565 20.6815C39.7002 21.0378 39.5 21.5211 39.5 22.025V38.175C39.5 38.6789 39.7002 39.1622 40.0565 39.5185C40.4128 39.8748 40.8961 40.075 41.4 40.075C41.9039 40.075 42.3872 39.8748 42.7435 39.5185C43.0998 39.1622 43.3 38.6789 43.3 38.175V22.025Z"
-                fill="white"
-              ></path>
-            </svg>
-          </div>
-          <div class="flex flex-col justify-start items-end absolute left-[268px] top-4 gap-[5px] rounded-xl">
-            <svg
-              width="60"
-              height="60"
-              viewBox="0 0 60 60"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              class="flex-grow-0 flex-shrink-0 w-[60px] h-[60px] relative"
-              preserveAspectRatio="xMidYMid meet"
-            >
-              <rect width="60" height="60" rx="12" fill="#33B1FF"></rect>
-              <path
-                d="M10.834 27.1252C10.8347 24.0219 11.8397 21.0021 13.6987 18.5172C15.5577 16.0323 18.171 14.2157 21.148 13.339C24.1249 12.4623 27.3056 12.5725 30.2147 13.6531C33.1238 14.7338 35.6051 16.7269 37.2877 19.3345C38.9703 21.9421 39.7639 25.0242 39.5497 28.1202C39.3356 31.2161 38.1254 34.1597 36.0998 36.5109C34.0743 38.862 31.3423 40.4946 28.3121 41.1645C25.2819 41.8344 22.1163 41.5057 19.2884 40.2276C16.8772 40.7834 14.2802 41.2626 13.0861 41.4772C12.7809 41.5318 12.4671 41.5111 12.1717 41.4172C11.8762 41.3232 11.6082 41.1587 11.3906 40.9379C11.173 40.7171 11.0124 40.4467 10.9228 40.1499C10.8332 39.8532 10.8172 39.5391 10.8762 39.2347C11.1023 38.0656 11.6045 35.5586 12.1814 33.2106C11.2911 31.3056 10.8311 29.228 10.834 27.1252ZM22.61 19.0886C21.7628 19.541 21.0958 20.2444 20.5917 21.1778C20.4268 21.5113 20.3975 21.8957 20.5101 22.2503C20.6226 22.6049 20.8683 22.902 21.1954 23.0792C21.5226 23.2565 21.9057 23.2999 22.2642 23.2005C22.6227 23.1012 22.9287 22.8666 23.1179 22.5463C23.3997 22.0288 23.6891 21.772 23.9651 21.6263C24.2526 21.4711 24.6436 21.3771 25.209 21.3771C25.6383 21.3771 26.1424 21.5286 26.5123 21.8333C26.8401 22.1016 27.1257 22.531 27.1257 23.2919C27.1257 23.6656 26.9819 23.8381 25.9987 24.6106C25.1362 25.2891 23.7715 26.3892 23.7715 28.5627C23.7715 28.944 23.9229 29.3096 24.1925 29.5792C24.4621 29.8488 24.8277 30.0002 25.209 30.0002C25.5902 30.0002 25.9559 29.8488 26.2255 29.5792C26.495 29.3096 26.6465 28.944 26.6465 28.5627C26.6465 27.8536 26.9608 27.5105 27.7735 26.8703L27.9364 26.7457C28.6782 26.1746 30.0007 25.1606 30.0007 23.2919C30.0007 21.6666 29.3279 20.4207 28.337 19.6081C27.4502 18.8949 26.347 18.5048 25.209 18.5021C24.3369 18.5021 23.4418 18.644 22.61 19.0886ZM27.1257 33.8336C27.1257 33.3252 26.9237 32.8377 26.5643 32.4783C26.2048 32.1188 25.7173 31.9169 25.209 31.9169C24.7007 31.9169 24.2132 32.1188 23.8537 32.4783C23.4943 32.8377 23.2923 33.3252 23.2923 33.8336C23.2923 34.3419 23.4943 34.8294 23.8537 35.1888C24.2132 35.5483 24.7007 35.7502 25.209 35.7502C25.7173 35.7502 26.2048 35.5483 26.5643 35.1888C26.9237 34.8294 27.1257 34.3419 27.1257 33.8336Z"
-                fill="white"
-              ></path>
-              <path
-                d="M25.0176 43.4165C27.6733 45.8854 31.1665 47.2552 34.7926 47.2498C36.9009 47.2498 38.9057 46.7956 40.7132 45.9771C43.1282 46.533 45.7367 47.0121 46.9385 47.223C47.2442 47.2769 47.5584 47.2555 47.854 47.1606C48.1495 47.0657 48.4175 46.9002 48.6346 46.6783C48.8517 46.4565 49.0115 46.185 49.1 45.8875C49.1885 45.59 49.2032 45.2754 49.1427 44.9709C48.7451 42.9581 48.3041 40.9541 47.8202 38.9602C48.6724 37.1355 49.1319 35.1521 49.1688 33.1385C49.2058 31.1249 48.8194 29.126 48.0346 27.2713C47.2499 25.4165 46.0843 23.7473 44.6135 22.3716C43.1426 20.996 41.3991 19.9446 39.4961 19.2856C40.8661 21.7811 41.5583 24.592 41.5037 27.4383C41.4492 30.2846 40.6497 33.0669 39.1851 35.508C37.7204 37.9491 35.6416 39.9638 33.1559 41.3514C30.6701 42.739 27.8642 43.451 25.0176 43.4165Z"
-                fill="white"
-              ></path>
-            </svg>
-          </div>
-          <div class="flex flex-col justify-start items-end absolute left-[352px] top-4 gap-[5px] rounded-xl">
-            <div class="flex-grow-0 flex-shrink-0 w-[60px] h-[60px] relative rounded-xl bg-[#42be65]">
-              <div
-                class="flex flex-col justify-start items-start w-[23px] h-[23px] absolute left-[46px] top-[-9px] gap-2.5 pl-[7px] pr-2 py-0.5 rounded-[100px] bg-[#fa4d56]"
-              >
-                <p class="self-stretch flex-grow w-2 h-[19px] text-base text-center text-white">1</p>
-              </div>
-              <svg
-                width="46"
-                height="46"
-                viewBox="0 0 46 46"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                class="w-[46px] h-[46px] absolute left-[7px] top-[7px]"
-                preserveAspectRatio="xMidYMid meet"
-              >
-                <path
-                  d="M42.1673 23.0002C42.1673 12.4144 33.5864 3.8335 23.0007 3.8335C12.4149 3.8335 3.834 12.4144 3.834 23.0002C3.82973 26.1053 4.58304 29.1645 6.02859 31.9127L3.88959 40.1332C3.81829 40.4081 3.82006 40.6967 3.8947 40.9707C3.96934 41.2446 4.11426 41.4942 4.31511 41.6949C4.51596 41.8955 4.76577 42.0402 5.03976 42.1146C5.31375 42.189 5.60243 42.1905 5.87717 42.1189L14.0997 39.978C16.8449 41.4197 19.8999 42.1709 23.0007 42.1668C33.5864 42.1668 42.1673 33.5859 42.1673 23.0002Z"
-                  fill="white"
-                ></path>
-              </svg>
-            </div>
-          </div>
-        </div>
-      </div>
+        </ng-template>
+      </p-dock>
     </div>
     <div class="right-col w-full">
-      <div class="flex flex-col bg-white max-h-[486px] min-h-[486px] mb-6 p-4 rounded-3xl overflow-y-scroll">
+      <div class="flex flex-col bg-white h-[350px] mb-6 p-4 pb-0 rounded-3xl">
         <div class="flex items-start w-full">
           <div class="image w-6 h-6 ml-5 mt-4">
             <img class="w-full" src="./assets/dashboard/History.svg" alt="" />
@@ -917,35 +140,40 @@
             <div class="subtitle text-[#8b8b8b] font-dana font-normal text-sm mt-2">به روز رسانی: ۱ دقیقه پیش</div>
           </div>
         </div>
-        <div class="my-4 w-full">
+        <div class="my-4 w-full h-[400px] overflow-auto" (scroll)="scrolling($event)">
           <ng-container *ngFor="let item of loginHistory">
             <div class="flex py-4 border-t">
               <div class="image flex items-center justify-center">
-                <ng-container [ngSwitch]="item['browserType']">
+                <ng-container [ngSwitch]="item.browserType">
                   <div class="bg-[#F4F4F4] p-[6px] rounded-lg" *ngSwitchCase="'FIREFOX'">
                     <img class="w-5 h-5" src="./assets/dashboard/mozila.png" alt="" />
                   </div>
-                  <div class="bg-[#F4F4F4] p-[6px] rounded-lg" *ngSwitchCase="'SAFARI'">
+                  <div class="bg-[#F4F4F4] p-[6px] rounded-lg" *ngSwitchCase="'safari'">
                     <img class="w-5 h-5" src="./assets/dashboard/safari.png" alt="" />
                   </div>
                   <div class="bg-[#F4F4F4] p-[6px] rounded-lg" *ngSwitchCase="'CHROME'">
                     <img class="w-5 h-5" src="./assets/dashboard/chrome.png" alt="" />
                   </div>
+                  <div class="bg-[#F4F4F4] p-[6px] rounded-lg" *ngSwitchCase="null">
+                    <img class="w-5 h-5" src="./assets/icons/alert.svg" alt="" />
+                  </div>
                 </ng-container>
               </div>
-              <div class="flex items-center mr-3">
-                <span class="time">{{ item['createdDate'] | date : 'hh:mm' }}</span>
+              <div class="flex items-center mr-3 font-thin">
+                <span class="date ml-1">{{ item.createdDate | jalali : 'HH/mm' }}</span>
                 ,
-                <span class="date">{{ item['createdDate'] | date : 'M/d/yy' }}</span>
+                <span class="time mr-1">{{ item.createdDate | jalali : 'YYYY/MM/DD' }}</span>
               </div>
             </div>
           </ng-container>
+          <div class="flex justify-center" *ngIf="!isOver">
+            <p-progressSpinner class="custom-spinner"></p-progressSpinner>
+          </div>
         </div>
       </div>
-      <div
-        class="flex flex-col rounded justify-start items-center w-full h-[214px] gap-4 p-4 rounded-3xl bg-cover bg-no-repeat bg-center border"
-        style="background-image: url('https://idc0-cdn0.khamenei.ir/ndata/news/49862/B/14001229_0149862.jpg')"
-      ></div>
+      <div class="flex flex-col bg-white h-[250px] mb-6 p-4 rounded-3xl">
+        <img src="assets/images/slogan.jpg" alt="" class="object-contain w-full h-full" />
+      </div>
     </div>
   </div>
 </div>

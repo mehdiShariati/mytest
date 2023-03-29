@@ -1,7 +1,7 @@
 <div class="component-container">
   <div class="header">
     <span>داشبورد ادمین</span>
-    <div class="return">
+    <div class="return" routerLink="/dashboard">
       بازگشت
       <i inlineSVG="assets/icons/return-arrow.svg"></i>
     </div>
@@ -56,12 +56,12 @@
               <p-sortIcon class="mr-4" field="representative.name"></p-sortIcon>
             </div>
           </th>
-          <th style="min-width: 8rem">
-            <div class="flex justify-content-between align-items-center">استان و شهر</div>
-          </th>
-          <th style="min-width: 8rem">
-            <div class="flex justify-content-between align-items-center">حوزه فعالیت</div>
-          </th>
+          <!--          <th style="min-width: 8rem">-->
+          <!--            <div class="flex justify-content-between align-items-center">استان و شهر</div>-->
+          <!--          </th>-->
+          <!--          <th style="min-width: 8rem">-->
+          <!--            <div class="flex justify-content-between align-items-center">حوزه فعالیت</div>-->
+          <!--          </th>-->
           <th style="min-width: 8rem">
             <div class="flex justify-content-between align-items-center">نقش</div>
           </th>
@@ -71,20 +71,20 @@
       <ng-template pTemplate="body" let-user>
         <tr class="p-selectable-row">
           <td style="color: #0f62fe !important">
-            {{ user?.personnel?.personnelCode }}
+            {{ user?.personnel?.personnelCode ?? '-' }}
           </td>
           <td>
-            <span class="image-text">{{ user?.personnel?.firstName }}</span>
+            <span class="image-text">{{ user?.personnel?.firstName ?? '-' }}</span>
           </td>
           <td>
-            <span class="image-text">{{ user?.personnel?.lastName }}</span>
+            <span class="image-text">{{ user?.personnel?.lastName ?? '-' }}</span>
           </td>
-          <td>{{ user.state }} - {{ user.city }}</td>
+          <!--          <td>{{ user.state }} - {{ user.city }}</td>-->
+          <!--          <td>-->
+          <!--            {{ user.activity }}-->
+          <!--          </td>-->
           <td>
-            {{ user.activity }}
-          </td>
-          <td>
-            <span>{{ user.role }}</span>
+            <span>{{ user.roles[0]?.title ?? '-' }}</span>
           </td>
           <td>
             <div class="edit">
@@ -101,7 +101,7 @@
     </p-table>
   </div>
   <div>
-    <p-paginator class="paginator-custom" [rows]="10" [totalRecords]="120"></p-paginator>
+    <p-paginator class="paginator-custom" [rows]="10" [totalRecords]="totalCount"></p-paginator>
   </div>
 </div>
 
@@ -117,13 +117,20 @@
 >
   <div>
     <div class="btns search-user mb-5">
-      <i class="search-icon" inlineSVG="assets/icons/chat/search.svg"></i>
-      <input placeholder="کد ملی کاربر مورد نظر را وارد کنید" [(ngModel)]="searchId" />
+      <i class="search-icon" inlineSVG="assets/icons/Search2.svg"></i>
+      <p-autoComplete
+        placeholder="کد ملی کاربر مورد نظر را وارد کنید"
+        [(ngModel)]="searchId"
+        (ngModelChange)="searchUser()"
+        [suggestions]="personnelUserInfo"
+        field="fullName"
+        class="custom-auto-complete"
+      ></p-autoComplete>
       <i *ngIf="searchId" class="remove-icon" inlineSVG="assets/icons/Dismiss-2.svg" (click)="removeId()"></i>
-      <div class="add">جستجو</div>
+      <div class="add" (click)="foundProfile()">جستجو</div>
     </div>
 
-    <div class="history">
+    <div class="history" *ngIf="!foundedUser">
       <div class="mb-2">سوابق جستجو</div>
       <ng-container *ngIf="[{}].length; else showMessage">
         <div class="flex items-center items" *ngFor="let item of [{}, {}]">
@@ -135,8 +142,19 @@
         </div>
       </ng-container>
       <ng-template #showMessage>
-        <div class="flex items-center justify-center mt-3">سوابقی یافت نشد.</div>
+        <div class="flex flex-wrap justify-center">
+          <i inlineSVG="assets/icons/alert.svg"></i>
+          <div class="flex items-center justify-center mt-3 w-full">سوابقی یافت نشد.</div>
+        </div>
       </ng-template>
+    </div>
+    <div class="text-gray-mid mb-3" *ngIf="foundedUser">کاربر یافت شد.</div>
+    <ng-container *ngIf="foundedUser">
+      <app-card-information [userInfo]="foundedUser"></app-card-information>
+    </ng-container>
+    <div *ngIf="foundedUser" class="btns">
+      <div (click)="cancel()">انصراف</div>
+      <div class="add" (click)="addNewUser()">افزودن کاربر</div>
     </div>
   </div>
 </p-dialog>
@@ -151,60 +169,5 @@
   [resizable]="false"
   class="modal-custom"
 >
-  <div class="modal-content">
-    <div class="information">
-      <img alt="" [src]="userInfo?.profileImageUrl ? userInfo?.profileImageUrl : 'assets/icons/profile-image.svg'" />
-      <div>
-        <p>{{ userInfo?.firstName }} {{ userInfo?.lastName }}</p>
-        <span>{{ userInfo?.state }} - {{ userInfo?.city }}</span>
-      </div>
-    </div>
-    <p-tabView class="tab-custom">
-      <p-tabPanel header="نقش ها">
-        <div class="btns mb-5" *ngIf="newRole">
-          <input />
-          <div class="add">ذخیره</div>
-        </div>
-        <div class="data" *ngIf="!newRole">
-          <div *ngFor="let item of [{}, {}, {}, {}, {}, {}]">
-            <p>راننده کامیونت بنز</p>
-            <i inlineSVG="assets/icons/recycle.svg"></i>
-          </div>
-        </div>
-        <div *ngIf="!newRole" class="add-new-btn" (click)="newRole = true">
-          <i inlineSVG="assets/icons/Add-blue.svg"></i>
-          افزودن نقش جدید
-        </div>
-        <div *ngIf="newRole" class="add-new-btn" (click)="newRole = false">انصراف</div>
-      </p-tabPanel>
-      <p-tabPanel header="حوزه های فعالیت">
-        <div class="data">
-          <div *ngFor="let item of [{}, {}, {}, {}, {}, {}]">
-            <p>راننده کامیونت بنز</p>
-          </div>
-        </div>
-      </p-tabPanel>
-      <p-tabPanel header="گروه های کاربری">
-        <div class="btns mb-5" *ngIf="newGroup">
-          <input />
-          <div class="add">ذخیره</div>
-        </div>
-        <div class="data" *ngIf="!newGroup">
-          <div *ngFor="let item of [{}, {}, {}, {}, {}, {}]">
-            <p>راننده کامیونت بنز</p>
-            <i inlineSVG="assets/icons/recycle.svg"></i>
-          </div>
-        </div>
-        <div *ngIf="!newGroup" class="add-new-btn" (click)="newGroup = true">
-          <i inlineSVG="assets/icons/Add-blue.svg"></i>
-          گروه کاربری جدید
-        </div>
-        <div *ngIf="newGroup" class="add-new-btn" (click)="newGroup = false">انصراف</div>
-      </p-tabPanel>
-    </p-tabView>
-  </div>
-  <!--  <div *ngIf="newGroup || newRole" class="btns">-->
-  <!--    <div (click)="cancel()">انصراف</div>-->
-  <!--    <div class="add">افزودن کاربر</div>-->
-  <!--  </div>-->
+  <app-card-information [userInfo]="userInfo"></app-card-information>
 </p-dialog>
