@@ -3,7 +3,7 @@ import { BehaviorSubject, map, Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { User } from '../models/user';
-
+const headers = { 'content-type': 'application/x-www-form-urlencoded', accept: '*/*' };
 @Injectable({
   providedIn: 'root',
 })
@@ -27,14 +27,18 @@ export class AuthServiceService {
       if (value[key]) formData.append(key, value[key]);
     }
 
-    return this.http.post<any>(`${environment.apiUrlPublic}/usermanagement/tokens/generate/password`, formData).pipe(
-      map(user => {
-        user.authBasic = btoa(value.username + ':' + value.password);
-        localStorage.setItem('currentUser', JSON.stringify(user));
-        this.currentUserSubject.next(user);
-        return user;
-      }),
-    );
+    return this.http
+      .post<any>(`${environment.apiUrlPublic}/usermanagement/tokens/generate/password`, formData, {
+        headers: headers,
+      })
+      .pipe(
+        map(user => {
+          user.authBasic = btoa(value.username + ':' + value.password);
+          localStorage.setItem('currentUser', JSON.stringify(user));
+          this.currentUserSubject.next(user);
+          return user;
+        }),
+      );
   }
 
   logout() {
@@ -45,7 +49,9 @@ export class AuthServiceService {
   }
 
   getCaptcha(value: any) {
-    return this.http.post(`${environment.apiUrlPublic}/usermanagement/captcha`, value);
+    return this.http.post(`${environment.apiUrlPublic}/usermanagement/captcha`, value, {
+      headers: headers,
+    });
   }
 
   changeTemporaryPassword(value: any) {
@@ -55,7 +61,9 @@ export class AuthServiceService {
       if (value[key]) formData.append(key, value[key]);
     }
 
-    return this.http.post(`${environment.apiUrlPublic}/usermanagement/tokens/change-temporary-password`, formData);
+    return this.http.post(`${environment.apiUrlPublic}/usermanagement/tokens/change-temporary-password`, formData, {
+      headers: headers,
+    });
   }
 
   getToken() {
@@ -63,7 +71,9 @@ export class AuthServiceService {
     value.append('grant_type', 'refresh_token');
     value.append('refresh_token', <string>localStorage.getItem('refresh-token'));
 
-    return this.http.post(`${environment.apiToken}/oauth2/token`, value);
+    return this.http.post(`${environment.apiToken}/oauth2/token`, value, {
+      headers: headers,
+    });
   }
 
   getAuthenticationHistory(filter: any | null = null) {

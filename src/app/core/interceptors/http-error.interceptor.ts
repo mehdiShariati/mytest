@@ -38,14 +38,13 @@ export class HttpErrorInterceptor implements HttpInterceptor {
                   DELETE: this.http.delete(request.urlWithParams),
                 };
 
-                return x[request.method].subscribe((res: any) => {
-                  console.log(res);
-                  return from(JSON.parse(res));
+                return x[request.method].next((res: any) => {
+                  return res;
                 });
               },
               () => {
-                this.authenticationService.logout();
-                this.router.navigate(['auth/login']);
+                //   this.authenticationService.logout();
+                //  this.router.navigate(['auth/login']);
               },
             );
           } else {

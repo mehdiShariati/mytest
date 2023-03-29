@@ -1,0 +1,5 @@
+<div class="w-full message-container relative overflow-y-scroll flex flex-col scrollbar-hide">
+  <div class="flex flex-col chat-conatainer h-[575px]" #chatContainer>
+    <app-chat-message class="flex" *ngFor="let item of messagesObserver$ | async" [message]="item"></app-chat-message>
+  </div>
+</div>
