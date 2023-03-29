@@ -7,11 +7,19 @@ import { ProfileService } from './profile-service';
 import { take } from 'rxjs/operators';
 import { WebsocketService } from './websocket.service';
 import { UserService } from './user.service';
+import { JwtService } from './jwt.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ChatService {
+  get showCreateChannelContainer(): boolean {
+    return this._showCreateChannelContainer;
+  }
+
+  set showCreateChannelContainer(value: boolean) {
+    this._showCreateChannelContainer = value;
+  }
   get showCreateGroupContainer(): boolean {
     return this._showCreateGroupContainer;
   }
@@ -24,6 +32,7 @@ export class ChatService {
   public currentUser: Observable<User>;
   private showThreeDowMenu: boolean = false;
   private _showCreateGroupContainer: boolean = false;
+  private _showCreateChannelContainer: boolean = false;
   private token = localStorage.getItem('token');
   public showNewMessageModal: boolean = false;
   public selectedUser: string = '';
@@ -67,19 +76,26 @@ export class ChatService {
     private profileSerive: ProfileService,
     WebsocketService: WebsocketService,
     private userService: UserService,
+    private jwtService: JwtService,
   ) {
     this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(<string>localStorage.getItem('currentUser')) ?? '');
     this.currentUser = this.currentUserSubject.asObservable();
-    profileSerive.getProfieData().subscribe((res: any) => {
-      this.selfUserId = res.personnel?.id;
-    });
+    let token = localStorage.getItem('token');
+    if (token) {
+      let parsedToken: any = this.jwtService.DecodeToken(token);
+      this.selfUserId = parsedToken.userId;
+    }
     WebsocketService.messages.subscribe((msg: any) => {
-      console.log(msg.data.sessionId);
       if (msg.data.sessionId === this.selectedUser) {
         const currentValue = this.obsArrayMessages.value;
         const updatedValue = [...currentValue, msg.data];
         this.obsArrayMessages.next(updatedValue);
       }
+      let session: any = this.obsArraySessions.value.map((item: any) => {
+        if (item.id === msg.data.sessionId) {
+          item.messagePreview.content = msg.data.content;
+        }
+      });
     });
   }
 
@@ -138,8 +154,9 @@ export class ChatService {
       return item.id === user['id'];
     });
     if (session.length) {
-      this.getMessages(user['id'], this.currentPage_messages, this.page_size);
       this.obsSelectedSession.next(session[0]);
+      this.isAllowToFetchMessages = true;
+      this.initialMessageSubject();
     } else {
       if (user?.id) {
         let currentValue = this.obsArraySessions.value;
@@ -205,6 +222,7 @@ export class ChatService {
   initialMessageSubject() {
     this.getSelectedUser().subscribe((res: any) => {
       if (res) {
+        console.log('here');
         if (this.isAllowToFetchMessages) {
           this.currentPage_messages = 0;
           this.getMessages(this.selectedUser, this.currentPage_messages, this.page_size).subscribe((result: any) => {
@@ -226,7 +244,8 @@ export class ChatService {
       this.itemsMessages$.pipe(take(1)),
       this.getMessages(this.selectedUser, this.currentPage_messages, this.page_size),
     ]).subscribe((data: any) => {
-      if (data.content.length) {
+      console.log(data[1]);
+      if (data[1].content.length) {
         this.obsArrayMessages.next([...data[1].content.reverse(), ...data[0]]);
       } else {
         this.obsArrayMessages.complete();
@@ -268,8 +287,12 @@ export class ChatService {
     this.currentPage_users++;
     forkJoin([this.itemsUsers$.pipe(take(1)), this.getSessions(this.currentPage_users, this.page_size)]).subscribe(
       (data: any) => {
-        const newArr = [...data[0], ...data[1].content];
-        this.obsArrayUsers.next(newArr);
+        if (data[1].content) {
+          const newArr = [...data[0], ...data[1].content];
+          this.obsArrayUsers.next(newArr);
+        } else {
+          this.obsArrayUsers.complete();
+        }
       },
     );
   }
@@ -301,7 +324,11 @@ export class ChatService {
     this.currentPage_sessions++;
     forkJoin([this.itemsSession$.pipe(take(1)), this.getSessions(this.currentPage_sessions, this.page_size)]).subscribe(
       (data: any) => {
-        this.obsArrayUsers.next([...data]);
+        if (data) {
+          this.obsArrayUsers.next([...data]);
+        } else {
+          this.obsArraySessions.complete();
+        }
       },
     );
   }

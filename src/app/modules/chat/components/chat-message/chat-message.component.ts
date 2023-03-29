@@ -11,8 +11,6 @@ export class ChatMessageComponent {
 
   constructor(private chatService: ChatService) {}
   isMessageSelf() {
-    console.log(this.message.senderId);
-    console.log(this.chatService.selfUserId);
     if (this.message.senderId === this.chatService.selfUserId) {
       return true;
     }

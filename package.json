@@ -21,6 +21,7 @@
     "@asymmetrik/ngx-leaflet": "^15.0.1",
     "faye-websocket": "^0.11.4",
     "husky": "^2.7.0",
+    "jwt-decode": "^3.1.2",
     "leaflet": "^1.9.3",
     "ng-inline-svg-2": "^15.0.1",
     "prettier": "^2.5.1",

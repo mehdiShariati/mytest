@@ -1,8 +1,10 @@
 <ng-container *ngIf="isMessageTypeText">
   <!--versus message text-->
-  <div class="flex w-full my-1 {{ isMessageSelf() ? 'flex-row-reverse' : '' }}">
+  <div class="flex w-full my-1 {{ isMessageSelf() ? '' : 'flex-row-reverse' }}">
     <div
-      class="message-versus flex flex-col min-w-[50px] items-right max-w-fit gap-1 p-3 rounded-tl-2xl rounded-tr-2xl rounded-bl rounded-br-2xl bg-[#edf5ff] border border-[#a6c8ff]"
+      class="message-versus flex flex-col min-w-[50px] items-right max-w-fit gap-1 p-3 rounded-tl-2xl rounded-tr-2xl rounded-bl rounded-br-2xl {{
+        isMessageSelf() ? 'bg-[#d9fbfb]' : 'bg-[#edf5ff]'
+      }} border border-[#a6c8ff]"
     >
       <p class="whitespace-wrap flex-shrink-0 max-w-[351px] text-sm text-right text-neutral-800">
         {{ message.content }}

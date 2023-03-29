@@ -157,7 +157,7 @@
           fill="#8D8D8D"
         ></path>
       </svg>
-      <p class="flex-grow-0 flex-shrink-0 text-sm text-center text-[#8d8d8d]">بازگشت</p>
+      <a [routerLink]="'/dashboard'" class="flex-grow-0 flex-shrink-0 text-sm text-center text-[#8d8d8d]">بازگشت</a>
     </div>
   </div>
   <div
@@ -533,7 +533,7 @@
         <!--          </div>-->
       </div>
       <div
-        class="w-[283px] h-12 left-[937px] top-[638px] bg-white menu-under-session flex"
+        class="w-[283px] h-12 left-[937px] top-[638px] bg-white menu-under-session flex justify-center items-center"
         style="box-shadow: 3px 0px 5px 0 rgba(0, 0, 0, 0.1)"
       >
         <div class="w-[251px] h-8 left-4 top-2 flex place-content-between">
@@ -636,7 +636,10 @@
     <div class="left-container flex flex-col">
       <app-chat-menu-container></app-chat-menu-container>
       <app-chat-new-chat></app-chat-new-chat>
-      <app-chat-header-container *ngIf="!showCreateGroupContainer()"></app-chat-header-container>
+      <app-chat-create-channel-container *ngIf="showCreateChannelContainer()"></app-chat-create-channel-container>
+      <app-chat-header-container
+        *ngIf="!showCreateGroupContainer() && !showCreateChannelContainer()"
+      ></app-chat-header-container>
       <app-chat-create-group-container *ngIf="showCreateGroupContainer()"></app-chat-create-group-container>
       <app-chat-container></app-chat-container>
       <app-chat-send-message></app-chat-send-message>

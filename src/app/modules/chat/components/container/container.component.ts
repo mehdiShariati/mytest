@@ -240,4 +240,7 @@ export class ContainerComponent {
   showCreateGroupContainer() {
     return this.chatService.showCreateGroupContainer;
   }
+  showCreateChannelContainer() {
+    return this.chatService.showCreateChannelContainer;
+  }
 }

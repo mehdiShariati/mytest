@@ -20,6 +20,7 @@ export class ChatMenuContainerComponent {
     this.chatService.toggleShowNewMessageModal();
   }
   onNewChannel() {
+    this.chatService.showCreateChannelContainer = true;
     this.toggleThreeDotMenu();
   }
   onNewGroup() {

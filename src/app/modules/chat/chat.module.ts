@@ -14,14 +14,14 @@ import { ChatNewChatComponent } from './components/chat-new-chat/chat-new-chat.c
 import { ChatContainerComponent } from './components/chat-container/chat-container.component';
 import { ChatMessageComponent } from './components/chat-message/chat-message.component';
 import { ChatChannelModalComponent } from './components/chat-channel-modal/chat-channel-modal.component';
-import { ChatGroupModalComponent } from './components/chat-group-modal/chat-group-modal.component';
-import { ChatGroupContainerComponent } from './components/chat-group-container/chat-group-container.component';
 import { ChatChannelContainerComponent } from './components/chat-channel-container/chat-channel-container.component';
 import { ChatSendMessageComponent } from './components/chat-send-message/chat-send-message.component';
 import { ChatCreateGroupContainerComponent } from './components/chat-create-group-container/chat-create-group-container.component';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ChatSessionContainerComponent } from './components/chat-session-container/chat-session-container.component';
 import { ChatHeaderContainerComponent } from './components/chat-header-container/chat-header-container.component';
+import { RouterModule } from '@angular/router';
+import { ChatCreateChannelContainerComponent } from './components/chat-create-channel-container/chat-create-channel-container.component';
 
 @NgModule({
   declarations: [
@@ -31,13 +31,12 @@ import { ChatHeaderContainerComponent } from './components/chat-header-container
     ChatContainerComponent,
     ChatMessageComponent,
     ChatChannelModalComponent,
-    ChatGroupModalComponent,
-    ChatGroupContainerComponent,
     ChatChannelContainerComponent,
     ChatSendMessageComponent,
     ChatCreateGroupContainerComponent,
     ChatSessionContainerComponent,
     ChatHeaderContainerComponent,
+    ChatCreateChannelContainerComponent,
   ],
   imports: [
     CommonModule,
@@ -50,6 +49,7 @@ import { ChatHeaderContainerComponent } from './components/chat-header-container
     DialogModule,
     ScrollPanelModule,
     CheckboxModule,
+    RouterModule,
   ],
 })
 export class ChatModule {}
