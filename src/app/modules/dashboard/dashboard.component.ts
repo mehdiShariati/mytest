@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
 
   slides = [
     { id: 1, photo: './assets/images/Space.png' },
-    { id: 2, photo: './assets/images/pic2.jpg' },
+    { id: 2, photo: './assets/images/Space.png' },
     { id: 3, photo: './assets/images/3.png' },
   ];
   stories = [
