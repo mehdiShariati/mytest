@@ -18,7 +18,6 @@ export class HttpErrorInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
       catchError(err => {
-        this.messageService.add({ severity: 'error', detail: err.message ? err.message : err.error.message });
         if (err.status === 401) {
           localStorage.removeItem('token');
           if (localStorage.getItem('refresh-token')) {
@@ -43,8 +42,8 @@ export class HttpErrorInterceptor implements HttpInterceptor {
                 });
               },
               () => {
-                //   this.authenticationService.logout();
-                //  this.router.navigate(['auth/login']);
+                this.authenticationService.logout();
+                this.router.navigate(['auth/login']);
               },
             );
           } else {

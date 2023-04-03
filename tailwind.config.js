@@ -20,6 +20,7 @@ module.exports = {
         'chat-others-msg': '#A6C8FF',
         story: '#08BDBA',
         neutral: '#C6C6C6',
+        green: '#A7F0BA',
       },
 
       fontFamily: {

@@ -27,7 +27,14 @@
           <div class="flex items-center">
             <span class="p-input-icon-left w-[500px]">
               <i class="pi pi-search"></i>
-              <input class="search-input" pInputText type="text" placeholder="جستجو" />
+              <input
+                class="search-input"
+                pInputText
+                type="text"
+                placeholder="جستجو براساس کد پرسنلی"
+                [(ngModel)]="searchCode"
+                (ngModelChange)="searchUser()"
+              />
             </span>
             <div class="add-new" (click)="newUserModal = true">
               <i class="ml-2" inlineSVG="assets/icons/Add.svg"></i>
@@ -83,8 +90,14 @@
           <!--          <td>-->
           <!--            {{ user.activity }}-->
           <!--          </td>-->
-          <td>
+          <td class="flex items-center">
             <span>{{ user.roles[0]?.title ?? '-' }}</span>
+            <div
+              class="w-[30px] h-[25px] flex items-center justify-center bg-green rounded-[4px] mr-4"
+              *ngIf="user?.roles?.length > 1"
+            >
+              {{ user?.roles?.length - 1 }}+
+            </div>
           </td>
           <td>
             <div class="edit">
@@ -118,15 +131,8 @@
   <div>
     <div class="btns search-user mb-5">
       <i class="search-icon" inlineSVG="assets/icons/Search2.svg"></i>
-      <p-autoComplete
-        placeholder="کد ملی کاربر مورد نظر را وارد کنید"
-        [(ngModel)]="searchId"
-        (ngModelChange)="searchUser()"
-        [suggestions]="personnelUserInfo"
-        field="fullName"
-        class="custom-auto-complete"
-      ></p-autoComplete>
-      <i *ngIf="searchId" class="remove-icon" inlineSVG="assets/icons/Dismiss-2.svg" (click)="removeId()"></i>
+      <input placeholder="کد ملی کاربر مورد نظر را وارد کنید" [(ngModel)]="nationalId" />
+      <i *ngIf="nationalId" class="remove-icon" inlineSVG="assets/icons/Dismiss-2.svg" (click)="removeId()"></i>
       <div class="add" (click)="foundProfile()">جستجو</div>
     </div>
 

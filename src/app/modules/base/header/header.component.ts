@@ -9,7 +9,7 @@ export class HeaderComponent implements OnInit {
   date!: string;
   day!: string;
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor() {}
 
   ngOnInit(): void {
     this.displayDate();
