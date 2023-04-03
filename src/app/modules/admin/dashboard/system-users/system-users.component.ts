@@ -67,12 +67,17 @@ export class SystemUsersComponent implements OnInit {
     this.nationalId = null;
   }
 
-  addNewUser() {
+  addNewUser(editMode: boolean = false) {
     let groupsId: any = [];
     let rolesId: any = [];
 
-    this.foundedUser?.groups?.map((item: any) => groupsId.push(item.id));
-    this.foundedUser?.roles?.map((item: any) => rolesId.push(item.id));
+    if (editMode) {
+      this.userInfo?.groups?.map((item: any) => groupsId.push(item.id));
+      this.userInfo?.roles?.map((item: any) => rolesId.push(item.id));
+    } else {
+      this.foundedUser?.groups?.map((item: any) => groupsId.push(item.id));
+      this.foundedUser?.roles?.map((item: any) => rolesId.push(item.id));
+    }
 
     if (!rolesId?.length) {
       this.messageService.add({ severity: 'warn', detail: 'باید حداقل یک نقش تعریف شود.' });
@@ -84,26 +89,46 @@ export class SystemUsersComponent implements OnInit {
       return;
     }
 
-    this.userService
-      .addUser({
-        mainPersonnelId: this.foundedUser.id,
-        groupIds: groupsId,
-        roleIds: rolesId,
-      })
-      .subscribe(
-        () => {
-          this.messageService.add({ severity: 'success', detail: 'کاربر جدید با موفقیت افزوده شد.' });
-          this.foundedUser = null;
-          this.nationalId = null;
-        },
-        err => {
-          if (err.error.message == 'personnel already assigned.') {
-            this.messageService.add({ severity: 'warn', detail: 'این شخص هم اکنون در لیست کاربران سامانه قرار دارد!' });
-            return;
-          }
-          this.messageService.add({ severity: 'error', detail: 'خطایی رخ داده است!' });
-        },
-      );
+    if (editMode) {
+      this.userService
+        .updateUser(
+          {
+            groupIds: groupsId,
+            roleIds: rolesId,
+          },
+          this.userInfo.id,
+        )
+        .subscribe(
+          () => {
+            this.messageService.add({ severity: 'success', detail: 'اطلاعات کاربر با موفقیت ویرایش شد.' });
+            this.userInfo = null;
+          },
+          err => {
+            this.messageService.add({ severity: 'error', detail: err.error.message });
+          },
+        );
+    } else {
+      this.userService
+        .addUser({
+          mainPersonnelId: this.foundedUser.id,
+          groupIds: groupsId,
+          roleIds: rolesId,
+        })
+        .subscribe(
+          () => {
+            this.messageService.add({ severity: 'success', detail: 'کاربر جدید با موفقیت افزوده شد.' });
+            this.foundedUser = null;
+            this.nationalId = null;
+          },
+          err => {
+            if (err.error.message) {
+              this.messageService.add({ severity: 'warn', detail: err.error.message });
+              return;
+            }
+            this.messageService.add({ severity: 'error', detail: 'خطایی رخ داده است!' });
+          },
+        );
+    }
   }
 
   foundProfile() {

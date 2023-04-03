@@ -33,4 +33,8 @@ export class UserService {
   addUser(value: any) {
     return this.http.post(`${environment.apiUrl}/usermanagement/users`, value);
   }
+
+  updateUser(value: any, id: string) {
+    return this.http.put(`${environment.apiUrl}/usermanagement/users/${id}`, value);
+  }
 }

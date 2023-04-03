@@ -181,4 +181,8 @@
   class="modal-custom"
 >
   <app-card-information [userInfo]="userInfo"></app-card-information>
+  <div class="btns">
+    <div (click)="cancel()">انصراف</div>
+    <div class="add" (click)="addNewUser(true)">ثبت تغییرات</div>
+  </div>
 </p-dialog>

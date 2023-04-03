@@ -54,18 +54,17 @@
           </th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-user>
+      <ng-template pTemplate="body" let-data>
         <tr class="p-selectable-row">
           <td style="color: #0f62fe !important">
-            {{ user?.personnel?.personnelCode }}
+            {{ data?.code }}
           </td>
           <td>
-            <span class="image-text">{{ user?.personnel?.firstName }}</span>
+            <span class="image-text">{{ data?.location?.title }}</span>
           </td>
           <td>
-            <span class="image-text">{{ user?.personnel?.lastName }}</span>
+            <span class="image-text">{{ data?.name }}</span>
           </td>
-          <td>{{ user.state }} - {{ user.city }}</td>
         </tr>
       </ng-template>
       <ng-template pTemplate="emptymessage">
@@ -76,6 +75,6 @@
     </p-table>
   </div>
   <div>
-    <p-paginator class="paginator-custom" [rows]="10" [totalRecords]="120"></p-paginator>
+    <p-paginator class="paginator-custom" [rows]="10" [totalRecords]="totalCount"></p-paginator>
   </div>
 </div>

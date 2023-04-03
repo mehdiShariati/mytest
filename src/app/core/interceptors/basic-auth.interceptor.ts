@@ -14,7 +14,7 @@ export class BasicAuthInterceptor implements HttpInterceptor {
       setHeaders: {
         Authorization: token ? `Bearer ${token}` : `Basic ${basicToken}`,
         //'Content-Type': headers.get('Content-Type') ? headers.get('Content-Type') :'application/x-www-form-urlencoded',
-        'Accept-Language': '*',
+        'Accept-Language': 'fa',
       },
     });
 
