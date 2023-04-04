@@ -136,7 +136,7 @@
       <div class="add" (click)="foundProfile()">جستجو</div>
     </div>
 
-    <div class="history" *ngIf="!foundedUser && !notFoundUser">
+    <div class="history" *ngIf="!foundedUser && !notFoundUser && !showSpinner">
       <div class="mb-2">سوابق جستجو</div>
       <ng-container *ngIf="[{}].length; else showMessage">
         <div class="flex items-center items" *ngFor="let item of [{}, {}]">
@@ -153,6 +153,9 @@
           <div class="flex items-center justify-center mt-3 w-full">سوابقی یافت نشد.</div>
         </div>
       </ng-template>
+    </div>
+    <div class="text-center" *ngIf="showSpinner">
+      <p-progressSpinner class="custom-spinner-2"></p-progressSpinner>
     </div>
     <div class="text-gray-mid mb-3" *ngIf="foundedUser">کاربر یافت شد.</div>
     <ng-container *ngIf="foundedUser">

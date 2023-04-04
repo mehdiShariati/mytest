@@ -23,6 +23,7 @@ export class SystemUsersComponent implements OnInit {
   notFoundUser: boolean = false;
   searchCode!: string;
   isSearchingCode: Subject<any> = new Subject<any>();
+  showSpinner: boolean = false;
 
   constructor(private userService: UserService, private messageService: MessageService) {}
 
@@ -61,6 +62,8 @@ export class SystemUsersComponent implements OnInit {
     this.newRole = false;
     this.nationalId = null;
     this.foundedUser = null;
+    this.displayModal = false;
+    this.newUserModal = false;
   }
 
   removeId() {
@@ -81,11 +84,6 @@ export class SystemUsersComponent implements OnInit {
 
     if (!rolesId?.length) {
       this.messageService.add({ severity: 'warn', detail: 'باید حداقل یک نقش تعریف شود.' });
-      return;
-    }
-
-    if (!groupsId?.length) {
-      this.messageService.add({ severity: 'warn', detail: 'باید حداقل یک گروه کاربری تعریف شود.' });
       return;
     }
 
@@ -132,7 +130,9 @@ export class SystemUsersComponent implements OnInit {
   }
 
   foundProfile() {
+    this.showSpinner = true;
     this.userService.getMainPersonnel({ nationalId: this.nationalId }).subscribe((res: any) => {
+      this.showSpinner = false;
       this.foundedUser = res?.content[0];
     });
   }

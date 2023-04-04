@@ -51,6 +51,13 @@ export class DashboardComponent implements OnInit {
     { color: '#FF8389', id: 11, subject: 'خطای سامانه', icon: 'assets/icons/system-error.svg', location: null },
     { color: '#33B1FF', id: 12, subject: 'نیروی انسانی', icon: 'assets/icons/manpower.svg', location: null },
     { color: '#BE95FF', id: 13, subject: 'طرح و برنامه', icon: 'assets/icons/plan.svg', location: null },
+    {
+      color: '#78A9FF',
+      id: 13,
+      subject: 'داشبورد ادمین',
+      icon: 'assets/icons/home-page.svg',
+      location: '/admin/system-users',
+    },
   ];
   @ViewChild('dock') dock!: any;
   @ViewChild('scrollContainer') container!: ElementRef;
