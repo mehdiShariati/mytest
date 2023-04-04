@@ -100,6 +100,7 @@ export class SystemUsersComponent implements OnInit {
           () => {
             this.messageService.add({ severity: 'success', detail: 'اطلاعات کاربر با موفقیت ویرایش شد.' });
             this.userInfo = null;
+            this.displayModal = false;
           },
           err => {
             this.messageService.add({ severity: 'error', detail: err.error.message });
@@ -117,6 +118,7 @@ export class SystemUsersComponent implements OnInit {
             this.messageService.add({ severity: 'success', detail: 'کاربر جدید با موفقیت افزوده شد.' });
             this.foundedUser = null;
             this.nationalId = null;
+            this.newUserModal = false;
           },
           err => {
             if (err.error.message) {
@@ -135,8 +137,10 @@ export class SystemUsersComponent implements OnInit {
       return;
     }
 
+    this.notFoundUser = false;
     this.showSpinner = true;
     this.userService.getMainPersonnel({ nationalId: this.nationalId }).subscribe((res: any) => {
+      if (!res?.content?.length) this.notFoundUser = true;
       this.showSpinner = false;
       this.foundedUser = res?.content[0];
     });

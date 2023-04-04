@@ -131,7 +131,12 @@
   <div>
     <div class="btns search-user mb-5">
       <i class="search-icon" inlineSVG="assets/icons/Search2.svg"></i>
-      <input placeholder="کد ملی کاربر مورد نظر را وارد کنید" [(ngModel)]="nationalId" />
+      <input
+        placeholder="کد ملی کاربر مورد نظر را وارد کنید"
+        [(ngModel)]="nationalId"
+        autofocus
+        (keydown.enter)="foundProfile()"
+      />
       <i *ngIf="nationalId" class="remove-icon" inlineSVG="assets/icons/Dismiss-2.svg" (click)="removeId()"></i>
       <div class="add" (click)="foundProfile()">جستجو</div>
     </div>

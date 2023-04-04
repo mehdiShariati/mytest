@@ -123,4 +123,20 @@ export class CardInformationComponent implements OnInit {
       },
     });
   }
+
+  deleteGroup(e: any, role: any) {
+    this.confirmationService.confirm({
+      target: e.target,
+      message: 'آیا مطمئن به انجام این کار هستید؟',
+      acceptLabel: 'بله',
+      rejectLabel: 'خیر',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.userInfo?.groups?.splice(
+          this.userInfo?.groups?.findIndex((item: any) => item?.id == role?.id),
+          1,
+        );
+      },
+    });
+  }
 }

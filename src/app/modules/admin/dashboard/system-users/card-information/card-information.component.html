@@ -70,7 +70,7 @@
         <ng-container *ngIf="userInfo?.groups?.length; else showEmpty">
           <div *ngFor="let item of userInfo?.groups">
             <p>{{ item?.title }}</p>
-            <i inlineSVG="assets/icons/recycle.svg"></i>
+            <img src="assets/icons/recycle.svg" (click)="deleteGroup($event, item)" alt="" />
           </div>
         </ng-container>
         <ng-template #showEmpty>
