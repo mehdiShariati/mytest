@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthServiceService } from '../../../../core/services/auth-service.service';
 
 @Component({
   selector: 'app-aside',
@@ -17,7 +18,11 @@ export class AsideComponent implements OnInit {
     { id: 8, title: 'سازمان ها', icon: 'assets/icons/Bank.svg', link: '/admin/structures' },
   ];
 
-  constructor() {}
+  constructor(private authService: AuthServiceService) {}
 
   ngOnInit(): void {}
+
+  exit() {
+    this.authService.reqForLogOut();
+  }
 }

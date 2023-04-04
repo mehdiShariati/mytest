@@ -130,6 +130,11 @@ export class SystemUsersComponent implements OnInit {
   }
 
   foundProfile() {
+    if (!this.nationalId) {
+      this.messageService.add({ severity: 'warn', detail: 'کد ملی شخص مورد نظر را وارد کنید!' });
+      return;
+    }
+
     this.showSpinner = true;
     this.userService.getMainPersonnel({ nationalId: this.nationalId }).subscribe((res: any) => {
       this.showSpinner = false;

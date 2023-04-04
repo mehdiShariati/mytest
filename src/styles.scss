@@ -293,4 +293,39 @@ svg {
   }
 }
 
+.exit-dialog {
+  .p-dialog-header {
+    @apply justify-center;
+  }
+
+  .p-dialog .p-dialog-footer {
+    @apply text-left;
+  }
+
+  .p-button {
+    @apply border-none rounded-[8px];
+  }
+
+  .accept-label {
+    @apply bg-danger;
+
+    &:hover {
+      @apply bg-danger;
+    }
+  }
+
+  .reject-label {
+    @apply text-gray-mid;
+
+    &:hover {
+      @apply text-gray-mid;
+      background: transparent;
+    }
+  }
+
+  .p-button-label {
+    @apply font-normal;
+  }
+}
+
 /*------------------------- overRide primeng -----------------------------*/
