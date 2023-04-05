@@ -328,4 +328,14 @@ svg {
   }
 }
 
+.p-dock-item:last-child {
+  a {
+    @apply w-[5rem];
+  }
+
+  .line {
+    @apply block absolute right-0 #{!important};
+  }
+}
+
 /*------------------------- overRide primeng -----------------------------*/
