@@ -20,6 +20,7 @@ import { OrganizationComponent } from './dashboard/organization/organization.com
 import { StructuresComponent } from './dashboard/structures/structures.component';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { CheckboxModule } from 'primeng/checkbox';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     AutoCompleteModule,
     ConfirmPopupModule,
     ProgressSpinnerModule,
+    CheckboxModule,
   ],
   exports: [AsideComponent],
 })

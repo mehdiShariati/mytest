@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-tickets',
@@ -7,8 +7,27 @@ import { Component } from '@angular/core';
 })
 export class TicketsComponent {
   tickets!: any;
+  displayModal: boolean = true;
+  userInfo!: any;
+  isCheckingTicket: boolean = false;
+  show: boolean = false;
+  @ViewChild('inputPass') passwordInput!: ElementRef;
 
   constructor() {}
 
   ngOnInit(): void {}
+
+  checkTicket() {
+    this.isCheckingTicket = true;
+  }
+
+  showPassword() {
+    this.show = !this.show;
+
+    if (this.passwordInput.nativeElement.type == 'password') {
+      this.passwordInput.nativeElement.type = 'text';
+    } else {
+      this.passwordInput.nativeElement.type = 'password';
+    }
+  }
 }

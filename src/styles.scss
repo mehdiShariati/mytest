@@ -338,4 +338,14 @@ svg {
   }
 }
 
+.forget-password-check-box {
+  .p-checkbox .p-checkbox-box.p-highlight {
+    @apply border-gray-dark bg-gray-dark;
+  }
+
+  .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-highlight:hover {
+    @apply border-gray-dark bg-gray-dark;
+  }
+}
+
 /*------------------------- overRide primeng -----------------------------*/
