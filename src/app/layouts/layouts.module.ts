@@ -8,10 +8,12 @@ import { LayoutsRoutingModule } from './layouts-routing.module';
 import { AdminModule } from '../modules/admin/admin.module';
 import { AdminLayoutComponent } from './admin-layout/admin-layout.component';
 import { DashboardModule } from '../modules/dashboard/dashboard.module';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { InlineSVGModule } from 'ng-inline-svg-2';
 
 @NgModule({
   declarations: [MainLayoutComponent, AuthLayoutComponent, HeaderComponent, FooterComponent, AdminLayoutComponent],
-  imports: [CommonModule, LayoutsRoutingModule, AdminModule, DashboardModule],
+  imports: [CommonModule, LayoutsRoutingModule, AdminModule, DashboardModule, ConfirmDialogModule, InlineSVGModule],
   exports: [MainLayoutComponent, AuthLayoutComponent, AdminLayoutComponent],
 })
 export class LayoutsModule {}

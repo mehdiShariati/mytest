@@ -26,7 +26,12 @@
         <ng-container *ngIf="userInfo?.roles?.length; else showMessage">
           <div *ngFor="let item of userInfo?.roles">
             <p>{{ item?.title ?? '-' }}</p>
-            <i inlineSVG="assets/icons/recycle.svg"></i>
+            <img
+              *ngIf="userInfo?.roles?.length > 1"
+              src="assets/icons/recycle.svg"
+              (click)="deleteRole($event, item)"
+              alt=""
+            />
           </div>
         </ng-container>
         <ng-template #showMessage>
@@ -65,7 +70,7 @@
         <ng-container *ngIf="userInfo?.groups?.length; else showEmpty">
           <div *ngFor="let item of userInfo?.groups">
             <p>{{ item?.title }}</p>
-            <i inlineSVG="assets/icons/recycle.svg"></i>
+            <img src="assets/icons/recycle.svg" (click)="deleteGroup($event, item)" alt="" />
           </div>
         </ng-container>
         <ng-template #showEmpty>
@@ -83,3 +88,4 @@
     </p-tabPanel>
   </p-tabView>
 </div>
+<p-confirmPopup></p-confirmPopup>

@@ -3,13 +3,17 @@ import { BehaviorSubject, map, Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { User } from '../models/user';
+
 const headers = { 'content-type': 'application/x-www-form-urlencoded', accept: '*/*' };
+
 @Injectable({
   providedIn: 'root',
 })
 export class AuthServiceService {
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<User>;
+
+  logOutSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(<string>localStorage.getItem('currentUser')) ?? '');
@@ -18,6 +22,10 @@ export class AuthServiceService {
 
   public get currentUserValue(): User {
     return this.currentUserSubject.value;
+  }
+
+  reqForLogOut() {
+    this.logOutSubject.next(true);
   }
 
   login(value: any) {
@@ -45,6 +53,7 @@ export class AuthServiceService {
     localStorage.removeItem('currentUser');
     localStorage.removeItem('token');
     localStorage.removeItem('refresh-token');
+    this.currentUserSubject.next(null);
     this.currentUserSubject.complete();
   }
 

@@ -27,7 +27,14 @@
           <div class="flex items-center">
             <span class="p-input-icon-left w-[500px]">
               <i class="pi pi-search"></i>
-              <input class="search-input" pInputText type="text" placeholder="جستجو" />
+              <input
+                class="search-input"
+                pInputText
+                type="text"
+                placeholder="جستجو براساس کد پرسنلی"
+                [(ngModel)]="searchCode"
+                (ngModelChange)="searchUser()"
+              />
             </span>
             <div class="add-new" (click)="newUserModal = true">
               <i class="ml-2" inlineSVG="assets/icons/Add.svg"></i>
@@ -83,8 +90,14 @@
           <!--          <td>-->
           <!--            {{ user.activity }}-->
           <!--          </td>-->
-          <td>
+          <td class="flex items-center">
             <span>{{ user.roles[0]?.title ?? '-' }}</span>
+            <div
+              class="w-[30px] h-[25px] flex items-center justify-center bg-green rounded-[4px] mr-4"
+              *ngIf="user?.roles?.length > 1"
+            >
+              {{ user?.roles?.length - 1 }}+
+            </div>
           </td>
           <td>
             <div class="edit">
@@ -118,19 +131,17 @@
   <div>
     <div class="btns search-user mb-5">
       <i class="search-icon" inlineSVG="assets/icons/Search2.svg"></i>
-      <p-autoComplete
+      <input
         placeholder="کد ملی کاربر مورد نظر را وارد کنید"
-        [(ngModel)]="searchId"
-        (ngModelChange)="searchUser()"
-        [suggestions]="personnelUserInfo"
-        field="fullName"
-        class="custom-auto-complete"
-      ></p-autoComplete>
-      <i *ngIf="searchId" class="remove-icon" inlineSVG="assets/icons/Dismiss-2.svg" (click)="removeId()"></i>
+        [(ngModel)]="nationalId"
+        autofocus
+        (keydown.enter)="foundProfile()"
+      />
+      <i *ngIf="nationalId" class="remove-icon" inlineSVG="assets/icons/Dismiss-2.svg" (click)="removeId()"></i>
       <div class="add" (click)="foundProfile()">جستجو</div>
     </div>
 
-    <div class="history" *ngIf="!foundedUser && !notFoundUser">
+    <div class="history" *ngIf="!foundedUser && !notFoundUser && !showSpinner">
       <div class="mb-2">سوابق جستجو</div>
       <ng-container *ngIf="[{}].length; else showMessage">
         <div class="flex items-center items" *ngFor="let item of [{}, {}]">
@@ -147,6 +158,9 @@
           <div class="flex items-center justify-center mt-3 w-full">سوابقی یافت نشد.</div>
         </div>
       </ng-template>
+    </div>
+    <div class="text-center" *ngIf="showSpinner">
+      <p-progressSpinner class="custom-spinner-2"></p-progressSpinner>
     </div>
     <div class="text-gray-mid mb-3" *ngIf="foundedUser">کاربر یافت شد.</div>
     <ng-container *ngIf="foundedUser">
@@ -175,4 +189,8 @@
   class="modal-custom"
 >
   <app-card-information [userInfo]="userInfo"></app-card-information>
+  <div class="btns">
+    <div (click)="cancel()">انصراف</div>
+    <div class="add" (click)="addNewUser(true)">ثبت تغییرات</div>
+  </div>
 </p-dialog>

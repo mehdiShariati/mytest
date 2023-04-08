@@ -17,6 +17,10 @@
 
 .app-container {
   @apply flex items-center justify-center w-[57px] h-[57px] rounded-[12px];
+
+  .line {
+    @apply hidden w-[1px] h-[32px] bg-gray-mid;
+  }
 }
 
 ::-webkit-scrollbar {

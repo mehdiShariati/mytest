@@ -64,15 +64,15 @@
       <ng-template pTemplate="body" let-user>
         <tr class="p-selectable-row">
           <td style="color: #0f62fe !important">
-            {{ user?.personnel?.personnelCode }}
+            {{ user?.title }}
           </td>
           <td>
-            <span class="image-text">{{ user?.personnel?.firstName }}</span>
+            <span class="image-text">{{ user?.formation?.title }}</span>
           </td>
           <td>
-            <span class="image-text">{{ user?.personnel?.lastName }}</span>
+            <span class="image-text">{{ user?.mainOrganization?.name }}</span>
           </td>
-          <td>{{ user.state }} - {{ user.city }}</td>
+          <td>{{ user?.roleAccesses[0]?.objectType }}</td>
         </tr>
       </ng-template>
       <ng-template pTemplate="emptymessage">
@@ -83,6 +83,6 @@
     </p-table>
   </div>
   <div>
-    <p-paginator class="paginator-custom" [rows]="10" [totalRecords]="120"></p-paginator>
+    <p-paginator class="paginator-custom" [rows]="10" [totalRecords]="totalCount"></p-paginator>
   </div>
 </div>

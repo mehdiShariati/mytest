@@ -11,6 +11,7 @@ module.exports = {
         'gray-dark': '#262626',
         'gray-light': '#E0E0E0',
         'cyan-60': '#0072C3',
+        'cyan-10': '#E5F6FF',
         danger: '#DA1E28',
         white: '#fff',
         black: '#000',
@@ -20,6 +21,7 @@ module.exports = {
         'chat-others-msg': '#A6C8FF',
         story: '#08BDBA',
         neutral: '#C6C6C6',
+        green: '#A7F0BA',
       },
 
       fontFamily: {

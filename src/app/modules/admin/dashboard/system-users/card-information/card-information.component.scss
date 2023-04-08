@@ -27,7 +27,7 @@
         @apply text-[16px] text-gray-dark;
       }
 
-      i {
+      img {
         @apply cursor-pointer ml-4;
       }
     }
@@ -55,7 +55,7 @@
   }
 
   .add-new-btn {
-    @apply rounded-[8px] border-solid border-[1px] text-cyan-60 border-cyan-60 p-[14px] w-full flex items-center justify-center mt-4 cursor-pointer;
+    @apply rounded-[8px] border-solid border-[1px] text-cyan-60 border-cyan-60 p-[14px] w-full flex items-center justify-center mt-4 cursor-pointer bg-white;
 
     i {
       @apply ml-[8px];

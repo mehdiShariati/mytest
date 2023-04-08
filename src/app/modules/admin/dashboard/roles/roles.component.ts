@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RoleService } from '../../../../core/services/role.service';
 
 @Component({
   selector: 'app-roles',
@@ -7,8 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RolesComponent implements OnInit {
   roles!: any;
+  totalCount!: number;
 
-  constructor() {}
+  constructor(private roleService: RoleService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.roleService.getRoles({ pageNumber: 0, pageSize: 10 }).subscribe((res: any) => {
+      this.roles = res?.content;
+      this.totalCount = res.totalElements;
+    });
+  }
 }

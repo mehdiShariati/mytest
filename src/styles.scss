@@ -148,6 +148,10 @@ svg {
   .p-tabview .p-tabview-nav li .p-tabview-nav-link:not(.p-disabled):focus {
     @apply shadow-none;
   }
+
+  .p-autocomplete-panel.p-component {
+    @apply max-h-[180px] #{!important};
+  }
 }
 
 .custom-auto-complete {
@@ -217,12 +221,130 @@ svg {
 }
 
 .p-datatable > .p-datatable-wrapper {
-  max-height: calc(100vh - 315px);
+  @apply max-h-[calc(100vh_-_315px)];
 }
 
 .custom-spinner {
   .p-progress-spinner {
     @apply w-[30px] h-[30px];
+  }
+}
+
+.custom-spinner-2 {
+  .p-progress-spinner {
+    @apply w-[100px] h-[100px];
+  }
+}
+
+.custom-spinner-2 .p-progress-spinner-circle {
+  animation: custom-progress-spinner-dash 1.5s ease-in-out infinite,
+    custom-progress-spinner-color 6s ease-in-out infinite;
+}
+
+@keyframes custom-progress-spinner-color {
+  100%,
+  0% {
+    stroke: #e0e0e0;
+  }
+  40% {
+    stroke: #e0e0e0;
+  }
+  66% {
+    stroke: #e0e0e0;
+  }
+  80%,
+  90% {
+    stroke: #e0e0e0;
+  }
+}
+
+@keyframes custom-progress-spinner-dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -35px;
+  }
+  100% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -124px;
+  }
+}
+
+.p-confirm-popup {
+  .p-button.p-button-text {
+    @apply text-danger border-none;
+  }
+
+  .p-button.p-button-text:enabled:hover {
+    @apply text-danger border-none;
+    background: none;
+  }
+
+  .p-confirm-popup-accept:enabled {
+    @apply text-secondary border-none shadow-none;
+
+    &:hover {
+      @apply text-secondary bg-none;
+      background: none;
+    }
+  }
+}
+
+.exit-dialog {
+  .p-dialog-header {
+    @apply justify-center;
+  }
+
+  .p-dialog .p-dialog-footer {
+    @apply text-left;
+  }
+
+  .p-button {
+    @apply border-none rounded-[8px];
+  }
+
+  .accept-label {
+    @apply bg-danger;
+
+    &:hover {
+      @apply bg-danger;
+    }
+  }
+
+  .reject-label {
+    @apply text-gray-mid;
+
+    &:hover {
+      @apply text-gray-mid;
+      background: transparent;
+    }
+  }
+
+  .p-button-label {
+    @apply font-normal;
+  }
+}
+
+.p-dock-item:last-child {
+  a {
+    @apply w-[5rem];
+  }
+
+  .line {
+    @apply block absolute right-0 #{!important};
+  }
+}
+
+.forget-password-check-box {
+  .p-checkbox .p-checkbox-box.p-highlight {
+    @apply border-gray-dark bg-gray-dark;
+  }
+
+  .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-highlight:hover {
+    @apply border-gray-dark bg-gray-dark;
   }
 }
 

@@ -1,1 +1,45 @@
 @import 'src/app/modules/admin/dashboard/dashboard.component';
+
+.template {
+  @apply bg-background rounded-[8px] p-[16px];
+
+  .information {
+    @apply flex items-center;
+
+    .image-container {
+      @apply w-[48px] h-[48px] rounded-full flex items-center justify-center ml-[16px] border-solid border-white border-[1px];
+    }
+
+    p {
+      @apply text-gray-dark text-[18px];
+    }
+
+    span {
+      @apply text-gray-mid text-[14px];
+    }
+  }
+
+  .form {
+    @apply mt-[16px];
+
+    label {
+      @apply text-gray-mid mb-[8px];
+    }
+
+    i {
+      @apply mx-4;
+    }
+  }
+
+  .sight-icon {
+    @apply relative;
+
+    .icon {
+      @apply absolute left-[115px] top-[35%] cursor-pointer p-0;
+    }
+
+    i {
+      @apply pt-1;
+    }
+  }
+}

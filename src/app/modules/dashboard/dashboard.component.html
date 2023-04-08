@@ -124,6 +124,7 @@
             pDraggable="true"
             (onDragStart)="dragStart(item)"
           >
+            <div class="line"></div>
             <i [inlineSVG]="item.icon" class="m-2" [routerLink]="item.location ? item.location : null"></i>
           </div>
         </ng-template>

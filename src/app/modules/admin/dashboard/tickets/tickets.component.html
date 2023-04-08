@@ -98,3 +98,88 @@
     <p-paginator class="paginator-custom" [rows]="10" [totalRecords]="120"></p-paginator>
   </div>
 </div>
+<p-dialog
+  [header]="isCheckingTicket ? 'تغییر رمز حساب' : 'جزئیات تیکت'"
+  [(visible)]="displayModal"
+  [closable]="true"
+  [modal]="true"
+  [style]="{ width: '700px' }"
+  [draggable]="false"
+  [resizable]="false"
+  class="modal-custom"
+>
+  <div class="template" *ngIf="!isCheckingTicket">
+    <div class="text-gray-mid">درخواست دهنده</div>
+    <div class="information py-[16px] border-solid border-gray-light border-b-[1px]">
+      <div class="image-container">
+        <img alt="" [src]="userInfo?.profileImageUrl ? userInfo?.profileImageUrl : 'assets/icons/profile-image.svg'" />
+      </div>
+      <div>
+        <p>محمد جواد ابوترابی</p>
+        <span>کد پرسنلی ۱۲۳۴۵۶۷۸</span>
+      </div>
+    </div>
+    <div class="text-gray-mid mt-[16px]">شرح درخواست</div>
+    <div class="information pt-[16px]">
+      <div class="image-container bg-cyan-10">
+        <img alt="" [src]="'assets/icons/faq.svg'" />
+      </div>
+      <div>
+        <p>فراموشی رمز عبور</p>
+        <span>لحظاتی پیش</span>
+      </div>
+    </div>
+  </div>
+  <div class="template" *ngIf="isCheckingTicket">
+    <div class="information">
+      <div class="image-container">
+        <img alt="" [src]="userInfo?.profileImageUrl ? userInfo?.profileImageUrl : 'assets/icons/profile-image.svg'" />
+      </div>
+      <div>
+        <p>محمد جواد ابوترابی</p>
+        <span>کد پرسنلی ۱۲۳۴۵۶۷۸</span>
+      </div>
+    </div>
+    <div class="mt-[16px] flex items-center">
+      <i inlineSVG="assets/icons/Error-3.svg" class="ml-3"></i>
+      رمز جدید به طور خودکار توسط سیستم ساخته میشود.
+    </div>
+
+    <div class="form">
+      <label for="user" class="text-neutral text-[12px]">رمز عبور جدید</label>
+      <div class="flex items-center sight-icon">
+        <input
+          id="user"
+          #inputPass
+          class="form-group mt-1 h-12 px-3 py-2 bg-white placeholder-slate-400 focus:outline-none focus:border-primary focus:ring-primary block w-full rounded-md sm:text-sm focus:ring-1"
+          placeholder="رمز عبور جدید"
+        />
+        <i class="icon" inlineSVG="assets/icons/Sight.svg" *ngIf="!show" (click)="showPassword()"></i>
+        <i class="icon" inlineSVG="assets/icons/Sight-off.svg" *ngIf="show" (click)="showPassword()"></i>
+        <i inlineSVG="assets/icons/refresh.svg"></i>
+        <i inlineSVG="assets/icons/Copy.svg"></i>
+      </div>
+    </div>
+
+    <label for="check" class="flex items-center mt-[16px]">
+      <p-checkbox [binary]="true" inputId="check" class="forget-password-check-box"></p-checkbox>
+      <div class="pr-[16px] pt-1">اطلاع رسانی به مدیر مستقیم</div>
+    </label>
+
+    <div class="form">
+      <label for="user" class="text-neutral text-[12px]">شماره تماس / ایمیل</label>
+      <div class="flex items-center sight-icon">
+        <input
+          id="user"
+          class="form-group mt-1 h-12 px-3 py-2 bg-white placeholder-slate-400 focus:outline-none focus:border-primary focus:ring-primary block w-full rounded-md sm:text-sm focus:ring-1"
+          placeholder="شماره تماس / ایمیل مدیر مستقیم"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="btns">
+    <div>انصراف</div>
+    <div class="add" (click)="checkTicket()" *ngIf="!isCheckingTicket">تائید تیکت</div>
+    <div class="add" *ngIf="isCheckingTicket">تغییر رمز عبور</div>
+  </div>
+</p-dialog>
