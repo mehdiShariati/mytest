@@ -7,17 +7,16 @@
   ></p-contextMenu>
 
   <div class="w-full flex overflow-y-scroll flex-col scrollbar-hide chat-conatainer h-[575px]" #chatContainer>
-    <div>
-      <app-chat-message
-        (contextmenu)="openContextMenu($event, item)"
-        class="flex mx-3"
-        *ngFor="let item of messagesObserver$ | async"
-        [message]="item"
-        [id]="item.id"
-      ></app-chat-message>
-    </div>
+    <app-chat-message
+      (contextmenu)="openContextMenu($event, item)"
+      class="flex mx-3"
+      *ngFor="let item of messagesObserver$ | async"
+      [message]="item"
+      [id]="item.id"
+    ></app-chat-message>
     <div class="bottomOfChat"></div>
   </div>
+
   <div
     *ngIf="showScrollTobottomBtn()"
     (click)="scrollToBottom()"
