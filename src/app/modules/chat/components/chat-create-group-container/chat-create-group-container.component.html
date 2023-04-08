@@ -1,6 +1,6 @@
-<div class="w-full h-[686px] relative">
+<div class="w-full h-full relative z-50">
   <div
-    class="flex justify-start items-center w-full h-16 absolute left-0 top-0 p-4 bg-white"
+    class="flex justify-start items-center w-full h-16 absolute z-50 left-0 top-0 p-4 bg-white"
     style="box-shadow: 0px 0px 5px 0 rgba(0, 0, 0, 0.1)"
   >
     <div
@@ -78,7 +78,7 @@
   <ng-container [ngSwitch]="step_number">
     <div
       *ngSwitchCase="1"
-      class="flex flex-col justify-start items-center w-full h-[622px] absolute left-0 top-16 overflow-hidden gap-1 px-32 pb-2 rounded-lg bg-white"
+      class="flex px-[8rem] flex-col justify-start items-center w-full h-[622px] absolute left-0 top-16 overflow-hidden gap-1 pb-2 rounded-lg bg-white"
     >
       <div class="flex flex-col justify-start items-start self-stretch flex-grow-0 flex-shrink-0 gap-3 py-4 bg-white">
         <div class="flex justify-center items-center self-stretch flex-grow-0 flex-shrink-0 gap-3 px-3">
@@ -154,20 +154,26 @@
 
     <div
       *ngSwitchCase="2"
-      class="flex flex-col justify-start items-center w-full h-[622px] relative gap-4 px-32 py-4 bg-white absolute left-0 top-16"
+      class="flex px-[8rem] flex-col justify-start items-center w-full h-[622px] relative gap-4 py-4 bg-white absolute left-0 top-16"
     >
-      <input type="file" class="hidden" (change)="onFileSelected($event)" #fileUpload />
+      <input
+        type="file"
+        class="hidden"
+        accept=".gif,.jpg,.jpeg,.png,.svg"
+        (change)="onFileSelected($event)"
+        #fileUpload
+      />
       <p class="self-stretch flex-grow-0 flex-shrink-0 w-full text-sm font-medium text-right text-[#8d8d8d]">
         مشخصات گروه
       </p>
       <div
         class="flex flex-row-reverse items-center self-stretch flex-grow-0 flex-shrink-0 relative gap-6 p-6 rounded-xl bg-[#f4f4f4]"
       >
-        <div class="flex justify-center items-center flex-grow flex-col">
+        <div class="flex justify-center my-2 items-center flex-grow flex-col">
           <p class="self-stretch flex-grow-0 flex-shrink-0 w-full text-xs font-medium text-right text-neutral-600">
             نام گروه
           </p>
-          <div class="flex flex-col justify-start items-start flex-grow bg-white">
+          <div class="flex flex-col justify-start items-start flex-grow bg-white w-full rounded">
             <div class="flex flex-col justify-start items-start self-stretch flex-grow-0 flex-shrink-0 gap-1">
               <div
                 class="flex flex-col justify-start items-start self-stretch flex-grow-0 flex-shrink-0 relative gap-2"
@@ -175,10 +181,10 @@
                 <div
                   class="flex justify-end items-start self-stretch flex-grow-0 flex-shrink-0 h-12 gap-4 px-4 py-[15px] rounded-lg bg-white"
                 >
-                  <div class="flex justify-start items-start flex-grow h-[18px] relative overflow-hidden gap-4">
+                  <div class="flex justify-start w-full items-start flex-grow h-[18px] relative overflow-hidden gap-4">
                     <input
                       [(ngModel)]="groupName"
-                      class="flex-grow w-full h-[18px] text-sm text-right text-neutral-800"
+                      class="flex-grow w-full h-[18px] text-sm text-right rounded text-neutral-800"
                     />
                   </div>
                 </div>
@@ -186,28 +192,16 @@
             </div>
           </div>
         </div>
-        <svg
-          width="64"
-          height="64"
-          viewBox="0 0 64 64"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          class="flex-grow-0 flex-shrink-0 w-16 h-16 relative"
-          preserveAspectRatio="xMidYMid meet"
+        <div
+          class="flex-grow-0 flex-shrink-0 w-[64px] h-[64px] relative overflow-hidden rounded-3xl bg-cover bg-no-repeat bg-center border border-[#f4f4f4] cursor-pointer"
+          style="background-image: url('{{ imageSrc ? imageSrc : 'assets/icons/chat/fileUpload.svg' }}');"
           (click)="fileUpload.click()"
-        >
-          <rect x="0.5" y="0.5" width="63" height="63" rx="31.5" fill="#8D8D8D"></rect>
-          <path
-            d="M24.6673 31.9999C22.7224 31.9999 20.8571 32.7726 19.4819 34.1478C18.1066 35.5231 17.334 37.3884 17.334 39.3333C17.334 41.2782 18.1066 43.1435 19.4819 44.5187C20.8571 45.894 22.7224 46.6666 24.6673 46.6666C26.6122 46.6666 28.4775 45.894 29.8528 44.5187C31.228 43.1435 32.0007 41.2782 32.0007 39.3333C32.0007 37.3884 31.228 35.5231 29.8528 34.1478C28.4775 32.7726 26.6122 31.9999 24.6673 31.9999ZM24.6673 34.6666L24.7873 34.6759C24.9205 34.7003 25.0432 34.7646 25.1389 34.8603C25.2347 34.9561 25.299 35.0787 25.3233 35.2119L25.334 35.3333V38.6666H28.67L28.79 38.6786C28.9232 38.7029 29.0458 38.7673 29.1416 38.863C29.2373 38.9588 29.3016 39.0814 29.326 39.2146L29.3367 39.3346L29.326 39.4546C29.3016 39.5878 29.2373 39.7104 29.1416 39.8062C29.0458 39.9019 28.9232 39.9663 28.79 39.9906L28.67 40.0013H25.334V43.3386L25.3233 43.4586C25.299 43.5918 25.2347 43.7144 25.1389 43.8102C25.0432 43.9059 24.9205 43.9703 24.7873 43.9946L24.6673 44.0053L24.5473 43.9946C24.4141 43.9703 24.2915 43.9059 24.1957 43.8102C24.1 43.7144 24.0357 43.5918 24.0113 43.4586L24.0007 43.3386V39.9999H20.662L20.542 39.9906C20.4088 39.9663 20.2861 39.9019 20.1904 39.8062C20.0946 39.7104 20.0303 39.5878 20.006 39.4546L19.9953 39.3346L20.006 39.2146C20.0304 39.0812 20.0949 38.9584 20.1909 38.8627C20.2869 38.7669 20.4099 38.7027 20.5433 38.6786L20.6633 38.6679H24.0007V35.3346L24.0113 35.2146C24.0354 35.0812 24.0996 34.9582 24.1954 34.8622C24.2912 34.7662 24.4139 34.7017 24.5473 34.6773L24.6673 34.6666ZM29.434 19.3359C28.9113 19.3359 28.3976 19.4724 27.9439 19.732C27.4902 19.9916 27.1122 20.3653 26.8473 20.8159L25.762 22.6666H23.0007C22.4316 22.6666 21.8681 22.7787 21.3424 22.9965C20.8166 23.2142 20.3389 23.5334 19.9365 23.9358C19.5341 24.3382 19.2149 24.8159 18.9972 25.3416C18.7794 25.8674 18.6673 26.4309 18.6673 26.9999V33.0799C19.262 32.5089 19.935 32.0254 20.666 31.6439L20.6673 26.9999C20.6673 26.3811 20.9132 25.7876 21.3507 25.35C21.7883 24.9124 22.3818 24.6666 23.0007 24.6666H26.334C26.5083 24.6667 26.6796 24.6212 26.8309 24.5347C26.9823 24.4481 27.1083 24.3236 27.1967 24.1733L28.5727 21.8306C28.6609 21.6805 28.7867 21.556 28.9378 21.4695C29.0889 21.383 29.2599 21.3374 29.434 21.3373H34.5047C34.6506 21.3374 34.7947 21.3694 34.9269 21.4312C35.0591 21.4929 35.1762 21.5828 35.27 21.6946L35.3567 21.8146L36.814 24.1879C36.9033 24.3337 37.0286 24.4541 37.1778 24.5377C37.3269 24.6213 37.495 24.6652 37.666 24.6653H40.9993C41.306 24.6651 41.6096 24.7254 41.893 24.8426C42.1763 24.9599 42.4337 25.1319 42.6506 25.3487C42.8674 25.5655 43.0394 25.823 43.1566 26.1063C43.2739 26.3896 43.3342 26.6933 43.334 26.9999V39.6666C43.334 40.9546 42.2887 41.9999 41.0007 41.9999H32.9167C32.686 42.7106 32.3673 43.3826 31.9713 43.9999H41.0007C42.1499 43.9999 43.2521 43.5434 44.0648 42.7307C44.8774 41.9181 45.334 40.8159 45.334 39.6666V26.9999C45.334 25.8507 44.8774 24.7485 44.0648 23.9358C43.2521 23.1232 42.1499 22.6666 41.0007 22.6666H38.2273L37.0607 20.7679C36.7924 20.3309 36.4166 19.9699 35.9691 19.7194C35.5217 19.469 35.0175 19.3374 34.5047 19.3373H29.434V19.3359ZM32.0007 26.6666C30.7322 26.6665 29.4963 27.0683 28.4703 27.8142C27.4444 28.5601 26.6811 29.6119 26.29 30.8186C26.9566 30.9453 27.5966 31.1479 28.2006 31.4173C28.4961 30.5119 29.1051 29.7417 29.9179 29.2453C30.7307 28.7489 31.694 28.5589 32.6344 28.7095C33.5748 28.8602 34.4306 29.3415 35.0477 30.0669C35.6648 30.7923 36.0027 31.7142 36.0007 32.6666C36.0007 34.5733 34.6673 36.1666 32.8833 36.5693C33.0968 37.2034 33.2355 37.8603 33.2967 38.5266C34.7395 38.2063 36.0133 37.3648 36.8742 36.1634C37.735 34.962 38.1222 33.4852 37.9617 32.016C37.8012 30.5468 37.1041 29.1885 36.0041 28.2014C34.9042 27.2143 33.4786 26.6678 32.0007 26.6666Z"
-            fill="white"
-          ></path>
-          <rect x="0.5" y="0.5" width="63" height="63" rx="31.5" stroke="#F4F4F4"></rect>
-        </svg>
+        ></div>
       </div>
       <p class="self-stretch flex-grow-0 flex-shrink-0 w-full text-sm font-medium text-right text-[#8d8d8d]">
         اعضای گروه
       </p>
-      <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-1 divide-y">
+      <div class="flex flex-col w-full justify-start items-start flex-grow-0 flex-shrink-0 relative gap-1 divide-y">
         <div
           *ngFor="let user of getSelectedUsers()"
           class="flex flex-row-reverse justify-start items-center flex-grow-0 flex-shrink-0 w-full relative gap-4 py-2 bg-white"

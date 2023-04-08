@@ -3,6 +3,7 @@ import { ChatService } from '../../../../core/services/chat.service';
 import { BehaviorSubject, fromEvent, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../../../../environments/environment';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-chat-create-group-container',
@@ -17,7 +18,8 @@ export class ChatCreateGroupContainerComponent {
   public selectedUserArray: any = [];
   public groupName: string = '';
   public File: any = '';
-  constructor(private chatService: ChatService) {}
+  public imageSrc: any = '';
+  constructor(private chatService: ChatService, private messageService: MessageService) {}
 
   ngAfterViewInit(): void {
     this.itemsUsers$ = this.chatService.getUsersObserver();
@@ -48,11 +50,17 @@ export class ChatCreateGroupContainerComponent {
   }
   nextStep() {
     if (this.step_number === 1) {
+      //this.mes.add({ severity: 'error', detail: err.message ? err.message : err.error.message });
+      if (!this.selectedUsers.length) {
+        return this.messageService.add({ severity: 'error', detail: 'حداقل یک کاربر باید انتخاب شود.' });
+      }
       this.step_number++;
       this.groupName = this.getPlaceHolder();
     } else if (this.step_number === 2) {
+      if (!this.File) {
+        return this.messageService.add({ severity: 'error', detail: 'باید عکس انتخاب شود.' });
+      }
       this.chatService.createGroup(this.groupName, this.selectedUsers, this.File).subscribe((res: any) => {
-        console.log(res);
         this.chatService.showCreateGroupContainer = false;
       });
     }
@@ -73,11 +81,15 @@ export class ChatCreateGroupContainerComponent {
     return items.join(',');
   }
   onFileSelected(event: any) {
-    let file: File = event.target?.files[0];
-    console.log(file);
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+      if (file) {
+        this.File = file;
+      }
+      const reader = new FileReader();
+      reader.onload = e => (this.imageSrc = reader.result);
 
-    if (file) {
-      this.File = file;
+      reader.readAsDataURL(file);
     }
   }
 }

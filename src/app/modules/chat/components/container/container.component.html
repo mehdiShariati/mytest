@@ -166,7 +166,7 @@
     </div>
   </div>
   <div class="w-full h-[686px] relative rounded-xl bg-[#f4f4f4] flex main-container justify-center mt-10">
-    <div class="right-container flex flex-col">
+    <div class="right-container flex flex-col z-[51]">
       <div
         class="flex flex-col justify-start items-center h-[686px] top-0 overflow-hidden pb-16 bg-white session-container"
         style="box-shadow: 0px 0px 5px 0 rgba(0, 0, 0, 0.1)"
@@ -581,14 +581,14 @@
     </div>
 
     <div class="left-container relative w-full flex flex-col">
+      <ng-container *ngIf="!showCreateGroupContainer()">
+        <app-chat-header-container *ngIf="!showCreateChannelContainer()"></app-chat-header-container>
+        <app-chat-container></app-chat-container>
+        <app-chat-send-message></app-chat-send-message>
+      </ng-container>
       <app-chat-new-chat></app-chat-new-chat>
       <app-chat-create-channel-container *ngIf="showCreateChannelContainer()"></app-chat-create-channel-container>
-      <app-chat-header-container
-        *ngIf="!showCreateGroupContainer() && !showCreateChannelContainer()"
-      ></app-chat-header-container>
       <app-chat-create-group-container *ngIf="showCreateGroupContainer()"></app-chat-create-group-container>
-      <app-chat-container></app-chat-container>
-      <app-chat-send-message></app-chat-send-message>
     </div>
   </div>
 </div>

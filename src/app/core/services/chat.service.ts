@@ -95,6 +95,8 @@ export class ChatService {
   obsLoadingMessage: BehaviorSubject<any> = new BehaviorSubject<any>(false);
   loadingMessages$: Observable<any> = this.obsLoadingMessage.asObservable();
 
+  obsGoTobottom: BehaviorSubject<any> = new BehaviorSubject<any>(false);
+
   private _isEditingMessage: boolean = false;
   private _isRepliengToAMessage: boolean = false;
   public selfUserId: string = '';
@@ -119,8 +121,9 @@ export class ChatService {
         const currentValue = this.obsArrayMessages.value;
         const updatedValue = [...currentValue, msg.data];
         this.obsArrayMessages.next(updatedValue);
-
-        this.disableScrollDown = true;
+        setTimeout(() => {
+          this.obsGoTobottom.next(true);
+        }, 200);
       }
       if (msg.type === 'MESSAGE') {
         let updatedSession;
@@ -202,6 +205,7 @@ export class ChatService {
     this.showNewMessageModal = !this.showNewMessageModal;
   }
   setSelectedSession(user: any) {
+    this.obsGoTobottom.next(false);
     this.isAllowToFetchMessages = false;
     this.isMessagesOver = false;
     this.selectedUser = user['id'];
@@ -395,10 +399,9 @@ export class ChatService {
   createGroup(groupName: string, selectedUser: Array<string>, File: any) {
     let headers = { 'content-type': 'multipart/form-data', accept: '*/*' };
     headers = { 'content-type': 'multipart/form-data', accept: '*/*' };
-    console.log(JSON.stringify(selectedUser));
     let value = new FormData();
     value.set('name', groupName);
-    value.set('members', JSON.stringify(selectedUser));
+    value.set('members', selectedUser.join(','));
     value.set('file', File);
     return this.http.post(`${environment.apiUrl}/chat/groups`, value, {});
   }

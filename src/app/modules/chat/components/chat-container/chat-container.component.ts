@@ -77,9 +77,16 @@ export class ChatContainerComponent implements AfterContentInit {
     this.contextMenu.show(event);
     event.stopPropagation();
   }
-
+  ngOnInit() {
+    this.chatService.obsGoTobottom.subscribe((res: boolean) => {
+      if (res) {
+        this.scrollToBottom();
+      }
+    });
+  }
   ngAfterContentInit(): void {
     this.messagesObserver$ = this.chatService.getMessagesObserver();
+
     this.messagesObserver$.subscribe((res: any) => {
       if (res.length) {
         console.log(res);
@@ -87,36 +94,17 @@ export class ChatContainerComponent implements AfterContentInit {
       }
     });
     let endOfContainer = document.querySelector('.bottomOfChat');
-    const threshold = 0.3; // how much % of the element is in view
-    const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            this.chatService.disableScrollDown = false;
-            // run your animation code here
-            // disconnect if you want to stop observing else it will rerun every time its back in view. Just make sure you disconnect in ngOnDestroy instead
-          } else {
-            this.chatService.disableScrollDown = true;
-          }
-        });
-      },
-      { threshold },
-    );
+    const threshold = 1; // how much % of the element is in view
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          this.chatService.disableScrollDown = false;
+        } else {
+          this.chatService.disableScrollDown = true;
+        }
+      });
+    });
     observer.observe(endOfContainer!);
-    // this.onScrolling.pipe(debounceTime(100), distinctUntilChanged()).subscribe(res => {
-    //   console.log(Math.floor(res.target.scrollTop) + Math.floor(res.target.clientHeight));
-    //   if (
-    //     Math.floor(res.target.scrollTop) + Math.floor(res.target.clientHeight) + 50 >=
-    //     Math.floor(res.target.scrollHeight) && this.chatService.disableScrollDown) {
-    //     this.chatService.disableScrollDown = false
-    //   } else {
-    //     this.chatService.disableScrollDown = true
-    //   }
-    //
-    //   if (Math.floor(res.target.scrollTop) < 30 && !this.chatService.isMessagesOver) {
-    //     this.chatService.getMoreMessage();
-    //   }
-    // });
 
     this.chatService
       .getLoadingMessagesObserver()
@@ -262,7 +250,7 @@ export class ChatContainerComponent implements AfterContentInit {
   }
   scrollToBottom(): void {
     try {
-      this.chatContainer.nativeElement.scrollTo(0, this.getContainerScrollTop());
+      this.chatContainer.nativeElement.scrollTo(0, this.getContainerScrollTop() + 500);
     } catch (err) {}
   }
   // // I update the container to use the new scroll offset.

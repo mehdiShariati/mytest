@@ -6,7 +6,7 @@
     [model]="contextMenuItems"
   ></p-contextMenu>
 
-  <div class="w-full flex overflow-y-scroll flex-col scrollbar-hide chat-conatainer h-[575px]" #chatContainer>
+  <div class="w-full flex overflow-y-scroll flex-col chat-conatainer h-[575px] pb-8" #chatContainer>
     <app-chat-message
       (contextmenu)="openContextMenu($event, item)"
       class="flex mx-3"
