@@ -26,7 +26,6 @@ export class HeaderComponent implements OnInit {
   ngAfterViewInit(): void {
     setInterval(() => {
       this.dataSubject.next(true);
-      this.displayDate();
     }, 1000);
   }
 
@@ -37,6 +36,12 @@ export class HeaderComponent implements OnInit {
         this.exit();
       }
     });
+
+    setTimeout(() => {
+      this.displayDate();
+      this.displayTime();
+    }, 100);
+
     this.dataSubject.subscribe((res: any) => {
       if (res) this.displayTime();
     });

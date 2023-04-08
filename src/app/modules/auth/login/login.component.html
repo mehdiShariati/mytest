@@ -87,7 +87,7 @@
 
       <div class="reset-pass">
         <div class="px-1">فراموشی رمز عبور؟</div>
-        <span>ثبت تیکت</span>
+        <span (click)="displayModal = true">ثبت تیکت</span>
       </div>
 
       <div class="form-group error-message" *ngIf="wrongPassword">
@@ -97,3 +97,54 @@
     </form>
   </div>
 </main>
+<p-dialog
+  header="فراموشی رمز عبور"
+  [(visible)]="displayModal"
+  [closable]="true"
+  [modal]="true"
+  [style]="{ width: '700px' }"
+  [draggable]="false"
+  [resizable]="false"
+  class="modal-custom"
+>
+  <div class="template">
+    <div class="form">
+      <label for="firstName">نام</label>
+      <div class="sight-icon">
+        <input
+          id="firstName"
+          class="form-group mt-1 h-12 px-3 py-2 bg-white placeholder-slate-400 focus:outline-none focus:border-primary focus:ring-primary block w-full rounded-md sm:text-sm focus:ring-1"
+          placeholder="نام"
+        />
+      </div>
+      <label for="lastName">نام خانوادگی</label>
+      <div class="sight-icon">
+        <input
+          id="lastName"
+          class="form-group mt-1 h-12 px-3 py-2 bg-white placeholder-slate-400 focus:outline-none focus:border-primary focus:ring-primary block w-full rounded-md sm:text-sm focus:ring-1"
+          placeholder="نام خانوادگی"
+        />
+      </div>
+      <label for="code">کد پرسنلی</label>
+      <div class="sight-icon">
+        <input
+          id="code"
+          class="form-group mt-1 h-12 px-3 py-2 bg-white placeholder-slate-400 focus:outline-none focus:border-primary focus:ring-primary block w-full rounded-md sm:text-sm focus:ring-1"
+          placeholder="کد پرسنلی"
+        />
+      </div>
+      <label for="nationalCode">کد ملی</label>
+      <div class="sight-icon">
+        <input
+          id="nationalCode"
+          class="form-group mt-1 h-12 px-3 py-2 bg-white placeholder-slate-400 focus:outline-none focus:border-primary focus:ring-primary block w-full rounded-md sm:text-sm focus:ring-1"
+          placeholder="کد ملی"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="btns">
+    <div (click)="displayModal = false">انصراف</div>
+    <div class="add">ثبت درخواست</div>
+  </div>
+</p-dialog>
