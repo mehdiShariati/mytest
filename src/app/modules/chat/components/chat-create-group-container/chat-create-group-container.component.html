@@ -1,6 +1,6 @@
-<div class="w-[937px] h-[686px] relative">
+<div class="w-full h-[686px] relative">
   <div
-    class="flex justify-start items-center w-[937px] h-16 absolute left-0 top-0 p-4 bg-white"
+    class="flex justify-start items-center w-full h-16 absolute left-0 top-0 p-4 bg-white"
     style="box-shadow: 0px 0px 5px 0 rgba(0, 0, 0, 0.1)"
   >
     <div
@@ -78,7 +78,7 @@
   <ng-container [ngSwitch]="step_number">
     <div
       *ngSwitchCase="1"
-      class="flex flex-col justify-start items-center w-[937px] h-[622px] absolute left-0 top-16 overflow-hidden gap-1 px-32 pb-2 rounded-lg bg-white"
+      class="flex flex-col justify-start items-center w-full h-[622px] absolute left-0 top-16 overflow-hidden gap-1 px-32 pb-2 rounded-lg bg-white"
     >
       <div class="flex flex-col justify-start items-start self-stretch flex-grow-0 flex-shrink-0 gap-3 py-4 bg-white">
         <div class="flex justify-center items-center self-stretch flex-grow-0 flex-shrink-0 gap-3 px-3">
@@ -114,7 +114,7 @@
           </div>
         </div>
       </div>
-      <div class="flex flex-col divide-y users-container h-50 overflow-y-scroll scrollbar-hide">
+      <div class="flex w-full flex-col divide-y users-container h-50 overflow-y-scroll scrollbar-hide">
         <div
           *ngFor="let user of itemsUsers$ | async"
           class="flex flex-row-reverse justify-start items-center self-stretch flex-grow-0 flex-shrink-0 relative gap-4 px-4 py-2 bg-white"
@@ -135,7 +135,7 @@
               </p>
             </div>
             <div class="flex justify-end items-start self-stretch flex-grow-0 flex-shrink-0 relative gap-1">
-              <p class="self-stretch flex-grow w-[555px] h-4 text-xs font-medium text-right text-[#8d8d8d]">
+              <p class="self-stretch flex-grow w-full h-4 text-xs font-medium text-right text-[#8d8d8d]">
                 آخرین فعالیت: ۸ ساعت پیش
               </p>
             </div>
@@ -154,17 +154,17 @@
 
     <div
       *ngSwitchCase="2"
-      class="flex flex-col justify-start items-center w-[937px] h-[622px] relative gap-4 px-32 py-4 bg-white absolute left-0 top-16"
+      class="flex flex-col justify-start items-center w-full h-[622px] relative gap-4 px-32 py-4 bg-white absolute left-0 top-16"
     >
       <input type="file" class="hidden" (change)="onFileSelected($event)" #fileUpload />
-      <p class="self-stretch flex-grow-0 flex-shrink-0 w-[681px] text-sm font-medium text-right text-[#8d8d8d]">
+      <p class="self-stretch flex-grow-0 flex-shrink-0 w-full text-sm font-medium text-right text-[#8d8d8d]">
         مشخصات گروه
       </p>
       <div
         class="flex flex-row-reverse items-center self-stretch flex-grow-0 flex-shrink-0 relative gap-6 p-6 rounded-xl bg-[#f4f4f4]"
       >
         <div class="flex justify-center items-center flex-grow flex-col">
-          <p class="self-stretch flex-grow-0 flex-shrink-0 w-[545px] text-xs font-medium text-right text-neutral-600">
+          <p class="self-stretch flex-grow-0 flex-shrink-0 w-full text-xs font-medium text-right text-neutral-600">
             نام گروه
           </p>
           <div class="flex flex-col justify-start items-start flex-grow bg-white">
@@ -178,7 +178,7 @@
                   <div class="flex justify-start items-start flex-grow h-[18px] relative overflow-hidden gap-4">
                     <input
                       [(ngModel)]="groupName"
-                      class="flex-grow w-[513px] h-[18px] text-sm text-right text-neutral-800"
+                      class="flex-grow w-full h-[18px] text-sm text-right text-neutral-800"
                     />
                   </div>
                 </div>
@@ -204,13 +204,13 @@
           <rect x="0.5" y="0.5" width="63" height="63" rx="31.5" stroke="#F4F4F4"></rect>
         </svg>
       </div>
-      <p class="self-stretch flex-grow-0 flex-shrink-0 w-[681px] text-sm font-medium text-right text-[#8d8d8d]">
+      <p class="self-stretch flex-grow-0 flex-shrink-0 w-full text-sm font-medium text-right text-[#8d8d8d]">
         اعضای گروه
       </p>
       <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 relative gap-1 divide-y">
         <div
           *ngFor="let user of getSelectedUsers()"
-          class="flex flex-row-reverse justify-start items-center flex-grow-0 flex-shrink-0 w-[681px] relative gap-4 py-2 bg-white"
+          class="flex flex-row-reverse justify-start items-center flex-grow-0 flex-shrink-0 w-full relative gap-4 py-2 bg-white"
         >
           <svg
             (click)="removeSelectedUser(user.id)"
@@ -238,7 +238,7 @@
               </p>
             </div>
             <div class="flex justify-end items-start self-stretch flex-grow-0 flex-shrink-0 relative gap-1">
-              <p class="self-stretch flex-grow w-[583px] h-4 text-xs font-medium text-right text-[#8d8d8d]">
+              <p class="self-stretch flex-grow w-full h-4 text-xs font-medium text-right text-[#8d8d8d]">
                 آخرین فعالیت: ۸ ساعت پیش
               </p>
             </div>

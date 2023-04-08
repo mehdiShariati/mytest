@@ -43,8 +43,8 @@ export class HttpErrorInterceptor implements HttpInterceptor {
                 });
               },
               () => {
-                //   this.authenticationService.logout();
-                //  this.router.navigate(['auth/login']);
+                this.authenticationService.logout();
+                this.router.navigate(['auth/login']);
               },
             );
           } else {

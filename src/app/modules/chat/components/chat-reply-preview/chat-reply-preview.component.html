@@ -1,0 +1,52 @@
+<div
+  class="flex flex-row-reverse justify-start items-center w-full h-12 relative gap-4 px-4 bg-white"
+  style="box-shadow: 0px 0px 5px 0 rgba(0, 0, 0, 0.1)"
+>
+  <div
+    class="flex flex-col justify-center items-center flex-grow-0 flex-shrink-0 h-8 w-8 overflow-hidden p-0.5 rounded-3xl"
+  >
+    <div
+      class="flex justify-center items-center flex-grow-0 flex-shrink-0 w-8 h-8 relative overflow-hidden gap-2 p-3.5 rounded-[22px]"
+    >
+      <svg
+        (click)="discard_reply()"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        class="flex-grow-0 flex-shrink-0 w-6 h-6 relative cursor-pointer"
+        preserveAspectRatio="none"
+      >
+        <path
+          d="M12 2C17.523 2 22 6.477 22 12C22 17.523 17.523 22 12 22C6.477 22 2 17.523 2 12C2 6.477 6.477 2 12 2ZM15.53 8.47L15.446 8.397C15.3186 8.30281 15.1646 8.2514 15.0061 8.25014C14.8477 8.24888 14.6929 8.29784 14.564 8.39L14.47 8.47L12 10.939L9.53 8.469L9.446 8.397C9.31857 8.30281 9.16459 8.2514 9.00614 8.25014C8.84768 8.24888 8.6929 8.29784 8.564 8.39L8.47 8.47L8.397 8.554C8.30281 8.68143 8.2514 8.83541 8.25014 8.99386C8.24888 9.15232 8.29784 9.3071 8.39 9.436L8.47 9.53L10.939 12L8.469 14.47L8.397 14.554C8.30281 14.6814 8.2514 14.8354 8.25014 14.9939C8.24888 15.1523 8.29784 15.3071 8.39 15.436L8.47 15.53L8.554 15.603C8.68143 15.6972 8.83541 15.7486 8.99386 15.7499C9.15232 15.7511 9.3071 15.7022 9.436 15.61L9.53 15.53L12 13.061L14.47 15.531L14.554 15.603C14.6814 15.6972 14.8354 15.7486 14.9939 15.7499C15.1523 15.7511 15.3071 15.7022 15.436 15.61L15.53 15.53L15.603 15.446C15.6972 15.3186 15.7486 15.1646 15.7499 15.0061C15.7511 14.8477 15.7022 14.6929 15.61 14.564L15.53 14.47L13.061 12L15.531 9.53L15.603 9.446C15.6972 9.31857 15.7486 9.16459 15.7499 9.00614C15.7511 8.84768 15.7022 8.6929 15.61 8.564L15.53 8.47L15.446 8.397L15.53 8.47Z"
+          fill="#8D8D8D"
+        ></path>
+      </svg>
+    </div>
+  </div>
+  <div class="flex flex-col justify-start items-end flex-grow relative">
+    <div class="flex-grow-0 flex-shrink-0 w-full h-[18px] relative overflow-hidden">
+      <p class="w-full h-[18px] absolute left-0 top-0 text-[10px] text-right text-[#8d8d8d]">
+        در حال پاسخ به
+        <span>{{ replay_person }}</span>
+      </p>
+    </div>
+    <div class="flex-grow-0 flex-shrink-0 w-full h-[18px] relative overflow-hidden">
+      <p class="w-full h-[18px] absolute left-0 top-0 text-sm text-right text-neutral-800 truncate">
+        {{ message }}
+      </p>
+    </div>
+  </div>
+  <svg
+    width="2"
+    height="32"
+    viewBox="0 0 2 32"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    class="flex-grow-0 flex-shrink-0"
+    preserveAspectRatio="xMidYMid meet"
+  >
+    <line x1="1" y1="4.37114e-8" x2="0.999999" y2="32" stroke="#A6C8FF" stroke-width="2"></line>
+  </svg>
+</div>

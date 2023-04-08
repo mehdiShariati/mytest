@@ -72,7 +72,7 @@
         <p class="flex-grow w-[85px] text-xs text-left text-[#8d8d8d]">
           {{session.messagePreview?.['createdDate'] ? getDate(session['messagePreview']['createdDate']) : ''}}
         </p>
-        <p class="flex-grow-0 flex-shrink-0 text-sm text-center text-neutral-800">
+        <p class="text-sm text-center text-neutral-800 truncate">
           {{ session.extraInfo ? session['extraInfo']['name'] : '' }}
         </p>
         <svg
@@ -91,14 +91,19 @@
           ></path>
         </svg>
       </div>
-      <div class="flex justify-end items-start self-stretch flex-grow-0 flex-shrink-0 relative gap-1 flex-row-reverse">
-        <p class="self-stretch truncate flex-grow w-[167px] h-4 text-xs text-right text-[#8d8d8d]">
+      <div class="flex items-start self-stretch flex-grow-0 flex-shrink-0 relative gap-1 flex place-content-between">
+        <p class="self-stretch max-w-[150px] truncate h-4 text-xs text-right text-[#8d8d8d]">
           {{
             session.messagePreview?.content && session.messagePreview?.type === 'TEXT'
               ? session.messagePreview?.content
-              : 'فایل'
+              : ''
           }}
         </p>
+        <div *ngIf="session.unreadMessageCount" class="w-4 h-4 relative rounded-full bg-[#fa4d56] self-stretch">
+          <p class="mx-auto text-xs text-center text-white">
+            {{ session.unreadMessageCount > 9 ? '+9' : session.unreadMessageCount }}
+          </p>
+        </div>
       </div>
     </div>
     <div

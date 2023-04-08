@@ -11,6 +11,7 @@ import { GroupsComponent } from './modules/admin/dashboard/groups/groups.compone
 import { OrganizationComponent } from './modules/admin/dashboard/organization/organization.component';
 import { StructuresComponent } from './modules/admin/dashboard/structures/structures.component';
 import { AuthGuard } from './core/guarda/auth.guard';
+import { LogoutComponent } from './modules/auth/logout/logout.component';
 
 const routes: Routes = [
   // {
@@ -49,6 +50,10 @@ const routes: Routes = [
         path: 'new-password',
         component: ChangePasswordComponent,
       },
+      {
+        path: 'logout',
+        component: LogoutComponent,
+      },
     ],
     data: { layout: Layouts.Auth },
   },
@@ -62,6 +67,7 @@ const routes: Routes = [
     path: 'app',
     canActivate: [AuthGuard],
     loadChildren: () => import('./modules/chat/chat-routing.module').then(m => m.ChatRoutingModule),
+    data: { layout: Layouts.Main },
   },
   // {
   //   path: 'auth',

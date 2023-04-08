@@ -63,45 +63,45 @@ export class ContainerComponent {
     //   this.obsArrayMessages.next(updatedValue);
     // });
   }
-  openContextMenu(event: MouseEvent, id: any): void {
-    this.contextMenuItems = [
-      {
-        label: 'ویرایش',
-        icon: 'pi pi-fw pi-pencil',
-        command: event => this.editMessage(id),
-      },
-      {
-        label: 'حذف',
-        icon: 'pi pi-fw pi-trash',
-        command: event => this.deleteMessage(id),
-      },
-    ];
-    this.contextMenu.show(event);
-    event.stopPropagation();
-  }
-  editMessage(id: any) {
-    this.is_editing_message = true;
-    this.select_edit_message_id = id;
-    const messagesArr: any[] = this.obsArrayMessages.getValue();
-
-    let selected_message: any = messagesArr.filter(item => {
-      return item.id === id;
-    });
-    this.message = selected_message[0]?.content;
-  }
-  deleteMessage(id: any) {
-    this.chatService.deleteMessage(id).subscribe((res: any) => {
-      const messagesArr: any[] = this.obsArrayMessages.getValue();
-
-      messagesArr.forEach((item, index) => {
-        if (item.id === id) {
-          messagesArr.splice(index, 1);
-        }
-      });
-
-      this.obsArrayMessages.next(messagesArr);
-    });
-  }
+  // openContextMenu(event: MouseEvent, id: any): void {
+  //   this.contextMenuItems = [
+  //     {
+  //       label: 'ویرایش',
+  //       icon: 'pi pi-fw pi-pencil',
+  //       command: event => this.editMessage(id),
+  //     },
+  //     {
+  //       label: 'حذف',
+  //       icon: 'pi pi-fw pi-trash',
+  //       command: event => this.console.og(id),
+  //     },
+  //   ];
+  //   this.contextMenu.show(event);
+  //   event.stopPropagation();
+  // }
+  // editMessage(id: any) {
+  //   this.is_editing_message = true;
+  //   this.select_edit_message_id = id;
+  //   const messagesArr: any[] = this.obsArrayMessages.getValue();
+  //
+  //   let selected_message: any = messagesArr.filter(item => {
+  //     return item.id === id;
+  //   });
+  //   this.message = selected_message[0]?.content;
+  // }
+  // deleteMessage(id: any) {
+  //   this.chatService.deleteMessage(id).subscribe((res: any) => {
+  //     const messagesArr: any[] = this.obsArrayMessages.getValue();
+  //
+  //     messagesArr.forEach((item, index) => {
+  //       if (item.id === id) {
+  //         messagesArr.splice(index, 1);
+  //       }
+  //     });
+  //
+  //     this.obsArrayMessages.next(messagesArr);
+  //   });
+  // }
   ngOnInit() {
     // this.chatService.getSelectedUser().subscribe((res: any) => {
     //   if (res) {
@@ -234,7 +234,7 @@ export class ContainerComponent {
   //     return InputDate.toLocaleDateString('fa-IR', { month: 'numeric', day: 'numeric' });
   //   }
   // }
-  toggleThreeDotMenu() {
+  togglePencilMenu() {
     this.chatService.toggleThreeDotMenu();
   }
   showCreateGroupContainer() {
