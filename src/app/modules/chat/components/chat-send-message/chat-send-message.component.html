@@ -1,7 +1,14 @@
+<app-chat-reply-preview *ngIf="show_replieng_tooltip" [message]="replieng_text"></app-chat-reply-preview>
 <div
-  class="flex w-[937px] h-12 left-0 top-[638px] bg-white message-sender place-content-between"
+  class="flex h-12 right-0 top-[638px] bg-white message-sender place-content-between"
   style="box-shadow: 0px 0px 5px 0 rgba(0, 0, 0, 0.1)"
 >
+  <emoji-mart
+    (emojiClick)="addEmoji($event)"
+    *ngIf="show_emoji_container"
+    [style]="{ position: 'absolute', bottom: '48px', left: '0' }"
+  ></emoji-mart>
+
   <div
     class="flex flex-col justify-center items-center w-8 h-8 left-[889px] top-10 overflow-hidden p-0.5 rounded-3xl h-full"
   >
@@ -24,15 +31,16 @@
       </svg>
     </div>
   </div>
-  <div class="flex flex-col justify-center items-end w-[761px] left-28 top-1 overflow-hidden bg-white">
+  <div class="flex flex-col justify-center items-end w-full left-28 top-1 overflow-hidden bg-white">
     <div class="flex flex-col justify-center items-end self-stretch flex-grow-0 flex-shrink-0 h-10 gap-1">
       <div class="flex flex-col justify-start items-start self-stretch flex-grow-0 flex-shrink-0 gap-2">
         <div class="flex justify-end items-center self-stretch flex-grow-0 flex-shrink-0 h-10 gap-4 p-4 bg-white">
           <div class="flex justify-start items-start flex-grow h-[18px] relative overflow-hidden gap-4">
             <input
+              #messageInput
               (keydown.enter)="sendMessage($event)"
               placeholder="پیامی بنویسید ..."
-              class="flex-grow w-[750px] h-[18px] text-sm text-right text-[#8d8d8d] justify-self-stretch"
+              class="flex-grow w-full h-[18px] text-sm text-right text-[#8d8d8d] justify-self-stretch"
             />
           </div>
         </div>
@@ -50,7 +58,7 @@
           viewBox="0 0 24 24"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          class="flex-grow-0 flex-shrink-0 w-6 h-6 relative"
+          class="flex-grow-0 flex-shrink-0 w-6 h-6 relative cursor-pointer"
           preserveAspectRatio="none"
         >
           <path
@@ -70,7 +78,8 @@
           viewBox="0 0 24 24"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          class="flex-grow-0 flex-shrink-0 w-6 h-6 relative"
+          (click)="toggleEmojiContainer($event)"
+          class="flex-grow-0 flex-shrink-0 w-6 h-6 relative cursor-pointer emoji"
           preserveAspectRatio="xMidYMid meet"
         >
           <path

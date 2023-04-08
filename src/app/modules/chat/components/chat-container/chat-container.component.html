@@ -1,8 +1,45 @@
-<div
-  class="w-full message-container relative overflow-y-scroll flex flex-col scrollbar-hide"
-  (scroll)="scrolling($event)"
->
-  <div class="flex flex-col chat-conatainer h-[575px]" #chatContainer>
-    <app-chat-message class="flex" *ngFor="let item of messagesObserver$ | async" [message]="item"></app-chat-message>
+<div class="w-full message-container relative flex flex-col">
+  <p-contextMenu
+    *ngIf="contextMenuItems.length"
+    #contextMenu
+    appendTo="body"
+    [model]="contextMenuItems"
+  ></p-contextMenu>
+
+  <div class="w-full flex overflow-y-scroll flex-col scrollbar-hide chat-conatainer h-[575px]" #chatContainer>
+    <div>
+      <app-chat-message
+        (contextmenu)="openContextMenu($event, item)"
+        class="flex mx-3"
+        *ngFor="let item of messagesObserver$ | async"
+        [message]="item"
+        [id]="item.id"
+      ></app-chat-message>
+    </div>
+    <div class="bottomOfChat"></div>
+  </div>
+  <div
+    *ngIf="showScrollTobottomBtn()"
+    (click)="scrollToBottom()"
+    class="flex flex-col absolute right-2 cursor-pointer bottom-2 justify-center items-center w-12 h-12 overflow-hidden p-0.5 rounded-3xl bg-white"
+  >
+    <div
+      class="flex justify-center items-center flex-grow-0 flex-shrink-0 w-11 h-11 relative overflow-hidden gap-2 p-3.5 rounded-[22px]"
+    >
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        class="flex-grow-0 flex-shrink-0 w-6 h-6 relative"
+        preserveAspectRatio="xMidYMid meet"
+      >
+        <path
+          d="M19.7905 13.267C19.9218 13.122 19.9911 12.9314 19.9839 12.7359C19.9766 12.5404 19.8932 12.3555 19.7516 12.2206C19.6099 12.0857 19.4211 12.0115 19.2255 12.0138C19.0299 12.0161 18.8429 12.0948 18.7045 12.233L12.7505 18.484V3.75C12.7505 3.55109 12.6715 3.36032 12.5308 3.21967C12.3902 3.07902 12.1994 3 12.0005 3C11.8016 3 11.6108 3.07902 11.4702 3.21967C11.3295 3.36032 11.2505 3.55109 11.2505 3.75V18.484L5.29551 12.233C5.15707 12.0948 4.97011 12.0161 4.7745 12.0138C4.5789 12.0115 4.39013 12.0857 4.24846 12.2206C4.10679 12.3555 4.02342 12.5404 4.01614 12.7359C4.00887 12.9314 4.07825 13.122 4.20951 13.267L11.2765 20.687C11.4365 20.855 11.6425 20.955 11.8565 20.987C11.9523 21.0055 12.0508 21.0051 12.1465 20.986C12.3674 20.9537 12.5709 20.848 12.7245 20.686L19.7915 13.267H19.7905Z"
+          fill="#0072C3"
+        ></path>
+      </svg>
+    </div>
   </div>
 </div>

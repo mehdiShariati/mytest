@@ -1,11 +1,10 @@
 <div
-  class="flex flex-row-reverse justify-start items-center w-[937px] left-0 top-0 gap-4 px-4 py-[11px] bg-white header-container"
+  class="flex flex-row-reverse justify-start items-center w-full left-0 top-0 gap-4 px-4 py-[11px] bg-white header-container"
   style="box-shadow: 0px 0px 5px 0 rgba(0, 0, 0, 0.1)"
 >
   <div
     id="tdotMenu"
     class="flex flex-col justify-center items-center flex-grow-0 flex-shrink-0 h-8 w-8 overflow-hidden p-0.5 rounded-3xl hover:cursor-pointer"
-    (click)="toggleThreeDotMenu()"
   >
     <div
       class="flex justify-center items-center flex-grow-0 flex-shrink-0 w-8 h-8 relative overflow-hidden gap-2 p-3.5 rounded-[22px]"
@@ -77,7 +76,7 @@
       </p>
     </div>
     <div class="flex justify-end items-start self-stretch flex-grow-0 flex-shrink-0 relative gap-1">
-      <p class="self-stretch flex-grow w-[703px] h-4 text-xs font-medium text-right text-[#8d8d8d]">
+      <p class="self-stretch flex-grow h-4 text-xs font-medium text-right text-[#8d8d8d]">
         {{ active_session ? 'آخرین فعالیت: ۸ ساعت پیش' : '' }}
       </p>
     </div>

@@ -22,7 +22,10 @@ import { ChatSessionContainerComponent } from './components/chat-session-contain
 import { ChatHeaderContainerComponent } from './components/chat-header-container/chat-header-container.component';
 import { RouterModule } from '@angular/router';
 import { ChatCreateChannelContainerComponent } from './components/chat-create-channel-container/chat-create-channel-container.component';
-
+import { ChatSessionHeaderComponent } from './components/chat-session-header/chat-session-header.component';
+import { ChatReplyPreviewComponent } from './components/chat-reply-preview/chat-reply-preview.component';
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
+import { EmojiModule } from '@ctrl/ngx-emoji-mart/ngx-emoji';
 @NgModule({
   declarations: [
     ContainerComponent,
@@ -37,6 +40,8 @@ import { ChatCreateChannelContainerComponent } from './components/chat-create-ch
     ChatSessionContainerComponent,
     ChatHeaderContainerComponent,
     ChatCreateChannelContainerComponent,
+    ChatSessionHeaderComponent,
+    ChatReplyPreviewComponent,
   ],
   imports: [
     CommonModule,
@@ -50,6 +55,8 @@ import { ChatCreateChannelContainerComponent } from './components/chat-create-ch
     ScrollPanelModule,
     CheckboxModule,
     RouterModule,
+    PickerModule,
+    EmojiModule,
   ],
 })
 export class ChatModule {}

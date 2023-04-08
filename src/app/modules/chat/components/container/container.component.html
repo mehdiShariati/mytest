@@ -137,12 +137,14 @@
 <!--    </div>-->
 <!--  </div>-->
 <!--</div>-->
-<div class="w-[1220px] h-[832px] relative overflow-hidden bg-[#f4f4f4] justify-center mx-auto mt-10" dir="rtl">
-  <div class="flex w-full place-content-between">
-    <div class="flex flex-col justify-start items-end w-[186px] top-16">
-      <p class="flex-grow-0 flex-shrink-0 text-2xl font-bold text-center text-neutral-800">پیام رسان</p>
+
+<div class="px-2 bg-background min-h-[705px] w-full" dir="rtl">
+  <div class="flex mt-4 w-full place-content-between">
+    <div class="flex flex-col justify-start w-[186px] top-16">
+      <p class="text-2xl font-bold text-right text-neutral-800">پیام رسان</p>
     </div>
     <div class="flex justify-start items-center">
+      <a [routerLink]="'/dashboard'" class="flex-grow-0 flex-shrink-0 text-sm text-center text-[#8d8d8d]">بازگشت</a>
       <svg
         width="24"
         height="24"
@@ -157,74 +159,15 @@
           fill="#8D8D8D"
         ></path>
       </svg>
-      <a [routerLink]="'/dashboard'" class="flex-grow-0 flex-shrink-0 text-sm text-center text-[#8d8d8d]">بازگشت</a>
     </div>
   </div>
-  <div
-    class="w-full h-[686px] relative overflow-hidden rounded-xl bg-[#f4f4f4] flex main-container justify-center mt-10"
-  >
+  <div class="w-full h-[686px] relative rounded-xl bg-[#f4f4f4] flex main-container justify-center mt-10">
     <div class="right-container flex flex-col">
       <div
-        class="flex flex-col justify-start items-center h-[686px] left-[937px] top-0 overflow-hidden pb-16 bg-white session-container"
+        class="flex flex-col justify-start items-center h-[686px] top-0 overflow-hidden pb-16 bg-white session-container"
         style="box-shadow: 0px 0px 5px 0 rgba(0, 0, 0, 0.1)"
       >
-        <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 gap-3 py-3 bg-white">
-          <div class="flex justify-center items-start flex-grow-0 flex-shrink-0 w-[283px] gap-3 px-3 flex-row-reverse">
-            <div
-              class="flex flex-col justify-center items-center flex-grow-0 flex-shrink-0 h-10 w-10 overflow-hidden p-0.5 rounded-3xl"
-            >
-              <div
-                class="flex justify-center items-center flex-grow-0 flex-shrink-0 w-8 h-8 relative overflow-hidden gap-2 p-3.5 rounded-[22px]"
-              >
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="flex-grow-0 flex-shrink-0 w-6 h-6 relative"
-                  preserveAspectRatio="none"
-                >
-                  <path
-                    d="M21.78 3.28015C21.8537 3.21149 21.9128 3.12869 21.9538 3.03669C21.9948 2.94469 22.0168 2.84538 22.0186 2.74468C22.0204 2.64397 22.0018 2.54394 21.9641 2.45056C21.9264 2.35717 21.8703 2.27233 21.799 2.20112C21.7278 2.1299 21.643 2.07375 21.5496 2.03603C21.4562 1.99831 21.3562 1.97979 21.2555 1.98156C21.1548 1.98334 21.0555 2.00538 20.9635 2.04637C20.8715 2.08736 20.7887 2.14647 20.72 2.22015L10.72 12.2202L10.25 13.7502L11.78 13.2802L21.78 3.28015Z"
-                    fill="#78A9FF"
-                  ></path>
-                  <path
-                    d="M6.25 3C5.38805 3 4.5614 3.34241 3.9519 3.9519C3.34241 4.5614 3 5.38805 3 6.25V17.75C3 18.612 3.34241 19.4386 3.9519 20.0481C4.5614 20.6576 5.38805 21 6.25 21H17.75C18.612 21 19.4386 20.6576 20.0481 20.0481C20.6576 19.4386 21 18.612 21 17.75V9.75C21 9.55109 20.921 9.36032 20.7803 9.21967C20.6397 9.07902 20.4489 9 20.25 9C20.0511 9 19.8603 9.07902 19.7197 9.21967C19.579 9.36032 19.5 9.55109 19.5 9.75V17.75C19.5 18.2141 19.3156 18.6592 18.9874 18.9874C18.6592 19.3156 18.2141 19.5 17.75 19.5H6.25C5.78587 19.5 5.34075 19.3156 5.01256 18.9874C4.68437 18.6592 4.5 18.2141 4.5 17.75V6.25C4.5 5.284 5.284 4.5 6.25 4.5H14.25C14.4489 4.5 14.6397 4.42098 14.7803 4.28033C14.921 4.13968 15 3.94891 15 3.75C15 3.55109 14.921 3.36032 14.7803 3.21967C14.6397 3.07902 14.4489 3 14.25 3H6.25Z"
-                    fill="#78A9FF"
-                  ></path>
-                </svg>
-              </div>
-            </div>
-            <div class="flex flex-col justify-center items-center flex-grow h-10 overflow-hidden rounded-xl bg-white">
-              <div class="flex flex-col justify-center items-center self-stretch flex-grow gap-1">
-                <div class="flex flex-col justify-center items-center self-stretch flex-grow gap-2">
-                  <div
-                    class="flex justify-end items-center self-stretch flex-grow gap-4 px-4 py-[15px] rounded-lg bg-[#f4f4f4]"
-                  >
-                    <div class="flex justify-center items-center flex-grow relative gap-2">
-                      <p class="flex-grow-0 flex-shrink-0 text-sm text-right text-[#8d8d8d]">جستجو</p>
-                      <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 16 16"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="flex-grow-0 flex-shrink-0 w-4 h-4 relative"
-                        preserveAspectRatio="xMidYMid meet"
-                      >
-                        <path
-                          d="M6.66658 1.83301C7.57997 1.83289 8.47471 2.0916 9.2471 2.57915C10.0195 3.0667 10.6379 3.76314 11.0307 4.58776C11.4235 5.41237 11.5746 6.33142 11.4665 7.2384C11.3584 8.14538 10.9955 9.00315 10.4199 9.71234L13.6866 12.979C13.7763 13.0681 13.8289 13.1879 13.8338 13.3142C13.8387 13.4406 13.7956 13.5641 13.7132 13.6599C13.6307 13.7557 13.515 13.8167 13.3893 13.8307C13.2637 13.8446 13.1374 13.8104 13.0359 13.735L12.9799 13.6863L9.71258 10.4197C9.11183 10.9071 8.40287 11.2432 7.64526 11.3997C6.88766 11.5562 6.10355 11.5286 5.35883 11.3192C4.61411 11.1098 3.93054 10.7246 3.36557 10.1962C2.8006 9.66769 2.37074 9.01133 2.1121 8.28224C1.85347 7.55315 1.77362 6.77263 1.87927 6.00627C1.98492 5.23991 2.27298 4.51011 2.71924 3.87819C3.1655 3.24628 3.75692 2.73071 4.44381 2.37482C5.1307 2.01894 5.89297 1.83313 6.66658 1.83301ZM6.66658 2.83301C6.16318 2.83301 5.66471 2.93216 5.19962 3.1248C4.73454 3.31745 4.31196 3.59981 3.956 3.95577C3.60004 4.31172 3.31768 4.73431 3.12504 5.19939C2.9324 5.66447 2.83324 6.16294 2.83324 6.66634C2.83324 7.16974 2.9324 7.66821 3.12504 8.13329C3.31768 8.59838 3.60004 9.02096 3.956 9.37692C4.31196 9.73287 4.73454 10.0152 5.19962 10.2079C5.66471 10.4005 6.16318 10.4997 6.66658 10.4997C7.68324 10.4997 8.65826 10.0958 9.37715 9.37692C10.096 8.65803 10.4999 7.683 10.4999 6.66634C10.4999 5.64968 10.096 4.67465 9.37715 3.95577C8.65826 3.23688 7.68324 2.83301 6.66658 2.83301Z"
-                          fill="#8D8D8D"
-                        ></path>
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <app-chat-session-header></app-chat-session-header>
 
         <app-chat-session-container></app-chat-session-container>
 
@@ -633,8 +576,7 @@
       </div>
     </div>
 
-    <div class="left-container flex flex-col">
-      <app-chat-menu-container></app-chat-menu-container>
+    <div class="left-container relative w-full flex flex-col">
       <app-chat-new-chat></app-chat-new-chat>
       <app-chat-create-channel-container *ngIf="showCreateChannelContainer()"></app-chat-create-channel-container>
       <app-chat-header-container

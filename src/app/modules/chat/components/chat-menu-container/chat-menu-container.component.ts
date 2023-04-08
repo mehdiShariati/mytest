@@ -15,16 +15,15 @@ export class ChatMenuContainerComponent {
     return this.chatService.getShowThreeDowMenu();
   }
   onNewChat() {
-    console.log('sadasdas');
-    this.toggleThreeDotMenu();
+    this.chatService.toggleThreeDotMenu;
     this.chatService.toggleShowNewMessageModal();
   }
   onNewChannel() {
     this.chatService.showCreateChannelContainer = true;
-    this.toggleThreeDotMenu();
+    this.chatService.toggleThreeDotMenu;
   }
   onNewGroup() {
     this.chatService.showCreateGroupContainer = true;
-    this.toggleThreeDotMenu();
+    this.chatService.toggleThreeDotMenu;
   }
 }

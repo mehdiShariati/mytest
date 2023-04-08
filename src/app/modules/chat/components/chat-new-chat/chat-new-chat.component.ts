@@ -13,24 +13,27 @@ import { environment } from '../../../../../environments/environment';
 export class ChatNewChatComponent implements AfterViewInit {
   itemsUsers$: Observable<any> = new BehaviorSubject<any[]>([]);
   public resource_path = environment.apiToken;
+  initialized_scroll: boolean = false;
 
   constructor(private chatService: ChatService, private userService: UserService) {}
   ngAfterViewInit(): void {
     this.itemsUsers$ = this.chatService.getUsersObserver();
     this.itemsUsers$.subscribe((res: any) => {
       if (res) {
-        const content = document.querySelector('.new-chat-users');
-        const scroll$ = fromEvent(content!, 'scroll').pipe(
-          map(() => {
-            return content!.scrollTop;
-          }),
-        );
-        scroll$.subscribe(scrollPos => {
-          let limit = content!.scrollHeight - content!.clientHeight;
-          if (scrollPos === limit) {
-            this.chatService.getMoreUsers();
-          }
-        });
+        if (!this.initialized_scroll) {
+          const content = document.querySelector('.new-chat-users');
+          const scroll$ = fromEvent(content!, 'scroll').pipe(
+            map(() => {
+              return content!.scrollTop;
+            }),
+          );
+          scroll$.subscribe(scrollPos => {
+            let limit = content!.scrollHeight - content!.clientHeight;
+            if (scrollPos === limit) {
+              this.chatService.getMoreUsers();
+            }
+          });
+        }
       }
     });
   }
