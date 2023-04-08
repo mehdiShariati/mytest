@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   step: any[] = [{ id: 1 }, { id: 2 }, { id: 3 }];
   captchaImage!: string;
   myForm!: FormGroup;
+  displayModal: boolean = true;
 
   constructor(private fb: FormBuilder, private authService: AuthServiceService, private router: Router) {
     if (localStorage.getItem('token')) {

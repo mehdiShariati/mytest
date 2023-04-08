@@ -7,10 +7,19 @@ import { HttpClientModule } from '@angular/common/http';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { CoreModule } from '../../core/core.module';
 import { LogoutComponent } from './logout/logout.component';
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
   declarations: [LoginComponent, ChangePasswordComponent, LogoutComponent],
   exports: [LoginComponent],
-  imports: [CommonModule, HttpClientModule, InlineSVGModule.forRoot(), FormsModule, ReactiveFormsModule, CoreModule],
+  imports: [
+    CommonModule,
+    HttpClientModule,
+    InlineSVGModule.forRoot(),
+    FormsModule,
+    ReactiveFormsModule,
+    CoreModule,
+    DialogModule,
+  ],
 })
 export class AuthModule {}

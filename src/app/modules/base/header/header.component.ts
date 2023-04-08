@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ConfirmationService } from 'primeng/api';
 import { AuthServiceService } from '../../../core/services/auth-service.service';
 import { Router } from '@angular/router';
@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
   date!: string;
   day!: string;
+  @ViewChild('dateContainer') dateContainer!: ElementRef;
+  @ViewChild('clock') clock!: ElementRef;
 
   constructor(
     private confirmationService: ConfirmationService,
@@ -19,11 +21,13 @@ export class HeaderComponent implements OnInit {
     private router: Router,
   ) {}
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.displayDate();
     this.displayTime();
     setInterval(this.displayTime, 1000);
+  }
 
+  ngOnInit(): void {
     this.authService.logOutSubject.subscribe(res => {
       if (res) this.exit();
     });
@@ -37,8 +41,7 @@ export class HeaderComponent implements OnInit {
     if (minutes < 10) {
       minutes = '0' + minutes;
     }
-    let clock: any = document.getElementById('clock');
-    clock.textContent = hours + ':' + minutes;
+    this.clock.nativeElement.innerText = hours + ':' + minutes;
 
     if (hours == 0 && minutes == 0 && second < 1) {
       this.displayDate();
@@ -56,8 +59,7 @@ export class HeaderComponent implements OnInit {
       day: 'numeric',
     });
 
-    let res: any = document.getElementById('date');
-    res.textContent = `${day} ${date}`;
+    this.dateContainer.nativeElement.innerText = `${day} ${date}`;
   }
 
   exit() {
