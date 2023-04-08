@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ConfirmationService } from 'primeng/api';
 import { AuthServiceService } from '../../../core/services/auth-service.service';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +14,8 @@ export class HeaderComponent implements OnInit {
   date!: string;
   day!: string;
   @ViewChild('dateContainer') dateContainer!: ElementRef;
-  @ViewChild('clock') clock!: ElementRef;
+  @ViewChild('clockElem') clockElem!: ElementRef;
+  dataSubject: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   constructor(
     private confirmationService: ConfirmationService,
@@ -22,14 +24,21 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngAfterViewInit(): void {
-    this.displayDate();
-    this.displayTime();
-    setInterval(this.displayTime, 1000);
+    setInterval(() => {
+      this.dataSubject.next(true);
+      this.displayDate();
+    }, 1000);
   }
 
   ngOnInit(): void {
     this.authService.logOutSubject.subscribe(res => {
-      if (res) this.exit();
+      if (res) {
+        this.authService.toggleLogOutModal(false);
+        this.exit();
+      }
+    });
+    this.dataSubject.subscribe((res: any) => {
+      if (res) this.displayTime();
     });
   }
 
@@ -41,7 +50,7 @@ export class HeaderComponent implements OnInit {
     if (minutes < 10) {
       minutes = '0' + minutes;
     }
-    this.clock.nativeElement.innerText = hours + ':' + minutes;
+    this.clockElem.nativeElement.innerText = hours + ':' + minutes;
 
     if (hours == 0 && minutes == 0 && second < 1) {
       this.displayDate();

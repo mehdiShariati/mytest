@@ -24,8 +24,8 @@ export class AuthServiceService {
     return this.currentUserSubject.value;
   }
 
-  reqForLogOut() {
-    this.logOutSubject.next(true);
+  toggleLogOutModal(status: boolean) {
+    this.logOutSubject.next(status);
   }
 
   login(value: any) {

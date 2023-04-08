@@ -6,12 +6,24 @@
     </div>
     <div class="flex items-center">
       <div class="flex justify-end items-center text-gray-dark">
-        <span class="time ml-3 font-dana text-sm font-normal text-gray-dark" #clock></span>
+        <span class="time ml-3 font-dana text-sm font-normal text-gray-dark" #clockElem></span>
         <span class="date font-dana text-sm font-normal text-gray-dark" #dateContainer></span>
       </div>
-      <a class="w-6 h-6 mr-5" [routerLink]="'/auth/logout'">
+      <a class="w-6 h-6 mr-5 cursor-pointer" (click)="exit()">
         <img src="./assets/dashboard/Exit.svg" alt="" />
       </a>
     </div>
   </div>
 </div>
+<p-confirmDialog class="exit-dialog" #cd [style]="{ width: '640px' }">
+  <ng-template pTemplate="header">
+    <div class="text-center mt-6">
+      <i inlineSVG="assets/icons/Error-2.svg"></i>
+      <h3 class="mt-3 text-gray-dark text-[18px]">آیا از خروج از داشبود اطمینان دارید؟</h3>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <button class="reject-label" type="button" pButton label="بازگشت و انصراف" (click)="cd.reject()"></button>
+    <button class="accept-label" type="button" pButton label="خروج از داشبورد" (click)="cd.accept()"></button>
+  </ng-template>
+</p-confirmDialog>

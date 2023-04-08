@@ -23,6 +23,6 @@ export class AsideComponent implements OnInit {
   ngOnInit(): void {}
 
   exit() {
-    this.authService.reqForLogOut();
+    this.authService.toggleLogOutModal(true);
   }
 }
