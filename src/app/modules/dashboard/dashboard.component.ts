@@ -73,7 +73,8 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.isScrolling.pipe(debounceTime(500), distinctUntilChanged()).subscribe(res => {
       if (
-        Math.floor(res.target.scrollTop) + Math.floor(res.target.clientHeight) >= Math.floor(res.target.scrollHeight) &&
+        Math.floor(res.target.scrollTop) + Math.floor(res.target.clientHeight) + 1 >=
+          Math.floor(res.target.scrollHeight) &&
         !this.isOver
       ) {
         this.page += 1;
