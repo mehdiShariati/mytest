@@ -19,25 +19,29 @@ export class ChatCreateGroupContainerComponent {
   public groupName: string = '';
   public File: any = '';
   public imageSrc: any = '';
+  private initialUserScroll: boolean = false;
   constructor(private chatService: ChatService, private messageService: MessageService) {}
 
   ngAfterViewInit(): void {
     this.itemsUsers$ = this.chatService.getUsersObserver();
     this.itemsUsers$.subscribe((res: any) => {
       if (res) {
-        const content = document.querySelector('.users-container');
-        const scroll$ = fromEvent(content!, 'scroll').pipe(
-          map(() => {
-            return content!.scrollTop;
-          }),
-        );
-        scroll$.subscribe(scrollPos => {
-          let limit = content!.scrollHeight - content!.clientHeight;
-          if (scrollPos === limit) {
-            this.getSelectedUsers();
-            this.chatService.getMoreUsers();
-          }
-        });
+        if (!this.initialUserScroll) {
+          const content = document.querySelector('.users-container');
+          const scroll$ = fromEvent(content!, 'scroll').pipe(
+            map(() => {
+              return content!.scrollTop;
+            }),
+          );
+          scroll$.subscribe(scrollPos => {
+            let limit = content!.scrollHeight - content!.clientHeight;
+            if (scrollPos === limit) {
+              this.getSelectedUsers();
+              this.chatService.getMoreUsers();
+            }
+          });
+        }
+        this.initialUserScroll = true;
       }
     });
   }

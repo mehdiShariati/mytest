@@ -13,6 +13,21 @@ import { JwtService } from './jwt.service';
   providedIn: 'root',
 })
 export class ChatService {
+  get allUsersLoaded(): boolean {
+    return this._allUsersLoaded;
+  }
+
+  set allUsersLoaded(value: boolean) {
+    this._allUsersLoaded = value;
+  }
+  get seenLastMessage(): boolean {
+    return this._seenLastMessage;
+  }
+
+  set seenLastMessage(value: boolean) {
+    this._seenLastMessage = value;
+  }
+
   get disableScrollDown(): boolean {
     return this._disableScrollDown;
   }
@@ -86,6 +101,7 @@ export class ChatService {
   obsArrayUsers: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   itemsUsers$: Observable<any> = this.obsArrayUsers.asObservable();
 
+  obsArraySessionsOriginal: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   obsArraySessions: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   itemsSession$: Observable<any> = this.obsArraySessions.asObservable();
 
@@ -101,6 +117,8 @@ export class ChatService {
   private _isRepliengToAMessage: boolean = false;
   public selfUserId: string = '';
   private _MessageIdUnderOperation: string = '';
+  private _seenLastMessage: boolean = false;
+  private _allUsersLoaded: boolean = false;
 
   constructor(
     private http: HttpClient,
@@ -117,14 +135,14 @@ export class ChatService {
       this.selfUserId = parsedToken.userId;
     }
     WebsocketService.messages.subscribe((msg: any) => {
-      if (msg.type === 'MESSAGE' && msg.data.sessionId === this.selectedUser) {
-        const currentValue = this.obsArrayMessages.value;
-        const updatedValue = [...currentValue, msg.data];
-        this.obsArrayMessages.next(updatedValue);
-        setTimeout(() => {
-          this.obsGoTobottom.next(true);
-        }, 200);
-      }
+      // if (msg.type === 'MESSAGE' && msg.data.sessionId === this.selectedUser) {
+      //   const currentValue = this.obsArrayMessages.value;
+      //   const updatedValue = [...currentValue, msg.data];
+      //   this.obsArrayMessages.next(updatedValue);
+      //   setTimeout(() => {
+      //     this.obsGoTobottom.next(true);
+      //   }, 200);
+      // }
       if (msg.type === 'MESSAGE') {
         let updatedSession;
 
@@ -132,14 +150,41 @@ export class ChatService {
         sessions.map((item: any, index: any) => {
           if (item.id === msg.data.sessionId) {
             item.messagePreview.content = msg.data.content;
-            if (msg.data.senderId !== this.selfUserId) {
+            if (msg.data.sessionId != this.selectedUser) {
               item.unreadMessageCount = item.unreadMessageCount ? item.unreadMessageCount + 1 : 1;
+            } else {
+              const currentValue = this.obsArrayMessages.value;
+              const updatedValue = [...currentValue, msg.data];
+              this.obsArrayMessages.next(updatedValue);
+              this.seenLastMessage = false;
+              this.seenLastMessages();
             }
-            updatedSession = item;
-            sessions.splice(index, 1);
           }
         });
-        sessions.unshift(updatedSession);
+      }
+      if (msg.type === 'SEEN') {
+        let sessions: any = this.obsArraySessions.value;
+        sessions.map((item: any, index: any) => {
+          if (item.id === msg.data.sessionId) {
+            item.messagePreview.content = msg.data.content;
+            if (msg.data.senderId !== this.selfUserId) {
+              item.unreadMessageCount = 0;
+            }
+          }
+        });
+
+        if (msg.data.sessionId === this.selectedUser) {
+          let messages = this.obsArrayMessages.value;
+          messages.map((item: any, index: number) => {
+            if (item.id === msg.data.id) {
+              messages.map((itm: any, subIndex: number) => {
+                if (subIndex <= index) {
+                  itm.messageStatus = 'SEEN';
+                }
+              });
+            }
+          });
+        }
       }
     });
   }
@@ -204,6 +249,7 @@ export class ChatService {
   toggleShowNewMessageModal() {
     this.showNewMessageModal = !this.showNewMessageModal;
   }
+
   setSelectedSession(user: any) {
     this.obsGoTobottom.next(false);
     this.isAllowToFetchMessages = false;
@@ -302,19 +348,34 @@ export class ChatService {
   initialMessageSubject() {
     this.getSelectedUser().subscribe((res: any) => {
       if (res) {
+        this.seenLastMessage = false;
         if (this.isAllowToFetchMessages) {
           this.currentPage_messages = 0;
           this.getMessages(this.selectedUser, this.currentPage_messages, this.page_size).subscribe((result: any) => {
             this.obsArrayMessages.next(result.content.reverse());
 
-            this.seenLastMessage();
+            this.seenLastMessages();
+            setTimeout(() => {
+              this.obsGoTobottom.next(true);
+            }, 200);
           });
         }
       }
     });
   }
-  seenLastMessage() {
-    this.seenMessage(this.obsArrayMessages.value.at(-1).id).subscribe();
+  seenLastMessages() {
+    if (this.obsArrayMessages.value.length && !this.seenLastMessage) {
+      let lastMessageId: any = '';
+      this.obsArrayMessages.value.map(item => {
+        if (item.senderId !== this.selfUserId) {
+          lastMessageId = item.id;
+        }
+      });
+      if (lastMessageId) {
+        this.seenMessage(lastMessageId).subscribe();
+        this.seenLastMessage = true;
+      }
+    }
   }
   getLoadingMessagesObserver(): any {
     return this.loadingMessages$;
@@ -331,10 +392,10 @@ export class ChatService {
         this.itemsMessages$.pipe(take(1)),
         this.getMessages(this.selectedUser, this.currentPage_messages, this.page_size),
       ]).subscribe((data: any) => {
-        console.log(data[1]);
         if (data[1].content.length) {
           this.obsArrayMessages.next([...data[1].content.reverse(), ...data[0]]);
           this.obsLoadingMessage.next(true);
+          this.seenLastMessages();
         } else {
           this.isMessagesOver = true;
           this.currentPage_messages = 0;
@@ -365,7 +426,16 @@ export class ChatService {
       this.sendMessage(message, this.selectedUser, replyId.id).subscribe((res: any) => {});
       this.discardRepliedMessage();
     } else {
-      this.sendMessage(message, this.selectedUser).subscribe((res: any) => {});
+      this.sendMessage(message, this.selectedUser).subscribe((res: any) => {
+        if (res) {
+          let messagesArr: any[] = this.obsArrayMessages.getValue();
+          messagesArr.push(res);
+          this.obsArrayMessages.next(messagesArr);
+          setTimeout(() => {
+            this.obsGoTobottom.next(true);
+          }, 200);
+        }
+      });
     }
   }
 
@@ -383,10 +453,11 @@ export class ChatService {
       this.itemsUsers$.pipe(take(1)),
       this.userService.getUser({ pageNumber: this.currentPage_users, pageSize: this.page_size }),
     ]).subscribe((data: any) => {
-      if (data[1].content) {
+      if (data[1].content.length) {
         const newArr = [...data[0], ...data[1].content];
         this.obsArrayUsers.next(newArr);
       } else {
+        this.allUsersLoaded = true;
         this.obsArrayUsers.complete();
       }
     });
@@ -409,6 +480,7 @@ export class ChatService {
   getSessionsObserver(): any {
     this.getSessions(this.currentPage_sessions, 100).subscribe((res: any) => {
       this.obsArraySessions.next(res);
+      this.obsArraySessionsOriginal.next(res);
     });
 
     return this.itemsSession$;
@@ -426,5 +498,16 @@ export class ChatService {
         }
       },
     );
+  }
+  searchOnsessions(text: any) {
+    if (!text) {
+      if (this.obsArraySessions.value.length !== this.obsArraySessionsOriginal.value.length)
+        this.obsArraySessions.next(this.obsArraySessionsOriginal.value);
+    } else {
+      let filteredSession = this.obsArraySessions.value;
+      filteredSession.filter((item: any) => {
+        return item.extraInfo.name.match();
+      });
+    }
   }
 }

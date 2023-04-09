@@ -2,74 +2,84 @@
   #sessions_container
   class="flex flex-col scrollbar-hide overflow-y-scroll justify-start items-center flex-grow-0 flex-shrink-0 h-[574px] w-[283px] relative pb-16"
 >
-  <div
-    class="flex justify-center items-center self-stretch flex-grow-0 flex-shrink-0 h-[81px] relative gap-4 hover:bg-[#edf5ff] flex-row-reverse hover:cursor-pointer"
-  >
-    <div class="flex flex-col justify-start items-end flex-grow-0 flex-shrink-0 w-[187px] gap-1">
-      <div class="flex justify-end items-center self-stretch flex-grow-0 flex-shrink-0 relative gap-1 flex-row-reverse">
-        <p class="flex-grow w-[85px] text-xs text-left text-[#8d8d8d]">26/11</p>
-        <p class="flex-grow-0 flex-shrink-0 text-sm text-center text-neutral-800">ذخیره شده ها</p>
-        <svg
-          width="16"
-          height="17"
-          viewBox="0 0 16 17"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          class="flex-grow-0 flex-shrink-0 w-4 h-4 relative"
-          preserveAspectRatio="xMidYMid meet"
+  <div *ngIf="!isSessionsLoaded" class="flex justify-center">
+    <p-progressSpinner class="custom-spinner"></p-progressSpinner>
+  </div>
+  <ng-container *ngIf="isSessionsLoaded">
+    <div
+      class="flex justify-center items-center self-stretch flex-grow-0 flex-shrink-0 h-[81px] relative gap-4 hover:bg-[#edf5ff] flex-row-reverse hover:cursor-pointer"
+    >
+      <div class="flex flex-col justify-start items-end flex-grow-0 flex-shrink-0 w-[187px] gap-1">
+        <div
+          class="flex justify-end items-center self-stretch flex-grow-0 flex-shrink-0 relative gap-1 flex-row-reverse"
         >
-          <path
-            d="M11.874 15.0693C11.9488 15.1231 12.0369 15.1552 12.1287 15.1621C12.2206 15.1689 12.3125 15.1503 12.3944 15.1082C12.4763 15.0662 12.545 15.0023 12.5929 14.9237C12.6409 14.8451 12.6662 14.7547 12.666 14.6627V4.66667C12.666 4.09203 12.4377 3.54093 12.0314 3.1346C11.6251 2.72827 11.074 2.5 10.4993 2.5H5.50001C4.92561 2.50018 4.37478 2.72844 3.96862 3.1346C3.56245 3.54077 3.33419 4.0916 3.33401 4.666V14.6633C3.33399 14.7554 3.35937 14.8456 3.40734 14.9241C3.45532 15.0027 3.52403 15.0664 3.60592 15.1084C3.68782 15.1504 3.7797 15.1689 3.87147 15.1621C3.96323 15.1552 4.05131 15.1231 4.12601 15.0693L8.00001 12.282L11.8747 15.0687L11.874 15.0693ZM4.33401 4.666C4.33401 4.35658 4.45693 4.05983 4.67572 3.84104C4.89452 3.62225 5.19126 3.49933 5.50068 3.49933H10.4987C10.8081 3.49933 11.1048 3.62225 11.3236 3.84104C11.5424 4.05983 11.6653 4.35658 11.6653 4.666V13.6873L8.29068 11.2607C8.20562 11.1995 8.10347 11.1665 7.99868 11.1665C7.89389 11.1665 7.79175 11.1995 7.70668 11.2607L4.33335 13.6873V4.66667L4.33401 4.666Z"
-            fill="#8D8D8D"
-          ></path>
-        </svg>
-      </div>
-      <div class="flex justify-end items-start self-stretch flex-grow-0 flex-shrink-0 relative gap-1 flex-row-reverse">
-        <svg
-          width="16"
-          height="17"
-          viewBox="0 0 16 17"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          class="flex-grow-0 flex-shrink-0 w-4 h-4 relative"
-          preserveAspectRatio="xMidYMid meet"
+          <p class="flex-grow w-[85px] text-xs text-left text-[#8d8d8d]">26/11</p>
+          <p class="flex-grow-0 flex-shrink-0 text-sm text-center text-neutral-800">ذخیره شده ها</p>
+          <svg
+            width="16"
+            height="17"
+            viewBox="0 0 16 17"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            class="flex-grow-0 flex-shrink-0 w-4 h-4 relative"
+            preserveAspectRatio="xMidYMid meet"
+          >
+            <path
+              d="M11.874 15.0693C11.9488 15.1231 12.0369 15.1552 12.1287 15.1621C12.2206 15.1689 12.3125 15.1503 12.3944 15.1082C12.4763 15.0662 12.545 15.0023 12.5929 14.9237C12.6409 14.8451 12.6662 14.7547 12.666 14.6627V4.66667C12.666 4.09203 12.4377 3.54093 12.0314 3.1346C11.6251 2.72827 11.074 2.5 10.4993 2.5H5.50001C4.92561 2.50018 4.37478 2.72844 3.96862 3.1346C3.56245 3.54077 3.33419 4.0916 3.33401 4.666V14.6633C3.33399 14.7554 3.35937 14.8456 3.40734 14.9241C3.45532 15.0027 3.52403 15.0664 3.60592 15.1084C3.68782 15.1504 3.7797 15.1689 3.87147 15.1621C3.96323 15.1552 4.05131 15.1231 4.12601 15.0693L8.00001 12.282L11.8747 15.0687L11.874 15.0693ZM4.33401 4.666C4.33401 4.35658 4.45693 4.05983 4.67572 3.84104C4.89452 3.62225 5.19126 3.49933 5.50068 3.49933H10.4987C10.8081 3.49933 11.1048 3.62225 11.3236 3.84104C11.5424 4.05983 11.6653 4.35658 11.6653 4.666V13.6873L8.29068 11.2607C8.20562 11.1995 8.10347 11.1665 7.99868 11.1665C7.89389 11.1665 7.79175 11.1995 7.70668 11.2607L4.33335 13.6873V4.66667L4.33401 4.666Z"
+              fill="#8D8D8D"
+            ></path>
+          </svg>
+        </div>
+        <div
+          class="flex justify-end items-start self-stretch flex-grow-0 flex-shrink-0 relative gap-1 flex-row-reverse"
         >
-          <path
-            d="M1.95467 5.67211L5.172 2.45478C5.37742 2.2494 5.62871 2.09578 5.90515 2.00657C6.18159 1.91736 6.47527 1.89511 6.762 1.94166C7.04872 1.98821 7.32028 2.10223 7.5543 2.27431C7.78832 2.4464 7.9781 2.67163 8.108 2.93144L9.73133 6.17811C9.78974 6.29518 9.89169 6.38469 10.0153 6.42744L12.7933 7.38678C12.9268 7.43291 13.0464 7.51221 13.1409 7.61725C13.2353 7.72228 13.3015 7.8496 13.3332 7.98724C13.3649 8.12488 13.3612 8.26832 13.3222 8.4041C13.2833 8.53987 13.2105 8.66353 13.1107 8.76344L11.0407 10.8334L14 13.7934V14.5001H13.2933L10.3333 11.5401L8.264 13.6101C8.16409 13.7101 8.04039 13.783 7.90454 13.8221C7.76868 13.8611 7.62513 13.8649 7.48738 13.8332C7.34964 13.8014 7.22223 13.7352 7.11715 13.6407C7.01206 13.5461 6.93275 13.4264 6.88667 13.2928L5.92667 10.5154C5.88407 10.3919 5.79481 10.29 5.678 10.2314L2.43133 8.60811C2.17152 8.47821 1.94629 8.28843 1.7742 8.05441C1.60212 7.82039 1.4881 7.54883 1.44155 7.26211C1.395 6.97539 1.41725 6.6817 1.50646 6.40526C1.59567 6.12882 1.74929 5.87754 1.95467 5.67211Z"
-            fill="#8D8D8D"
-          ></path>
-        </svg>
-        <p class="self-stretch flex-grow w-[167px] h-4 text-xs text-right text-[#8d8d8d]">🖼 ️سخن بزرگان @ghasedak</p>
+          <svg
+            width="16"
+            height="17"
+            viewBox="0 0 16 17"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            class="flex-grow-0 flex-shrink-0 w-4 h-4 relative"
+            preserveAspectRatio="xMidYMid meet"
+          >
+            <path
+              d="M1.95467 5.67211L5.172 2.45478C5.37742 2.2494 5.62871 2.09578 5.90515 2.00657C6.18159 1.91736 6.47527 1.89511 6.762 1.94166C7.04872 1.98821 7.32028 2.10223 7.5543 2.27431C7.78832 2.4464 7.9781 2.67163 8.108 2.93144L9.73133 6.17811C9.78974 6.29518 9.89169 6.38469 10.0153 6.42744L12.7933 7.38678C12.9268 7.43291 13.0464 7.51221 13.1409 7.61725C13.2353 7.72228 13.3015 7.8496 13.3332 7.98724C13.3649 8.12488 13.3612 8.26832 13.3222 8.4041C13.2833 8.53987 13.2105 8.66353 13.1107 8.76344L11.0407 10.8334L14 13.7934V14.5001H13.2933L10.3333 11.5401L8.264 13.6101C8.16409 13.7101 8.04039 13.783 7.90454 13.8221C7.76868 13.8611 7.62513 13.8649 7.48738 13.8332C7.34964 13.8014 7.22223 13.7352 7.11715 13.6407C7.01206 13.5461 6.93275 13.4264 6.88667 13.2928L5.92667 10.5154C5.88407 10.3919 5.79481 10.29 5.678 10.2314L2.43133 8.60811C2.17152 8.47821 1.94629 8.28843 1.7742 8.05441C1.60212 7.82039 1.4881 7.54883 1.44155 7.26211C1.395 6.97539 1.41725 6.6817 1.50646 6.40526C1.59567 6.12882 1.74929 5.87754 1.95467 5.67211Z"
+              fill="#8D8D8D"
+            ></path>
+          </svg>
+          <p class="self-stretch flex-grow w-[167px] h-4 text-xs text-right text-[#8d8d8d]">🖼 ️سخن بزرگان @ghasedak</p>
+        </div>
       </div>
+      <svg
+        width="48"
+        height="49"
+        viewBox="0 0 48 49"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        class="flex-grow-0 flex-shrink-0 w-12 h-12 relative"
+        preserveAspectRatio="none"
+      >
+        <rect x="0.5" y="1" width="47" height="47" rx="23.5" fill="#33B1FF"></rect>
+        <path
+          d="M31.7461 37.6387C31.8956 37.7462 32.0719 37.8104 32.2555 37.8241C32.4392 37.8379 32.623 37.8006 32.7869 37.7165C32.9507 37.6324 33.0881 37.5047 33.1839 37.3474C33.2798 37.1902 33.3304 37.0095 33.3301 36.8253V16.8333C33.3301 15.6841 32.8735 14.5819 32.0609 13.7692C31.2482 12.9565 30.146 12.5 28.9967 12.5H18.9981C17.8493 12.5004 16.7476 12.9569 15.9353 13.7692C15.1229 14.5815 14.6664 15.6832 14.6661 16.832V36.8267C14.666 37.0107 14.7168 37.1912 14.8127 37.3483C14.9087 37.5053 15.0461 37.6328 15.2099 37.7168C15.3737 37.8008 15.5575 37.8379 15.741 37.8241C15.9245 37.8103 16.1007 37.7461 16.2501 37.6387L23.9981 32.064L31.7474 37.6373L31.7461 37.6387Z"
+          fill="#F4F4F4"
+        ></path>
+        <rect x="0.5" y="1" width="47" height="47" rx="23.5" stroke="#F4F4F4"></rect>
+      </svg>
     </div>
     <svg
-      width="48"
-      height="49"
-      viewBox="0 0 48 49"
+      width="259"
+      height="1"
+      viewBox="0 0 259 1"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      class="flex-grow-0 flex-shrink-0 w-12 h-12 relative"
-      preserveAspectRatio="none"
+      class="flex-grow-0 flex-shrink-0"
+      preserveAspectRatio="xMidYMid meet"
     >
-      <rect x="0.5" y="1" width="47" height="47" rx="23.5" fill="#33B1FF"></rect>
-      <path
-        d="M31.7461 37.6387C31.8956 37.7462 32.0719 37.8104 32.2555 37.8241C32.4392 37.8379 32.623 37.8006 32.7869 37.7165C32.9507 37.6324 33.0881 37.5047 33.1839 37.3474C33.2798 37.1902 33.3304 37.0095 33.3301 36.8253V16.8333C33.3301 15.6841 32.8735 14.5819 32.0609 13.7692C31.2482 12.9565 30.146 12.5 28.9967 12.5H18.9981C17.8493 12.5004 16.7476 12.9569 15.9353 13.7692C15.1229 14.5815 14.6664 15.6832 14.6661 16.832V36.8267C14.666 37.0107 14.7168 37.1912 14.8127 37.3483C14.9087 37.5053 15.0461 37.6328 15.2099 37.7168C15.3737 37.8008 15.5575 37.8379 15.741 37.8241C15.9245 37.8103 16.1007 37.7461 16.2501 37.6387L23.9981 32.064L31.7474 37.6373L31.7461 37.6387Z"
-        fill="#F4F4F4"
-      ></path>
-      <rect x="0.5" y="1" width="47" height="47" rx="23.5" stroke="#F4F4F4"></rect>
+      <line x1="258.5" y1="0.5" x2="0.5" y2="0.5" stroke="#E0E0E0" stroke-linecap="round"></line>
     </svg>
-  </div>
-  <svg
-    width="259"
-    height="1"
-    viewBox="0 0 259 1"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    class="flex-grow-0 flex-shrink-0"
-    preserveAspectRatio="xMidYMid meet"
-  >
-    <line x1="258.5" y1="0.5" x2="0.5" y2="0.5" stroke="#E0E0E0" stroke-linecap="round"></line>
-  </svg>
+  </ng-container>
+
   <ng-container *ngFor="let session of itemsSession$ | async">
     <div
       (click)="SetActiveSession(session)"

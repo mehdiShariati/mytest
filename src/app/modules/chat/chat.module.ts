@@ -26,6 +26,8 @@ import { ChatSessionHeaderComponent } from './components/chat-session-header/cha
 import { ChatReplyPreviewComponent } from './components/chat-reply-preview/chat-reply-preview.component';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { EmojiModule } from '@ctrl/ngx-emoji-mart/ngx-emoji';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+
 @NgModule({
   declarations: [
     ContainerComponent,
@@ -56,7 +58,7 @@ import { EmojiModule } from '@ctrl/ngx-emoji-mart/ngx-emoji';
     CheckboxModule,
     RouterModule,
     PickerModule,
-    EmojiModule,
+    ProgressSpinnerModule,
   ],
 })
 export class ChatModule {}

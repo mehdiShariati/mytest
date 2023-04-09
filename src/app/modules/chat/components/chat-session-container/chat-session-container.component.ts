@@ -14,7 +14,7 @@ export class ChatSessionContainerComponent implements AfterContentInit {
   public active_session: string = '';
   public resource_path = environment.apiToken;
   private initialScrollListener: boolean = false;
-  private scrollObserver$: any;
+  public isSessionsLoaded: boolean = false;
   @ViewChild('sessions_container') sessions_container!: ElementRef;
 
   constructor(private chatService: ChatService) {}
@@ -31,7 +31,8 @@ export class ChatSessionContainerComponent implements AfterContentInit {
     this.itemsSession$ = this.chatService.getSessionsObserver();
     this.itemsSession$.subscribe((res: any) => {
       if (res.length) {
-        this.itemToObserve();
+        this.isSessionsLoaded = true;
+        //    this.itemToObserve();
         // if (!this.initialScrollListener) {
         //   const content = document.querySelector('#sessions_container');
         //   this.scrollObserver$ = fromEvent(content!, 'scroll').pipe(
@@ -52,25 +53,25 @@ export class ChatSessionContainerComponent implements AfterContentInit {
       }
     });
   }
-  private itemToObserve() {
-    setTimeout(() => {
-      let elem =
-        this.sessions_container.nativeElement.children[this.sessions_container.nativeElement.children.length - 1];
-      const threshold = 0.5; // how much % of the element is in view
-      const observer = new IntersectionObserver(
-        entries => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              this.chatService.getMoreSessions();
-              observer.disconnect(); // disconnect if you want to stop observing else it will rerun every time its back in view. Just make sure you disconnect in ngOnDestroy instead
-            }
-          });
-        },
-        { threshold },
-      );
-      observer.observe(elem);
-    }, 500);
-  }
+  // private itemToObserve() {
+  //   setTimeout(() => {
+  //     let elem =
+  //       this.sessions_container.nativeElement.children[this.sessions_container.nativeElement.children.length - 1];
+  //     const threshold = 0.5; // how much % of the element is in view
+  //     const observer = new IntersectionObserver(
+  //       entries => {
+  //         entries.forEach(entry => {
+  //           if (entry.isIntersecting) {
+  //             this.chatService.getMoreSessions();
+  //             observer.disconnect(); // disconnect if you want to stop observing else it will rerun every time its back in view. Just make sure you disconnect in ngOnDestroy instead
+  //           }
+  //         });
+  //       },
+  //       { threshold },
+  //     );
+  //     observer.observe(elem);
+  //   }, 500);
+  // }
   SetActiveSession(active_user: object) {
     this.chatService.setSelectedSession(active_user);
   }

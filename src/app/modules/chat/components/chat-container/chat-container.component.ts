@@ -14,6 +14,7 @@ import {
 import { map, take, debounceTime, distinct } from 'rxjs/operators';
 import { MenuItem } from 'primeng/api';
 import { ContextMenu } from 'primeng/contextmenu';
+import set = Reflect.set;
 
 @Component({
   selector: 'app-chat-container',
@@ -89,10 +90,10 @@ export class ChatContainerComponent implements AfterContentInit {
 
     this.messagesObserver$.subscribe((res: any) => {
       if (res.length) {
-        console.log(res);
         this.itemToObserve();
       }
     });
+
     let endOfContainer = document.querySelector('.bottomOfChat');
     const threshold = 1; // how much % of the element is in view
     const observer = new IntersectionObserver(entries => {
