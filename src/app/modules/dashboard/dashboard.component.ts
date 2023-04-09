@@ -1,5 +1,4 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import * as L from 'leaflet';
 import { AuthServiceService } from '../../core/services/auth-service.service';
 import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 import { UserService } from '../../core/services/user.service';
@@ -12,12 +11,6 @@ import { UserService } from '../../core/services/user.service';
 export class DashboardComponent implements OnInit {
   itemWasDrag!: any;
   loginHistory: any = [];
-
-  options = {
-    layers: [L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18 })],
-    zoom: 15,
-    center: L.latLng(35.705041, 51.355605),
-  };
 
   slides = [
     { id: 1, photo: './assets/images/Space.png' },
