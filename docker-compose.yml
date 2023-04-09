@@ -2,14 +2,14 @@
 version: '3.7'
 services:
   app:
-    container_name: 'samava-frontEnd'
-    mem_reservation: 1g
+    container_name: 'samava-frontEnd-production'
+    mem_reservation: 2g
     build:
       context: .
-      dockerfile: ./dev.dockerfile
+      dockerfile: ./production.dockerfile
     command: sh -c "npm start"
     ports:
-      - 4200:4200
+      - 8181:8181
     working_dir: /home/node/app
     volumes:
       - ./:/home/node/app
