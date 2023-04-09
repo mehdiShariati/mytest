@@ -7,7 +7,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 })
 export class TicketsComponent {
   tickets!: any;
-  displayModal: boolean = true;
+  displayModal: boolean = false;
   userInfo!: any;
   isCheckingTicket: boolean = false;
   show: boolean = false;
